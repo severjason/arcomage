@@ -1,0 +1,26 @@
+/* line 1, ../scss/_base.scss */
+html {
+  font-size: 62.5%;
+  box-sizing: border-box;
+}
+
+/* line 6, ../scss/_base.scss */
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+/* line 9, ../scss/_base.scss */
+body {
+  font-size: 1.8rem;
+}
+
+/* line 13, ../scss/_base.scss */
+img {
+  display: block;
+  max-width: 100%;
+}
+
+/* line 18, ../scss/_base.scss */
+a:hover, a:focus {
+  text-decoration: none;
+}
