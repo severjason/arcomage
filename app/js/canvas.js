@@ -9,6 +9,8 @@ document.addEventListener('DOMContentLoaded', function () {
     let canvasHeight = getElementHeight(arcomageDiv);
     canvas.setDimensions({width: canvasWidth, height: canvasHeight});
 
+    let promises = [];
+
 
     /*let loadImages = new Promise(function (resolve, reject) {
         let imagesArray = [];
@@ -24,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });*/
 
 
-    function drawCards() {
+    function createCards() {
 
         let padding = 5;
         let cardsValues = {
@@ -44,11 +46,12 @@ document.addEventListener('DOMContentLoaded', function () {
                 "price": "beasts"
             }
         };
+        let cardsNames = CARDS.names;
 
-        for (let i = 0, cardsArrayLength = getCardsNames().length; i < cardsArrayLength; i++) {
+        for (let i = 0, cardsArrayLength = cardsNames.length; i < cardsArrayLength; i++) {
 
-            let cardName = getCardsNames()[i];
-            let card = CARDS[cardName];
+            let cardName = cardsNames[i];
+            let card = CARDS.all[cardName];
             //let img = document.getElementById(cardName);
             let descriptionLength = card.description.length;
 
@@ -93,47 +96,73 @@ document.addEventListener('DOMContentLoaded', function () {
                 top: 171
             });
 
-            let img = new Image();
-            img.src = card.src;
-            let image = new fabric.Image(img, {
-                left: -120,
-                top: 30
-            });
-
-            let group = new fabric.Group([mainBody, descriptionText, image, mainText, circle, priceText], {
-                left: padding,
-                top: canvasHeight - mainBody.getHeight() - 2 * padding,
-                selectable: true,
-                hoverCursor: "pointer"
-            });
-
-            group.on('mousedown', function () {
-                console.log('mousedown');
-            });
-            group.on('mouseover', function () {
-                console.log('mouseover');
-                group.top -= 5;
-                canvas.renderAll();
-            });
-            group.on('mouseout', function () {
-                console.log('mouseout');
-                group.top += 5;
-                canvas.renderAll();
-            });
 
 
-            CARDS[cardName].object = group;
+
+
+            let loadImage = new Promise(function (resolve, reject) {
+
+                let img = new Image();
+                img.src = card.src;
+
+                    img.onload = function () {
+
+                        let image = new fabric.Image(img, {
+                            left: -120,
+                            top: 30
+                        });
+
+                        let group = new fabric.Group([mainBody, descriptionText, image, mainText, circle, priceText], {
+                            left: padding,
+                            top: canvasHeight - mainBody.getHeight() - 2 * padding,
+                            selectable: true,
+                            hoverCursor: "pointer"
+                        });
+
+                        group.on('mousedown', function () {
+                            console.log('mousedown');
+                        });
+                        group.on('mouseover', function () {
+                            console.log('mouseover');
+                            group.top -= 5;
+                            canvas.renderAll();
+                        });
+                        group.on('mouseout', function () {
+                            console.log('mouseout');
+                            group.top += 5;
+                            canvas.renderAll();
+                        });
+
+                        /*let cardAsImage = new Image();
+                        cardAsImage.src = group.toDataURL();
+                        CARDS[cardName].object = cardAsImage;*/
+                        CARDS.all[cardName].object = group;
+                        resolve(group);
+                };
+
+            });
+            promises.push(loadImage);
+
+
+
         }
     }
+
 //addCardsImagesToHtml();
-    drawCards();
+    createCards();
+    Promise.all(promises).then(function (res) {
+        console.log(res);
+        console.log(CARDS.all);
+        canvas.add(CARDS.all["amethyst"].object);
+        canvas.add(CARDS.all["great_wall"].object);
+        canvas.add(CARDS.all["werewolf"].object);
+        canvas.add(CARDS.all["new_equipment"].object);
+    });
 //console.log(CARDS);
 //canvas.add(CARDS["amethyst"].object);
 //canvas.renderAll();
 
-    canvas.add(CARDS["amethyst"].object);
-    canvas.add(CARDS["great_wall"].object);
-    canvas.add(CARDS["werewolf"].object);
+
 
 });
 

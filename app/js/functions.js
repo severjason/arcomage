@@ -12,17 +12,3 @@ function getElementHeight (element) {
     }
     else return false;
 }
-function addCardsImagesToHtml() {
-    for (let card in CARDS) {
-        if (CARDS.hasOwnProperty(card)) {
-            let hiddenDiv = document.getElementById("hidden_cards_img");
-            let image = document.createElement("img");
-            image.id = card;
-            image.src = CARDS[card].src;
-            hiddenDiv.appendChild(image);
-        }
-    }
-}
-function getCardsNames() {
-    return Object.keys(CARDS);
-}

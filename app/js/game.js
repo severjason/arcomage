@@ -2,47 +2,52 @@
 
 class Arcomage {
 
-
-
-    constructor(player = "Player") {
-        this.player = new Player(player);
-        this.CPU = new Player("CPU");
-
-        this.CARDS_QUANTITY = 2;
+    constructor(player1 = "Player", player2 = "CPU" , cardsQuantity, cardsObject) {
+        this.player1 = new Player(player1);
+        this.player2 = new Player(player2);
+        this.cardsQuantity = cardsQuantity;
+        this.cards = cardsObject;
     }
 
-    static applyCard(cardName, player, enemy) {
-        CARDS[cardName].action(player, enemy);
-        CARDS[cardName].active = true;
+    get firstPlayer() {
+        return this.player1;
     }
 
-    static allotCards(player) {
-        if (player.getCards().length < this.CARDS_QUANTITY) {
+    get secondPlayer() {
+        return this.player2;
+    }
 
-            let randomCard  = Math.floor(Math.random() * (getCardsNames().length));
+    applyCard(cardName, player, enemy) {
+        this.cards.getSingleCard(cardName).action(player, enemy);
+        //this.CARDS[cardName].isActive = false;
+    }
 
-            if (!CARDS[getCardsNames()[randomCard]].isActive) {
-                CARDS[getCardsNames()[randomCard]].isActive = true;
-                player.updateCards(CARDS[getCardsNames()[randomCard]]);
+    allotCards(player) {
+        let cardsNames = this.cards.names;
+        
+        for (let i = 0; player.cards.length < this.cardsQuantity; i++) {
+            let random  = Math.floor(Math.random() * (cardsNames.length));
+            let randomCard = this.cards.getSingleCard(cardsNames[random]);
+
+            if (!randomCard.isActive) {
+                randomCard.isActive = true;
+                player.updateCards(randomCard);
             }
             else this.allotCards(player);
-
         }
-
     }
 
 }
 
-let game = new Arcomage();
+let game = new Arcomage("Player", "CPU", 2, CARDS);
+
+game.applyCard("new_equipment", game.firstPlayer, game.secondPlayer);
+
+game.allotCards(game.firstPlayer);
+//game.allotCards(game.secondPlayer);
+game.applyCard("new_equipment", game.firstPlayer, game.secondPlayer);
 
 
-
-Arcomage.applyCard("new_equipment", game.player, game.CPU);
-
-Arcomage.allotCards(game.player);
-Arcomage.allotCards(game.player);
-console.log(game.player);
-//Arcomage.allotCards(game.CPU);
 
 
 
