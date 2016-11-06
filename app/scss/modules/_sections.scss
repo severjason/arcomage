@@ -1,13 +1,10 @@
 main {
-
-  max-width: $main_width;
-  margin: 0 auto;
+  position: absolute;
+  width: 99%;
+  height: 100%;
+  margin: 0;
 
   h1 {
     text-align: center;
   }
-}
-
-#hidden_cards_img {
-  display: none !important;
 }

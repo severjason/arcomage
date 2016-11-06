@@ -1,34 +1,51 @@
 "use strict";
 
-document.addEventListener('DOMContentLoaded', function () {
+class Canvas {
 
-    let arcomageDiv = document.getElementById("arcomage");
+    constructor(containerId, canvasId) {
 
-    let canvas = new fabric.Canvas("arcomage_canvas");
-    let canvasWidth = getElementWidth(arcomageDiv);
-    let canvasHeight = getElementHeight(arcomageDiv);
-    canvas.setDimensions({width: canvasWidth, height: canvasHeight});
+        this.divId = containerId;
+        this.ID = canvasId;
+        this.canvas = new fabric.Canvas(canvasId, {
+            selection: false
+        });
+        this.promises = [];
 
-    let promises = [];
+    }
 
+    get width() {
+        let element = document.getElementById(this.divId);
+        return parseInt(element.getBoundingClientRect().right - element.getBoundingClientRect().left, 10);
+    }
 
-    /*let loadImages = new Promise(function (resolve, reject) {
-        let imagesArray = [];
+    get height() {
+        let element = document.getElementById(this.divId);
+        return parseInt(element.getBoundingClientRect().bottom - element.getBoundingClientRect().top, 10);
+    }
 
-        for (let i = 0, cardsArrayLength = getCardsNames().length; i < cardsArrayLength; i++) {
-            let img = new Image();
-            img.src = CARDS[getCardsNames()[i]].src;
-            img.onload = function () {
-                imagesArray.push(img);
-            };
-        }
-        resolve(imagesArray);
-    });*/
+    get fabricElement() {
+        return this.canvas;
+    }
 
+    get imagesLoaded() {
+        return this.promises;
+    }
 
-    function createCards() {
+    setCanvasDimensions(width = this.width, height = this.height) {
+        this.fabricElement.setDimensions({
+            width: width,
+            height: height
+        })
+    }
 
+    createCards(CARDS) {
+        let that = this;
         let padding = 5;
+        let cardsPerPlayer = 5;
+        let cardWidth = (this.width >= 800) ? 150 : parseInt(this.width / cardsPerPlayer - 2 * padding, 10);
+        let cardHeight = parseInt(cardWidth * 1.4, 10);
+
+
         let cardsValues = {
             "red": {
                 "color": "#e74c3c",
@@ -52,12 +69,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
             let cardName = cardsNames[i];
             let card = CARDS.all[cardName];
-            //let img = document.getElementById(cardName);
-            let descriptionLength = card.description.length;
+            let descriptionFontSize = (card.description.length >= 15) ? 14 : 16;
+            let mainTextFontSize = (card.text["ru"].length >= 15) ? 14 : 16;
+            let cardPrice = card.price[cardsValues[card.type].price];
+            let circleRadius = 12;
 
             let mainBody = new fabric.Rect({
-                width: 150,
-                height: 200,
+                width: cardWidth,
+                height: cardHeight,
                 fill: cardsValues[card.type].color,
                 stroke: cardsValues[card.type].textColor,
                 strokeWidth: 1,
@@ -66,38 +85,40 @@ document.addEventListener('DOMContentLoaded', function () {
                 originX: 'right',
                 originY: 'top'
             });
-            let mainText = new fabric.Text(card.text["ru"], {
-                fontSize: 14,
-                width: 150,
-                left: -140,
-                top: 115,
-                fill: cardsValues[card.type].textColor
-            });
-            let descriptionText = new fabric.Text(card.description, {
-                fontSize: 16,
-                width: 150,
-                left: -140,
-                top: 5,
+            let mainText = new fabric.Textbox(card.text["ru"], {
+                fontSize: mainTextFontSize,
+                width: cardWidth,
+                left: -cardWidth,
+                top: cardHeight / 2,
                 fill: cardsValues[card.type].textColor,
                 textAlign: "center"
             });
-            let priceText = new fabric.Text(card.price[cardsValues[card.type].price].toString(), {
+            let descriptionText = new fabric.Textbox(card.description, {
+                fontSize: descriptionFontSize,
+                width: cardWidth,
+                left: -cardWidth,
+                top: padding,
+                fill: cardsValues[card.type].textColor,
+                textAlign: "center"
+            });
+            let priceText = new fabric.Textbox(cardPrice.toString(), {
                 fontSize: 18,
-                left: -22,
-                top: 174,
-                fill: cardsValues[card.type].textColor
+                lineHeight: 18,
+                width: circleRadius * 2,
+                height: circleRadius * 2,
+                left: -circleRadius * 2 - padding,
+                top: cardHeight - circleRadius * 2 - padding,
+                fill: cardsValues[card.type].textColor,
+                textAlign: "center"
             });
             let circle = new fabric.Circle({
-                radius: 12,
+                radius: circleRadius,
                 fill: cardsValues[card.type].color,
                 stroke: cardsValues[card.type].textColor,
                 strokeWidth: 1,
                 left: -30,
-                top: 171
+                top: cardHeight - 31
             });
-
-
-
 
 
             let loadImage = new Promise(function (resolve, reject) {
@@ -105,64 +126,53 @@ document.addEventListener('DOMContentLoaded', function () {
                 let img = new Image();
                 img.src = card.src;
 
-                    img.onload = function () {
 
-                        let image = new fabric.Image(img, {
-                            left: -120,
-                            top: 30
-                        });
+                img.onload = function () {
 
-                        let group = new fabric.Group([mainBody, descriptionText, image, mainText, circle, priceText], {
-                            left: padding,
-                            top: canvasHeight - mainBody.getHeight() - 2 * padding,
-                            selectable: true,
-                            hoverCursor: "pointer"
-                        });
+                    let imgWidth = (cardWidth >= 90) ? 90 : cardWidth - 2 * padding;
 
-                        group.on('mousedown', function () {
-                            console.log('mousedown');
-                        });
-                        group.on('mouseover', function () {
-                            console.log('mouseover');
-                            group.top -= 5;
-                            canvas.renderAll();
-                        });
-                        group.on('mouseout', function () {
-                            console.log('mouseout');
-                            group.top += 5;
-                            canvas.renderAll();
-                        });
+                    let image = new fabric.Image(img, {
+                        width: imgWidth,
+                        height: parseInt(imgWidth / 1.5, 10),
+                        left: -parseInt((imgWidth + cardWidth) / 2, 10),
+                        top: 30
+                    });
 
-                        /*let cardAsImage = new Image();
-                        cardAsImage.src = group.toDataURL();
-                        CARDS[cardName].object = cardAsImage;*/
-                        CARDS.all[cardName].object = group;
-                        resolve(group);
+                    let group = new fabric.Group([mainBody, descriptionText, image, mainText, circle, priceText], {
+                        left: padding,
+                        top: that.fabricElement.height - mainBody.getHeight() - 2 * padding,
+                        selectable: true,
+                        subTargetCheck: true,
+                        hoverCursor: "pointer"
+                    });
+
+                    group.on('mousedown', function () {
+                        console.log('mousedown');
+                    });
+                    group.on('mouseover', function () {
+                        console.log('mouseover');
+                        group.top -= 5;
+                        that.fabricElement.renderAll();
+                    });
+                    group.on('mouseout', function () {
+                        console.log('mouseout');
+                        group.top += 5;
+                        that.fabricElement.renderAll();
+                    });
+
+                    CARDS.all[cardName].object = group;
+                    
+                    resolve("Images loaded");
+                    
+                    reject(new Error("Can`t load images"));
+                    
                 };
 
             });
-            promises.push(loadImage);
-
-
-
+            that.imagesLoaded.push(loadImage);
         }
     }
 
-//addCardsImagesToHtml();
-    createCards();
-    Promise.all(promises).then(function (res) {
-        console.log(res);
-        console.log(CARDS.all);
-        canvas.add(CARDS.all["amethyst"].object);
-        canvas.add(CARDS.all["great_wall"].object);
-        canvas.add(CARDS.all["werewolf"].object);
-        canvas.add(CARDS.all["new_equipment"].object);
-    });
-//console.log(CARDS);
-//canvas.add(CARDS["amethyst"].object);
-//canvas.renderAll();
+}
 
-
-
-});
 

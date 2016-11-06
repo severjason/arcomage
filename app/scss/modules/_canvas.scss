@@ -1,6 +1,8 @@
 #arcomage {
-  width: $canvas_width;
-  height: $canvas_heigth;
-  margin: 0 auto;
+  width: 100%;
+  max-width: $canvas_width;
+  //min-width: $canvas_width/2;
+  height: 80%;
+  margin: 20px auto;
   border: $canvas_border;
 }

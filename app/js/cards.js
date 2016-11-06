@@ -3,6 +3,7 @@
 class ArcomageCards {
 
     constructor() {
+        
         this.cards = {
             "great_wall": {
                 "type": "red",
@@ -42,7 +43,7 @@ class ArcomageCards {
                 },
                 "src": "./images/cards/amethyst.jpg",
                 "price": {
-                    "gems": 2
+                    "gems": 20
                 },
                 "action": function (player, enemy) {
                     return player.updateTower(3);
@@ -64,7 +65,6 @@ class ArcomageCards {
                     enemy.takeDamage(9);
                 },
                 "isActive": false
-
             }
         };
     }
@@ -83,7 +83,5 @@ class ArcomageCards {
     
     
 }
-
-var CARDS = new ArcomageCards();
 
 

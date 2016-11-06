@@ -8,7 +8,7 @@ class Arcomage {
         this.cardsQuantity = cardsQuantity;
         this.cards = cardsObject;
     }
-
+    
     get firstPlayer() {
         return this.player1;
     }
@@ -39,13 +39,6 @@ class Arcomage {
 
 }
 
-let game = new Arcomage("Player", "CPU", 2, CARDS);
-
-game.applyCard("new_equipment", game.firstPlayer, game.secondPlayer);
-
-game.allotCards(game.firstPlayer);
-//game.allotCards(game.secondPlayer);
-game.applyCard("new_equipment", game.firstPlayer, game.secondPlayer);
 
 
 
