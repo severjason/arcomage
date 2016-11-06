@@ -91,6 +91,7 @@ class Canvas {
                 left: -cardWidth,
                 top: cardHeight / 2,
                 fill: cardsValues[card.type].textColor,
+                editable: false,
                 textAlign: "center"
             });
             let descriptionText = new fabric.Textbox(card.description, {
@@ -99,6 +100,7 @@ class Canvas {
                 left: -cardWidth,
                 top: padding,
                 fill: cardsValues[card.type].textColor,
+                editable: false,
                 textAlign: "center"
             });
             let priceText = new fabric.Textbox(cardPrice.toString(), {
@@ -109,6 +111,7 @@ class Canvas {
                 left: -circleRadius * 2 - padding,
                 top: cardHeight - circleRadius * 2 - padding,
                 fill: cardsValues[card.type].textColor,
+                editable: false,
                 textAlign: "center"
             });
             let circle = new fabric.Circle({
