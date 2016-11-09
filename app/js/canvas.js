@@ -10,7 +10,6 @@ class Canvas {
             selection: false
         });
         this.promises = [];
-
     }
 
     get width() {
@@ -42,13 +41,13 @@ class Canvas {
         let that = this;
         let padding = 5;
         let cardsPerPlayer = 5;
-        let cardWidth = (this.width >= 800) ? 150 : parseInt(this.width / cardsPerPlayer - 2 * padding, 10);
+        let cardWidth = 150;//(this.width >= 800) ? 150 : parseInt(this.width / cardsPerPlayer - 2 * padding, 10);
         let cardHeight = parseInt(cardWidth * 1.4, 10);
 
 
         let cardsValues = {
             "red": {
-                "color": "#e74c3c",
+                "color": "#d35400",
                 "textColor": "#34495e",
                 "price": "bricks"
             },
@@ -140,11 +139,11 @@ class Canvas {
                         left: -parseInt((imgWidth + cardWidth) / 2, 10),
                         top: 30
                     });
-
                     let group = new fabric.Group([mainBody, descriptionText, image, mainText, circle, priceText], {
                         left: padding,
                         top: that.fabricElement.height - mainBody.getHeight() - 2 * padding,
                         selectable: true,
+                        hasBorders:false,
                         subTargetCheck: true,
                         hoverCursor: "pointer"
                     });
@@ -164,11 +163,11 @@ class Canvas {
                     });
 
                     CARDS.all[cardName].object = group;
-                    
+
                     resolve("Images loaded");
-                    
+
                     reject(new Error("Can`t load images"));
-                    
+
                 };
 
             });

@@ -2,19 +2,19 @@
 
 class Arcomage {
 
-    constructor(player1 = "Player", player2 = "CPU" , cardsQuantity, cardsObject) {
-        this.player1 = new Player(player1);
-        this.player2 = new Player(player2);
+    constructor(playerOne,playerOneValues, playerTwo,playerTwoValues, cardsQuantity, cardsObject) {
+        this.playerOne = new Player(playerOne, playerOneValues);
+        this.playerTwo = new Player(playerTwo, playerTwoValues);
         this.cardsQuantity = cardsQuantity;
         this.cards = cardsObject;
     }
     
     get firstPlayer() {
-        return this.player1;
+        return this.playerOne;
     }
 
     get secondPlayer() {
-        return this.player2;
+        return this.playerTwo;
     }
 
     applyCard(cardName, player, enemy) {

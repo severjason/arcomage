@@ -3,6 +3,7 @@
 class Loader {
 
     constructor() {
+        this.params = {};
         this.promises = [];
         this.cards = {};
         this.game = {};
@@ -30,20 +31,30 @@ class Loader {
         let that = this;
         let promiseChain = new Promise((resolve, reject) => {
 
-            resolve(new ArcomageCards());
+            resolve(new Param());
 
-            reject(new Error("Can`t create ArcomageCards!"));
+            reject(new Error("Can`t create Default Parameters!"));
 
         });
 
         return promiseChain
+            .then(function (param) {
+                that.params = param;
+                return new ArcomageCards();
+            })
             .then(function (cards) {
                 that.cards = cards;
-                return new Arcomage("Player", "CPU", 2, cards);
+                return new Arcomage(
+                    that.params.firstPlayer,
+                    that.params.firstPlayerValues, 
+                    that.params.secondPlayer,
+                    that.params.secondPlayerValues, 
+                    that.params.cardsQuantity, 
+                    cards);
             })
             .then(function (game) {
                 that.game = game;
-                return new Canvas("arcomage", "arcomage_canvas");
+                return new Canvas(that.params.canvasDivId, that.params.canvasId);
             })
             .then(function (canvas) {
                 that.canvas = canvas;

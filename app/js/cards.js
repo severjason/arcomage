@@ -16,7 +16,7 @@ class ArcomageCards {
                     "bricks": 2
                 },
                 "action": function (player, enemy) {
-                    return player.updateWall(8);
+                    player.updateWall(8);
                 },
                 "isActive": false
             },
@@ -31,7 +31,7 @@ class ArcomageCards {
                     "bricks": 2
                 },
                 "action": function (player, enemy) {
-                    return player.updateSources({"mine": 2});
+                    player.updateSources({"mine": 2});
                 },
                 "isActive": false
             },
@@ -46,7 +46,7 @@ class ArcomageCards {
                     "gems": 20
                 },
                 "action": function (player, enemy) {
-                    return player.updateTower(3);
+                    player.updateTower(3);
                 },
                 "isActive": false
 
@@ -63,6 +63,22 @@ class ArcomageCards {
                 },
                 "action": function (player, enemy) {
                     enemy.takeDamage(9);
+                },
+                "isActive": false
+            },
+            "earthquake": {
+                "type": "red",
+                "description": "Землетрясение",
+                "text": {
+                    "ru": "-1 шахты всех игроков"
+                },
+                "src": "./images/cards/earthquake.jpg",
+                "price": {
+                    "bricks": 0
+                },
+                "action": function (player, enemy) {
+                    player.updateSources({"mine": -1});
+                    enemy.updateSources({"mine": -1});
                 },
                 "isActive": false
             }

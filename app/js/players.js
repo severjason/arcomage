@@ -1,24 +1,12 @@
 "use strict";
 class Player {
 
-    constructor(name,
-                tower = 15,
-                wall = 5,
-                resources = {
-                    "bricks": 10,
-                    "gems": 10,
-                    "beasts": 10
-                },
-                sources = {
-                    "mine": 1,
-                    "magic": 1,
-                    "dungeon": 1
-                }) {
+    constructor(name, playerValues) {
         this.playerName = name;
-        this.playerTower = parseInt(tower, 10);
-        this.playerWall = parseInt(wall, 10);
-        this.playerResources = resources;
-        this.playerSources = sources;
+        this.playerTower = parseInt(playerValues.tower, 10);
+        this.playerWall = parseInt(playerValues.wall, 10);
+        this.playerResources = playerValues.resources;
+        this.playerSources = playerValues.sources;
         this.playerCards = [];
     }
 
@@ -50,17 +38,9 @@ class Player {
         return this.playerResources;
     }
 
-/*    set resources(newValue) {
-        return this.playerResources = newValue;
-    }*/
-
     get sources() {
         return this.playerSources;
     }
-/*
-    set sources(newValue) {
-        return this.playerSources = newValue;
-    }*/
 
     get cards() {
         return this.playerCards;
