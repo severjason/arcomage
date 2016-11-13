@@ -1,11 +1,13 @@
 #arcomage {
-  //width: 100%;
-  max-width: $canvas_width;
-  //min-width: $canvas_width/2;
-  height: 99%;
-  margin: 0 auto;
+  position: absolute;
+  width: $canvas_width;
+  height: $canvas_heigth;
+  left: 50%;
+  top: 50%;
+  margin-left: - $canvas_width / 2;
+  margin-top: - $canvas_heigth / 2;
+  //transform: translate(-50%,-50%);
   border: $canvas_border;
-
 
 }
 

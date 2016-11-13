@@ -4,12 +4,11 @@ class Loader {
 
     constructor() {
         this.params = {};
-        this.promises = [];
         this.cards = {};
         this.game = {};
         this.canvas = {};
     }
-
+/*
     get allPromises() {
         return this.promises;
     }
@@ -25,7 +24,7 @@ class Loader {
                 this.promises.push(promise);
             }
         }
-    }
+    }*/
 
     init() {
         let that = this;
@@ -45,9 +44,9 @@ class Loader {
             .then(function (cards) {
                 that.cards = cards;
                 return new Arcomage(
-                    that.params.firstPlayer,
+                    that.params.firstPlayerName,
                     that.params.firstPlayerValues, 
-                    that.params.secondPlayer,
+                    that.params.secondPlayerName,
                     that.params.secondPlayerValues, 
                     that.params.cardsQuantity, 
                     cards);
@@ -59,8 +58,17 @@ class Loader {
             .then(function (canvas) {
                 that.canvas = canvas;
                 that.canvas.setCanvasDimensions();
-                that.canvas.createCards(that.cards);
-                return that.canvas.imagesLoaded;
+                that.canvas.createCards(that.cards, that.params.cardsValues);
+                that.canvas.createNames(
+                    that.params.firstPlayerName,
+                    that.params.secondPlayerName,
+                    that.params.mainCanvasValues);
+                that.canvas.createSources(
+                    that.game.firstPlayer,
+                    that.game.secondPlayer,
+                    that.params.mainCanvasValues,
+                    that.params.cardsValues);
+                return that.canvas.cardsImagesLoaded;
             })
             .then(function (imagesPromises) {
                 return Promise.all(imagesPromises);

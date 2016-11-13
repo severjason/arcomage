@@ -9,7 +9,10 @@ class Canvas {
         this.canvas = new fabric.Canvas(canvasId, {
             selection: false
         });
-        this.promises = [];
+        this.promises = {
+            cardsImages :[],
+            sourcesImages :[]
+        };
     }
 
     get width() {
@@ -26,8 +29,12 @@ class Canvas {
         return this.canvas;
     }
 
-    get imagesLoaded() {
-        return this.promises;
+    get cardsImagesLoaded() {
+        return this.promises.cardsImages;
+    }
+
+    get sourcesImagesLoaded() {
+        return this.promises.sourcesImages;
     }
 
     setCanvasDimensions(width = this.width, height = this.height) {
@@ -37,31 +44,13 @@ class Canvas {
         })
     }
 
-    createCards(CARDS) {
+    createCards(CARDS, cardsValues) {
         let that = this;
         let padding = 5;
-        let cardsPerPlayer = 5;
+        //let cardsPerPlayer = 5;
         let cardWidth = 150;//(this.width >= 800) ? 150 : parseInt(this.width / cardsPerPlayer - 2 * padding, 10);
         let cardHeight = parseInt(cardWidth * 1.4, 10);
 
-
-        let cardsValues = {
-            "red": {
-                "color": "#d35400",
-                "textColor": "#34495e",
-                "price": "bricks"
-            },
-            "blue": {
-                "color": "#3498db",
-                "textColor": "#34495e",
-                "price": "gems"
-            },
-            "green": {
-                "color": "#1abc9c",
-                "textColor": "#34495e",
-                "price": "beasts"
-            }
-        };
         let cardsNames = CARDS.names;
 
         for (let i = 0, cardsArrayLength = cardsNames.length; i < cardsArrayLength; i++) {
@@ -77,10 +66,10 @@ class Canvas {
                 width: cardWidth,
                 height: cardHeight,
                 fill: cardsValues[card.type].color,
-                stroke: cardsValues[card.type].textColor,
-                strokeWidth: 1,
-                rx: 3,
-                ry: 3,
+                /*stroke: cardsValues[card.type].textColor,
+                strokeWidth: 1,*/
+                rx: 2,
+                ry: 2,
                 originX: 'right',
                 originY: 'top'
             });
@@ -166,14 +155,134 @@ class Canvas {
 
                     resolve("Images loaded");
 
-                    reject(new Error("Can`t load images"));
+                    reject(new Error("Can`t load cards images"));
 
                 };
 
             });
-            that.imagesLoaded.push(loadImage);
+            that.cardsImagesLoaded.push(loadImage);
         }
+        
+    } //createCards(CARDS);
+    
+    createNames(playerOneName, playerTwoName, canvasValues) {
+
+        function getText(text) {
+
+            return new fabric.Textbox(text, {
+                fontSize: canvasValues.playersNamesText.fontSize,
+                width: canvasValues.playersNamesText.width,
+                padding: canvasValues.playersNamesText.padding,
+                fontWeight: 'bold',
+                textAlign: "center",
+                originX: 'right',
+                originY: 'top'
+            });
+        }
+        function getMainBody() {
+            return new fabric.Rect({
+                width: canvasValues.playersNamesText.width,
+                height: canvasValues.playersNamesText.height,
+                fill:false,
+                stroke: "black",
+                strokeWidth: 1,
+                rx: 3,
+                ry: 3,
+                originX: 'right',
+                originY: 'top'
+            });
+        }
+
+        let playerOneText = getText(playerOneName);
+        let playerTwoText = getText(playerTwoName);
+
+        let groupForPlayerOne = new fabric.Group([getMainBody(), playerOneText], {
+            left: 0,
+            top:0,
+            editable: false,
+            selectable: false,
+            hoverCursor: "default"
+        });
+
+        let groupForPlayerTwo = new fabric.Group([getMainBody(), playerTwoText], {
+            left: this.width - canvasValues.playersNamesText.width - 2 * canvasValues.playersNamesText.padding,
+            top:0,
+            editable: false,
+            selectable: false,
+            hoverCursor: "default"
+        });
+        
+        this.canvas.add(groupForPlayerOne);
+        this.canvas.add(groupForPlayerTwo);
+    } // createNames(playerOneName, playerTwoName, cardsValues)
+
+    createSources(playerOne, playerTwo, canvasValues, cardsValues) {
+
+        let that = this;
+
+        let loadImage = new Promise(function (resolve, reject) {
+
+
+            let img = new Image();
+            img.src = canvasValues.sources.mine.src;
+
+
+            img.onload = function () {
+
+                let imgWidth = img.width;
+
+                let image = new fabric.Image(img, {
+                    left: parseInt(canvasValues.sources.width - imgWidth, 10),
+                    top: 0
+                });
+
+                let mineBody = new fabric.Rect({
+                    width: canvasValues.sources.width,
+                    height: canvasValues.sources.height,
+                    fill:cardsValues.red.color,
+                    rx: 1,
+                    ry: 1,
+                    originX: 'left',
+                    originY: 'top'
+                });
+                let mineValue = new fabric.Textbox(playerOne.sources.mine.toString(), {
+                    left:0,
+                    top:0,
+                    fontWeight: 'bold',
+                    textAlign: "center",
+                    originX: 'left',
+                    originY: 'top'
+                });
+
+                let group = new fabric.Group([mineBody, image, mineValue], {
+                    left:canvasValues.sources.padding,
+                    top:5 * canvasValues.sources.padding,
+                    selectable: false,
+                    hasBorders:false,
+                    hoverCursor: "default"
+                });
+
+
+
+                function addObjects() {
+                    playerOne.sourcesObject.mine = group;
+                    that.canvas.add(group);
+                }
+                resolve(addObjects());
+
+                reject(new Error("Can`t load images"));
+
+            };
+
+        });
+        that.sourcesImagesLoaded.push(loadImage);
+
+
+        
+
     }
+
+
 
 }
 

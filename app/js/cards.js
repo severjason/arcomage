@@ -18,7 +18,8 @@ class ArcomageCards {
                 "action": function (player, enemy) {
                     player.updateWall(8);
                 },
-                "isActive": false
+                "isActive": false,
+                "object": {}
             },
             "new_equipment": {
                 "type": "red",
@@ -33,7 +34,8 @@ class ArcomageCards {
                 "action": function (player, enemy) {
                     player.updateSources({"mine": 2});
                 },
-                "isActive": false
+                "isActive": false,
+                "object": {}
             },
             "amethyst": {
                 "type": "blue",
@@ -48,7 +50,8 @@ class ArcomageCards {
                 "action": function (player, enemy) {
                     player.updateTower(3);
                 },
-                "isActive": false
+                "isActive": false,
+                "object": {}
 
             },
             "werewolf": {
@@ -64,7 +67,8 @@ class ArcomageCards {
                 "action": function (player, enemy) {
                     enemy.takeDamage(9);
                 },
-                "isActive": false
+                "isActive": false,
+                "object": {}
             },
             "earthquake": {
                 "type": "red",
@@ -80,7 +84,8 @@ class ArcomageCards {
                     player.updateSources({"mine": -1});
                     enemy.updateSources({"mine": -1});
                 },
-                "isActive": false
+                "isActive": false,
+                "object": {}
             }
         };
     }

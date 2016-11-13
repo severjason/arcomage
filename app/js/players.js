@@ -7,6 +7,7 @@ class Player {
         this.playerWall = parseInt(playerValues.wall, 10);
         this.playerResources = playerValues.resources;
         this.playerSources = playerValues.sources;
+        this.playerSourcesObject = {};
         this.playerCards = [];
     }
 
@@ -41,6 +42,17 @@ class Player {
     get sources() {
         return this.playerSources;
     }
+    
+    get sourcesObject() {
+        return this.playerSourcesObject;
+    }
+
+    set sourcesObject(newValue) {
+        if(typeof newValue === "object") {
+            return this.playerSourcesObject = newValue;
+        }
+
+    }
 
     get cards() {
         return this.playerCards;
@@ -68,6 +80,7 @@ class Player {
             if (newSources.hasOwnProperty(key)) {
                 let newValue = parseInt(newSources[key], 10);
                 ((this.sources[key] + newValue) > 0) ? this.sources[key] += newValue : this.sources[key] = 1;
+                this.sourcesObject[key]._objects[2].text = this.sources[key].toString();
             }
         }
     }
