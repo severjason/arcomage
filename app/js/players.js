@@ -8,6 +8,7 @@ class Player {
         this.playerResources = playerValues.resources;
         this.playerSources = playerValues.sources;
         this.playerSourcesObject = {};
+        this.playerResourcesObject = {};
         this.playerCards = [];
     }
 
@@ -51,7 +52,15 @@ class Player {
         if(typeof newValue === "object") {
             return this.playerSourcesObject = newValue;
         }
+    }
+    get resourcesObject() {
+        return this.playerResourcesObject;
+    }
 
+    set resourcesObject(newValue) {
+        if(typeof newValue === "object") {
+            return this.playerResourcesObject = newValue;
+        }
     }
 
     get cards() {
@@ -79,7 +88,13 @@ class Player {
         for (let key in newSources) {
             if (newSources.hasOwnProperty(key)) {
                 let newValue = parseInt(newSources[key], 10);
-                ((this.sources[key] + newValue) > 0) ? this.sources[key] += newValue : this.sources[key] = 1;
+                if ((this.sources[key] + newValue) > 0) {
+                    ((this.sources[key] + newValue) < 100) ? this.sources[key] += newValue : this.sources[key] = 99;
+                }
+                else {
+                    this.sources[key] = 1;
+                }
+
                 this.sourcesObject[key]._objects[2].text = this.sources[key].toString();
             }
         }
@@ -89,7 +104,12 @@ class Player {
         for (let key in newResources) {
             if (newResources.hasOwnProperty(key)) {
                 let newValue = parseInt(newResources[key], 10);
-                ((this.resources[key] + newValue) > 0) ? this.resources[key] += newValue : this.resources[key] = 1;
+                if ((this.resources[key] + newValue) > 0) {
+                    ((this.resources[key] + newValue) < 300) ? this.resources[key] += newValue : this.resources[key] = 299;
+                } else {
+                    this.resources[key] = 1;
+                }
+                this.resourcesObject[key]._objects[2].text = this.resources[key].toString();
             }
         }
     }

@@ -10,8 +10,8 @@ class Canvas {
             selection: false
         });
         this.promises = {
-            cardsImages :[],
-            sourcesImages :[]
+            cardsImages: [],
+            sourcesImages: []
         };
     }
 
@@ -67,7 +67,7 @@ class Canvas {
                 height: cardHeight,
                 fill: cardsValues[card.type].color,
                 /*stroke: cardsValues[card.type].textColor,
-                strokeWidth: 1,*/
+                 strokeWidth: 1,*/
                 rx: 2,
                 ry: 2,
                 originX: 'right',
@@ -132,7 +132,7 @@ class Canvas {
                         left: padding,
                         top: that.fabricElement.height - mainBody.getHeight() - 2 * padding,
                         selectable: true,
-                        hasBorders:false,
+                        hasBorders: false,
                         subTargetCheck: true,
                         hoverCursor: "pointer"
                     });
@@ -162,9 +162,9 @@ class Canvas {
             });
             that.cardsImagesLoaded.push(loadImage);
         }
-        
+
     } //createCards(CARDS);
-    
+
     createNames(playerOneName, playerTwoName, canvasValues) {
 
         function getText(text) {
@@ -179,12 +179,13 @@ class Canvas {
                 originY: 'top'
             });
         }
+
         function getMainBody() {
             return new fabric.Rect({
                 width: canvasValues.playersNamesText.width,
                 height: canvasValues.playersNamesText.height,
-                fill:false,
-                stroke: "black",
+                fill: false,
+                stroke:  canvasValues.playersNamesText.textColor,
                 strokeWidth: 1,
                 rx: 3,
                 ry: 3,
@@ -198,7 +199,7 @@ class Canvas {
 
         let groupForPlayerOne = new fabric.Group([getMainBody(), playerOneText], {
             left: 0,
-            top:0,
+            top: 0,
             editable: false,
             selectable: false,
             hoverCursor: "default"
@@ -206,17 +207,17 @@ class Canvas {
 
         let groupForPlayerTwo = new fabric.Group([getMainBody(), playerTwoText], {
             left: this.width - canvasValues.playersNamesText.width - 2 * canvasValues.playersNamesText.padding,
-            top:0,
+            top: 0,
             editable: false,
             selectable: false,
             hoverCursor: "default"
         });
-        
+
         this.canvas.add(groupForPlayerOne);
         this.canvas.add(groupForPlayerTwo);
     } // createNames(playerOneName, playerTwoName, cardsValues)
 
-    createSources(playerOne, playerTwo, canvasValues, cardsValues) {
+    createSources(source, playerOne, playerTwo, canvasValues) {
 
         let that = this;
 
@@ -224,50 +225,144 @@ class Canvas {
 
 
             let img = new Image();
-            img.src = canvasValues.sources.mine.src;
+            img.src = canvasValues.sources[source].src;
 
 
             img.onload = function () {
 
-                let imgWidth = img.width;
+                img.width = canvasValues.sources.imgWidth;
+                img.height = canvasValues.sources.imgHeight;
 
-                let image = new fabric.Image(img, {
-                    left: parseInt(canvasValues.sources.width - imgWidth, 10),
+                let imageOne = new fabric.Image(img, {
+                    left: parseInt(canvasValues.sources.width - canvasValues.sources.imgWidth, 10),
+                    top: 0
+                });
+                let imageTwo = new fabric.Image(img, {
+                    left: parseInt(canvasValues.sources.width - canvasValues.sources.imgWidth, 10),
                     top: 0
                 });
 
-                let mineBody = new fabric.Rect({
-                    width: canvasValues.sources.width,
-                    height: canvasValues.sources.height,
-                    fill:cardsValues.red.color,
-                    rx: 1,
-                    ry: 1,
-                    originX: 'left',
-                    originY: 'top'
-                });
-                let mineValue = new fabric.Textbox(playerOne.sources.mine.toString(), {
-                    left:0,
-                    top:0,
-                    fontWeight: 'bold',
-                    textAlign: "center",
-                    originX: 'left',
-                    originY: 'top'
-                });
+                function getSourceBody() {
+                    return new fabric.Rect({
+                        width: canvasValues.sources.width,
+                        height: canvasValues.sources.height * 0.75,
+                        fill: canvasValues.sources[source].color,
+                        originX: 'left',
+                        originY: 'top'
+                    });
+                }
 
-                let group = new fabric.Group([mineBody, image, mineValue], {
-                    left:canvasValues.sources.padding,
-                    top:5 * canvasValues.sources.padding,
+                function getSourceValue(player) {
+                    return new fabric.Textbox(player.sources[source].toString(), {
+                        width: canvasValues.sources.width,
+                        left: parseInt(canvasValues.sources.padding / 2, 10),
+                        top: canvasValues.sources.imgHeight - canvasValues.sources.fontSize,
+                        fontSize: canvasValues.sources.fontSize,
+                        fill:canvasValues.sources.textColor,
+                        textAlign: "left",
+                        originX: 'left',
+                        originY: 'top'
+                    });
+                }
+
+                function getResourcesText() {
+                    return new fabric.Textbox("Bricks", {
+                        left: parseInt(canvasValues.sources.padding / 4, 10),
+                        top: parseInt(canvasValues.sources.height * 0.75 + canvasValues.sources.padding / 4,10),
+                        fontSize: canvasValues.sources.fontSize / 2,
+                        fill:canvasValues.sources.textColor,
+                        textAlign: "center",
+                        originX: 'left',
+                        originY: 'top'
+                    });
+                }
+                function getResourcesBody() {
+                    return new fabric.Rect({
+                        width: canvasValues.sources.width,
+                        height: canvasValues.sources.height * 0.25,
+                        top: parseInt(canvasValues.sources.height * 0.75 + canvasValues.sources.borderRadius * 2, 10),
+                        fill: canvasValues.sources[source].color,
+                        originX: 'left',
+                        originY: 'top'
+                    });
+                }
+                function getResources(player) {
+                    return new fabric.Textbox(player.resources[canvasValues.sources[source].resource].toString(), {
+                        width:canvasValues.sources.width - canvasValues.sources.padding / 2 ,
+                        left: canvasValues.sources.padding / 4,
+                        top: parseInt(canvasValues.sources.height * 0.75 + canvasValues.sources.padding / 4,10),
+                        fontSize: canvasValues.sources.fontSize / 2,
+                        fill:canvasValues.sources.textColor,
+                        textAlign: "right",
+                        originX: 'left',
+                        originY: 'top'
+                    });
+                }
+
+
+                let sourceObjectPlayerOne = new fabric.Group([
+                    getSourceBody(),
+                    imageOne,
+                    getSourceValue(playerOne)], {
+                    left: canvasValues.sources.padding,
+                    top: 5 * canvasValues.sources.padding,
+                    rx: canvasValues.sources.borderRadius,
+                    ry: canvasValues.sources.borderRadius,
                     selectable: false,
-                    hasBorders:false,
+                    hasBorders: false,
+                    hoverCursor: "default"
+                });
+                let resourceObjectPlayerOne = new fabric.Group([
+                    getResourcesBody(),
+                    getResourcesText(),
+                    getResources(playerOne)], {
+                    left: canvasValues.sources.padding,
+                    top: parseInt(canvasValues.sources.height * 0.75 + 5 * canvasValues.sources.padding +
+                        canvasValues.sources.borderRadius * 2, 10),
+                    rx: canvasValues.sources.borderRadius,
+                    ry: canvasValues.sources.borderRadius,
+                    selectable: false,
+                    hasBorders: false,
+                    hoverCursor: "default"
+                });
+                let sourceObjectPlayerTwo = new fabric.Group([
+                    getSourceBody(),
+                    imageTwo,
+                    getSourceValue(playerTwo)], {
+                    left: that.width - canvasValues.sources.width - canvasValues.sources.padding,
+                    top: 5 * canvasValues.sources.padding,
+                    rx: canvasValues.sources.borderRadius,
+                    ry: canvasValues.sources.borderRadius,
+                    selectable: false,
+                    hasBorders: false,
+                    hoverCursor: "default"
+                });
+                let resourceObjectPlayerTwo = new fabric.Group([
+                    getResourcesBody(),
+                    getResourcesText(),
+                    getResources(playerTwo)], {
+                    left: that.width - canvasValues.sources.width - canvasValues.sources.padding,
+                    top: parseInt(canvasValues.sources.height * 0.75 + 5 * canvasValues.sources.padding +
+                        canvasValues.sources.borderRadius * 2, 10),
+                    rx: canvasValues.sources.borderRadius,
+                    ry: canvasValues.sources.borderRadius,
+                    selectable: false,
+                    hasBorders: false,
                     hoverCursor: "default"
                 });
 
 
-
                 function addObjects() {
-                    playerOne.sourcesObject.mine = group;
-                    that.canvas.add(group);
+                    playerOne.sourcesObject[source] = sourceObjectPlayerOne;
+                    playerOne.resourcesObject[canvasValues.sources[source].resource] = resourceObjectPlayerOne;
+                    that.canvas.add(sourceObjectPlayerOne);
+                    that.canvas.add(resourceObjectPlayerOne);
+                    playerTwo.sourcesObject[source] = sourceObjectPlayerTwo;
+                    playerTwo.resourcesObject[canvasValues.sources[source].resource] = resourceObjectPlayerTwo;
+                    that.canvas.add(sourceObjectPlayerTwo);
+                    that.canvas.add(resourceObjectPlayerTwo);
                 }
+
                 resolve(addObjects());
 
                 reject(new Error("Can`t load images"));
@@ -278,10 +373,7 @@ class Canvas {
         that.sourcesImagesLoaded.push(loadImage);
 
 
-        
-
     }
-
 
 
 }

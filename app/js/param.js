@@ -37,26 +37,35 @@ class Param {
                         "width": 100,
                         "height" : 26,
                         "padding": 20,
-                        "fontSize":24
+                        "fontSize":24,
+                        "textColor":"#000"
                     },
                     "sources": {
                         "width": 100,
                         "height": 100,
+                        "imgWidth":50,
+                        "imgHeight":75,
                         "padding": 20,
+                        "fontSize":40,
+                        "textColor":"black",
+                        "borderRadius": 1,
                         "mine": {
                             "color": "#d35400",
                             "textColor": "#34495e",
-                            "src": "./images/sources/mine.png"
+                            "src": "./images/sources/mine.png",
+                            "resource":"bricks"
                         },
                         "magic": {
                             "color": "#3498db",
                             "textColor": "#34495e",
-                            "src": "./images/sources/magic.jpg"
+                            "src": "./images/sources/magic.jpg",
+                            "resource":"gems"
                         },
                         "dungeon": {
                             "color": "#1abc9c",
                             "textColor": "#34495e",
-                            "src": "./images/sources/dungeon.jpg"
+                            "src": "./images/sources/dungeon.jpg",
+                            "resource":"beasts"
                         }
                     }
                 },

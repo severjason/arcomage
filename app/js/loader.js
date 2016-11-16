@@ -64,10 +64,10 @@ class Loader {
                     that.params.secondPlayerName,
                     that.params.mainCanvasValues);
                 that.canvas.createSources(
+                    "mine",
                     that.game.firstPlayer,
                     that.game.secondPlayer,
-                    that.params.mainCanvasValues,
-                    that.params.cardsValues);
+                    that.params.mainCanvasValues);
                 return that.canvas.cardsImagesLoaded;
             })
             .then(function (imagesPromises) {
