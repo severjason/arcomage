@@ -58,7 +58,7 @@ class Loader {
             .then(function (canvas) {
                 that.canvas = canvas;
                 that.canvas.setCanvasDimensions();
-                that.canvas.createCards(that.cards, that.params.cardsValues);
+                that.canvas.createCards(that.cards, that.params.cardsValues, that.params.relations);
                 that.canvas.createNames(
                     that.params.firstPlayerName,
                     that.params.secondPlayerName,

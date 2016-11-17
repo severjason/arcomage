@@ -6,13 +6,13 @@ class ArcomageCards {
         
         this.cards = {
             "great_wall": {
-                "type": "red",
+                "source": "mine",
                 "description": "Великая стена",
                 "text": {
                     "ru": "+8 к стене"
                 },
                 "src": "./images/cards/great_wall.jpg",
-                "price": {
+                "resource": {
                     "bricks": 2
                 },
                 "action": function (player, enemy) {
@@ -22,13 +22,13 @@ class ArcomageCards {
                 "object": {}
             },
             "new_equipment": {
-                "type": "red",
+                "source": "mine",
                 "description": "Новое оборудование",
                 "text": {
                     "ru": "+8 к стене"
                 },
                 "src": "./images/cards/new_equipment.jpg",
-                "price": {
+                "resource": {
                     "bricks": 2
                 },
                 "action": function (player, enemy) {
@@ -38,13 +38,13 @@ class ArcomageCards {
                 "object": {}
             },
             "amethyst": {
-                "type": "blue",
+                "source": "magic",
                 "description": "Аметист",
                 "text": {
                     "ru": "+3 к башне"
                 },
                 "src": "./images/cards/amethyst.jpg",
-                "price": {
+                "resource": {
                     "gems": 20
                 },
                 "action": function (player, enemy) {
@@ -55,13 +55,13 @@ class ArcomageCards {
 
             },
             "werewolf": {
-                "type": "green",
+                "source": "dungeon",
                 "description": "Оборотень",
                 "text": {
                     "ru": "Если стена больше,\nчем у врага, то\n6 урона башне врага,\nиначе 6 урона"
                 },
                 "src": "./images/cards/werewolf.jpg",
-                "price": {
+                "resource": {
                     "beasts": 5
                 },
                 "action": function (player, enemy) {
@@ -71,13 +71,13 @@ class ArcomageCards {
                 "object": {}
             },
             "earthquake": {
-                "type": "red",
+                "source": "mine",
                 "description": "Землетрясение",
                 "text": {
                     "ru": "-1 шахты всех игроков"
                 },
                 "src": "./images/cards/earthquake.jpg",
-                "price": {
+                "resource": {
                     "bricks": 0
                 },
                 "action": function (player, enemy) {

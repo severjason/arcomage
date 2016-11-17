@@ -6,11 +6,11 @@ loader.init().then(function (res) {
     let game = loader.game;
     let canvas = loader.canvas;
 
-   /* canvas.fabricElement.add(CARDS.all["amethyst"].object);
+    canvas.fabricElement.add(CARDS.all["amethyst"].object);
     canvas.fabricElement.add(CARDS.all["great_wall"].object);
     canvas.fabricElement.add(CARDS.all["werewolf"].object);
     canvas.fabricElement.add(CARDS.all["new_equipment"].object);
-    canvas.fabricElement.add(CARDS.all["earthquake"].object);*/
+    canvas.fabricElement.add(CARDS.all["earthquake"].object);
 
     document.addEventListener("click", function () {
         game.applyCard("new_equipment", game.firstPlayer, game.secondPlayer);
