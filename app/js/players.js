@@ -3,8 +3,8 @@ class Player {
 
     /**
      *
-     * @param name {String}
-     * @param playerValues {Object}
+     * @param name {string}
+     * @param playerValues {object}
      */
     constructor(name, playerValues) {
         this.playerName = name;
@@ -19,7 +19,7 @@ class Player {
 
     /**
      * Get playerName
-     * @returns {String} playerName
+     * @returns {string} playerName
      */
     get name() {
         return this.playerName;
@@ -27,7 +27,7 @@ class Player {
 
     /**
      * Get playerTowerLife
-     * @returns {Number} playerTowerLife
+     * @returns {number} playerTowerLife
      */
     get towerLife() {
         return this.playerTowerLife;
@@ -35,7 +35,7 @@ class Player {
 
     /**
      * Set new playerTowerLife
-     * @param {Number} newPlayerTowerLife
+     * @param {number} newPlayerTowerLife
      */
     set towerLife(newPlayerTowerLife) {
         if (newPlayerTowerLife >= 0) {
@@ -45,7 +45,7 @@ class Player {
 
     /**
      * Get playerWallLife
-     * @returns {Number} playerWallLife
+     * @returns {number} playerWallLife
      */
     get wallLife() {
         return this.playerWallLife;
@@ -53,7 +53,7 @@ class Player {
 
     /**
      * Set playerWallLife
-     * @param {Number} newPlayerWall
+     * @param {number} newPlayerWall
      */
     set wallLife(newPlayerWall) {
         if (newPlayerWall >= 0) {
@@ -63,7 +63,7 @@ class Player {
 
     /**
      * Get playerResources
-     * @returns {Object} playerResources
+     * @returns {object} playerResources
      */
     get resources() {
         return this.playerResources;
@@ -71,7 +71,7 @@ class Player {
 
     /**
      * Get playerSources
-     * @returns {Object} playerSources
+     * @returns {object} playerSources
      */
     get sources() {
         return this.playerSources;
@@ -79,7 +79,7 @@ class Player {
 
     /**
      * Get playerSources fabric object
-     * @returns {Object} playerSourcesObject
+     * @returns {object} playerSourcesObject
      */
     get sourcesObject() {
         return this.playerSourcesObject;
@@ -88,7 +88,7 @@ class Player {
 
     /**
      * Set new source fabric object
-     * @param {Object} newFabricObject
+     * @param {object} newFabricObject
      */
     set sourcesObject(newFabricObject) {
         if(typeof newFabricObject === "object") {
@@ -98,7 +98,7 @@ class Player {
 
     /**
      * Get player resources fabric object
-     * @returns {Object} playerResourcesObject
+     * @returns {object} playerResourcesObject
      */
     get resourcesObject() {
         return this.playerResourcesObject;
@@ -106,7 +106,7 @@ class Player {
 
     /**
      * Set new resource fabric object
-     * @param {Object} newFabricObject
+     * @param {object} newFabricObject
      */
     set resourcesObject(newFabricObject) {
         if(typeof newFabricObject === "object") {
@@ -116,7 +116,7 @@ class Player {
 
     /**
      * Get playerCards
-     * @returns {Array} playerCards
+     * @returns {array} playerCards
      */
     get cards() {
         return this.playerCards;
@@ -124,7 +124,7 @@ class Player {
 
     /**
      * Updates player tower life
-     * @param {Number} value
+     * @param {number} value
      */
     updateTowerLife(value) {
         let newValue = parseInt(value, 10);
@@ -134,7 +134,7 @@ class Player {
     /**
      * Updates player wall life
      * @param value
-     * @returns {Number} reminded wall life
+     * @returns {number} reminded wall life
      */
     updateWallLife(value) {
         let newValue = parseInt(value, 10);
@@ -150,7 +150,7 @@ class Player {
 
     /**
      * Updates player sources
-     * @param {Object} newSources
+     * @param {object} newSources
      */
     updateSources(newSources) {
         for (let key in newSources) {
@@ -170,7 +170,7 @@ class Player {
 
     /**
      * Updates player resources
-     * @param {Object} newResources
+     * @param {object} newResources
      */
     updateResources(newResources) {
         for (let key in newResources) {
@@ -188,7 +188,7 @@ class Player {
 
     /**
      * Take damage to wall if wall=0 to tower
-     * @param {Number} value
+     * @param {number} value
      */
     takeDamage(value) {
         let damage = parseInt(value, 10);
@@ -197,7 +197,7 @@ class Player {
 
     /**
      * Array of player cards
-     * @param {Array} card
+     * @param {array} card
      */
     updateCards(card) {
         this.cards.push(card);

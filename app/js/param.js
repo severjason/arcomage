@@ -2,6 +2,17 @@
 
 class Param {
 
+    /**
+     *
+     * @param playerOneName
+     * @param playerOneValues
+     * @param playerTwoName
+     * @param playerTwoValues
+     * @param canvasValues
+     * @param cardsQuantity
+     * @param divIdForCanvas
+     * @param idForCanvas
+     */
     constructor(playerOneName = "Player",
                 playerOneValues = {
                     "towerLife": 15,
@@ -115,42 +126,82 @@ class Param {
         this.idForCanvas = idForCanvas;
     }
 
+    /**
+     *
+     * @returns {string} firstPlayerName
+     */
     get firstPlayerName() {
         return this.playerOneName;
     }
 
+    /**
+     *
+     * @returns {string} playerTwoName
+     */
     get secondPlayerName() {
         return this.playerTwoName;
     }
 
+    /**
+     * Get first player defaults values
+     * @returns {object} playerOneValues
+     */
     get firstPlayerValues() {
         return this.playerOneValues;
     }
 
+    /**
+     * Get second player defaults values
+     * @returns {object} playerTwoValues
+     */
     get secondPlayerValues() {
         return this.playerTwoValues;
     }
 
+    /**
+     * Get all canvas basic values
+     * @returns {object} canvasValues
+     */
     get mainCanvasValues() {
         return this.canvasValues;
     }
 
+    /**
+     * Get cards values from Canvas values
+     * @returns {object} canvasValues.cards
+     */
     get cardsValues() {
         return this.canvasValues.cards;
     }
 
+    /**
+     * Get cards quantity for each player
+     * @returns {number} quantityOfCards
+     */
     get cardsQuantity() {
         return this.quantityOfCards;
     }
 
+    /**
+     * Get canvas container (div) id
+     * @returns {string} divIdForCanvas
+     */
     get canvasDivId() {
         return this.divIdForCanvas;
     }
 
+    /**
+     * Get canvas id
+     * @returns {string} idForCanvas
+     */
     get canvasId() {
         return this.idForCanvas;
     }
-    
+
+    /**
+     * Get relarions between resources and sources
+     * @returns {object} canvasValues.relations
+     */
     get relations() {
         return this.canvasValues.relations;
     }
