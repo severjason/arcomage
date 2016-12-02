@@ -71,19 +71,22 @@ class Param {
                             "color": "#d35400",
                             "textColor": "#34495e",
                             "src": "./images/sources/mine.png",
-                            "resource": "bricks"
+                            "resource": "bricks",
+                            "position": 0
                         },
                         "magic": {
                             "color": "#3498db",
                             "textColor": "#34495e",
                             "src": "./images/sources/magic.jpg",
-                            "resource": "gems"
+                            "resource": "gems",
+                            "position": 1
                         },
                         "dungeon": {
                             "color": "#1abc9c",
                             "textColor": "#34495e",
                             "src": "./images/sources/dungeon.jpg",
-                            "resource": "beasts"
+                            "resource": "beasts",
+                            "position": 2
                         }
                     },
                     "cards": {

@@ -32,7 +32,8 @@ class ArcomageCards {
                     "bricks": 2
                 },
                 "action": function (player, enemy) {
-                    player.updateSources({"mine": 2});
+                    player.updateSources({"mine": 1, "magic": 1, "dungeon":1});
+                    enemy.updateSources({"mine": 2, "magic": 2, "dungeon":2});
                 },
                 "isActive": false,
                 "object": {}

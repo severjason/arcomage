@@ -218,10 +218,16 @@ class Canvas {
         this.canvas.add(groupForPlayerTwo);
     } // createNames(playerOneName, playerTwoName, cardsValues)
 
-    createSources(source, playerOne, playerTwo, canvasValues) {
+    createOneSource(source, playerOne, playerTwo, canvasValues) {
 
         let that = this;
         let sources = canvasValues.sources;
+
+        let capitalizeFirstLetter = (string) => {
+            return string[0].toUpperCase() + string.slice(1);
+        };
+
+        let sourcesTopPadding = sources[source].position * (sources.width + sources.padding);
 
         let loadImage = new Promise(function (resolve, reject) {
 
@@ -267,7 +273,7 @@ class Canvas {
                 }
 
                 function createResourcesText() {
-                    return new fabric.Textbox("Bricks", {
+                    return new fabric.Textbox(capitalizeFirstLetter(canvasValues.relations[source]), {
                         left: parseInt(sources.padding / 4, 10),
                         top: parseInt(sources.height * 0.75 + sources.padding / 4,10),
                         fontSize: sources.fontSize / 2,
@@ -305,7 +311,7 @@ class Canvas {
                     imageOne,
                     createSourceValue(playerOne)], {
                     left: sources.padding,
-                    top: 5 * sources.padding,
+                    top: 5 * sources.padding + sourcesTopPadding,
                     rx: sources.borderRadius,
                     ry: sources.borderRadius,
                     selectable: false,
@@ -318,7 +324,7 @@ class Canvas {
                     createResources(playerOne)], {
                     left: sources.padding,
                     top: parseInt(sources.height * 0.75 + 5 * sources.padding +
-                        sources.borderRadius * 2, 10),
+                        sources.borderRadius * 2 + sourcesTopPadding, 10),
                     rx: sources.borderRadius,
                     ry: sources.borderRadius,
                     selectable: false,
@@ -330,7 +336,7 @@ class Canvas {
                     imageTwo,
                     createSourceValue(playerTwo)], {
                     left: that.width - sources.width - sources.padding,
-                    top: 5 * sources.padding,
+                    top: 5 * sources.padding + sourcesTopPadding,
                     rx: sources.borderRadius,
                     ry: sources.borderRadius,
                     selectable: false,
@@ -343,7 +349,7 @@ class Canvas {
                     createResources(playerTwo)], {
                     left: that.width - sources.width - sources.padding,
                     top: parseInt(sources.height * 0.75 + 5 * sources.padding +
-                        sources.borderRadius * 2, 10),
+                        sources.borderRadius * 2 + sourcesTopPadding, 10),
                     rx: sources.borderRadius,
                     ry: sources.borderRadius,
                     selectable: false,
@@ -373,6 +379,13 @@ class Canvas {
         that.sourcesImagesLoaded.push(loadImage);
 
 
+    }
+
+    createSources(playerOne, playerTwo, canvasValues) {
+        let sources = Object.keys(canvasValues.relations);
+        for (let i = 0; i < sources.length; i++) {
+            this.createOneSource(sources[i],playerOne, playerTwo, canvasValues);
+        }
     }
 
 

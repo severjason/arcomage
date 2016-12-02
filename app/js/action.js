@@ -14,7 +14,7 @@ loader.init().then(function (res) {
     canvas.fabricElement.add(CARDS.getCardObject("earthquake"));
 
     document.addEventListener("click", function () {
-        game.applyCard("werewolf", game.firstPlayer, game.secondPlayer);
+        game.applyCard("new_equipment", game.firstPlayer, game.secondPlayer);
         canvas.fabricElement.renderAll();
         console.log(game.secondPlayer);
     });
