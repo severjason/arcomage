@@ -1,30 +1,15 @@
 "use strict";
 
-class Loader {
 
+
+class Loader {
+    
     constructor() {
         this.params = {};
         this.cards = {};
         this.game = {};
         this.canvas = {};
     }
-/*
-    get allPromises() {
-        return this.promises;
-    }
-
-    add(promise) {
-        if (typeof promise === "object") {
-            if (Array.isArray(promise)) {
-                for (let i = 0, promiseLength = promise.length; i < promiseLength; i++) {
-                    this.promises.push(promise[i]);
-                }
-            }
-            else {
-                this.promises.push(promise);
-            }
-        }
-    }*/
 
     init() {
         let that = this;

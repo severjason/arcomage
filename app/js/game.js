@@ -1,7 +1,7 @@
 "use strict";
 
 class Arcomage {
-
+    
     constructor(playerOne,playerOneValues, playerTwo,playerTwoValues, cardsQuantity, cardsObject) {
         this.playerOne = new Player(playerOne, playerOneValues);
         this.playerTwo = new Player(playerTwo, playerTwoValues);

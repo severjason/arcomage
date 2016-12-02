@@ -4,8 +4,8 @@ class Param {
 
     constructor(playerOneName = "Player",
                 playerOneValues = {
-                    "tower": 15,
-                    "wall": 5,
+                    "towerLife": 15,
+                    "wallLife": 5,
                     "resources": {
                         "bricks": 10,
                         "gems": 10,
@@ -19,8 +19,8 @@ class Param {
                 },
                 playerTwoName = "CPU",
                 playerTwoValues = {
-                    "tower": 15,
-                    "wall": 5,
+                    "towerLife": 15,
+                    "wallLife": 50,
                     "resources": {
                         "bricks": 10,
                         "gems": 10,

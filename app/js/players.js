@@ -1,10 +1,15 @@
 "use strict";
 class Player {
 
+    /**
+     *
+     * @param name {String}
+     * @param playerValues {Object}
+     */
     constructor(name, playerValues) {
         this.playerName = name;
-        this.playerTower = parseInt(playerValues.tower, 10);
-        this.playerWall = parseInt(playerValues.wall, 10);
+        this.playerTowerLife = parseInt(playerValues.towerLife, 10);
+        this.playerWallLife = parseInt(playerValues.wallLife, 10);
         this.playerResources = playerValues.resources;
         this.playerSources = playerValues.sources;
         this.playerSourcesObject = {};
@@ -12,78 +17,141 @@ class Player {
         this.playerCards = [];
     }
 
+    /**
+     * Get playerName
+     * @returns {String} playerName
+     */
     get name() {
         return this.playerName;
     }
 
-    get tower() {
-        return this.playerTower;
+    /**
+     * Get playerTowerLife
+     * @returns {Number} playerTowerLife
+     */
+    get towerLife() {
+        return this.playerTowerLife;
     }
 
-    set tower(newValue) {
-        if (newValue >= 0) {
-            return this.playerTower = newValue;
+    /**
+     * Set new playerTowerLife
+     * @param {Number} newPlayerTowerLife
+     */
+    set towerLife(newPlayerTowerLife) {
+        if (newPlayerTowerLife >= 0) {
+            this.playerTowerLife = newPlayerTowerLife;
         }
     }
 
-    get wall() {
-        return this.playerWall;
+    /**
+     * Get playerWallLife
+     * @returns {Number} playerWallLife
+     */
+    get wallLife() {
+        return this.playerWallLife;
     }
 
-    set wall(newValue) {
-        if (newValue >= 0) {
-            return this.playerWall = newValue;
+    /**
+     * Set playerWallLife
+     * @param {Number} newPlayerWall
+     */
+    set wallLife(newPlayerWall) {
+        if (newPlayerWall >= 0) {
+            this.playerWallLife = newPlayerWall;
         }
     }
 
+    /**
+     * Get playerResources
+     * @returns {Object} playerResources
+     */
     get resources() {
         return this.playerResources;
     }
 
+    /**
+     * Get playerSources
+     * @returns {Object} playerSources
+     */
     get sources() {
         return this.playerSources;
     }
-    
+
+    /**
+     * Get playerSources fabric object
+     * @returns {Object} playerSourcesObject
+     */
     get sourcesObject() {
         return this.playerSourcesObject;
     }
 
-    set sourcesObject(newValue) {
-        if(typeof newValue === "object") {
-            return this.playerSourcesObject = newValue;
+
+    /**
+     * Set new source fabric object
+     * @param {Object} newFabricObject
+     */
+    set sourcesObject(newFabricObject) {
+        if(typeof newFabricObject === "object") {
+            this.playerSourcesObject = newFabricObject;
         }
     }
+
+    /**
+     * Get player resources fabric object
+     * @returns {Object} playerResourcesObject
+     */
     get resourcesObject() {
         return this.playerResourcesObject;
     }
 
-    set resourcesObject(newValue) {
-        if(typeof newValue === "object") {
-            return this.playerResourcesObject = newValue;
+    /**
+     * Set new resource fabric object
+     * @param {Object} newFabricObject
+     */
+    set resourcesObject(newFabricObject) {
+        if(typeof newFabricObject === "object") {
+            this.playerResourcesObject = newFabricObject;
         }
     }
 
+    /**
+     * Get playerCards
+     * @returns {Array} playerCards
+     */
     get cards() {
         return this.playerCards;
     }
 
-    updateTower(value) {
+    /**
+     * Updates player tower life
+     * @param {Number} value
+     */
+    updateTowerLife(value) {
         let newValue = parseInt(value, 10);
-        (newValue < 0 && Math.abs(newValue) > this.tower) ? this.tower = 0 : this.tower += newValue;
+        (newValue < 0 && Math.abs(newValue) > this.towerLife) ? this.towerLife = 0 : this.towerLife += newValue;
     }
 
-    updateWall(value) {
+    /**
+     * Updates player wall life
+     * @param value
+     * @returns {Number} reminded wall life
+     */
+    updateWallLife(value) {
         let newValue = parseInt(value, 10);
-        if (newValue < 0 && Math.abs(newValue) > this.wall) {
-            let remainder = newValue + this.wall;
-            this.wall = 0;
+        if (newValue < 0 && Math.abs(newValue) > this.wallLife) {
+            let remainder = newValue + this.wallLife;
+            this.wallLife = 0;
             return remainder;
         }
         else {
-            this.wall += newValue;
+            this.wallLife += newValue;
         }
     }
 
+    /**
+     * Updates player sources
+     * @param {Object} newSources
+     */
     updateSources(newSources) {
         for (let key in newSources) {
             if (newSources.hasOwnProperty(key)) {
@@ -100,6 +168,10 @@ class Player {
         }
     }
 
+    /**
+     * Updates player resources
+     * @param {Object} newResources
+     */
     updateResources(newResources) {
         for (let key in newResources) {
             if (newResources.hasOwnProperty(key)) {
@@ -114,11 +186,19 @@ class Player {
         }
     }
 
+    /**
+     * Take damage to wall if wall=0 to tower
+     * @param {Number} value
+     */
     takeDamage(value) {
         let damage = parseInt(value, 10);
-        (damage <= this.wall) ? this.updateWall(-damage) : this.updateTower(this.updateWall(-damage));
+        (damage <= this.wallLife) ? this.updateWallLife(-damage) : this.updateTowerLife(this.updateWallLife(-damage));
     }
 
+    /**
+     * Array of player cards
+     * @param {Array} card
+     */
     updateCards(card) {
         this.cards.push(card);
     }

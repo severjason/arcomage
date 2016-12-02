@@ -16,7 +16,7 @@ class ArcomageCards {
                     "bricks": 2
                 },
                 "action": function (player, enemy) {
-                    player.updateWall(8);
+                    player.updateWallLife(8);
                 },
                 "isActive": false,
                 "object": {}
@@ -48,7 +48,7 @@ class ArcomageCards {
                     "gems": 20
                 },
                 "action": function (player, enemy) {
-                    player.updateTower(3);
+                    player.updateTowerLife(3);
                 },
                 "isActive": false,
                 "object": {}
@@ -101,7 +101,10 @@ class ArcomageCards {
     getSingleCard(card) {
         return this.cards[card];
     }
-    
+
+    getCardObject(card) {
+        return this.all[card].object;
+    }
     
 }
 
