@@ -89,19 +89,37 @@ class ArcomageCards {
             }
         };
     }
-    
+
+    /**
+     * Get all cards
+     * @returns {object} cards
+     */
     get all() {
         return this.cards;
     }
-    
+
+    /**
+     * Get cards names
+     * @returns {array}
+     */
     get names() {
         return Object.keys(this.cards);
     }
-    
+
+    /**
+     * Get one card
+     * @param card
+     * @returns {object} cards[card]
+     */
     getSingleCard(card) {
         return this.cards[card];
     }
 
+    /**
+     * Get card fabric object
+     * @param card
+     * @returns {object}
+     */
     getCardObject(card) {
         return this.all[card].object;
     }
