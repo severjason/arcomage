@@ -207,7 +207,7 @@ class Canvas {
         });
 
         let groupForPlayerTwo = new fabric.Group([createMainBody(), playerTwoText], {
-            left: this.width - canvasValues.playersNamesText.width - 2 * canvasValues.playersNamesText.padding,
+            left: this.width - canvasValues.playersNamesText.width - 2 * canvasValues.playersNamesText.padding - canvasValues.playersNamesText.strokeWidth,
             top: 0,
             editable: false,
             selectable: false,
@@ -227,7 +227,7 @@ class Canvas {
             return string[0].toUpperCase() + string.slice(1);
         };
 
-        let sourcesTopPadding = sources[source].position * (sources.width + sources.padding);
+        let sourcesTopPadding = sources[source].position * (sources.width + sources.paddingTop);
 
         let loadImage = new Promise(function (resolve, reject) {
 
@@ -275,7 +275,7 @@ class Canvas {
                 function createResourcesText() {
                     return new fabric.Textbox(capitalizeFirstLetter(canvasValues.relations[source]), {
                         left: parseInt(sources.padding / 4, 10),
-                        top: parseInt(sources.height * 0.75 + sources.padding / 4,10),
+                        top: parseInt(sources.height * 0.75 + sources.padding,10),
                         fontSize: sources.fontSize / 2,
                         fill:sources.textColor,
                         textAlign: "center",
@@ -297,7 +297,7 @@ class Canvas {
                     return new fabric.Textbox(player.resources[sources[source].resource].toString(), {
                         width:sources.width - sources.padding / 2 ,
                         left: sources.padding / 4,
-                        top: parseInt(sources.height * 0.75 + sources.padding / 4,10),
+                        top: parseInt(sources.height * 0.75 + sources.padding,10),
                         fontSize: sources.fontSize / 2,
                         fill:sources.textColor,
                         textAlign: "right",
@@ -310,8 +310,8 @@ class Canvas {
                     createSourceBody(),
                     imageOne,
                     createSourceValue(playerOne)], {
-                    left: sources.padding,
-                    top: 5 * sources.padding + sourcesTopPadding,
+                    left: sources.padding - sources.borderRadius,
+                    top: 3 * sources.paddingTop + sourcesTopPadding,
                     rx: sources.borderRadius,
                     ry: sources.borderRadius,
                     selectable: false,
@@ -322,8 +322,8 @@ class Canvas {
                     createResourcesBody(),
                     createResourcesText(),
                     createResources(playerOne)], {
-                    left: sources.padding,
-                    top: parseInt(sources.height * 0.75 + 5 * sources.padding +
+                    left: sources.padding - sources.borderRadius,
+                    top: parseInt(sources.height * 0.75 + 3 * sources.paddingTop +
                         sources.borderRadius * 2 + sourcesTopPadding, 10),
                     rx: sources.borderRadius,
                     ry: sources.borderRadius,
@@ -335,8 +335,8 @@ class Canvas {
                     createSourceBody(),
                     imageTwo,
                     createSourceValue(playerTwo)], {
-                    left: that.width - sources.width - sources.padding,
-                    top: 5 * sources.padding + sourcesTopPadding,
+                    left: that.width - sources.width - sources.padding - sources.borderRadius,
+                    top: 3 * sources.paddingTop + sourcesTopPadding,
                     rx: sources.borderRadius,
                     ry: sources.borderRadius,
                     selectable: false,
@@ -347,8 +347,8 @@ class Canvas {
                     createResourcesBody(),
                     createResourcesText(),
                     createResources(playerTwo)], {
-                    left: that.width - sources.width - sources.padding,
-                    top: parseInt(sources.height * 0.75 + 5 * sources.padding +
+                    left: that.width - sources.width - sources.padding - sources.borderRadius,
+                    top: parseInt(sources.height * 0.75 + 3 * sources.paddingTop +
                         sources.borderRadius * 2 + sourcesTopPadding, 10),
                     rx: sources.borderRadius,
                     ry: sources.borderRadius,

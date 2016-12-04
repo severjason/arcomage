@@ -1,7 +1,5 @@
 "use strict";
 
-
-
 class Loader {
     
     constructor() {
@@ -61,7 +59,7 @@ class Loader {
 
 }
 
-var loader = new Loader();
+
 
 
 

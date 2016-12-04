@@ -47,7 +47,7 @@ class Param {
                     "playersNamesText": {
                         "width": 100,
                         "height": 26,
-                        "padding": 20,
+                        "padding": 5,
                         "strokeWidth":1,
                         "borderRadius":2,
                         "fontSize": 24,
@@ -63,34 +63,35 @@ class Param {
                         "height": 100,
                         "imgWidth": 50,
                         "imgHeight": 75,
-                        "padding": 20,
+                        "padding": 5,
+                        "paddingTop":20,
                         "fontSize": 40,
-                        "textColor": "black",
+                        "textColor": "#2c3e50",
                         "borderRadius": 1,
                         "mine": {
                             "color": "#d35400",
-                            "textColor": "#34495e",
+                            "textColor": "white",
                             "src": "./images/sources/mine.png",
                             "resource": "bricks",
                             "position": 0
                         },
                         "magic": {
-                            "color": "#3498db",
+                            "color": "#2980b9",
                             "textColor": "#34495e",
-                            "src": "./images/sources/magic.jpg",
+                            "src": "./images/sources/magic.png",
                             "resource": "gems",
                             "position": 1
                         },
                         "dungeon": {
-                            "color": "#1abc9c",
+                            "color": "#27ae60",
                             "textColor": "#34495e",
-                            "src": "./images/sources/dungeon.jpg",
+                            "src": "./images/sources/dungeon.png",
                             "resource": "beasts",
                             "position": 2
                         }
                     },
                     "cards": {
-                        "width": 150,
+                        "width": 146,
                         "height": 210,
                         "padding":5,
                         "cardsStrokeWidth":0,
@@ -102,15 +103,15 @@ class Param {
                         "priceStrokeWidth":1,
                         "mine": {
                             "color": "#d35400",
-                            "textColor": "#34495e"
+                            "textColor": "#2c3e50"
                         },
                         "magic": {
-                            "color": "#3498db",
-                            "textColor": "#34495e"
+                            "color": "#2980b9",
+                            "textColor": "#2c3e50"
                         },
                         "dungeon": {
-                            "color": "#1abc9c",
-                            "textColor": "#34495e"
+                            "color": "#27ae60",
+                            "textColor": "#2c3e50"
                         }
                     }
 
