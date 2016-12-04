@@ -2,45 +2,35 @@
 
 class Param {
 
-    /**
-     *
-     * @param playerOneName
-     * @param playerOneValues
-     * @param playerTwoName
-     * @param playerTwoValues
-     * @param canvasValues
-     * @param cardsQuantity
-     * @param divIdForCanvas
-     * @param idForCanvas
-     */
-    constructor(playerOneName = "Player",
-                playerOneValues = {
-                    "towerLife": 50,
-                    "wallLife": 10,
-                    "resources": {
-                        "bricks": 10,
-                        "gems": 10,
-                        "beasts": 10
+    constructor(playersValues = {
+                    "names": ["Player", "CPU"],
+                    "firstPlayer": {
+                        "towerLife": 50,
+                        "wallLife": 10,
+                        "resources": {
+                            "bricks": 10,
+                            "gems": 10,
+                            "beasts": 10
+                        },
+                        "sources": {
+                            "mine": 1,
+                            "magic": 1,
+                            "dungeon": 1
+                        }
                     },
-                    "sources": {
-                        "mine": 1,
-                        "magic": 1,
-                        "dungeon": 1
-                    }
-                },
-                playerTwoName = "CPU",
-                playerTwoValues = {
-                    "towerLife": 15,
-                    "wallLife": 10,
-                    "resources": {
-                        "bricks": 10,
-                        "gems": 10,
-                        "beasts": 10
-                    },
-                    "sources": {
-                        "mine": 1,
-                        "magic": 1,
-                        "dungeon": 1
+                    "secondPlayer": {
+                        "towerLife": 15,
+                        "wallLife": 10,
+                        "resources": {
+                            "bricks": 10,
+                            "gems": 10,
+                            "beasts": 10
+                        },
+                        "sources": {
+                            "mine": 1,
+                            "magic": 1,
+                            "dungeon": 1
+                        }
                     }
                 },
                 canvasValues = {
@@ -128,10 +118,7 @@ class Param {
                 divIdForCanvas = "arcomage",
                 idForCanvas = "arcomage_canvas") {
 
-        this.playerOneName = playerOneName;
-        this.playerOneValues = playerOneValues;
-        this.playerTwoName = playerTwoName;
-        this.playerTwoValues = playerTwoValues;
+        this.playersValues = playersValues;
         this.canvasValues = canvasValues;
         this.quantityOfCards = cardsQuantity;
         this.divIdForCanvas = divIdForCanvas;
@@ -140,34 +127,34 @@ class Param {
 
     /**
      *
-     * @returns {string} firstPlayerName
+     * @returns {string} playersValues.names[0]
      */
     get firstPlayerName() {
-        return this.playerOneName;
+        return this.playersValues.names[0];
     }
 
     /**
      *
-     * @returns {string} playerTwoName
+     * @returns {string} playersValues.names[1]
      */
     get secondPlayerName() {
-        return this.playerTwoName;
+        return this.playersValues.names[1];
     }
 
     /**
      * Get first player defaults values
-     * @returns {object} playerOneValues
+     * @returns {object} playersValues.firstPlayer
      */
     get firstPlayerValues() {
-        return this.playerOneValues;
+        return this.playersValues.firstPlayer;
     }
 
     /**
      * Get second player defaults values
-     * @returns {object} playerTwoValues
+     * @returns {object} playersValues.secondPlayer
      */
     get secondPlayerValues() {
-        return this.playerTwoValues;
+        return this.playersValues.secondPlayer;
     }
 
     /**
