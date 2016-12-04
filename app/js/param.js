@@ -15,8 +15,8 @@ class Param {
      */
     constructor(playerOneName = "Player",
                 playerOneValues = {
-                    "towerLife": 15,
-                    "wallLife": 5,
+                    "towerLife": 50,
+                    "wallLife": 10,
                     "resources": {
                         "bricks": 10,
                         "gems": 10,
@@ -31,7 +31,7 @@ class Param {
                 playerTwoName = "CPU",
                 playerTwoValues = {
                     "towerLife": 15,
-                    "wallLife": 50,
+                    "wallLife": 10,
                     "resources": {
                         "bricks": 10,
                         "gems": 10,
@@ -47,7 +47,7 @@ class Param {
                     "playersNamesText": {
                         "width": 100,
                         "height": 26,
-                        "padding": 5,
+                        "padding": 10,
                         "strokeWidth":1,
                         "borderRadius":2,
                         "fontSize": 24,
@@ -63,8 +63,9 @@ class Param {
                         "height": 100,
                         "imgWidth": 50,
                         "imgHeight": 75,
-                        "padding": 5,
+                        "padding": 10,
                         "paddingTop":20,
+                        "textPadding":5,
                         "fontSize": 40,
                         "textColor": "#2c3e50",
                         "borderRadius": 1,
@@ -89,6 +90,13 @@ class Param {
                             "resource": "beasts",
                             "position": 2
                         }
+                    },
+                    "towers":{
+                        "positionY":320,
+                        "width":50,
+                        "heightStep":4,
+                        "padding": 50,
+                        "fontSize": 24
                     },
                     "cards": {
                         "width": 146,
@@ -203,7 +211,7 @@ class Param {
     }
 
     /**
-     * Get relarions between resources and sources
+     * Get relations between resources and sources
      * @returns {object} canvasValues.relations
      */
     get relations() {

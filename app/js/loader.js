@@ -30,7 +30,8 @@ class Loader {
                     that.params.firstPlayerName,
                     that.params.firstPlayerValues, 
                     that.params.secondPlayerName,
-                    that.params.secondPlayerValues, 
+                    that.params.secondPlayerValues,
+                    that.params.mainCanvasValues.towers,
                     that.params.cardsQuantity, 
                     cards);
             })
@@ -47,6 +48,10 @@ class Loader {
                     that.params.secondPlayerName,
                     that.params.mainCanvasValues);
                 that.canvas.createSources(
+                    that.game.firstPlayer,
+                    that.game.secondPlayer,
+                    that.params.mainCanvasValues);
+                that.canvas.createTowers(
                     that.game.firstPlayer,
                     that.game.secondPlayer,
                     that.params.mainCanvasValues);

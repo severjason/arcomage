@@ -262,7 +262,7 @@ class Canvas {
                 function createSourceValue(player) {
                     return new fabric.Textbox(player.sources[source].toString(), {
                         width: sources.width,
-                        left: parseInt(sources.padding / 2, 10),
+                        left: parseInt(sources.textPadding, 10),
                         top: sources.imgHeight - sources.fontSize,
                         fontSize: sources.fontSize,
                         fill:sources.textColor,
@@ -275,7 +275,7 @@ class Canvas {
                 function createResourcesText() {
                     return new fabric.Textbox(capitalizeFirstLetter(canvasValues.relations[source]), {
                         left: parseInt(sources.padding / 4, 10),
-                        top: parseInt(sources.height * 0.75 + sources.padding,10),
+                        top: parseInt(sources.height * 0.75 + sources.textPadding,10),
                         fontSize: sources.fontSize / 2,
                         fill:sources.textColor,
                         textAlign: "center",
@@ -297,7 +297,7 @@ class Canvas {
                     return new fabric.Textbox(player.resources[sources[source].resource].toString(), {
                         width:sources.width - sources.padding / 2 ,
                         left: sources.padding / 4,
-                        top: parseInt(sources.height * 0.75 + sources.padding,10),
+                        top: parseInt(sources.height * 0.75 + sources.textPadding,10),
                         fontSize: sources.fontSize / 2,
                         fill:sources.textColor,
                         textAlign: "right",
@@ -386,6 +386,72 @@ class Canvas {
         for (let i = 0; i < sources.length; i++) {
             this.createOneSource(sources[i],playerOne, playerTwo, canvasValues);
         }
+    }
+
+    createTowers(playerOne, playerTwo, canvasValues) {
+        
+        let that = this;
+
+        function createTowerRoof(player) {
+            return new fabric.Rect({
+                left: parseInt(canvasValues.sources.width + canvasValues.sources.padding + canvasValues.towers.padding,10),
+                top: parseInt(that.height - canvasValues.towers.positionY - canvasValues.towers.heightStep * player.towerLife,10),
+                width: canvasValues.towers.width * 2,
+                height: 20,
+                fill: false,
+                stroke:  "red",
+                strokeWidth: 1,
+                originX: 'left',
+                originY: 'bottom'
+            });
+        }
+
+        function createTower(player) {
+            return new fabric.Rect({
+                left: parseInt(canvasValues.sources.width + canvasValues.sources.padding + canvasValues.towers.padding,10),
+                top: parseInt(that.height - canvasValues.towers.positionY,10),
+                width: canvasValues.towers.width,
+                height: parseInt(canvasValues.towers.heightStep * player.towerLife,10),
+                fill: false,
+                stroke:  "red",
+                strokeWidth: 1,
+                originX: 'left',
+                originY: 'bottom'
+            });
+        }
+
+        function createTowerText(player) {
+            return new fabric.Textbox(player.towerLife.toString(), {
+                left: parseInt(canvasValues.sources.width + canvasValues.sources.padding + canvasValues.towers.padding,10),
+                top: parseInt(that.height - canvasValues.towers.positionY,10),
+                width: canvasValues.towers.width,
+                fontSize: canvasValues.towers.fontSize,
+                fill:"black",
+                textAlign: "center",
+                originX: 'left',
+                originY: 'top'
+            });
+        }
+
+        let towerObjectPlayerOne = new fabric.Group([
+            createTowerRoof(playerOne),
+            createTower(playerOne),
+            createTowerText(playerOne)], {
+            selectable: false,
+            hasBorders: false,
+            hoverCursor: "default"
+        });
+
+
+        function addObjects() {
+            playerOne.towerObject = towerObjectPlayerOne;
+            that.canvas.add(playerOne.towerObject);
+        }
+
+        addObjects();
+
+
+
     }
 
 

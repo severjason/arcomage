@@ -5,16 +5,19 @@ class Player {
      *
      * @param name {string}
      * @param playerValues {object}
+     * @param canvasTowerValues {object}
      */
-    constructor(name, playerValues) {
+    constructor(name, playerValues, canvasTowerValues) {
         this.playerName = name;
         this.playerTowerLife = parseInt(playerValues.towerLife, 10);
         this.playerWallLife = parseInt(playerValues.wallLife, 10);
         this.playerResources = playerValues.resources;
         this.playerSources = playerValues.sources;
+        this.canvasTowerHeightStep = parseInt(canvasTowerValues.heightStep, 10);
         this.playerSourcesObject = {};
         this.playerResourcesObject = {};
         this.playerCards = [];
+        this.playerTowerObject = {};
     }
 
     /**
@@ -78,6 +81,26 @@ class Player {
     }
 
     /**
+     * Get playerTower fabric object
+     * @returns {object} playerTowerObject
+     */
+    get towerObject() {
+        return this.playerTowerObject;
+    }
+
+
+    /**
+     * Set new tower fabric object
+     * @param {object} newFabricObject
+     */
+    set towerObject(newFabricObject) {
+        if (typeof newFabricObject === "object") {
+            this.playerTowerObject = newFabricObject;
+        }
+    }
+
+
+    /**
      * Get playerSources fabric object
      * @returns {object} playerSourcesObject
      */
@@ -91,7 +114,7 @@ class Player {
      * @param {object} newFabricObject
      */
     set sourcesObject(newFabricObject) {
-        if(typeof newFabricObject === "object") {
+        if (typeof newFabricObject === "object") {
             this.playerSourcesObject = newFabricObject;
         }
     }
@@ -109,7 +132,7 @@ class Player {
      * @param {object} newFabricObject
      */
     set resourcesObject(newFabricObject) {
-        if(typeof newFabricObject === "object") {
+        if (typeof newFabricObject === "object") {
             this.playerResourcesObject = newFabricObject;
         }
     }
@@ -128,7 +151,18 @@ class Player {
      */
     updateTowerLife(value) {
         let newValue = parseInt(value, 10);
-        (newValue < 0 && Math.abs(newValue) > this.towerLife) ? this.towerLife = 0 : this.towerLife += newValue;
+
+        if (this.towerLife <= 100) {
+            if (newValue < 0 && Math.abs(newValue) > this.towerLife) {
+                this.towerLife = 0;
+                this.towerObject._objects[0].top = this.towerObject._objects[1].top;
+            } else {
+                this.towerLife += newValue;
+                this.towerObject._objects[0].top -= newValue * this.canvasTowerHeightStep;
+            }
+            this.towerObject._objects[1].height = this.towerLife * this.canvasTowerHeightStep;
+            this.towerObject._objects[2].text = this.towerLife.toString();
+        }
     }
 
     /**
@@ -162,7 +196,6 @@ class Player {
                 else {
                     this.sources[key] = 1;
                 }
-
                 this.sourcesObject[key]._objects[2].text = this.sources[key].toString();
             }
         }
