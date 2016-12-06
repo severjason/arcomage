@@ -47,21 +47,13 @@ class Loader {
             .then(function (canvas) {
                 that.canvas = canvas;
                 that.canvas.setCanvasDimensions();
-                that.canvas.createCards(that.cards, that.params.cardsValues, that.params.relations);
-                that.canvas.createNames(
+                that.canvas.drawAll(
+                    that.cards,
+                    that.params.cardsValues,
+                    that.params.relations,
                     that.params.firstPlayerName,
+                    that.game.firstPlayer,
                     that.params.secondPlayerName,
-                    that.params.mainCanvasValues);
-                that.canvas.createSources(
-                    that.game.firstPlayer,
-                    that.game.secondPlayer,
-                    that.params.mainCanvasValues);
-                that.canvas.createTowers(
-                    that.game.firstPlayer,
-                    that.game.secondPlayer,
-                    that.params.mainCanvasValues);
-                that.canvas.createWalls(
-                    that.game.firstPlayer,
                     that.game.secondPlayer,
                     that.params.mainCanvasValues);
                 return that.canvas.cardsImagesLoaded;

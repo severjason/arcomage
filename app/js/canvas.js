@@ -530,6 +530,15 @@ class Canvas {
         addObjects();
 
     }
+    
+    
+    drawAll(CARDS, cardsValues, relations, playerOneName, playerOne, playerTwoName, playerTwo, canvasValues) {
+        this.createCards(CARDS, cardsValues, relations);
+        this.createNames(playerOneName, playerTwoName, canvasValues);
+        this.createSources(playerOne, playerTwo, canvasValues);
+        this.createTowers(playerOne, playerTwo, canvasValues);
+        this.createWalls(playerOne, playerTwo, canvasValues);
+    }
 
 
 }
