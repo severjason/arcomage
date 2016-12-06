@@ -8,6 +8,11 @@ class Loader {
         this.game = {};
         this.canvas = {};
     }
+    
+    static hideLoader() {
+        document.querySelector("#loader").style.display = "none";
+        return true;
+    }
 
     init() {
         let that = this;
@@ -31,7 +36,7 @@ class Loader {
                     that.params.firstPlayerValues, 
                     that.params.secondPlayerName,
                     that.params.secondPlayerValues,
-                    that.params.mainCanvasValues.towers,
+                    that.params.mainCanvasValues,
                     that.params.cardsQuantity, 
                     cards);
             })
@@ -52,6 +57,10 @@ class Loader {
                     that.game.secondPlayer,
                     that.params.mainCanvasValues);
                 that.canvas.createTowers(
+                    that.game.firstPlayer,
+                    that.game.secondPlayer,
+                    that.params.mainCanvasValues);
+                that.canvas.createWalls(
                     that.game.firstPlayer,
                     that.game.secondPlayer,
                     that.params.mainCanvasValues);

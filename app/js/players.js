@@ -5,19 +5,21 @@ class Player {
      *
      * @param name {string}
      * @param playerValues {object}
-     * @param canvasTowerValues {object}
+     * @param canvasValues {object}
      */
-    constructor(name, playerValues, canvasTowerValues) {
+    constructor(name, playerValues, canvasValues) {
         this.playerName = name;
         this.playerTowerLife = parseInt(playerValues.towerLife, 10);
         this.playerWallLife = parseInt(playerValues.wallLife, 10);
         this.playerResources = playerValues.resources;
         this.playerSources = playerValues.sources;
-        this.canvasTowerHeightStep = parseInt(canvasTowerValues.heightStep, 10);
+        this.canvasTowerHeightStep = parseInt(canvasValues.towers.heightStep, 10);
+        this.canvasWallHeightStep = parseInt(canvasValues.walls.heightStep, 10);
         this.playerSourcesObject = {};
         this.playerResourcesObject = {};
         this.playerCards = [];
         this.playerTowerObject = {};
+        this.playerWallObject = {};
     }
 
     /**
@@ -42,7 +44,7 @@ class Player {
      */
     set towerLife(newPlayerTowerLife) {
         if (newPlayerTowerLife >= 0) {
-            this.playerTowerLife = newPlayerTowerLife;
+            this.playerTowerLife = (newPlayerTowerLife < 100) ? newPlayerTowerLife : 100;
         }
     }
 
@@ -60,7 +62,7 @@ class Player {
      */
     set wallLife(newPlayerWall) {
         if (newPlayerWall >= 0) {
-            this.playerWallLife = newPlayerWall;
+            this.playerWallLife = (newPlayerWall < 150) ? newPlayerWall : 150;
         }
     }
 
@@ -99,6 +101,24 @@ class Player {
         }
     }
 
+    /**
+     * Get playerWall fabric object
+     * @returns {object} playerWallObject
+     */
+    get wallObject() {
+        return this.playerWallObject;
+    }
+
+
+    /**
+     * Set new wall fabric object
+     * @param {object} newFabricObject
+     */
+    set wallObject(newFabricObject) {
+        if (typeof newFabricObject === "object") {
+            this.playerWallObject = newFabricObject;
+        }
+    }
 
     /**
      * Get playerSources fabric object
@@ -146,40 +166,47 @@ class Player {
     }
 
     /**
-     * Updates player tower life
+     * Updates player tower life and tower fabric object
      * @param {number} value
      */
     updateTowerLife(value) {
         let newValue = parseInt(value, 10);
 
-        if (this.towerLife <= 100) {
-            if (newValue < 0 && Math.abs(newValue) > this.towerLife) {
-                this.towerLife = 0;
-                this.towerObject._objects[0].top = this.towerObject._objects[1].top;
-            } else {
-                this.towerLife += newValue;
-                this.towerObject._objects[0].top -= newValue * this.canvasTowerHeightStep;
-            }
-            this.towerObject._objects[1].height = this.towerLife * this.canvasTowerHeightStep;
-            this.towerObject._objects[2].text = this.towerLife.toString();
+        if (newValue < 0 && Math.abs(newValue) > this.towerLife) {
+            this.towerLife = 0;
+            this.towerObject._objects[0].top = this.towerObject._objects[1].top;
+        } else {
+            this.towerLife += newValue;
+            this.towerObject._objects[0].top -= newValue * this.canvasTowerHeightStep;
         }
+        this.towerObject._objects[1].height = this.towerLife * this.canvasTowerHeightStep;
+        this.towerObject._objects[2].text = this.towerLife.toString();
+
     }
 
     /**
-     * Updates player wall life
+     * Updates player wall life and wall fabric object
      * @param value
      * @returns {number} reminded wall life
      */
     updateWallLife(value) {
         let newValue = parseInt(value, 10);
-        if (newValue < 0 && Math.abs(newValue) > this.wallLife) {
+        if (this.wallLife >= 150) {
+            this.wallLife = 150
+        }
+        else if (newValue < 0 && Math.abs(newValue) > this.wallLife) {
             let remainder = newValue + this.wallLife;
             this.wallLife = 0;
+            this.wallObject._objects[0].height = this.wallLife * this.canvasWallHeightStep;
+            this.wallObject._objects[1].text = this.wallLife.toString();
             return remainder;
         }
         else {
             this.wallLife += newValue;
         }
+        this.wallObject._objects[0].height = this.wallLife * this.canvasWallHeightStep;
+        this.wallObject._objects[1].text = this.wallLife.toString();
+
     }
 
     /**

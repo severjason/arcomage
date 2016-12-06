@@ -394,10 +394,10 @@ class Canvas {
 
         function createTowerRoof(player) {
             return new fabric.Rect({
-                left: parseInt(canvasValues.sources.width + canvasValues.sources.padding + canvasValues.towers.padding,10),
-                top: parseInt(that.height - canvasValues.towers.positionY - canvasValues.towers.heightStep * player.towerLife,10),
-                width: canvasValues.towers.width * 2,
-                height: 20,
+                top: parseInt( - canvasValues.towers.heightStep * player.towerLife,10),
+                left:- (canvasValues.towers.roofWidth - canvasValues.towers.width)/2,
+                width: canvasValues.towers.roofWidth,
+                height: canvasValues.towers.roofHeight,
                 fill: false,
                 stroke:  "red",
                 strokeWidth: 1,
@@ -408,8 +408,6 @@ class Canvas {
 
         function createTower(player) {
             return new fabric.Rect({
-                left: parseInt(canvasValues.sources.width + canvasValues.sources.padding + canvasValues.towers.padding,10),
-                top: parseInt(that.height - canvasValues.towers.positionY,10),
                 width: canvasValues.towers.width,
                 height: parseInt(canvasValues.towers.heightStep * player.towerLife,10),
                 fill: false,
@@ -422,11 +420,9 @@ class Canvas {
 
         function createTowerText(player) {
             return new fabric.Textbox(player.towerLife.toString(), {
-                left: parseInt(canvasValues.sources.width + canvasValues.sources.padding + canvasValues.towers.padding,10),
-                top: parseInt(that.height - canvasValues.towers.positionY,10),
                 width: canvasValues.towers.width,
                 fontSize: canvasValues.towers.fontSize,
-                fill:"black",
+                fill:canvasValues.towers.textColor,
                 textAlign: "center",
                 originX: 'left',
                 originY: 'top'
@@ -437,6 +433,23 @@ class Canvas {
             createTowerRoof(playerOne),
             createTower(playerOne),
             createTowerText(playerOne)], {
+            left: canvasValues.towers.padding,
+            top: parseInt(that.height - canvasValues.towers.positionY,10),
+            originX: 'left',
+            originY: 'bottom',
+            selectable: false,
+            hasBorders: false,
+            hoverCursor: "default"
+        });
+
+        let towerObjectPlayerTwo = new fabric.Group([
+            createTowerRoof(playerTwo),
+            createTower(playerTwo),
+            createTowerText(playerTwo)], {
+            left: parseInt(that.width - canvasValues.towers.padding,10),
+            top: parseInt(that.height - canvasValues.towers.positionY,10),
+            originX: 'right',
+            originY: 'bottom',
             selectable: false,
             hasBorders: false,
             hoverCursor: "default"
@@ -446,11 +459,75 @@ class Canvas {
         function addObjects() {
             playerOne.towerObject = towerObjectPlayerOne;
             that.canvas.add(playerOne.towerObject);
+            playerTwo.towerObject = towerObjectPlayerTwo;
+            that.canvas.add(playerTwo.towerObject);
         }
 
         addObjects();
 
+    }
 
+
+    createWalls(playerOne, playerTwo, canvasValues) {
+
+        let that = this;
+
+        function createWall(player) {
+            return new fabric.Rect({
+                width: canvasValues.walls.width,
+                height: parseInt(canvasValues.walls.heightStep * player.wallLife,10),
+                fill: false,
+                stroke:  "red",
+                strokeWidth: 1,
+                originX: 'left',
+                originY: 'bottom'
+            });
+        }
+
+        function createWallText(player) {
+            return new fabric.Textbox(player.wallLife.toString(), {
+                width: canvasValues.walls.width,
+                fontSize: canvasValues.walls.fontSize,
+                fill:canvasValues.walls.textColor,
+                textAlign: "center",
+                originX: 'left',
+                originY: 'top'
+            });
+        }
+
+        let wallObjectPlayerOne = new fabric.Group([
+            createWall(playerOne),
+            createWallText(playerOne)], {
+            left: canvasValues.walls.padding,
+            top: parseInt(that.height - canvasValues.walls.positionY,10),
+            originX: 'left',
+            originY: 'bottom',
+            selectable: false,
+            hasBorders: false,
+            hoverCursor: "default"
+        });
+
+        let wallObjectPlayerTwo = new fabric.Group([
+            createWall(playerTwo),
+            createWallText(playerTwo)], {
+            left: parseInt(that.width - canvasValues.walls.padding,10),
+            top: parseInt(that.height - canvasValues.walls.positionY,10),
+            originX: 'right',
+            originY: 'bottom',
+            selectable: false,
+            hasBorders: false,
+            hoverCursor: "default"
+        });
+
+
+        function addObjects() {
+            playerOne.wallObject = wallObjectPlayerOne;
+            that.canvas.add(playerOne.wallObject);
+            playerTwo.wallObject = wallObjectPlayerTwo;
+            that.canvas.add(playerTwo.wallObject);
+        }
+
+        addObjects();
 
     }
 

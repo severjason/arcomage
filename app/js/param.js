@@ -5,7 +5,7 @@ class Param {
     constructor(playersValues = {
                     "names": ["Player", "CPU"],
                     "firstPlayer": {
-                        "towerLife": 50,
+                        "towerLife": 10,
                         "wallLife": 10,
                         "resources": {
                             "bricks": 10,
@@ -82,11 +82,22 @@ class Param {
                         }
                     },
                     "towers":{
-                        "positionY":320,
+                        "positionY":300,
                         "width":50,
+                        "roofWidth":70,
+                        "roofHeight":50,
                         "heightStep":4,
-                        "padding": 50,
-                        "fontSize": 24
+                        "padding": 150,
+                        "fontSize": 24,
+                        "textColor": "#34495e"
+                    },
+                    "walls":{
+                        "positionY":300,
+                        "width":30,
+                        "heightStep":3,
+                        "padding": 250,
+                        "fontSize": 24,
+                        "textColor": "#34495e"
                     },
                     "cards": {
                         "width": 146,

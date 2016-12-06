@@ -41,11 +41,11 @@ gulp.task('browserSync', function () {
 gulp.task('css', function () {
     return gulp.src(path.scss)
         .pipe($.sourcemaps.init())
-        .pipe($.compass({
+        /*.pipe($.compass({
             config_file: './config.rb',
             css: path.app + '/css',
             sass: path.app + '/scss'
-        }))
+        }))*/
         //.pipe($.sass({outputStyle: 'expanded'}))
         .pipe($.sass({outputStyle: 'compressed'}))
         .on('error', $.sass.logError)
