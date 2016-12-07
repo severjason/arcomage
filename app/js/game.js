@@ -2,10 +2,10 @@
 
 class Arcomage {
     
-    constructor(playersValues, canvasValues, cardsQuantity, cardsObject) {
-        this.playerOne = new Player(playersValues.firstPlayerName, playersValues.firstPlayerValues,playersValues.maxValues, canvasValues);
-        this.playerTwo = new Player(playersValues.secondPlayerName, playersValues.secondPlayerValues, playersValues.maxValues, canvasValues);
-        this.cardsQuantity = cardsQuantity;
+    constructor(params, cardsObject) {
+        this.playerOne = new Player(params.firstPlayerName, params.firstPlayerValues,params.maxValues, params.mainCanvasValues);
+        this.playerTwo = new Player(params.secondPlayerName, params.secondPlayerValues, params.maxValues, params.mainCanvasValues);
+        this.cardsQuantity = params.cardsQuantity;
         this.cards = cardsObject;
     }
 

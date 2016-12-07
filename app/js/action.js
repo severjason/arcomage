@@ -18,7 +18,7 @@
                 canvas.fabricElement.add(CARDS.getCardObject("earthquake"));
 
                 document.addEventListener("click", function () {
-                    game.applyCard("earthquake", game.secondPlayer, game.firstPlayer);
+                    game.applyCard("great_wall", game.secondPlayer, game.firstPlayer);
                     canvas.fabricElement.renderAll();
                     console.log(game.secondPlayer);
                 });

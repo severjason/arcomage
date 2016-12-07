@@ -33,9 +33,7 @@ class Loader {
                 that.cards = cards;
                 return new Arcomage(
                     that.params,
-                    that.params.mainCanvasValues,
-                    that.params.cardsQuantity, 
-                    cards);
+                    that.cards);
             })
             .then(function (game) {
                 that.game = game;
