@@ -4,6 +4,12 @@ class Param {
 
     constructor(playersValues = {
                     "names": ["Player", "CPU"],
+                    "max": {
+                        "tower":100,
+                        "wall": 150,
+                        "sources" : 50,
+                        "resources": 300
+                    },
                     "firstPlayer": {
                         "towerLife": 10,
                         "wallLife": 10,
@@ -13,7 +19,7 @@ class Param {
                             "beasts": 10
                         },
                         "sources": {
-                            "mine": 1,
+                            "mine": 4,
                             "magic": 1,
                             "dungeon": 1
                         }
@@ -27,8 +33,8 @@ class Param {
                             "beasts": 10
                         },
                         "sources": {
-                            "mine": 1,
-                            "magic": 1,
+                            "mine": 3,
+                            "magic": 4,
                             "dungeon": 1
                         }
                     }
@@ -84,6 +90,7 @@ class Param {
                     "towers":{
                         "positionY":300,
                         "width":50,
+                        "height": 30,
                         "roofWidth":70,
                         "roofHeight":50,
                         "heightStep":4,
@@ -96,7 +103,7 @@ class Param {
                         "width":30,
                         "heightStep":3,
                         "padding": 250,
-                        "fontSize": 24,
+                        "fontSize": 20,
                         "textColor": "#34495e"
                     },
                     "cards": {
@@ -129,7 +136,7 @@ class Param {
                 divIdForCanvas = "arcomage",
                 idForCanvas = "arcomage_canvas") {
 
-        this.playersValues = playersValues;
+        this._playersValues = playersValues;
         this.canvasValues = canvasValues;
         this.quantityOfCards = cardsQuantity;
         this.divIdForCanvas = divIdForCanvas;
@@ -138,10 +145,18 @@ class Param {
 
     /**
      *
+     * @returns {object} playersValues
+     */
+    get playersValues() {
+        return this._playersValues;
+    }
+
+    /**
+     *
      * @returns {string} playersValues.names[0]
      */
     get firstPlayerName() {
-        return this.playersValues.names[0];
+        return this._playersValues.names[0];
     }
 
     /**
@@ -149,7 +164,7 @@ class Param {
      * @returns {string} playersValues.names[1]
      */
     get secondPlayerName() {
-        return this.playersValues.names[1];
+        return this._playersValues.names[1];
     }
 
     /**
@@ -157,7 +172,7 @@ class Param {
      * @returns {object} playersValues.firstPlayer
      */
     get firstPlayerValues() {
-        return this.playersValues.firstPlayer;
+        return this._playersValues.firstPlayer;
     }
 
     /**
@@ -165,7 +180,7 @@ class Param {
      * @returns {object} playersValues.secondPlayer
      */
     get secondPlayerValues() {
-        return this.playersValues.secondPlayer;
+        return this._playersValues.secondPlayer;
     }
 
     /**
@@ -190,6 +205,14 @@ class Param {
      */
     get cardsQuantity() {
         return this.quantityOfCards;
+    }
+
+    /**
+     * Get max values
+     * @returns {object} max
+     */
+    get maxValues() {
+        return this._playersValues.max;
     }
 
     /**

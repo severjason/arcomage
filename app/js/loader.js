@@ -32,10 +32,7 @@ class Loader {
             .then(function (cards) {
                 that.cards = cards;
                 return new Arcomage(
-                    that.params.firstPlayerName,
-                    that.params.firstPlayerValues, 
-                    that.params.secondPlayerName,
-                    that.params.secondPlayerValues,
+                    that.params,
                     that.params.mainCanvasValues,
                     that.params.cardsQuantity, 
                     cards);

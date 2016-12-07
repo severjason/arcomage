@@ -5,16 +5,21 @@ class Player {
      *
      * @param name {string}
      * @param playerValues {object}
+     * @param maxValues {object}
      * @param canvasValues {object}
      */
-    constructor(name, playerValues, canvasValues) {
+    constructor(name, playerValues, maxValues, canvasValues) {
         this.playerName = name;
-        this.playerTowerLife = parseInt(playerValues.towerLife, 10);
-        this.playerWallLife = parseInt(playerValues.wallLife, 10);
+        this.playerTowerLife = playerValues.towerLife;
+        this.playerWallLife = playerValues.wallLife;
         this.playerResources = playerValues.resources;
         this.playerSources = playerValues.sources;
-        this.canvasTowerHeightStep = parseInt(canvasValues.towers.heightStep, 10);
-        this.canvasWallHeightStep = parseInt(canvasValues.walls.heightStep, 10);
+        this.canvasTowerHeightStep = canvasValues.towers.heightStep;
+        this.canvasWallHeightStep = canvasValues.walls.heightStep;
+        this.maxWallLife = maxValues.wall;
+        this.maxTowerLife = maxValues.tower;
+        this.maxSources = maxValues.sources;
+        this.maxResources = maxValues.resources;
         this.playerSourcesObject = {};
         this.playerResourcesObject = {};
         this.playerCards = [];
@@ -44,7 +49,7 @@ class Player {
      */
     set towerLife(newPlayerTowerLife) {
         if (newPlayerTowerLife >= 0) {
-            this.playerTowerLife = (newPlayerTowerLife < 100) ? newPlayerTowerLife : 100;
+            this.playerTowerLife = (newPlayerTowerLife < this.maxTowerLife) ? newPlayerTowerLife : this.maxTowerLife;
         }
     }
 
@@ -62,7 +67,7 @@ class Player {
      */
     set wallLife(newPlayerWall) {
         if (newPlayerWall >= 0) {
-            this.playerWallLife = (newPlayerWall < 150) ? newPlayerWall : 150;
+            this.playerWallLife = (newPlayerWall < this.maxWallLife) ? newPlayerWall : this.maxWallLife;
         }
     }
 
@@ -175,12 +180,25 @@ class Player {
         if (newValue < 0 && Math.abs(newValue) > this.towerLife) {
             this.towerLife = 0;
             this.towerObject._objects[0].top = this.towerObject._objects[1].top;
-        } else {
-            this.towerLife += newValue;
-            this.towerObject._objects[0].top -= newValue * this.canvasTowerHeightStep;
+        }
+        else {
+            if (this.towerLife + newValue > this.maxTowerLife) {
+                if(this.towerLife <= this.maxTowerLife) {
+                    this.towerLife += newValue;
+                    this.towerObject._objects[1].height = this.towerLife * this.canvasTowerHeightStep;
+                    this.towerObject._objects[0].top = this.towerObject._objects[1].top - this.towerObject._objects[1].height;
+                }
+                else {
+                    this.towerObject._objects[0].top = this.towerObject._objects[1].top - this.towerObject._objects[1].height;
+                }
+            }
+            else {
+                this.towerLife += newValue;
+                this.towerObject._objects[0].top -= newValue * this.canvasTowerHeightStep;
+            }
         }
         this.towerObject._objects[1].height = this.towerLife * this.canvasTowerHeightStep;
-        this.towerObject._objects[2].text = this.towerLife.toString();
+        this.towerObject._objects[3].text = this.towerLife.toString();
 
     }
 
@@ -191,21 +209,21 @@ class Player {
      */
     updateWallLife(value) {
         let newValue = parseInt(value, 10);
-        if (this.wallLife >= 150) {
-            this.wallLife = 150
+        if (this.wallLife >= this.maxWallLife) {
+            this.wallLife = this.maxWallLife
         }
         else if (newValue < 0 && Math.abs(newValue) > this.wallLife) {
             let remainder = newValue + this.wallLife;
             this.wallLife = 0;
             this.wallObject._objects[0].height = this.wallLife * this.canvasWallHeightStep;
-            this.wallObject._objects[1].text = this.wallLife.toString();
+            this.wallObject._objects[2].text = this.wallLife.toString();
             return remainder;
         }
         else {
             this.wallLife += newValue;
         }
         this.wallObject._objects[0].height = this.wallLife * this.canvasWallHeightStep;
-        this.wallObject._objects[1].text = this.wallLife.toString();
+        this.wallObject._objects[2].text = this.wallLife.toString();
 
     }
 
@@ -218,7 +236,7 @@ class Player {
             if (newSources.hasOwnProperty(key)) {
                 let newValue = parseInt(newSources[key], 10);
                 if ((this.sources[key] + newValue) > 0) {
-                    ((this.sources[key] + newValue) < 100) ? this.sources[key] += newValue : this.sources[key] = 99;
+                    ((this.sources[key] + newValue) < this.maxSources) ? this.sources[key] += newValue : this.sources[key] = this.maxSources;
                 }
                 else {
                     this.sources[key] = 1;
@@ -237,7 +255,7 @@ class Player {
             if (newResources.hasOwnProperty(key)) {
                 let newValue = parseInt(newResources[key], 10);
                 if ((this.resources[key] + newValue) > 0) {
-                    ((this.resources[key] + newValue) < 300) ? this.resources[key] += newValue : this.resources[key] = 299;
+                    ((this.resources[key] + newValue) < this.maxResources) ? this.resources[key] += newValue : this.resources[key] = this.maxResources;
                 } else {
                     this.resources[key] = 1;
                 }
