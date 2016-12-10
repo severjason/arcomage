@@ -95,7 +95,6 @@ class Player {
         return this.playerTowerObject;
     }
 
-
     /**
      * Set new tower fabric object
      * @param {object} newFabricObject
@@ -114,7 +113,6 @@ class Player {
         return this.playerWallObject;
     }
 
-
     /**
      * Set new wall fabric object
      * @param {object} newFabricObject
@@ -132,7 +130,6 @@ class Player {
     get sourcesObject() {
         return this.playerSourcesObject;
     }
-
 
     /**
      * Set new source fabric object
@@ -199,7 +196,6 @@ class Player {
         }
         this.towerObject._objects[1].height = this.towerLife * this.canvasTowerHeightStep;
         this.towerObject._objects[3].text = this.towerLife.toString();
-
     }
 
     /**

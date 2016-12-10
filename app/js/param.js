@@ -12,7 +12,7 @@ class Param {
                     },
                     "firstPlayer": {
                         "towerLife": 10,
-                        "wallLife": 10,
+                        "wallLife": 100,
                         "resources": {
                             "bricks": 10,
                             "gems": 10,
@@ -96,7 +96,9 @@ class Param {
                         "heightStep":4,
                         "padding": 150,
                         "fontSize": 24,
-                        "textColor": "#34495e"
+                        "textColor": "#34495e",
+                        "roofColor":"#7c3607",
+                        "towerColor":"#a34508"
                     },
                     "walls":{
                         "positionY":300,
@@ -104,7 +106,9 @@ class Param {
                         "heightStep":3,
                         "padding": 250,
                         "fontSize": 20,
-                        "textColor": "#34495e"
+                        "textColor": "#34495e",
+                        "wallColor":"#7f8c8d",
+                        "src": "./images/temp/bricks.jpg"
                     },
                     "cards": {
                         "width": 146,

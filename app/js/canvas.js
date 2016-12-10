@@ -393,14 +393,15 @@ class Canvas {
         let that = this;
 
         function createTowerRoof(player) {
-            return new fabric.Rect({
+
+            let pos1 = `0 ${canvasValues.towers.roofHeight}`;
+            let pos2 = `${canvasValues.towers.roofWidth / 2} 0`;
+            let pos3 = `${canvasValues.towers.roofWidth} ${canvasValues.towers.roofHeight}`;
+
+            return new fabric.Path(`M ${pos1} L ${pos2} L ${pos3} z`,{
                 top: parseInt( - canvasValues.towers.heightStep * player.towerLife,10),
                 left:- (canvasValues.towers.roofWidth - canvasValues.towers.width)/2,
-                width: canvasValues.towers.roofWidth,
-                height: canvasValues.towers.roofHeight,
-                fill: false,
-                stroke:  "red",
-                strokeWidth: 1,
+                fill: canvasValues.towers.roofColor,
                 originX: 'left',
                 originY: 'bottom'
             });
@@ -410,9 +411,7 @@ class Canvas {
             return new fabric.Rect({
                 width: canvasValues.towers.width,
                 height: parseInt(canvasValues.towers.heightStep * player.towerLife,10),
-                fill: false,
-                stroke:  "red",
-                strokeWidth: 1,
+                fill: canvasValues.towers.towerColor,
                 originX: 'left',
                 originY: 'bottom'
             });
@@ -485,14 +484,14 @@ class Canvas {
     createWalls(playerOne, playerTwo, canvasValues) {
 
         let that = this;
+/*        let img = new Image();
+        img.src = canvasValues.walls.src;*/
 
         function createWall(player) {
             return new fabric.Rect({
                 width: canvasValues.walls.width,
                 height: parseInt(canvasValues.walls.heightStep * player.wallLife,10),
-                fill: false,
-                stroke:  "red",
-                strokeWidth: 1,
+                fill: canvasValues.walls.wallColor,
                 originX: 'left',
                 originY: 'bottom'
             });
