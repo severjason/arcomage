@@ -123,7 +123,7 @@
      *  Watch task - for sass
      */
     gulp.task('watch', ['browserSync', 'css'], function () {
-        gulp.watch(path.ts, ['ts']);
+        //gulp.watch(path.ts, ['ts']);
         gulp.watch(path.scss, ['css']);
         gulp.watch([path.app + "*.html", path.scss, path.app + path.tsCompiled + "**/*.js"]).on('change', browserSync.reload);
     });

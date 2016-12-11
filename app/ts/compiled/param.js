@@ -1,4 +1,3 @@
-"use strict";
 var Param = (function () {
     function Param(playersValues, canvasValues, cardsQuantity, divIdForCanvas, idForCanvas) {
         if (playersValues === void 0) { playersValues = {
