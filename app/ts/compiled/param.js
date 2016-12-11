@@ -1,7 +1,7 @@
 "use strict";
 var Param = (function () {
     function Param(playersValues, canvasValues, cardsQuantity, divIdForCanvas, idForCanvas) {
-        this._playersValues = {
+        if (playersValues === void 0) { playersValues = {
             "names": ["Player", "CPU"],
             "max": {
                 "tower": 100,
@@ -37,8 +37,8 @@ var Param = (function () {
                     "dungeon": 1
                 }
             }
-        };
-        this._canvasValues = {
+        }; }
+        if (canvasValues === void 0) { canvasValues = {
             "playersNamesText": {
                 "width": 100,
                 "height": 26,
@@ -133,10 +133,10 @@ var Param = (function () {
                     "textColor": "#2c3e50"
                 }
             }
-        };
-        this._cardsPerPlayer = 2;
-        this._idForDivCanvas = "arcomage";
-        this._idForCanvas = "arcomage_canvas";
+        }; }
+        if (cardsQuantity === void 0) { cardsQuantity = 2; }
+        if (divIdForCanvas === void 0) { divIdForCanvas = "arcomage"; }
+        if (idForCanvas === void 0) { idForCanvas = "arcomage_canvas"; }
         this._playersValues = playersValues;
         this._canvasValues = canvasValues;
         this._cardsPerPlayer = cardsQuantity;

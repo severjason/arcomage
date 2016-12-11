@@ -2,7 +2,13 @@
 
 class Param {
 
-    private _playersValues:any = {
+    private _playersValues:any;
+    private _canvasValues:any;
+    private _cardsPerPlayer:number;
+    private _idForDivCanvas:string;
+    private _idForCanvas:string;
+
+    constructor(playersValues:Object = {
         "names": ["Player", "CPU"],
         "max": {
             "tower": 100,
@@ -38,112 +44,106 @@ class Param {
                 "dungeon": 1
             }
         }
-    };
-    private _canvasValues:any = {
-        "playersNamesText": {
-            "width": 100,
-            "height": 26,
-            "padding": 10,
-            "strokeWidth": 1,
-            "borderRadius": 2,
-            "fontSize": 24,
-            "textColor": "#000"
-        },
-        "relations": {
-            "mine": "bricks",
-            "magic": "gems",
-            "dungeon": "beasts"
-        },
-        "sources": {
-            "width": 100,
-            "height": 100,
-            "imgWidth": 50,
-            "imgHeight": 75,
-            "padding": 10,
-            "paddingTop": 20,
-            "textPadding": 5,
-            "fontSize": 40,
-            "textColor": "#2c3e50",
-            "borderRadius": 1,
-            "mine": {
-                "color": "#d35400",
-                "textColor": "white",
-                "src": "./images/sources/mine.png",
-                "resource": "bricks",
-                "position": 0
-            },
-            "magic": {
-                "color": "#2980b9",
-                "textColor": "#34495e",
-                "src": "./images/sources/magic.png",
-                "resource": "gems",
-                "position": 1
-            },
-            "dungeon": {
-                "color": "#27ae60",
-                "textColor": "#34495e",
-                "src": "./images/sources/dungeon.png",
-                "resource": "beasts",
-                "position": 2
-            }
-        },
-        "towers": {
-            "positionY": 300,
-            "width": 50,
-            "height": 30,
-            "roofWidth": 70,
-            "roofHeight": 50,
-            "heightStep": 4,
-            "padding": 150,
-            "fontSize": 24,
-            "textColor": "#34495e",
-            "roofColor": "#7c3607",
-            "towerColor": "#a34508"
-        },
-        "walls": {
-            "positionY": 300,
-            "width": 30,
-            "heightStep": 3,
-            "padding": 250,
-            "fontSize": 20,
-            "textColor": "#34495e",
-            "wallColor": "#7f8c8d",
-            "src": "./images/temp/bricks.jpg"
-        },
-        "cards": {
-            "width": 146,
-            "height": 210,
-            "padding": 5,
-            "cardsStrokeWidth": 0,
-            "cardsBordersRadius": 2,
-            "imageWidth": 90,
-            "imageHeight": 60,
-            "priceCircleRadius": 12,
-            "priceFontSize": 18,
-            "priceStrokeWidth": 1,
-            "mine": {
-                "color": "#d35400",
-                "textColor": "#2c3e50"
-            },
-            "magic": {
-                "color": "#2980b9",
-                "textColor": "#2c3e50"
-            },
-            "dungeon": {
-                "color": "#27ae60",
-                "textColor": "#2c3e50"
-            }
-        }
-    };
-    private _cardsPerPlayer:number = 2;
-    private _idForDivCanvas:string = "arcomage";
-    private _idForCanvas:string = "arcomage_canvas";
-
-    constructor(playersValues:Object,
-                canvasValues:Object,
-                cardsQuantity:number,
-                divIdForCanvas:string,
-                idForCanvas:string) {
+    },
+                canvasValues:Object = {
+                    "playersNamesText": {
+                        "width": 100,
+                        "height": 26,
+                        "padding": 10,
+                        "strokeWidth": 1,
+                        "borderRadius": 2,
+                        "fontSize": 24,
+                        "textColor": "#000"
+                    },
+                    "relations": {
+                        "mine": "bricks",
+                        "magic": "gems",
+                        "dungeon": "beasts"
+                    },
+                    "sources": {
+                        "width": 100,
+                        "height": 100,
+                        "imgWidth": 50,
+                        "imgHeight": 75,
+                        "padding": 10,
+                        "paddingTop": 20,
+                        "textPadding": 5,
+                        "fontSize": 40,
+                        "textColor": "#2c3e50",
+                        "borderRadius": 1,
+                        "mine": {
+                            "color": "#d35400",
+                            "textColor": "white",
+                            "src": "./images/sources/mine.png",
+                            "resource": "bricks",
+                            "position": 0
+                        },
+                        "magic": {
+                            "color": "#2980b9",
+                            "textColor": "#34495e",
+                            "src": "./images/sources/magic.png",
+                            "resource": "gems",
+                            "position": 1
+                        },
+                        "dungeon": {
+                            "color": "#27ae60",
+                            "textColor": "#34495e",
+                            "src": "./images/sources/dungeon.png",
+                            "resource": "beasts",
+                            "position": 2
+                        }
+                    },
+                    "towers": {
+                        "positionY": 300,
+                        "width": 50,
+                        "height": 30,
+                        "roofWidth": 70,
+                        "roofHeight": 50,
+                        "heightStep": 4,
+                        "padding": 150,
+                        "fontSize": 24,
+                        "textColor": "#34495e",
+                        "roofColor": "#7c3607",
+                        "towerColor": "#a34508"
+                    },
+                    "walls": {
+                        "positionY": 300,
+                        "width": 30,
+                        "heightStep": 3,
+                        "padding": 250,
+                        "fontSize": 20,
+                        "textColor": "#34495e",
+                        "wallColor": "#7f8c8d",
+                        "src": "./images/temp/bricks.jpg"
+                    },
+                    "cards": {
+                        "width": 146,
+                        "height": 210,
+                        "padding": 5,
+                        "cardsStrokeWidth": 0,
+                        "cardsBordersRadius": 2,
+                        "imageWidth": 90,
+                        "imageHeight": 60,
+                        "priceCircleRadius": 12,
+                        "priceFontSize": 18,
+                        "priceStrokeWidth": 1,
+                        "mine": {
+                            "color": "#d35400",
+                            "textColor": "#2c3e50"
+                        },
+                        "magic": {
+                            "color": "#2980b9",
+                            "textColor": "#2c3e50"
+                        },
+                        "dungeon": {
+                            "color": "#27ae60",
+                            "textColor": "#2c3e50"
+                        }
+                    }
+                },
+                cardsQuantity:number = 2,
+                divIdForCanvas:string = "arcomage",
+                idForCanvas:string = "arcomage_canvas") {
 
         this._playersValues = playersValues;
         this._canvasValues = canvasValues;
