@@ -1,6 +1,5 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
     "noImplicitAny": true,
     "target": "es5",
     "outDir": "app/ts/compiled"
