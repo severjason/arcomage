@@ -140,8 +140,9 @@ declare namespace fabric {
   var Polyline: IPolylineStatic;
   var Rect: IRectStatic;
   var Shadow: IShadowStatic;
-  var Text: ITextStatic;
+  var Text: ITextboxStatic;
   var IText: IITextStatic;
+  var Textbox: IITextStatic;
   var Triangle: ITriangleStatic;
 
   var util: IUtil;
@@ -2064,6 +2065,11 @@ declare namespace fabric {
      * When true, an object is rendered as flipped vertically
      */
     flipY?: boolean;
+    
+    /**
+     * When `true`, object is cached on an additional canvas. default to true since 1.7.0
+     */
+    objectCaching?:boolean;
 
     /**
      * Opacity of an object
@@ -3276,6 +3282,189 @@ declare namespace fabric {
      * @param {Object} object Object to create an instance from
      */
     fromObject(object: any): IText;
+  }
+
+  interface ITextboxOptions extends IObjectOptions, ITextOptions {
+    /**
+     * Font size (in pixels)
+     */
+    fontSize?: number;
+    /**
+     * Font weight (e.g. bold, normal, 400, 600, 800)
+     */
+    fontWeight?: number|string;
+    /**
+     * Font family
+     */
+    fontFamily?: string;
+    /**
+     * Text decoration Possible values?: "", "underline", "overline" or "line-through".
+     */
+    textDecoration?: string;
+    /**
+     * Text alignment. Possible values?: "left", "center", or "right".
+     */
+    textAlign?: string;
+    /**
+     * Font style . Possible values?: "", "normal", "italic" or "oblique".
+     */
+    fontStyle?: string;
+    /**
+     * Line height
+     */
+    lineHeight?: number;
+    /**
+     * When defined, an object is rendered via stroke and this property specifies its color.
+     * <b>Backwards incompatibility note?:</b> This property was named "strokeStyle" until v1.1.6
+     */
+    stroke?: string;
+    /**
+     * Shadow object representing shadow of this shape.
+     * <b>Backwards incompatibility note?:</b> This property was named "textShadow" (String) until v1.2.11
+     */
+    shadow?: IShadow|string;
+    /**
+     * Background color of text lines
+     */
+    textBackgroundColor?: string;
+
+    path?: string;
+    useNative?: Boolean;
+    text?: string;
+  }
+  interface ITextbox extends IObject, ITextboxOptions {
+    /**
+     * Returns complexity of an instance
+     */
+    complexity(): number;
+    /**
+     * Returns string representation of an instance
+     */
+    toString(): string;
+    /**
+     * Renders text instance on a specified context
+     * @param {CanvasRenderingContext2D} ctx Context to render on
+     */
+    render(ctx: CanvasRenderingContext2D, noTransform: boolean): void;
+    /**
+     * Returns object representation of an instance
+     * @param {Array} [propertiesToInclude] Any properties that you might want to additionally include in the output
+     */
+    toObject(propertiesToInclude?: any[]): IObject;
+    /**
+     * Returns SVG representation of an instance
+     * @param {Function} [reviver] Method for further parsing of svg representation.
+     */
+    toSVG(reviver?: Function): string;
+    /**
+     * Retrieves object's fontSize
+     */
+    getFontSize(): number;
+    /**
+     * Sets object's fontSize
+     * @param {Number} fontSize Font size (in pixels)
+     */
+    setFontSize(fontSize: number): IText;
+    /**
+     * Retrieves object's fontWeight
+     */
+    getFontWeight(): number|string;
+    /**
+     * Sets object's fontWeight
+     * @param {(Number|String)} fontWeight Font weight
+     */
+    setFontWeight(fontWeight: string|number): IText;
+    /**
+     * Retrieves object's fontFamily
+     */
+    getFontFamily(): string;
+    /**
+     * Sets object's fontFamily
+     * @param {String} fontFamily Font family
+     */
+    setFontFamily(fontFamily: string): IText;
+    /**
+     * Retrieves object's text
+     */
+    getText(): string;
+    /**
+     * Sets object's text
+     * @param {String} text Text
+     */
+    setText(text: string): IText;
+    /**
+     * Retrieves object's textDecoration
+     */
+    getTextDecoration(): string;
+    /**
+     * Sets object's textDecoration
+     * @param {String} textDecoration Text decoration
+     */
+    setTextDecoration(textDecoration: string): IText;
+    /**
+     * Retrieves object's fontStyle
+     */
+    getFontStyle(): string;
+    /**
+     * Sets object's fontStyle
+     * @param {String} fontStyle Font style
+     */
+    setFontStyle(fontStyle: string): IText;
+    /**
+     * Retrieves object's lineHeight
+     */
+    getLineHeight(): number;
+    /**
+     * Sets object's lineHeight
+     * @param {Number} lineHeight Line height
+     */
+    setLineHeight(lineHeight: number): IText;
+    /**
+     * Retrieves object's textAlign
+     */
+    getTextAlign(): string;
+    /**
+     * Sets object's textAlign
+     * @param {String} textAlign Text alignment
+     */
+    setTextAlign(textAlign: string): IText;
+    /**
+     * Retrieves object's textBackgroundColor
+     */
+    getTextBackgroundColor(): string;
+    /**
+     * Sets object's textBackgroundColor
+     * @param {String} textBackgroundColor Text background color
+     */
+    setTextBackgroundColor(textBackgroundColor: string): IText;
+  }
+  interface ITextboxStatic {
+    /**
+     * List of attribute names to account for when parsing SVG element (used by `fabric.Text.fromElement`)
+     */
+    ATTRIBUTE_NAMES: string[];
+    /**
+     * Default SVG font size
+     */
+    DEFAULT_SVG_FONT_SIZE: number;
+    /**
+     * Constructor
+     * @param {String} text Text string
+     * @param {Object} [options] Options object
+     */
+    new (text: string, options?: ITextboxOptions): IText;
+
+    /**
+     * Returns fabric.Text instance from an SVG element (<b>not yet implemented</b>)
+     * @param {SVGElement} element Element to parse
+     * @param {Object} [options] Options object
+     */
+    fromElement(element: SVGElement, options?: ITextboxOptions): IText;
+    /**
+     * Returns fabric.Text instance from an object representation
+     * @param {Object} object Object to create an instance from
+     */
+    fromObject(object: any): ITextbox;
   }
 
   interface IITextOptions extends IObjectOptions, ITextOptions {

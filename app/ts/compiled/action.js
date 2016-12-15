@@ -12,7 +12,7 @@
                 canvas.fabricElement.add(CARDS.getCardObject("new_equipment"));
                 canvas.fabricElement.add(CARDS.getCardObject("earthquake"));
                 document.addEventListener("click", function () {
-                    game.applyCard("new_equipment", game.secondPlayer, game.firstPlayer);
+                    game.applyCard("amethyst", game.secondPlayer, game.firstPlayer);
                     canvas.fabricElement.renderAll();
                     console.log(game.secondPlayer);
                 });
