@@ -35,8 +35,7 @@ main {
   top: 50%;
   margin-left: -400px;
   margin-top: -400px;
-  border: 1px solid #efefef;
-}
+  border: 1px solid #efefef; }
 
 #loader {
   z-index: 100;

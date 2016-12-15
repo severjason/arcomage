@@ -1,6 +1,5 @@
-var Param = (function () {
-    function Param(playersValues, canvasValues, cardsQuantity, divIdForCanvas, idForCanvas) {
-        if (playersValues === void 0) { playersValues = {
+class Param {
+    constructor(playersValues = {
             "names": ["Player", "CPU"],
             "max": {
                 "tower": 100,
@@ -36,8 +35,7 @@ var Param = (function () {
                     "dungeon": 1
                 }
             }
-        }; }
-        if (canvasValues === void 0) { canvasValues = {
+        }, canvasValues = {
             "playersNamesText": {
                 "width": 100,
                 "height": 26,
@@ -132,147 +130,95 @@ var Param = (function () {
                     "textColor": "#2c3e50"
                 }
             }
-        }; }
-        if (cardsQuantity === void 0) { cardsQuantity = 2; }
-        if (divIdForCanvas === void 0) { divIdForCanvas = "arcomage"; }
-        if (idForCanvas === void 0) { idForCanvas = "arcomage_canvas"; }
+        }, cardsQuantity = 2, divIdForCanvas = "arcomage", idForCanvas = "arcomage_canvas") {
         this._playersValues = playersValues;
         this._canvasValues = canvasValues;
         this._cardsPerPlayer = cardsQuantity;
         this._idForDivCanvas = divIdForCanvas;
         this._idForCanvas = idForCanvas;
     }
-    Object.defineProperty(Param.prototype, "playersValues", {
-        /**
-         *
-         * @returns {any} playersValues
-         */
-        get: function () {
-            return this._playersValues;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Param.prototype, "firstPlayerName", {
-        /**
-         *
-         * @returns {string} _playersValues.names[0]
-         */
-        get: function () {
-            return this._playersValues.names[0];
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Param.prototype, "secondPlayerName", {
-        /**
-         *
-         * @returns {string} _playersValues.names[1]
-         */
-        get: function () {
-            return this._playersValues.names[1];
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Param.prototype, "firstPlayerValues", {
-        /**
-         * Get first player defaults values
-         * @returns {Object} _playersValues.firstPlayer
-         */
-        get: function () {
-            return this._playersValues.firstPlayer;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Param.prototype, "secondPlayerValues", {
-        /**
-         * Get second player defaults values
-         * @returns {Object} _playersValues.secondPlayer
-         */
-        get: function () {
-            return this._playersValues.secondPlayer;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Param.prototype, "mainCanvasValues", {
-        /**
-         * Get all canvas basic values
-         * @returns {Object} _canvasValues
-         */
-        get: function () {
-            return this._canvasValues;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Param.prototype, "cardsValues", {
-        /**
-         * Get cards values from Canvas values
-         * @returns {Object} _canvasValues.cards
-         */
-        get: function () {
-            return this._canvasValues.cards;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Param.prototype, "cardsQuantity", {
-        /**
-         * Get cards quantity for each player
-         * @returns {number} quantityOfCards
-         */
-        get: function () {
-            return this._cardsPerPlayer;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Param.prototype, "maxValues", {
-        /**
-         * Get max values
-         * @returns {Object} _playersValues.max
-         */
-        get: function () {
-            return this._playersValues.max;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Param.prototype, "canvasDivId", {
-        /**
-         * Get canvas container (div) id
-         * @returns {string} _idForDivCanvas
-         */
-        get: function () {
-            return this._idForDivCanvas;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Param.prototype, "canvasId", {
-        /**
-         * Get canvas id
-         * @returns {string} _idForCanvas
-         */
-        get: function () {
-            return this._idForCanvas;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Param.prototype, "relations", {
-        /**
-         * Get relations between resources and sources
-         * @returns {Object} _canvasValues.relations
-         */
-        get: function () {
-            return this._canvasValues.relations;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    return Param;
-}());
+    /**
+     *
+     * @returns {any} playersValues
+     */
+    get playersValues() {
+        return this._playersValues;
+    }
+    /**
+     *
+     * @returns {string} _playersValues.names[0]
+     */
+    get firstPlayerName() {
+        return this._playersValues.names[0];
+    }
+    /**
+     *
+     * @returns {string} _playersValues.names[1]
+     */
+    get secondPlayerName() {
+        return this._playersValues.names[1];
+    }
+    /**
+     * Get first player defaults values
+     * @returns {any} _playersValues.firstPlayer
+     */
+    get firstPlayerValues() {
+        return this._playersValues.firstPlayer;
+    }
+    /**
+     * Get second player defaults values
+     * @returns {any} _playersValues.secondPlayer
+     */
+    get secondPlayerValues() {
+        return this._playersValues.secondPlayer;
+    }
+    /**
+     * Get all canvas basic values
+     * @returns {any} _canvasValues
+     */
+    get mainCanvasValues() {
+        return this._canvasValues;
+    }
+    /**
+     * Get cards values from Canvas values
+     * @returns {any} _canvasValues.cards
+     */
+    get cardsValues() {
+        return this._canvasValues.cards;
+    }
+    /**
+     * Get cards quantity for each player
+     * @returns {number} quantityOfCards
+     */
+    get cardsQuantity() {
+        return this._cardsPerPlayer;
+    }
+    /**
+     * Get max values
+     * @returns {any} _playersValues.max
+     */
+    get maxValues() {
+        return this._playersValues.max;
+    }
+    /**
+     * Get canvas container (div) id
+     * @returns {string} _idForDivCanvas
+     */
+    get canvasDivId() {
+        return this._idForDivCanvas;
+    }
+    /**
+     * Get canvas id
+     * @returns {string} _idForCanvas
+     */
+    get canvasId() {
+        return this._idForCanvas;
+    }
+    /**
+     * Get relations between resources and sources
+     * @returns {any} _canvasValues.relations
+     */
+    get relations() {
+        return this._canvasValues.relations;
+    }
+}

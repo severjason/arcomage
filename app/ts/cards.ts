@@ -6,9 +6,9 @@ class ArcomageCards {
         this._cards = {
             "great_wall": {
                 "source": "mine",
-                "description": "Великая стена",
+                "description": "Great Wall",
                 "text": {
-                    "ru": "+8 к стене"
+                    "ru": "+8 to wall"
                 },
                 "src": "./images/cards/great_wall.jpg",
                 "resource": {
@@ -39,9 +39,9 @@ class ArcomageCards {
             },
             "amethyst": {
                 "source": "magic",
-                "description": "Аметист",
+                "description": "Amethyst",
                 "text": {
-                    "ru": "+3 к башне"
+                    "ru": "+3 to tower"
                 },
                 "src": "./images/cards/amethyst.jpg",
                 "resource": {

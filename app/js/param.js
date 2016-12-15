@@ -1,12 +1,6 @@
 class Param {
 
-    private _playersValues:any;
-    private _canvasValues:any;
-    private _cardsPerPlayer:number;
-    private _idForDivCanvas:string;
-    private _idForCanvas:string;
-
-    constructor(playersValues:any = {
+    constructor(playersValues = {
         "names": ["Player", "CPU"],
         "max": {
             "tower": 100,
@@ -16,7 +10,7 @@ class Param {
         },
         "firstPlayer": {
             "towerLife": 10,
-            "wallLife": 100,
+            "wallLife": 20,
             "resources": {
                 "bricks": 10,
                 "gems": 10,
@@ -43,7 +37,7 @@ class Param {
             }
         }
     },
-                canvasValues:any = {
+                canvasValues = {
                     "playersNamesText": {
                         "width": 100,
                         "height": 26,
@@ -139,9 +133,9 @@ class Param {
                         }
                     }
                 },
-                cardsQuantity:number = 2,
-                divIdForCanvas:string = "arcomage",
-                idForCanvas:string = "arcomage_canvas") {
+                cardsQuantity = 2,
+                divIdForCanvas = "arcomage",
+                idForCanvas = "arcomage_canvas") {
 
         this._playersValues = playersValues;
         this._canvasValues = canvasValues;
@@ -154,7 +148,7 @@ class Param {
      *
      * @returns {any} playersValues
      */
-    get playersValues():any {
+    get playersValues() {
         return this._playersValues;
     }
 
@@ -162,7 +156,7 @@ class Param {
      *
      * @returns {string} _playersValues.names[0]
      */
-    get firstPlayerName():string {
+    get firstPlayerName() {
         return this._playersValues.names[0];
     }
 
@@ -170,7 +164,7 @@ class Param {
      *
      * @returns {string} _playersValues.names[1]
      */
-    get secondPlayerName():string {
+    get secondPlayerName() {
         return this._playersValues.names[1];
     }
 
@@ -178,7 +172,7 @@ class Param {
      * Get first player defaults values
      * @returns {any} _playersValues.firstPlayer
      */
-    get firstPlayerValues():any {
+    get firstPlayerValues() {
         return this._playersValues.firstPlayer;
     }
 
@@ -186,7 +180,7 @@ class Param {
      * Get second player defaults values
      * @returns {any} _playersValues.secondPlayer
      */
-    get secondPlayerValues():any {
+    get secondPlayerValues() {
         return this._playersValues.secondPlayer;
     }
 
@@ -194,7 +188,7 @@ class Param {
      * Get all canvas basic values
      * @returns {any} _canvasValues
      */
-    get mainCanvasValues():any {
+    get mainCanvasValues() {
         return this._canvasValues;
     }
 
@@ -202,7 +196,7 @@ class Param {
      * Get cards values from Canvas values
      * @returns {any} _canvasValues.cards
      */
-    get cardsValues():any {
+    get cardsValues() {
         return this._canvasValues.cards;
     }
 
@@ -218,7 +212,7 @@ class Param {
      * Get max values
      * @returns {any} _playersValues.max
      */
-    get maxValues():any {
+    get maxValues() {
         return this._playersValues.max;
     }
 
@@ -226,7 +220,7 @@ class Param {
      * Get canvas container (div) id
      * @returns {string} _idForDivCanvas
      */
-    get canvasDivId():string {
+    get canvasDivId() {
         return this._idForDivCanvas;
     }
 
@@ -234,7 +228,7 @@ class Param {
      * Get canvas id
      * @returns {string} _idForCanvas
      */
-    get canvasId():string {
+    get canvasId() {
         return this._idForCanvas;
     }
 
@@ -242,7 +236,7 @@ class Param {
      * Get relations between resources and sources
      * @returns {any} _canvasValues.relations
      */
-    get relations():any {
+    get relations() {
         return this._canvasValues.relations;
     }
 }

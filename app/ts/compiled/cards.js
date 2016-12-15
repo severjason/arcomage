@@ -1,11 +1,11 @@
-var ArcomageCards = (function () {
-    function ArcomageCards() {
+class ArcomageCards {
+    constructor() {
         this._cards = {
             "great_wall": {
                 "source": "mine",
-                "description": "Великая стена",
+                "description": "Great Wall",
                 "text": {
-                    "ru": "+8 к стене"
+                    "ru": "+8 to wall"
                 },
                 "src": "./images/cards/great_wall.jpg",
                 "resource": {
@@ -36,9 +36,9 @@ var ArcomageCards = (function () {
             },
             "amethyst": {
                 "source": "magic",
-                "description": "Аметист",
+                "description": "Amethyst",
                 "text": {
-                    "ru": "+3 к башне"
+                    "ru": "+3 to tower"
                 },
                 "src": "./images/cards/amethyst.jpg",
                 "resource": {
@@ -85,43 +85,34 @@ var ArcomageCards = (function () {
             }
         };
     }
-    Object.defineProperty(ArcomageCards.prototype, "all", {
-        /**
-         * Get all cards
-         * @returns {any} cards
-         */
-        get: function () {
-            return this._cards;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(ArcomageCards.prototype, "names", {
-        /**
-         *  Get cards names
-         * @returns {string[]}
-         */
-        get: function () {
-            return Object.keys(this._cards);
-        },
-        enumerable: true,
-        configurable: true
-    });
+    /**
+     * Get all cards
+     * @returns {any} cards
+     */
+    get all() {
+        return this._cards;
+    }
+    /**
+     *  Get cards names
+     * @returns {string[]}
+     */
+    get names() {
+        return Object.keys(this._cards);
+    }
     /**
      * Get one card
      * @param {string} card
      * @returns {any} cards[card]
      */
-    ArcomageCards.prototype.getSingleCard = function (card) {
+    getSingleCard(card) {
         return this._cards[card];
-    };
+    }
     /**
      * Get card fabric object
      * @param {string} card
      * @returns {any}
      */
-    ArcomageCards.prototype.getCardObject = function (card) {
+    getCardObject(card) {
         return this.getSingleCard(card).object;
-    };
-    return ArcomageCards;
-}());
+    }
+}

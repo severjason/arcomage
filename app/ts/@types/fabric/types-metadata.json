@@ -1,0 +1,25 @@
+{
+    "authors": "Oliver Klemencic <https://github.com/oklemencic/>, Joseph Livecchi <https://github.com/joewashear007/>, Michael Randolph <https://github.com/mrand01/>",
+    "definitionFilename": "index.d.ts",
+    "libraryDependencies": [],
+    "moduleDependencies": [],
+    "libraryMajorVersion": "1",
+    "libraryMinorVersion": "5",
+    "libraryName": "FabricJS v1.5.0",
+    "typingsPackageName": "fabric",
+    "projectName": "http://fabricjs.com/",
+    "sourceRepoURL": "https://www.github.com/DefinitelyTyped/DefinitelyTyped",
+    "sourceBranch": "types-2.0",
+    "kind": "OldUMD",
+    "globals": [
+        "fabric"
+    ],
+    "declaredModules": [
+        "fabric"
+    ],
+    "files": [
+        "index.d.ts"
+    ],
+    "hasPackageJson": false,
+    "contentHash": "5c4d69d08ac7e4b781ab4246bc4d8abba59e89a1b5b962866d6c7cc556f01275"
+}

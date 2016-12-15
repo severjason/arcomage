@@ -186,7 +186,6 @@ class Player {
      */
     updateTowerLife(value:number) {
         let newValue:number = value;
-
         if (newValue < 0 && Math.abs(newValue) > this.towerLife) {
             this.towerLife = 0;
             this.towerObject._objects[0].top = this.towerObject._objects[1].top;

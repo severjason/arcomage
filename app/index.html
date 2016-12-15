@@ -22,10 +22,6 @@
     <!-- build:css css/print.min.css -->
     <link href="./css/print.css" rel="stylesheet" media="all">
     <!-- endbuild -->
-
-    <!--[if lt IE 9]>
-    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
 </head>
 <body>
 
@@ -45,20 +41,20 @@
 
 
 <!--build:js lib/fabric.min.js  defer -->
-<script src="../bower_components/fabric.js/dist/fabric.min.js"></script>
+
+<script src="../bower_components/fabric.js/dist/fabric.js"></script>
+
 <!-- endbuild -->
 
-<!--build:js js/main_ts.min.js  defer -->
+<!--build:js js/main.min.js  defer -->
 <script defer src="ts/compiled/param.js"></script>
 <script defer src="ts/compiled/cards.js"></script>
 <script defer src="ts/compiled/players.js"></script>
 <script defer src="ts/compiled/game.js"></script>
-<!-- endbuild -->
-
-<!--build:js js/main.min.js  defer -->
+<!--<script defer src="ts/compiled/canvas.js"></script>-->
 <script defer src="js/canvas.js"></script>
-<script defer src="js/loader.js"></script>
-<script defer src="js/action.js"></script>
+<script defer src="ts/compiled/loader.js"></script>
+<script defer src="ts/compiled/action.js"></script>
 <!-- endbuild -->
 </body>
 </html>

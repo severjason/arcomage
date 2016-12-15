@@ -1,1 +1,1 @@
-{"version":3,"file":"libs.css","sources":["libs.scss"],"sourcesContent":["// libs.scss\n// ==============\n\n\n//@import \"../../node_modules/bootstrap-sass/assets/stylesheets/_bootstrap.scss\";\n\n"],"mappings":"","names":[]}
+{"version":3,"file":"libs.css","sources":["libs.scss"],"sourcesContent":["// libs.scss\n// ==============\n\n//@import \"../../node_modules/bootstrap-sass/assets/stylesheets/_bootstrap.scss\";\n\n"],"mappings":"","names":[]}

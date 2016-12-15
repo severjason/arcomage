@@ -1,0 +1,76 @@
+{
+  "_args": [
+    [
+      {
+        "name": "@types/fabric",
+        "raw": "@types/fabric@^1.5.19",
+        "rawSpec": "^1.5.19",
+        "scope": "@types",
+        "spec": ">=1.5.19 <2.0.0",
+        "type": "range"
+      },
+      "/home/sever/www/work.loc/public"
+    ]
+  ],
+  "_from": "@types/fabric@>=1.5.19 <2.0.0",
+  "_id": "@types/fabric@1.5.19",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/@types/fabric",
+  "_npmOperationalInternal": {
+    "host": "packages-12-west.internal.npmjs.com",
+    "tmp": "tmp/fabric-1.5.19.tgz_1474306259851_0.08809971902519464"
+  },
+  "_npmUser": {
+    "email": "ts-npm-types@microsoft.com",
+    "name": "types"
+  },
+  "_phantomChildren": {},
+  "_requested": {
+    "name": "@types/fabric",
+    "raw": "@types/fabric@^1.5.19",
+    "rawSpec": "^1.5.19",
+    "scope": "@types",
+    "spec": ">=1.5.19 <2.0.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "#DEV:/"
+  ],
+  "_resolved": "https://registry.npmjs.org/@types/fabric/-/fabric-1.5.19.tgz",
+  "_shasum": "773e3ff0aede44deb39392416bd52155a0fb0f3c",
+  "_shrinkwrap": null,
+  "_spec": "@types/fabric@^1.5.19",
+  "_where": "/home/sever/www/work.loc/public",
+  "author": {
+    "email": "https://github.com/oklemencic/",
+    "name": "Oliver Klemencic"
+  },
+  "dependencies": {},
+  "description": "TypeScript definitions for FabricJS v1.5.0",
+  "devDependencies": {},
+  "directories": {},
+  "dist": {
+    "shasum": "773e3ff0aede44deb39392416bd52155a0fb0f3c",
+    "tarball": "https://registry.npmjs.org/@types/fabric/-/fabric-1.5.19.tgz"
+  },
+  "license": "MIT",
+  "main": "",
+  "maintainers": [
+    {
+      "email": "ryan.cavanaugh@microsoft.com",
+      "name": "types"
+    }
+  ],
+  "name": "@types/fabric",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "repository": {
+    "type": "git",
+    "url": "https://www.github.com/DefinitelyTyped/DefinitelyTyped.git"
+  },
+  "scripts": {},
+  "typesPublisherContentHash": "5c4d69d08ac7e4b781ab4246bc4d8abba59e89a1b5b962866d6c7cc556f01275",
+  "typings": "index.d.ts",
+  "version": "1.5.19"
+}
