@@ -52,7 +52,7 @@ declare namespace fabric {
   function loadSVGFromURL(url: string, callback: (results: IObject[], options: any) => void, reviver?: Function): void;
   /**
    * Returns CSS rules for a given SVG document
-   * @param {SVGDocument} doc SVG document to parse
+   * @param {SVGElement} doc SVG document to parse
    */
   function getCSSRules(doc: SVGElement): any;
 
@@ -78,13 +78,14 @@ declare namespace fabric {
   /**
    * Returns an object of attributes' name/value, given element and an array of attribute names;
    * Parses parent "g" nodes recursively upwards.
-   * @param {DOMElement} element Element to parse
+   * @param {HTMLElement} element Element to parse
    * @param {Array} attributes Array of attributes to parse
+   * @param {string} svgUid
    */
-  function parseAttributes(elemen: HTMLElement, attributes: string[], svgUid?: string): { [key: string]: string }
+  function parseAttributes(element: HTMLElement, attributes: string[], svgUid?: string): { [key: string]: string }
   /**
    * Parses an SVG document, returning all of the gradient declarations found in it
-   * @param {SVGDocument} doc SVG document to parse
+   * @param {SVGElement} doc SVG document to parse
    */
   function getGradientDefs(doc: SVGElement): { [key: string]: any };
   /**
@@ -95,7 +96,7 @@ declare namespace fabric {
   function parseFontDeclaration(value: string, oStyle: any): void;
   /**
    * Parses an SVG document, converts it to an array of corresponding fabric.* instances and passes them to a callback
-   * @param {SVGDocument} doc SVG document to parse
+   * @param {SVGElement} doc SVG document to parse
    * @param {Function} callback Callback to call when parsing is finished; It's being passed an array of elements (parsed from a document).
    * @param {Function} [reviver] Method for further parsing of SVG elements, called after each fabric object created.
    */
@@ -393,7 +394,7 @@ declare namespace fabric {
      * Animates object's properties
      * object.animate({ left: ..., top: ... }, { duration: ... });
      * @param properties Properties to animate
-     * @param value Options object
+     * @param options Options object
      */
     animate(properties: any, options?: IAnimationOptions): IObject;
   }
@@ -1795,7 +1796,7 @@ declare namespace fabric {
   interface IGroupStatic {
     /**
      * Constructor
-     * @param {Object} objects Group objects
+     * @param {Object} items Group objects
      * @param {Object} [options] Options object
      */
     new (items?: any[], options?: IObjectOptions): IGroup;
@@ -2156,6 +2157,11 @@ declare namespace fabric {
      * Width of a stroke used to render this object
      */
     strokeWidth?: number;
+
+    /**
+     * Indicates if click events should also check for subtargets
+     */
+    subTargetCheck?: boolean;
 
     /**
      * Array specifying dash pattern of an object's stroke (stroke must be defined)

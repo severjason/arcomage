@@ -1,11 +1,17 @@
 /// <reference path="@types/fabric/index.d.ts" />
 
 
+import IImage = fabric.IImage;
+import ICircle = fabric.ICircle;
+import ITextbox = fabric.ITextbox;
+import IRect = fabric.IRect;
+import IGroup = fabric.IGroup;
+import IPath = fabric.IPath;
 class Canvas {
     
     private _containerId:string;
     private _canvasId:string;
-    public _canvas:any;
+    private _canvas:any;
     private _promises:any;
 
     constructor(containerId:string, canvasId:string) {
@@ -43,31 +49,31 @@ class Canvas {
         return this._promises.sourcesImages;
     }
 
-    setCanvasDimensions(width:number = this.width, height:number = this.height) {
+    setCanvasDimensions(width:number = this.width, height:number = this.height):void {
         this.fabricElement.setDimensions({
             width: width,
             height: height
         })
     }
 
-    createCards(CARDS:ArcomageCards, cardsValues:any, relations:any) {
-        let that = this;
-        let padding = cardsValues.padding;
-        let cardWidth = cardsValues.width;
-        let cardHeight = cardsValues.height;
+    createCards(CARDS:any, cardsValues:any, relations:any):void {
+        let that:Canvas = this;
+        let padding:number = cardsValues.padding;
+        let cardWidth:number = cardsValues.width;
+        let cardHeight:number = cardsValues.height;
 
-        let cardsNames = CARDS.names;
+        let cardsNames:Array<string> = CARDS.names;
 
-        for (let i = 0, cardsArrayLength = cardsNames.length; i < cardsArrayLength; i++) {
+        for (let i = 0; i < cardsNames.length; i++) {
 
-            let cardName = cardsNames[i];
-            let card = CARDS.all[cardName];
-            let descriptionFontSize = (card.description.length >= 15) ? 14 : 16;
-            let mainTextFontSize = (card.text["ru"].length >= 15) ? 14 : 16;
-            let cardPrice = card.resource[relations[card.source]];
-            let circleRadius = cardsValues.priceCircleRadius;
+            let cardName:string = cardsNames[i];
+            let card:any = CARDS.getSingleCard(cardName);
+            let descriptionFontSize:number = (card.description.length >= 15) ? 14 : 16;
+            let mainTextFontSize:number = (card.text["ru"].length >= 15) ? 14 : 16;
+            let cardPrice:number = card.resource[relations[card.source]];
+            let circleRadius:number = cardsValues.priceCircleRadius;
 
-            let mainBody = new fabric.Rect({
+            let mainBody:IRect = new fabric.Rect({
                 width: cardWidth,
                 height: cardHeight,
                 fill: cardsValues[card.source].color,
@@ -78,7 +84,7 @@ class Canvas {
                 originX: 'right',
                 originY: 'top'
             });
-            let mainText = new fabric.Textbox(card.text["ru"], {
+            let mainText:ITextbox = new fabric.Textbox(card.text["ru"], {
                 fontSize: mainTextFontSize,
                 width: cardWidth,
                 left: -cardWidth,
@@ -87,7 +93,7 @@ class Canvas {
                 editable: false,
                 textAlign: "center"
             });
-            let descriptionText = new fabric.Textbox(card.description, {
+            let descriptionText:ITextbox = new fabric.Textbox(card.description, {
                 fontSize: descriptionFontSize,
                 width: cardWidth,
                 left: -cardWidth,
@@ -96,7 +102,7 @@ class Canvas {
                 editable: false,
                 textAlign: "center"
             });
-            let priceText = new fabric.Textbox(cardPrice.toString(), {
+            let priceText:ITextbox = new fabric.Textbox(cardPrice.toString(), {
                 fontSize: cardsValues.priceFontSize,
                 lineHeight: cardsValues.priceFontSize,
                 width: circleRadius * 2,
@@ -107,7 +113,7 @@ class Canvas {
                 editable: false,
                 textAlign: "center"
             });
-            let circle = new fabric.Circle({
+            let circle:ICircle = new fabric.Circle({
                 radius: circleRadius,
                 fill: cardsValues[card.source].color,
                 stroke: cardsValues[card.source].textColor,
@@ -117,28 +123,34 @@ class Canvas {
             });
 
 
-            let loadImage = new Promise(function (resolve, reject) {
+            let loadImage:Promise<any> = new Promise(function (resolve, reject) {
 
-                let img = new Image();
+                let img:HTMLImageElement = new Image();
                 img.src = card.src;
 
 
                 img.onload = function () {
 
-                    let imgWidth = cardsValues.imageWidth;
+                    let imgWidth:number = cardsValues.imageWidth;
 
-                    let image = new fabric.Image(img, {
+                    let image:IImage = new fabric.Image(img, {
                         width: imgWidth,
                         height: cardsValues.imageHeight,
                         left: -(imgWidth + cardWidth) / 2,
                         top: 30
                     });
-                    let group = new fabric.Group([mainBody, descriptionText, image, mainText, circle, priceText], {
+                    let group:IGroup = new fabric.Group([
+                        mainBody,
+                        descriptionText,
+                        image,
+                        mainText,
+                        circle,
+                        priceText], {
                         left: padding,
                         top: that.fabricElement.height - mainBody.getHeight() - 2 * padding,
                         selectable: true,
                         hasBorders: false,
-                        //subTargetCheck: true,
+                        subTargetCheck: true,
                         hoverCursor: "pointer"
                     });
 
@@ -156,10 +168,12 @@ class Canvas {
                         that.fabricElement.renderAll();
                     });
 
-                    function addCards() {
-                        CARDS.all[cardName].object = group;
+                    function addCards():void {
+                        CARDS.getSingleCard(cardName).object = group;
                     }
+
                     addCards();
+
                     resolve();
 
                     reject(new Error("Can`t load cards images"));
@@ -170,12 +184,11 @@ class Canvas {
             that.cardsImagesLoaded.push(loadImage);
         }
 
-    } //createCards(CARDS);
+    } //createCards
 
-    createNames(playerOneName:string, playerTwoName:string, canvasValues:any) {
+    createNames(playerOneName:string, playerTwoName:string, canvasValues:any):void {
 
-        function createText(text:string) {
-
+        function createText(text:string):ITextbox {
             return new fabric.Textbox(text, {
                 fontSize: canvasValues.playersNamesText.fontSize,
                 width: canvasValues.playersNamesText.width,
@@ -188,7 +201,7 @@ class Canvas {
             });
         }
 
-        function createMainBody() {
+        function createMainBody():IRect {
             return new fabric.Rect({
                 width: canvasValues.playersNamesText.width,
                 height: canvasValues.playersNamesText.height,
@@ -202,14 +215,14 @@ class Canvas {
             });
         }
 
-        let groupForPlayerOne = new fabric.Group([createMainBody(), createText(playerOneName)], {
+        let groupForPlayerOne:IGroup = new fabric.Group([createMainBody(), createText(playerOneName)], {
             left: canvasValues.playersNamesText.padding,
             top: 0,
             selectable: false,
             hoverCursor: "default"
         });
 
-        let groupForPlayerTwo = new fabric.Group([createMainBody(), createText(playerTwoName)], {
+        let groupForPlayerTwo:IGroup = new fabric.Group([createMainBody(), createText(playerTwoName)], {
             left: this.width - canvasValues.playersNamesText.width - canvasValues.playersNamesText.padding - canvasValues.playersNamesText.strokeWidth,
             top: 0,
             selectable: false,
@@ -218,9 +231,9 @@ class Canvas {
 
         this._canvas.add(groupForPlayerOne);
         this._canvas.add(groupForPlayerTwo);
-    } // createNames(playerOneName, playerTwoName, cardsValues)
+    } // createNames
 
-    createOneSource(source:string, playerOne:Player, playerTwo:Player, canvasValues:any) {
+    createOneSource(source:string, playerOne:Player, playerTwo:Player, canvasValues:any):void {
 
         let that:Canvas = this;
         let sources:any = canvasValues.sources;
@@ -229,11 +242,11 @@ class Canvas {
             return string[0].toUpperCase() + string.slice(1);
         };
 
-        let sourcesTopPadding = sources[source].position * (sources.width + sources.paddingTop);
+        let sourcesTopPadding:number = sources[source].position * (sources.width + sources.paddingTop);
 
-        let loadImage = new Promise(function (resolve, reject) {
+        let loadImage:Promise<any> = new Promise(function (resolve, reject) {
 
-            let img = new Image();
+            let img:HTMLImageElement = new Image();
             img.src = sources[source].src;
 
 
@@ -242,16 +255,16 @@ class Canvas {
                 img.width = sources.imgWidth;
                 img.height = sources.imgHeight;
 
-                let imageOne = new fabric.Image(img, {
+                let imageOne:IImage = new fabric.Image(img, {
                     left: sources.width - sources.imgWidth,
                     top: 0
                 });
-                let imageTwo = new fabric.Image(img, {
+                let imageTwo:IImage = new fabric.Image(img, {
                     left: sources.width - sources.imgWidth,
                     top: 0
                 });
 
-                function createSourceBody() {
+                function createSourceBody():IRect {
                     return new fabric.Rect({
                         width: sources.width,
                         height: sources.height * 0.75,
@@ -263,10 +276,10 @@ class Canvas {
                     });
                 }
 
-                function createSourceValue(player:Player) {
+                function createSourceValue(player:Player):ITextbox {
                     return new fabric.Textbox(player.sources[source].toString(), {
                         width: sources.width,
-                        left: parseInt(sources.textPadding, 10),
+                        left: sources.textPadding,
                         top: sources.imgHeight - sources.fontSize,
                         fontSize: sources.fontSize,
                         fill:sources.textColor,
@@ -276,7 +289,7 @@ class Canvas {
                     });
                 }
 
-                function createResourcesText() {
+                function createResourcesText():ITextbox {
                     return new fabric.Textbox(capitalizeFirstLetter(canvasValues.relations[source]), {
                         left: sources.padding / 4,
                         top: sources.height * 0.75 + sources.textPadding,
@@ -287,7 +300,7 @@ class Canvas {
                         originY: 'top'
                     });
                 }
-                function createResourcesBody() {
+                function createResourcesBody():IRect {
                     return new fabric.Rect({
                         width: sources.width,
                         height: sources.height * 0.25,
@@ -299,7 +312,7 @@ class Canvas {
                         originY: 'top'
                     });
                 }
-                function createResources(player:Player) {
+                function createResources(player:Player):ITextbox {
                     return new fabric.Textbox(player.resources[sources[source].resource].toString(), {
                         width:sources.width - sources.padding / 2 ,
                         left: sources.padding / 4,
@@ -312,7 +325,7 @@ class Canvas {
                     });
                 }
 
-                let sourceObjectPlayerOne = new fabric.Group([
+                let sourceObjectPlayerOne:IGroup = new fabric.Group([
                     createSourceBody(),
                     imageOne,
                     createSourceValue(playerOne)], {
@@ -335,7 +348,7 @@ class Canvas {
                     hasBorders: false,
                     hoverCursor: "default"
                 });
-                let sourceObjectPlayerTwo = new fabric.Group([
+                let sourceObjectPlayerTwo:IGroup = new fabric.Group([
                     createSourceBody(),
                     imageTwo,
                     createSourceValue(playerTwo)], {
@@ -346,7 +359,7 @@ class Canvas {
                     hasBorders: false,
                     hoverCursor: "default"
                 });
-                let resourceObjectPlayerTwo = new fabric.Group([
+                let resourceObjectPlayerTwo:IGroup = new fabric.Group([
                     createResourcesBody(),
                     createResourcesText(),
                     createResources(playerTwo)], {
@@ -360,7 +373,7 @@ class Canvas {
                 });
 
 
-                function addObjects() {
+                function addObjects():void {
                     playerOne.sourcesObject[source] = sourceObjectPlayerOne;
                     playerOne.resourcesObject[sources[source].resource] = resourceObjectPlayerOne;
                     that._canvas.add(playerOne.sourcesObject[source]);
@@ -380,26 +393,24 @@ class Canvas {
 
         });
         that.sourcesImagesLoaded.push(loadImage);
+    } // createOneSource
 
-
-    }
-
-    createSources(playerOne:Player, playerTwo:Player, canvasValues:any) {
+    createSources(playerOne:Player, playerTwo:Player, canvasValues:any):void {
         let sources = Object.keys(canvasValues.relations);
         for (let i = 0; i < sources.length; i++) {
             this.createOneSource(sources[i],playerOne, playerTwo, canvasValues);
         }
-    }
+    } //createSources
 
-    createTowers(playerOne:Player, playerTwo:Player, canvasValues:any) {
+    createTowers(playerOne:Player, playerTwo:Player, canvasValues:any):void {
 
         let that:Canvas = this;
 
-        function createTowerRoof(player:Player) {
+        function createTowerRoof(player:Player):IPath {
 
-            let pos1 = `0 ${canvasValues.towers.roofHeight}`;
-            let pos2 = `${canvasValues.towers.roofWidth / 2} 0`;
-            let pos3 = `${canvasValues.towers.roofWidth} ${canvasValues.towers.roofHeight}`;
+            let pos1:string = `0 ${canvasValues.towers.roofHeight}`;
+            let pos2:string = `${canvasValues.towers.roofWidth / 2} 0`;
+            let pos3:string = `${canvasValues.towers.roofWidth} ${canvasValues.towers.roofHeight}`;
 
             return new fabric.Path(`M ${pos1} L ${pos2} L ${pos3} z`,{
                 top: - canvasValues.towers.heightStep * player.towerLife,
@@ -410,7 +421,7 @@ class Canvas {
             });
         }
 
-        function createTower(player:Player) {
+        function createTower(player:Player):IRect {
             return new fabric.Rect({
                 width: canvasValues.towers.width,
                 height: canvasValues.towers.heightStep * player.towerLife,
@@ -420,7 +431,7 @@ class Canvas {
             });
         }
 
-        function createTowerText(player:Player) {
+        function createTowerText(player:Player):ITextbox {
             return new fabric.Textbox(player.towerLife.toString(), {
                 top: (canvasValues.towers.height - canvasValues.towers.fontSize)/2,
                 width: canvasValues.towers.width,
@@ -431,7 +442,8 @@ class Canvas {
                 originY: 'top'
             });
         }
-        function createTextRect() {
+
+        function createTextRect():IRect {
             return new fabric.Rect({
                 width: canvasValues.towers.width,
                 height: canvasValues.towers.height,
@@ -443,7 +455,7 @@ class Canvas {
             });
         }
 
-        let towerObjectPlayerOne = new fabric.Group([
+        let towerObjectPlayerOne:IGroup = new fabric.Group([
             createTowerRoof(playerOne),
             createTower(playerOne),
             createTextRect(),
@@ -458,7 +470,7 @@ class Canvas {
             hoverCursor: "default"
         });
 
-        let towerObjectPlayerTwo = new fabric.Group([
+        let towerObjectPlayerTwo:IGroup = new fabric.Group([
             createTowerRoof(playerTwo),
             createTower(playerTwo),
             createTextRect(),
@@ -474,7 +486,7 @@ class Canvas {
         });
 
 
-        function addObjects() {
+        function addObjects():void {
             playerOne.towerObject = towerObjectPlayerOne;
             that._canvas.add(playerOne.towerObject);
             playerTwo.towerObject = towerObjectPlayerTwo;
@@ -483,16 +495,16 @@ class Canvas {
 
         addObjects();
 
-    }
+    } // createTowers
 
 
     createWalls(playerOne:Player, playerTwo:Player, canvasValues:any) {
 
-        let that = this;
+        let that:Canvas = this;
         /*        let img = new Image();
          img.src = canvasValues.walls.src;*/
 
-        function createWall(player:Player) {
+        function createWall(player:Player):IRect {
             return new fabric.Rect({
                 width: canvasValues.walls.width,
                 height: canvasValues.walls.heightStep * player.wallLife,
@@ -502,7 +514,7 @@ class Canvas {
             });
         }
 
-        function createWallText(player:Player) {
+        function createWallText(player:Player):ITextbox {
             return new fabric.Textbox(player.wallLife.toString(), {
                 top: (canvasValues.towers.height - canvasValues.walls.fontSize)/2,
                 width: canvasValues.walls.width,
@@ -515,7 +527,7 @@ class Canvas {
             });
         }
 
-        function createTextRect() {
+        function createTextRect():IRect {
             return new fabric.Rect({
                 width: canvasValues.walls.width,
                 height: canvasValues.towers.height,
@@ -527,7 +539,7 @@ class Canvas {
             });
         }
 
-        let wallObjectPlayerOne = new fabric.Group([
+        let wallObjectPlayerOne:IGroup = new fabric.Group([
             createWall(playerOne),
             createTextRect(),
             createWallText(playerOne)], {
@@ -541,7 +553,7 @@ class Canvas {
             hoverCursor: "default"
         });
 
-        let wallObjectPlayerTwo = new fabric.Group([
+        let wallObjectPlayerTwo:IGroup = new fabric.Group([
             createWall(playerTwo),
             createTextRect(),
             createWallText(playerTwo)], {
@@ -556,7 +568,7 @@ class Canvas {
         });
 
 
-        function addObjects() {
+        function addObjects():void {
             playerOne.wallObject = wallObjectPlayerOne;
             that._canvas.add(playerOne.wallObject);
             playerTwo.wallObject = wallObjectPlayerTwo;
@@ -575,7 +587,7 @@ class Canvas {
             playerOne:Player,
             playerTwoName:string,
             playerTwo:Player,
-            canvasValues:any) {
+            canvasValues:any):void {
         this.createCards(CARDS, cardsValues, relations);
         this.createNames(playerOneName, playerTwoName, canvasValues);
         this.createSources(playerOne, playerTwo, canvasValues);

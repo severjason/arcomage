@@ -40,9 +40,9 @@ class Canvas {
         let cardWidth = cardsValues.width;
         let cardHeight = cardsValues.height;
         let cardsNames = CARDS.names;
-        for (let i = 0, cardsArrayLength = cardsNames.length; i < cardsArrayLength; i++) {
+        for (let i = 0; i < cardsNames.length; i++) {
             let cardName = cardsNames[i];
-            let card = CARDS.all[cardName];
+            let card = CARDS.getSingleCard(cardName);
             let descriptionFontSize = (card.description.length >= 15) ? 14 : 16;
             let mainTextFontSize = (card.text["ru"].length >= 15) ? 14 : 16;
             let cardPrice = card.resource[relations[card.source]];
@@ -106,12 +106,18 @@ class Canvas {
                         left: -(imgWidth + cardWidth) / 2,
                         top: 30
                     });
-                    let group = new fabric.Group([mainBody, descriptionText, image, mainText, circle, priceText], {
+                    let group = new fabric.Group([
+                        mainBody,
+                        descriptionText,
+                        image,
+                        mainText,
+                        circle,
+                        priceText], {
                         left: padding,
                         top: that.fabricElement.height - mainBody.getHeight() - 2 * padding,
                         selectable: true,
                         hasBorders: false,
-                        //subTargetCheck: true,
+                        subTargetCheck: true,
                         hoverCursor: "pointer"
                     });
                     group.on('mousedown', function () {
@@ -128,7 +134,7 @@ class Canvas {
                         that.fabricElement.renderAll();
                     });
                     function addCards() {
-                        CARDS.all[cardName].object = group;
+                        CARDS.getSingleCard(cardName).object = group;
                     }
                     addCards();
                     resolve();
@@ -137,7 +143,7 @@ class Canvas {
             });
             that.cardsImagesLoaded.push(loadImage);
         }
-    } //createCards(CARDS);
+    } //createCards
     createNames(playerOneName, playerTwoName, canvasValues) {
         function createText(text) {
             return new fabric.Textbox(text, {
@@ -178,7 +184,7 @@ class Canvas {
         });
         this._canvas.add(groupForPlayerOne);
         this._canvas.add(groupForPlayerTwo);
-    } // createNames(playerOneName, playerTwoName, cardsValues)
+    } // createNames
     createOneSource(source, playerOne, playerTwo, canvasValues) {
         let that = this;
         let sources = canvasValues.sources;
@@ -214,7 +220,7 @@ class Canvas {
                 function createSourceValue(player) {
                     return new fabric.Textbox(player.sources[source].toString(), {
                         width: sources.width,
-                        left: parseInt(sources.textPadding, 10),
+                        left: sources.textPadding,
                         top: sources.imgHeight - sources.fontSize,
                         fontSize: sources.fontSize,
                         fill: sources.textColor,
@@ -320,13 +326,13 @@ class Canvas {
             };
         });
         that.sourcesImagesLoaded.push(loadImage);
-    }
+    } // createOneSource
     createSources(playerOne, playerTwo, canvasValues) {
         let sources = Object.keys(canvasValues.relations);
         for (let i = 0; i < sources.length; i++) {
             this.createOneSource(sources[i], playerOne, playerTwo, canvasValues);
         }
-    }
+    } //createSources
     createTowers(playerOne, playerTwo, canvasValues) {
         let that = this;
         function createTowerRoof(player) {
@@ -407,7 +413,7 @@ class Canvas {
             that._canvas.add(playerTwo.towerObject);
         }
         addObjects();
-    }
+    } // createTowers
     createWalls(playerOne, playerTwo, canvasValues) {
         let that = this;
         /*        let img = new Image();
