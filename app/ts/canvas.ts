@@ -1,14 +1,14 @@
 /// <reference path="@types/fabric/index.d.ts" />
 
-
 import IImage = fabric.IImage;
 import ICircle = fabric.ICircle;
 import ITextbox = fabric.ITextbox;
 import IRect = fabric.IRect;
 import IGroup = fabric.IGroup;
 import IPath = fabric.IPath;
+
 class Canvas {
-    
+
     private _containerId:string;
     private _canvasId:string;
     private _canvas:any;
@@ -118,7 +118,7 @@ class Canvas {
                 fill: cardsValues[card.source].color,
                 stroke: cardsValues[card.source].textColor,
                 strokeWidth: cardsValues.priceStrokeWidth,
-                left: - 2 * circleRadius - padding - 1,
+                left: -2 * circleRadius - padding - 1,
                 top: cardHeight - 2 * circleRadius - padding - 2
             });
 
@@ -206,7 +206,7 @@ class Canvas {
                 width: canvasValues.playersNamesText.width,
                 height: canvasValues.playersNamesText.height,
                 fill: "white",
-                stroke:  canvasValues.playersNamesText.textColor,
+                stroke: canvasValues.playersNamesText.textColor,
                 strokeWidth: canvasValues.playersNamesText.strokeWidth,
                 rx: canvasValues.playersNamesText.borderRadius,
                 ry: canvasValues.playersNamesText.borderRadius,
@@ -282,7 +282,7 @@ class Canvas {
                         left: sources.textPadding,
                         top: sources.imgHeight - sources.fontSize,
                         fontSize: sources.fontSize,
-                        fill:sources.textColor,
+                        fill: sources.textColor,
                         textAlign: "left",
                         originX: 'left',
                         originY: 'top'
@@ -294,12 +294,13 @@ class Canvas {
                         left: sources.padding / 4,
                         top: sources.height * 0.75 + sources.textPadding,
                         fontSize: sources.fontSize / 2,
-                        fill:sources.textColor,
+                        fill: sources.textColor,
                         textAlign: "center",
                         originX: 'left',
                         originY: 'top'
                     });
                 }
+
                 function createResourcesBody():IRect {
                     return new fabric.Rect({
                         width: sources.width,
@@ -312,13 +313,14 @@ class Canvas {
                         originY: 'top'
                     });
                 }
+
                 function createResources(player:Player):ITextbox {
                     return new fabric.Textbox(player.resources[sources[source].resource].toString(), {
-                        width:sources.width - sources.padding / 2 ,
+                        width: sources.width - sources.padding / 2,
                         left: sources.padding / 4,
                         top: sources.height * 0.75 + sources.textPadding,
                         fontSize: sources.fontSize / 2,
-                        fill:sources.textColor,
+                        fill: sources.textColor,
                         textAlign: "right",
                         originX: 'left',
                         originY: 'top'
@@ -329,7 +331,7 @@ class Canvas {
                     createSourceBody(),
                     imageOne,
                     createSourceValue(playerOne)], {
-                    objectCaching:false,
+                    objectCaching: false,
                     left: sources.padding - sources.borderRadius,
                     top: 3 * sources.paddingTop + sourcesTopPadding,
                     selectable: false,
@@ -340,10 +342,10 @@ class Canvas {
                     createResourcesBody(),
                     createResourcesText(),
                     createResources(playerOne)], {
-                    objectCaching:false,
+                    objectCaching: false,
                     left: sources.padding - sources.borderRadius,
                     top: sources.height * 0.75 + 3 * sources.paddingTop +
-                        sources.borderRadius * 2 + sourcesTopPadding,
+                    sources.borderRadius * 2 + sourcesTopPadding,
                     selectable: false,
                     hasBorders: false,
                     hoverCursor: "default"
@@ -352,7 +354,7 @@ class Canvas {
                     createSourceBody(),
                     imageTwo,
                     createSourceValue(playerTwo)], {
-                    objectCaching:false,
+                    objectCaching: false,
                     left: that.width - sources.width - sources.padding - sources.borderRadius,
                     top: 3 * sources.paddingTop + sourcesTopPadding,
                     selectable: false,
@@ -363,10 +365,10 @@ class Canvas {
                     createResourcesBody(),
                     createResourcesText(),
                     createResources(playerTwo)], {
-                    objectCaching:false,
+                    objectCaching: false,
                     left: that.width - sources.width - sources.padding - sources.borderRadius,
                     top: sources.height * 0.75 + 3 * sources.paddingTop +
-                        sources.borderRadius * 2 + sourcesTopPadding,
+                    sources.borderRadius * 2 + sourcesTopPadding,
                     selectable: false,
                     hasBorders: false,
                     hoverCursor: "default"
@@ -383,6 +385,7 @@ class Canvas {
                     that._canvas.add(playerTwo.sourcesObject[source]);
                     that._canvas.add(playerTwo.resourcesObject[sources[source].resource]);
                 }
+
                 addObjects();
 
                 resolve();
@@ -398,7 +401,7 @@ class Canvas {
     createSources(playerOne:Player, playerTwo:Player, canvasValues:any):void {
         let sources = Object.keys(canvasValues.relations);
         for (let i = 0; i < sources.length; i++) {
-            this.createOneSource(sources[i],playerOne, playerTwo, canvasValues);
+            this.createOneSource(sources[i], playerOne, playerTwo, canvasValues);
         }
     } //createSources
 
@@ -412,9 +415,9 @@ class Canvas {
             let pos2:string = `${canvasValues.towers.roofWidth / 2} 0`;
             let pos3:string = `${canvasValues.towers.roofWidth} ${canvasValues.towers.roofHeight}`;
 
-            return new fabric.Path(`M ${pos1} L ${pos2} L ${pos3} z`,{
-                top: - canvasValues.towers.heightStep * player.towerLife,
-                left:- (canvasValues.towers.roofWidth - canvasValues.towers.width)/2,
+            return new fabric.Path(`M ${pos1} L ${pos2} L ${pos3} z`, {
+                top: -canvasValues.towers.heightStep * player.towerLife,
+                left: -(canvasValues.towers.roofWidth - canvasValues.towers.width) / 2,
                 fill: canvasValues.towers.roofColor,
                 originX: 'left',
                 originY: 'bottom'
@@ -433,10 +436,10 @@ class Canvas {
 
         function createTowerText(player:Player):ITextbox {
             return new fabric.Textbox(player.towerLife.toString(), {
-                top: (canvasValues.towers.height - canvasValues.towers.fontSize)/2,
+                top: (canvasValues.towers.height - canvasValues.towers.fontSize) / 2,
                 width: canvasValues.towers.width,
                 fontSize: canvasValues.towers.fontSize,
-                fill:canvasValues.towers.textColor,
+                fill: canvasValues.towers.textColor,
                 textAlign: "center",
                 originX: 'left',
                 originY: 'top'
@@ -448,7 +451,7 @@ class Canvas {
                 width: canvasValues.towers.width,
                 height: canvasValues.towers.height,
                 fill: 'white',
-                stroke:  canvasValues.playersNamesText.textColor,
+                stroke: canvasValues.playersNamesText.textColor,
                 strokeWidth: canvasValues.playersNamesText.strokeWidth,
                 originX: 'left',
                 originY: 'top'
@@ -460,7 +463,7 @@ class Canvas {
             createTower(playerOne),
             createTextRect(),
             createTowerText(playerOne)], {
-            objectCaching:false,
+            objectCaching: false,
             left: canvasValues.towers.padding,
             top: that.height - canvasValues.towers.positionY,
             originX: 'left',
@@ -475,7 +478,7 @@ class Canvas {
             createTower(playerTwo),
             createTextRect(),
             createTowerText(playerTwo)], {
-            objectCaching:false,
+            objectCaching: false,
             left: that.width - canvasValues.towers.padding,
             top: that.height - canvasValues.towers.positionY,
             originX: 'right',
@@ -516,10 +519,10 @@ class Canvas {
 
         function createWallText(player:Player):ITextbox {
             return new fabric.Textbox(player.wallLife.toString(), {
-                top: (canvasValues.towers.height - canvasValues.walls.fontSize)/2,
+                top: (canvasValues.towers.height - canvasValues.walls.fontSize) / 2,
                 width: canvasValues.walls.width,
                 fontSize: canvasValues.walls.fontSize,
-                fill:canvasValues.walls.textColor,
+                fill: canvasValues.walls.textColor,
                 textAlign: "center",
                 selectable: true,
                 originX: 'left',
@@ -532,7 +535,7 @@ class Canvas {
                 width: canvasValues.walls.width,
                 height: canvasValues.towers.height,
                 fill: 'white',
-                stroke:  canvasValues.playersNamesText.textColor,
+                stroke: canvasValues.playersNamesText.textColor,
                 strokeWidth: canvasValues.playersNamesText.strokeWidth,
                 originX: 'left',
                 originY: 'top'
@@ -543,7 +546,7 @@ class Canvas {
             createWall(playerOne),
             createTextRect(),
             createWallText(playerOne)], {
-            objectCaching:false,
+            objectCaching: false,
             left: canvasValues.walls.padding,
             top: that.height - canvasValues.walls.positionY,
             originX: 'left',
@@ -557,7 +560,7 @@ class Canvas {
             createWall(playerTwo),
             createTextRect(),
             createWallText(playerTwo)], {
-            objectCaching:false,
+            objectCaching: false,
             left: that.width - canvasValues.walls.padding,
             top: that.height - canvasValues.walls.positionY,
             originX: 'right',
