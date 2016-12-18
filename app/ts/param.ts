@@ -16,7 +16,7 @@ class Param {
         },
         "firstPlayer": {
             "towerLife": 10,
-            "wallLife": 100,
+            "wallLife": 50,
             "resources": {
                 "bricks": 10,
                 "gems": 10,
