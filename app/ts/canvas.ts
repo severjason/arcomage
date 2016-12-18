@@ -425,6 +425,7 @@ class Canvas {
         }
 
         function createTower(player:Player):IRect {
+
             return new fabric.Rect({
                 width: canvasValues.towers.width,
                 height: canvasValues.towers.heightStep * player.towerLife,
@@ -488,7 +489,6 @@ class Canvas {
             hoverCursor: "default"
         });
 
-
         function addObjects():void {
             playerOne.towerObject = towerObjectPlayerOne;
             that._canvas.add(playerOne.towerObject);
@@ -499,7 +499,6 @@ class Canvas {
         addObjects();
 
     } // createTowers
-
 
     createWalls(playerOne:Player, playerTwo:Player, canvasValues:any) {
 
@@ -581,7 +580,6 @@ class Canvas {
         addObjects();
 
     }
-
 
     drawAll(CARDS:ArcomageCards,
             cardsValues:any,
