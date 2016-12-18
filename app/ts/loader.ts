@@ -4,6 +4,7 @@ class Loader {
     private _cards:any;
     private _game:any;
     private _canvas:any;
+    private _events:Events;
 
     constructor() { 
         this._params = {};
@@ -24,12 +25,32 @@ class Loader {
         return this._cards;
     }
 
+    set cards(newCards:ArcomageCards) {
+        this._cards = newCards;
+    }
+
     get game():Arcomage {
         return this._game;
     }
 
+    set game(newGame:Arcomage) {
+        this._game = newGame;
+    }
+
     get canvas():any {
         return this._canvas;
+    }
+
+    set canvas(newCanvas) {
+        this._canvas = newCanvas;
+    }
+
+    get events():Events {
+        return this._events;
+    }
+
+    set events(newEvents) {
+        this._events = newEvents;
     }
 
     static hideLoader():boolean {
@@ -51,21 +72,21 @@ class Loader {
 
         return promiseChain
             .then(function (param:Param) {
-                that._params = param;
+                that.params = param;
                 return new ArcomageCards();
             })
             .then(function (cards:ArcomageCards) {
-                that._cards = cards;
+                that.cards = cards;
                 return new Arcomage(
                     that.params,
                     that.cards);
-            }) 
+            })
             .then(function (game:Arcomage) {
-                that._game = game;
+                that.game = game;
                 return new Canvas(that.params.canvasDivId, that.params.canvasId);
             })
             .then(function (canvas:any) {
-                that._canvas = canvas;
+                that.canvas = canvas;
                 that.canvas.setCanvasDimensions();
                 that.canvas.drawAll(
                     that.cards,
@@ -76,6 +97,10 @@ class Loader {
                     that.params.secondPlayerName,
                     that.game.secondPlayer,
                     that.params.mainCanvasValues);
+                return new Events(that.cards, that.canvas);
+            })
+            .then(function (events) {
+                that.events = events;
                 return that.canvas.cardsImagesLoaded;
             })
             .then(function (imagesPromises:Array<Promise<any>>) {
