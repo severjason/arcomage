@@ -1,9 +1,9 @@
 (function () {
     document.addEventListener("DOMContentLoaded", function () {
-        
-        var loader:Loader = new Loader();
-        loader.init().then(function (res) {
 
+        let loader:Loader = new Loader();
+        loader.init().then(function (res) {
+            loader.events.init();
             let CARDS:ArcomageCards = loader.cards;
             let game:Arcomage = loader.game;
             let canvas:any = loader.canvas;
@@ -16,11 +16,11 @@
                 canvas.fabricElement.add(CARDS.getCardObject("new_equipment"));
                 canvas.fabricElement.add(CARDS.getCardObject("earthquake"));
 
-                document.addEventListener("click", function () {
+                /*document.addEventListener("click", function () {
                     game.applyCard("amethyst", game.secondPlayer, game.firstPlayer);
                     canvas.fabricElement.renderAll();
                     console.log(game.secondPlayer);
-                });
+                 });*/
 
                 /*game.applyCard("new_equipment", game.firstPlayer, game.secondPlayer);
                  game.allotCards(game.firstPlayer);

@@ -154,7 +154,7 @@ class Canvas {
                         hoverCursor: "pointer"
                     });
 
-                    group.on('mousedown', function () {
+                    /*group.on('mousedown', function () {
                         console.log('mousedown');
                     });
                     group.on('mouseover', function () {
@@ -166,7 +166,7 @@ class Canvas {
                         console.log('mouseout');
                         group.top += 5;
                         that.fabricElement.renderAll();
-                    });
+                     });*/
 
                     function addCards():void {
                         CARDS.getSingleCard(cardName).object = group;

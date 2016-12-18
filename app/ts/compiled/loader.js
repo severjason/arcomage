@@ -14,29 +14,24 @@ class Loader {
     get cards() {
         return this._cards;
     }
-
     set cards(newCards) {
         this._cards = newCards;
     }
     get game() {
         return this._game;
     }
-
     set game(newGame) {
         this._game = newGame;
     }
     get canvas() {
         return this._canvas;
     }
-
     set canvas(newCanvas) {
         this._canvas = newCanvas;
     }
-
     get events() {
         return this._events;
     }
-
     set events(newEvents) {
         this._events = newEvents;
     }
