@@ -48,25 +48,25 @@ class Loader {
         });
         return promiseChain
             .then(function (param) {
-                that.params = param;
+            that.params = param;
             return new ArcomageCards();
         })
             .then(function (cards) {
-                that.cards = cards;
+            that.cards = cards;
             return new Arcomage(that.params, that.cards);
         })
             .then(function (game) {
-                that.game = game;
+            that.game = game;
             return new Canvas(that.params.canvasDivId, that.params.canvasId);
         })
             .then(function (canvas) {
-                that.canvas = canvas;
+            that.canvas = canvas;
             that.canvas.setCanvasDimensions();
             that.canvas.drawAll(that.cards, that.params.cardsValues, that.params.relations, that.params.firstPlayerName, that.game.firstPlayer, that.params.secondPlayerName, that.game.secondPlayer, that.params.mainCanvasValues);
-                return new Events(that.cards, that.canvas, that.game);
-            })
+            return new Events(that.cards, that.canvas, that.game);
+        })
             .then(function (events) {
-                that.events = events;
+            that.events = events;
             return that.canvas.cardsImagesLoaded;
         })
             .then(function (imagesPromises) {

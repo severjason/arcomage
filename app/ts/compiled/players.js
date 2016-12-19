@@ -148,7 +148,6 @@ class Player {
     set cards(newCardsArray) {
         this._playerCards = newCardsArray;
     }
-
     /**
      * Remove one card from cards array
      * @param {any} card
@@ -158,7 +157,6 @@ class Player {
             return playerCard.description !== card.description;
         });
     }
-
     /**
      * Updates player tower life and tower fabric object
      * @param {number} value
