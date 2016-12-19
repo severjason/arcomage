@@ -105,7 +105,7 @@ class ArcomageCards {
      * @returns {any} cards[card]
      */
     getSingleCard(card) {
-        return this._cards[card];
+        return this.all[card];
     }
     /**
      * Get card fabric object

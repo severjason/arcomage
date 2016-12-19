@@ -107,7 +107,7 @@ class Param {
                 "src": "./images/temp/bricks.jpg"
             },
             "cards": {
-                "width": 146,
+                "width": 150,
                 "height": 210,
                 "padding": 5,
                 "cardsStrokeWidth": 0,

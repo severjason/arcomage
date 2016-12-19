@@ -10,11 +10,14 @@
 
             if (Loader.hideLoader()) {
 
-                canvas.fabricElement.add(CARDS.getCardObject("amethyst"));
+                game.allotCards(game.firstPlayer);
+                //game.allotCards(game.secondPlayer);
+                game.drawCards(canvas);
+                /*canvas.fabricElement.add(CARDS.getCardObject("amethyst"));
                 canvas.fabricElement.add(CARDS.getCardObject("great_wall"));
                 canvas.fabricElement.add(CARDS.getCardObject("werewolf"));
                 canvas.fabricElement.add(CARDS.getCardObject("new_equipment"));
-                canvas.fabricElement.add(CARDS.getCardObject("earthquake"));
+                 canvas.fabricElement.add(CARDS.getCardObject("earthquake"));*/
 
                 /*document.addEventListener("click", function () {
                     game.applyCard("amethyst", game.secondPlayer, game.firstPlayer);

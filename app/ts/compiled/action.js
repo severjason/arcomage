@@ -7,11 +7,9 @@
             let game = loader.game;
             let canvas = loader.canvas;
             if (Loader.hideLoader()) {
-                canvas.fabricElement.add(CARDS.getCardObject("amethyst"));
-                canvas.fabricElement.add(CARDS.getCardObject("great_wall"));
-                canvas.fabricElement.add(CARDS.getCardObject("werewolf"));
-                canvas.fabricElement.add(CARDS.getCardObject("new_equipment"));
-                canvas.fabricElement.add(CARDS.getCardObject("earthquake"));
+                game.allotCards(game.firstPlayer);
+                //game.allotCards(game.secondPlayer);
+                game.drawCards(canvas);
             }
         });
     });

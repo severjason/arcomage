@@ -112,7 +112,7 @@ class ArcomageCards {
      * @returns {any} cards[card]
      */
     getSingleCard(card:string):any {
-        return this._cards[card];
+        return this.all[card];
     }
 
     /**

@@ -1,5 +1,6 @@
 class Arcomage {
-    
+
+    private _params:Param;
     private _playerOne:Player;
     private _playerTwo:Player;
     private _cardsQuantity:number;
@@ -11,6 +12,7 @@ class Arcomage {
         this._playerTwo = new Player(params.secondPlayerName, params.secondPlayerValues, params.maxValues, params.mainCanvasValues);
         this._cardsQuantity = params.cardsQuantity;
         this._cards = cards;
+        this._params = params;
     }
 
     get firstPlayer() {
@@ -21,14 +23,17 @@ class Arcomage {
         return this._playerTwo;
     }
 
+    get cardsValues():any {
+        return this._params.cardsValues;
+    }
+
     applyCard(cardName:string, player:Player, enemy:Player) {
         this._cards.getSingleCard(cardName).action(player, enemy);
         //this.CARDS[cardName].isActive = false;
     }
 
-    allotCards(player:Player) {
+    allotCards(player:Player):boolean {
         let cardsNames:Array<string> = this._cards.names;
-
         for (let i = 0; player.cards.length < this._cardsQuantity; i++) {
             let random:number  = Math.floor(Math.random() * (cardsNames.length));
             let randomCard:any = this._cards.getSingleCard(cardsNames[random]);
@@ -39,7 +44,22 @@ class Arcomage {
             }
             else this.allotCards(player);
         }
+        return true;
     }
+
+    drawCards(canvas:Canvas) {
+        let that = this;
+        for (let i = 0; i < that.firstPlayer.cards.length; i++) {
+            let playerCard = that.firstPlayer.cards[i];
+            let playerCardObject = playerCard.object;
+            playerCardObject.left = (that.cardsValues.width + 2 * this.cardsValues.padding) * i;
+            canvas.fabricElement.add(playerCardObject);
+            canvas.fabricElement.renderAll();
+
+        }
+    }
+    
+    
 
 }
 

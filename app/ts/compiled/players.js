@@ -142,6 +142,24 @@ class Player {
         return this._playerCards;
     }
     /**
+     * Set new array of player cards
+     * @param {Array<any>} newCardsArray
+     */
+    set cards(newCardsArray) {
+        this._playerCards = newCardsArray;
+    }
+
+    /**
+     * Remove one card from cards array
+     * @param {any} card
+     */
+    removeCard(card) {
+        this.cards = this.cards.filter(function (playerCard) {
+            return playerCard.description !== card.description;
+        });
+    }
+
+    /**
      * Updates player tower life and tower fabric object
      * @param {number} value
      */

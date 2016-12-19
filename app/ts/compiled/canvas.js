@@ -115,7 +115,7 @@ class Canvas {
                         priceText], {
                         left: padding,
                         top: that.fabricElement.height - mainBody.getHeight() - 2 * padding,
-                        selectable: true,
+                        selectable: false,
                         hasBorders: false,
                         subTargetCheck: true,
                         hoverCursor: "pointer"
