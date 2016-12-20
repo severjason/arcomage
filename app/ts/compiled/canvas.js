@@ -112,8 +112,7 @@ class Canvas {
                         image,
                         mainText,
                         circle,
-                        priceText
-                    ], {
+                        priceText], {
                         left: padding,
                         top: that.fabricElement.height - mainBody.getHeight() - 2 * padding,
                         selectable: false,
@@ -268,8 +267,7 @@ class Canvas {
                 let sourceObjectPlayerOne = new fabric.Group([
                     createSourceBody(),
                     imageOne,
-                    createSourceValue(playerOne)
-                ], {
+                    createSourceValue(playerOne)], {
                     objectCaching: false,
                     left: sources.padding - sources.borderRadius,
                     top: 3 * sources.paddingTop + sourcesTopPadding,
@@ -280,8 +278,7 @@ class Canvas {
                 let resourceObjectPlayerOne = new fabric.Group([
                     createResourcesBody(),
                     createResourcesText(),
-                    createResources(playerOne)
-                ], {
+                    createResources(playerOne)], {
                     objectCaching: false,
                     left: sources.padding - sources.borderRadius,
                     top: sources.height * 0.75 + 3 * sources.paddingTop +
@@ -293,8 +290,7 @@ class Canvas {
                 let sourceObjectPlayerTwo = new fabric.Group([
                     createSourceBody(),
                     imageTwo,
-                    createSourceValue(playerTwo)
-                ], {
+                    createSourceValue(playerTwo)], {
                     objectCaching: false,
                     left: that.width - sources.width - sources.padding - sources.borderRadius,
                     top: 3 * sources.paddingTop + sourcesTopPadding,
@@ -305,8 +301,7 @@ class Canvas {
                 let resourceObjectPlayerTwo = new fabric.Group([
                     createResourcesBody(),
                     createResourcesText(),
-                    createResources(playerTwo)
-                ], {
+                    createResources(playerTwo)], {
                     objectCaching: false,
                     left: that.width - sources.width - sources.padding - sources.borderRadius,
                     top: sources.height * 0.75 + 3 * sources.paddingTop +
@@ -387,8 +382,7 @@ class Canvas {
             createTowerRoof(playerOne),
             createTower(playerOne),
             createTextRect(),
-            createTowerText(playerOne)
-        ], {
+            createTowerText(playerOne)], {
             objectCaching: false,
             left: canvasValues.towers.padding,
             top: that.height - canvasValues.towers.positionY,
@@ -402,8 +396,7 @@ class Canvas {
             createTowerRoof(playerTwo),
             createTower(playerTwo),
             createTextRect(),
-            createTowerText(playerTwo)
-        ], {
+            createTowerText(playerTwo)], {
             objectCaching: false,
             left: that.width - canvasValues.towers.padding,
             top: that.height - canvasValues.towers.positionY,
@@ -460,8 +453,7 @@ class Canvas {
         let wallObjectPlayerOne = new fabric.Group([
             createWall(playerOne),
             createTextRect(),
-            createWallText(playerOne)
-        ], {
+            createWallText(playerOne)], {
             objectCaching: false,
             left: canvasValues.walls.padding,
             top: that.height - canvasValues.walls.positionY,
@@ -474,8 +466,7 @@ class Canvas {
         let wallObjectPlayerTwo = new fabric.Group([
             createWall(playerTwo),
             createTextRect(),
-            createWallText(playerTwo)
-        ], {
+            createWallText(playerTwo)], {
             objectCaching: false,
             left: that.width - canvasValues.walls.padding,
             top: that.height - canvasValues.walls.positionY,
