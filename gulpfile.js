@@ -75,10 +75,11 @@
     gulp.task('useref', function () {
         return gulp.src(path.app + '**/*.html')
             .pipe(useref())
-            .pipe(gulpIf(['*.js', path.tsCompiled + "*.js"], babel({
+            .pipe(gulpIf('*.js', babel({
+                ignore: 'fabric.js',
                 presets: ['es2015']
             })))
-            .pipe(gulpIf(['*.js', path.tsCompiled + "*.js"], uglify()))
+            .pipe(gulpIf('*.js', uglify()))
             .pipe(gulpIf('*.css', cssNano()))
             .pipe(gulp.dest('dist'));
     });
@@ -133,7 +134,7 @@
      *  Task to builds an app for production
      */
     gulp.task('build', function () {
-        runSequence(['css','ts', 'useref', 'img', 'fonts'])
+        runSequence(['css', 'useref', 'img', 'fonts'])
     });
 
     /**
