@@ -12,6 +12,9 @@ class ArcomageCards {
                     "bricks": 2
                 },
                 "action": function (player, enemy) {
+                    player.updateResources({
+                        "bricks": -2
+                    });
                     player.updateWallLife(8);
                 },
                 "isActive": false,
@@ -19,17 +22,20 @@ class ArcomageCards {
             },
             "new_equipment": {
                 "source": "mine",
-                "description": "Новое оборудование",
+                "description": "New equipment",
                 "text": {
-                    "ru": "+8 к стене"
+                    "ru": "+1 to all mines"
                 },
                 "src": "./images/cards/new_equipment.jpg",
                 "resource": {
                     "bricks": 2
                 },
                 "action": function (player, enemy) {
-                    player.updateSources({ "mine": 1, "magic": 1, "dungeon": 1 });
-                    enemy.updateSources({ "mine": 2, "magic": 2, "dungeon": 2 });
+                    player.updateResources({
+                        "bricks": -2
+                    });
+                    player.updateSources({"mine": 1});
+                    enemy.updateSources({"mine": 1});
                 },
                 "isActive": false,
                 "object": {}
@@ -42,9 +48,12 @@ class ArcomageCards {
                 },
                 "src": "./images/cards/amethyst.jpg",
                 "resource": {
-                    "gems": 20
+                    "gems": 8
                 },
                 "action": function (player, enemy) {
+                    player.updateResources({
+                        "gems": -8
+                    });
                     player.updateTowerLife(3);
                 },
                 "isActive": false,
@@ -54,13 +63,16 @@ class ArcomageCards {
                 "source": "dungeon",
                 "description": "Оборотень",
                 "text": {
-                    "ru": "Если стена больше,\nчем у врага, то\n6 урона башне врага,\nиначе 6 урона"
+                    "ru": "Если стена больше,\nчем у врага, то\n6 урона башне врага,\nиначе 9 урона"
                 },
                 "src": "./images/cards/werewolf.jpg",
                 "resource": {
                     "beasts": 5
                 },
                 "action": function (player, enemy) {
+                    player.updateResources({
+                        "beasts": -5
+                    });
                     enemy.takeDamage(9);
                 },
                 "isActive": false,
@@ -114,5 +126,43 @@ class ArcomageCards {
      */
     getCardObject(card) {
         return this.getSingleCard(card).object;
+    }
+
+    /**
+     * Check if player have enough resources and if card is in the game (active)
+     * @param {string} cardName
+     * @param {Player} player
+     * @returns {boolean}
+     */
+    cardCanBeUsed(cardName, player) {
+        let card = this.getSingleCard(cardName);
+        let resourceName = Object.keys(card.resource)[0];
+        let resourceValue = card.resource[resourceName];
+        return ((player.resources[resourceName] - resourceValue >= 0) && this.isActive(cardName));
+    }
+
+    /**
+     * Get card active status
+     * @param {string} cardName
+     * @returns {boolean}
+     */
+    isActive(cardName) {
+        return this.getSingleCard(cardName).isActive;
+    }
+
+    /**
+     * Change card status to false
+     * @param {string} cardName
+     */
+    deactivate(cardName) {
+        this.getSingleCard(cardName).isActive = false;
+    }
+
+    /**
+     * Change card status to active
+     * @param {string} cardName
+     */
+    activate(cardName) {
+        this.getSingleCard(cardName).isActive = true;
     }
 }
