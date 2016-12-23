@@ -155,7 +155,6 @@ class Player {
     get maxTowerLife() {
         return this._maxTowerLife;
     }
-
     /**
      * Get max wall life
      * @returns {number} _maxWallLife
@@ -163,7 +162,6 @@ class Player {
     get maxWallLife() {
         return this._maxWallLife;
     }
-
     /**
      * Get max sources value
      * @returns {number} _maxSources
@@ -171,7 +169,6 @@ class Player {
     get maxSources() {
         return this._maxSources;
     }
-
     /**
      * Get max resources value
      * @returns {number} _maxResources
@@ -179,7 +176,6 @@ class Player {
     get maxResources() {
         return this._maxResources;
     }
-
     /**
      * Get tower height step in canvas
      * @returns {number} _canvasTowerHeightStep
@@ -187,7 +183,6 @@ class Player {
     get canvasTowerHeightStep() {
         return this._canvasTowerHeightStep;
     }
-
     /**
      * Get wall height step in canvas
      * @returns {number} _canvasWallHeightStep
@@ -195,7 +190,6 @@ class Player {
     get canvasWallHeightStep() {
         return this._canvasWallHeightStep;
     }
-
     /**
      * Remove one card from cards array
      * @param {any} card

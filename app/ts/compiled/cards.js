@@ -127,7 +127,6 @@ class ArcomageCards {
     getCardObject(card) {
         return this.getSingleCard(card).object;
     }
-
     /**
      * Check if player have enough resources and if card is in the game (active)
      * @param {string} cardName
@@ -140,7 +139,6 @@ class ArcomageCards {
         let resourceValue = card.resource[resourceName];
         return ((player.resources[resourceName] - resourceValue >= 0) && this.isActive(cardName));
     }
-
     /**
      * Get card active status
      * @param {string} cardName
@@ -149,7 +147,6 @@ class ArcomageCards {
     isActive(cardName) {
         return this.getSingleCard(cardName).isActive;
     }
-
     /**
      * Change card status to false
      * @param {string} cardName
@@ -157,7 +154,6 @@ class ArcomageCards {
     deactivate(cardName) {
         this.getSingleCard(cardName).isActive = false;
     }
-
     /**
      * Change card status to active
      * @param {string} cardName
