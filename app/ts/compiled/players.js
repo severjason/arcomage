@@ -58,7 +58,7 @@ class Player {
     }
     /**
      * Get playerResources
-     * @returns {any} playerResources
+     * @returns {any} _playerResources
      */
     get resources() {
         return this._playerResources;
@@ -120,7 +120,7 @@ class Player {
     }
     /**
      * Get player resources fabric object
-     * @returns {any} playerResourcesObject
+     * @returns {any} _playerResourcesObject
      */
     get resourcesObject() {
         return this._playerResourcesObject;
@@ -149,6 +149,54 @@ class Player {
         this._playerCards = newCardsArray;
     }
     /**
+     * Get max tower life
+     * @returns {number} _maxTowerLife
+     */
+    get maxTowerLife() {
+        return this._maxTowerLife;
+    }
+
+    /**
+     * Get max wall life
+     * @returns {number} _maxWallLife
+     */
+    get maxWallLife() {
+        return this._maxWallLife;
+    }
+
+    /**
+     * Get max sources value
+     * @returns {number} _maxSources
+     */
+    get maxSources() {
+        return this._maxSources;
+    }
+
+    /**
+     * Get max resources value
+     * @returns {number} _maxResources
+     */
+    get maxResources() {
+        return this._maxResources;
+    }
+
+    /**
+     * Get tower height step in canvas
+     * @returns {number} _canvasTowerHeightStep
+     */
+    get canvasTowerHeightStep() {
+        return this._canvasTowerHeightStep;
+    }
+
+    /**
+     * Get wall height step in canvas
+     * @returns {number} _canvasWallHeightStep
+     */
+    get canvasWallHeightStep() {
+        return this._canvasWallHeightStep;
+    }
+
+    /**
      * Remove one card from cards array
      * @param {any} card
      */
@@ -165,26 +213,29 @@ class Player {
         let newValue = value;
         if (newValue < 0 && Math.abs(newValue) > this.towerLife) {
             this.towerLife = 0;
-            this.towerObject._objects[0].top = this.towerObject._objects[1].top;
+            this.towerObject.getObjects()[0].setTop(this.towerObject.getObjects()[1].getTop());
         }
         else {
-            if (this.towerLife + newValue > this._maxTowerLife) {
-                if (this.towerLife <= this._maxTowerLife) {
+            if (this.towerLife + newValue > this.maxTowerLife) {
+                if (this.towerLife <= this.maxTowerLife) {
                     this.towerLife += newValue;
-                    this.towerObject._objects[1].height = this.towerLife * this._canvasTowerHeightStep;
-                    this.towerObject._objects[0].top = this.towerObject._objects[1].top - this.towerObject._objects[1].height;
+                    this.towerObject.getObjects()[1].setHeight(this.towerLife * this.canvasTowerHeightStep);
+                    this.towerObject.getObjects()[0].setTop(this.towerObject.getObjects()[1].getTop()
+                        - this.towerObject.getObjects()[1].getHeight());
                 }
                 else {
-                    this.towerObject._objects[0].top = this.towerObject._objects[1].top - this.towerObject._objects[1].height;
+                    this.towerObject.getObjects()[0].setTop(this.towerObject.getObjects()[1].getTop()
+                        - this.towerObject.getObjects()[1].getHeight());
                 }
             }
             else {
                 this.towerLife += newValue;
-                this.towerObject._objects[0].top -= newValue * this._canvasTowerHeightStep;
+                this.towerObject.getObjects()[0].setTop(this.towerObject.getObjects()[0].getTop()
+                    - newValue * this.canvasTowerHeightStep);
             }
         }
-        this.towerObject._objects[1].height = this.towerLife * this._canvasTowerHeightStep;
-        this.towerObject._objects[3].text = this.towerLife.toString();
+        this.towerObject.getObjects()[1].setHeight(this.towerLife * this.canvasTowerHeightStep);
+        this.towerObject.getObjects()[3].text = this.towerLife.toString();
     }
     /**
      * Updates player wall life and wall fabric object
@@ -193,21 +244,21 @@ class Player {
      */
     updateWallLife(value) {
         let newValue = value;
-        if (this.wallLife >= this._maxWallLife) {
-            this.wallLife = this._maxWallLife;
+        if (this.wallLife >= this.maxWallLife) {
+            this.wallLife = this.maxWallLife;
         }
         else if (newValue < 0 && Math.abs(newValue) > this.wallLife) {
             let remainder = newValue + this.wallLife;
             this.wallLife = 0;
-            this.wallObject._objects[0].height = this.wallLife * this._canvasWallHeightStep;
-            this.wallObject._objects[2].text = this.wallLife.toString();
+            this.wallObject.getObjects()[0].setHeight(this.wallLife * this.canvasWallHeightStep);
+            this.wallObject.getObjects()[2].text = this.wallLife.toString();
             return remainder;
         }
         else {
             this.wallLife += newValue;
         }
-        this.wallObject._objects[0].height = this.wallLife * this._canvasWallHeightStep;
-        this.wallObject._objects[2].text = this.wallLife.toString();
+        this.wallObject.getObjects()[0].setHeight(this.wallLife * this.canvasWallHeightStep);
+        this.wallObject.getObjects()[2].text = this.wallLife.toString();
     }
     /**
      * Updates player sources
@@ -216,14 +267,16 @@ class Player {
     updateSources(newSources) {
         for (let key in newSources) {
             if (newSources.hasOwnProperty(key)) {
-                let newValue = parseInt(newSources[key], 10);
+                let newValue = newSources[key];
                 if ((this.sources[key] + newValue) > 0) {
-                    ((this.sources[key] + newValue) < this._maxSources) ? this.sources[key] += newValue : this.sources[key] = this._maxSources;
+                    ((this.sources[key] + newValue) < this.maxSources)
+                        ? this.sources[key] += newValue
+                        : this.sources[key] = this.maxSources;
                 }
                 else {
                     this.sources[key] = 1;
                 }
-                this.sourcesObject[key]._objects[2].text = this.sources[key].toString();
+                this.sourcesObject[key].getObjects()[2].text = this.sources[key].toString();
             }
         }
     }
@@ -234,14 +287,16 @@ class Player {
     updateResources(newResources) {
         for (let key in newResources) {
             if (newResources.hasOwnProperty(key)) {
-                let newValue = parseInt(newResources[key], 10);
+                let newValue = newResources[key];
                 if ((this.resources[key] + newValue) > 0) {
-                    ((this.resources[key] + newValue) < this._maxResources) ? this.resources[key] += newValue : this.resources[key] = this._maxResources;
+                    ((this.resources[key] + newValue) < this.maxResources)
+                        ? this.resources[key] += newValue
+                        : this.resources[key] = this.maxResources;
                 }
                 else {
-                    this.resources[key] = 1;
+                    this.resources[key] = 0;
                 }
-                this.resourcesObject[key]._objects[2].text = this.resources[key].toString();
+                this.resourcesObject[key].getObjects()[2].text = this.resources[key].toString();
             }
         }
     }
