@@ -97,7 +97,7 @@ class Loader {
                     that.params.secondPlayerName,
                     that.game.secondPlayer,
                     that.params.mainCanvasValues);
-                return new Events(that.cards, that.canvas, that.game);
+                return new Events(that.params, that.cards, that.canvas, that.game);
             })
             .then(function (events) {
                 that.events = events;
