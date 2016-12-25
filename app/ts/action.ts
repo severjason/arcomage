@@ -12,7 +12,7 @@
 
                 game.allotCards(game.firstPlayer);
                 //game.allotCards(game.secondPlayer);
-                game.drawCards(canvas);
+                game.drawCards(canvas, game.firstPlayer);
                 /*canvas.fabricElement.add(CARDS.getCardObject("amethyst"));
                 canvas.fabricElement.add(CARDS.getCardObject("great_wall"));
                 canvas.fabricElement.add(CARDS.getCardObject("werewolf"));
