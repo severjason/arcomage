@@ -1,6 +1,7 @@
 class ArcomageCards {
 
     private _cards:any;
+    private _discardText:string;
 
     constructor() {
         this._cards = {
@@ -100,14 +101,23 @@ class ArcomageCards {
                 "object": {}
             }
         };
+        this._discardText = "DISCARD";
     }
 
     /**
      * Get all cards
      * @returns {any} cards
      */
-    get all():any {
+    get cards():any {
         return this._cards;
+    }
+
+    /**
+     * Get discard text
+     * @returns {string} _discardText
+     */
+    get discardText():string {
+        return this._discardText;
     }
 
     /**
@@ -124,7 +134,7 @@ class ArcomageCards {
      * @returns {any} cards[card]
      */
     getSingleCard(card:string):any {
-        return this.all[card];
+        return this.cards[card];
     }
 
     /**
@@ -137,7 +147,7 @@ class ArcomageCards {
     }
 
     /**
-     * Check if player have enough resources and if card is in the game (active)
+     * Check if player have enough resources to use card
      * @param {string} cardName
      * @param {Player} player
      * @returns {boolean}
@@ -146,7 +156,7 @@ class ArcomageCards {
         let card = this.getSingleCard(cardName);
         let resourceName:string = Object.keys(card.resource)[0];
         let resourceValue:number = card.resource[resourceName];
-        return ((player.resources[resourceName] - resourceValue >= 0) && this.isActive(cardName));
+        return (player.resources[resourceName] - resourceValue >= 0);
     }
 
     /**
