@@ -96,14 +96,23 @@ class ArcomageCards {
                 "object": {}
             }
         };
+        this._discardText = "DISCARD";
     }
     /**
      * Get all cards
      * @returns {any} cards
      */
-    get all() {
+    get cards() {
         return this._cards;
     }
+    /**
+     * Get discard text
+     * @returns {string} _discardText
+     */
+    get discardText() {
+        return this._discardText;
+    }
+
     /**
      *  Get cards names
      * @returns {string[]}
@@ -117,7 +126,7 @@ class ArcomageCards {
      * @returns {any} cards[card]
      */
     getSingleCard(card) {
-        return this.all[card];
+        return this.cards[card];
     }
     /**
      * Get card fabric object
@@ -128,7 +137,7 @@ class ArcomageCards {
         return this.getSingleCard(card).object;
     }
     /**
-     * Check if player have enough resources and if card is in the game (active)
+     * Check if player have enough resources to use card
      * @param {string} cardName
      * @param {Player} player
      * @returns {boolean}
@@ -137,7 +146,7 @@ class ArcomageCards {
         let card = this.getSingleCard(cardName);
         let resourceName = Object.keys(card.resource)[0];
         let resourceValue = card.resource[resourceName];
-        return ((player.resources[resourceName] - resourceValue >= 0) && this.isActive(cardName));
+        return (player.resources[resourceName] - resourceValue >= 0);
     }
     /**
      * Get card active status

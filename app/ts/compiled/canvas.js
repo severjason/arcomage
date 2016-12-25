@@ -49,7 +49,7 @@ class Canvas {
             let circleRadius = cardsValues.priceCircleRadius;
             let mainBody = new fabric.Rect({
                 width: cardWidth,
-                height: cardHeight,
+                height: cardHeight - cardsValues.discardHeight,
                 fill: cardsValues[card.source].color,
                 stroke: cardsValues[card.source].textColor,
                 strokeWidth: cardsValues.cardsStrokeWidth,
@@ -62,7 +62,7 @@ class Canvas {
                 fontSize: mainTextFontSize,
                 width: cardWidth,
                 left: -cardWidth,
-                top: cardHeight / 2,
+                top: cardsValues.mainTextPadding,
                 fill: cardsValues[card.source].textColor,
                 editable: false,
                 textAlign: "center"
@@ -82,7 +82,7 @@ class Canvas {
                 width: circleRadius * 2,
                 height: circleRadius * 2,
                 left: -circleRadius * 2 - padding,
-                top: cardHeight - circleRadius * 2 - padding,
+                top: cardHeight - cardsValues.discardHeight - circleRadius * 2 - padding,
                 fill: cardsValues[card.source].textColor,
                 editable: false,
                 textAlign: "center"
@@ -93,7 +93,27 @@ class Canvas {
                 stroke: cardsValues[card.source].textColor,
                 strokeWidth: cardsValues.priceStrokeWidth,
                 left: -2 * circleRadius - padding - 1,
-                top: cardHeight - 2 * circleRadius - padding - 2
+                top: cardHeight - 2 * circleRadius - cardsValues.discardHeight - padding - 2
+            });
+            let discardRect = new fabric.Rect({
+                width: cardWidth,
+                height: cardsValues.discardHeight,
+                left: -cardWidth,
+                top: cardHeight + 2 - cardsValues.discardHeight,
+                fill: "#bdc3c7",
+                stroke: cardsValues[card.source].textColor,
+                strokeWidth: cardsValues.cardsStrokeWidth,
+                rx: cardsValues.cardsBordersRadius,
+                ry: cardsValues.cardsBordersRadius,
+            });
+            let discardText = new fabric.Textbox(CARDS.discardText, {
+                fontSize: mainTextFontSize,
+                width: cardWidth,
+                left: -cardWidth,
+                top: cardHeight - 3 * cardsValues.discardHeight / 4,
+                fill: cardsValues[card.source].textColor,
+                editable: false,
+                textAlign: "center"
             });
             let loadImage = new Promise(function (resolve, reject) {
                 let img = new Image();
@@ -104,7 +124,7 @@ class Canvas {
                         width: imgWidth,
                         height: cardsValues.imageHeight,
                         left: -(imgWidth + cardWidth) / 2,
-                        top: 30
+                        top: cardsValues.imagePadding
                     });
                     let group = new fabric.Group([
                         mainBody,
@@ -112,27 +132,16 @@ class Canvas {
                         image,
                         mainText,
                         circle,
-                        priceText], {
+                        priceText,
+                        discardRect,
+                        discardText], {
                         left: padding,
-                        top: that.fabricElement.height - mainBody.getHeight() - 2 * padding,
+                        top: that.fabricElement.height - mainBody.getHeight() - 2 * padding - cardsValues.discardHeight,
                         selectable: false,
                         hasBorders: false,
                         subTargetCheck: true,
                         hoverCursor: "pointer"
                     });
-                    /*group.on('mousedown', function () {
-                        console.log('mousedown');
-                    });
-                    group.on('mouseover', function () {
-                        console.log('mouseover');
-                        group.top -= 5;
-                        that.fabricElement.renderAll();
-                    });
-                    group.on('mouseout', function () {
-                        console.log('mouseout');
-                        group.top += 5;
-                        that.fabricElement.renderAll();
-                     });*/
                     function addCards() {
                         CARDS.getSingleCard(cardName).object = group;
                     }

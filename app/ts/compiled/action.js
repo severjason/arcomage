@@ -9,7 +9,7 @@
             if (Loader.hideLoader()) {
                 game.allotCards(game.firstPlayer);
                 //game.allotCards(game.secondPlayer);
-                game.drawCards(canvas);
+                game.drawCards(canvas, game.firstPlayer);
             }
         });
     });

@@ -8,30 +8,25 @@ class Arcomage {
         this._playerOneTurn = true;
         this._playerTwoTurn = false;
     }
-
     get params() {
         return this._params;
     }
     get firstPlayer() {
         return this._playerOne;
     }
-
     get firstPlayerTurn() {
         return this._playerOneTurn;
     }
     get secondPlayer() {
         return this._playerTwo;
     }
-
     get secondPlayerTurn() {
         return this._playerTwoTurn;
     }
-
     firstPlayerMoved() {
         this._playerOneTurn = false;
         this._playerTwoTurn = true;
     }
-
     secondPlayerMoved() {
         this._playerTwoTurn = false;
         this._playerOneTurn = true;
@@ -39,11 +34,9 @@ class Arcomage {
     get cardsValues() {
         return this._params.cardsValues;
     }
-
     get cards() {
         return this._cards;
     }
-
     get cardsQuantity() {
         return this._cardsQuantity;
     }
@@ -65,10 +58,11 @@ class Arcomage {
         }
         return true;
     }
-    drawCards(canvas) {
+
+    drawCards(canvas, player) {
         let that = this;
-        for (let i = 0; i < that.firstPlayer.cards.length; i++) {
-            let playerCardObject = that.firstPlayer.cards[i].object;
+        for (let i = 0; i < player.cards.length; i++) {
+            let playerCardObject = player.cards[i].object;
             let paddingLeft = (i === 0)
                 ? this.cardsValues.padding
                 : (that.cardsValues.width + 2 * this.cardsValues.padding) * i + this.cardsValues.padding;
@@ -77,7 +71,6 @@ class Arcomage {
             canvas.fabricElement.add(playerCardObject);
         }
     }
-
     updateResources(playerOneSources, playerTwoSources) {
         let sources = Object.keys(this.params.relations);
         let newResourcesPlayerOne = {};
