@@ -1717,6 +1717,13 @@ declare namespace fabric {
   }
 
   interface IGroup extends IObject, ICollection<IGroup> {
+
+    /**
+     * Array of group objects
+     * @return Array{IObject}
+     */
+    _objects:Array<IObject>;
+    
     activateAllObjects(): IGroup;
     /**
      * Adds an object to a group; Then recalculates group's dimension, position.
