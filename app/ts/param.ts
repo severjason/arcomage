@@ -116,15 +116,18 @@ class Param {
                     },
                     "cards": {
                         "width": 150,
-                        "height": 210,
+                        "height": 240,
                         "padding": 5,
+                        "mainTextPadding": 100,
                         "cardsStrokeWidth": 0,
                         "cardsBordersRadius": 2,
                         "imageWidth": 90,
                         "imageHeight": 60,
+                        "imagePadding": 30,
                         "priceCircleRadius": 12,
                         "priceFontSize": 18,
                         "priceStrokeWidth": 1,
+                        "discardHeight": 30,
                         "mine": {
                             "color": "#d35400",
                             "textColor": "#2c3e50"
