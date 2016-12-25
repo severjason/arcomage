@@ -83,10 +83,10 @@ class Arcomage {
         return true;
     }
 
-    drawCards(canvas:Canvas) {
+    drawCards(canvas:Canvas, player:Player) {
         let that = this;
-        for (let i = 0; i < that.firstPlayer.cards.length; i++) {
-            let playerCardObject:IGroup = that.firstPlayer.cards[i].object;
+        for (let i = 0; i < player.cards.length; i++) {
+            let playerCardObject:IGroup = player.cards[i].object;
             let paddingLeft = (i === 0)
                 ? this.cardsValues.padding
                 : (that.cardsValues.width + 2 * this.cardsValues.padding) * i + this.cardsValues.padding;
