@@ -112,7 +112,6 @@ class ArcomageCards {
     get discardText() {
         return this._discardText;
     }
-
     /**
      *  Get cards names
      * @returns {string[]}
