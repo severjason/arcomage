@@ -133,7 +133,7 @@ class Canvas {
                 ry: cardsValues.cardsBordersRadius,
             });
             let discardText:ITextbox = new fabric.Textbox(CARDS.discardText, {
-                fontSize: mainTextFontSize,
+                fontSize: cardsValues.discardFontSize,
                 width: cardWidth,
                 left: -cardWidth,
                 top: cardHeight - 3 * cardsValues.discardHeight / 4,
