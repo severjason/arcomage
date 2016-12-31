@@ -75,20 +75,20 @@ class Events {
             let card:any = this.cards.getSingleCard(cardName);
             let cardObject:IGroup = this.cards.getCardObject(cardName);
 
-            let applyCard = ():void => {
-                if (that.game.firstPlayerTurn) {
-                    if (!that.cards.cardCanBeUsed(cardName, that.game.firstPlayer)) {
-                        that.shakeCard(cardName)
+            let applyCard = (player:Player):void => {
+                let playerOne = (player === that.firstPlayer) ? that.firstPlayer : that.secondPlayer;
+                let playerTwo = (player === that.firstPlayer) ? that.secondPlayer : that.firstPlayer;
+                if (that.game.getPlayerTurn(playerOne)) {
+                    if (!that.cards.cardCanBeUsed(cardName, playerOne)) {
+                        that.shakeCard(cardName);
                     }
                     else {
                         if (that.cards.isActive(cardName)) {
-
-                            that.game.firstPlayerMoved();
+                            that.game.playerMoved(playerOne);
                             let basicValue:any = {
                                 "top": cardObject.getTop(),
                                 "left": cardObject.getLeft()
                             };
-                            that.cards.deactivate(cardName);
                             cardObject.animate({
                                 "top": 100,
                                 "left": (that.canvas.width - that.params.cardsValues.width) / 2
@@ -97,7 +97,7 @@ class Events {
                                 easing: fabric.util.ease.easeInCubic,
                                 duration: 500,
                                 onComplete: function () {
-                                    that.game.applyCard(cardName, that.game.firstPlayer, that.game.secondPlayer);
+                                    that.game.applyCard(cardName, playerOne, playerTwo);
                                     cardObject.animate({
                                         "top": 0,
                                         "opacity": 0
@@ -106,20 +106,20 @@ class Events {
                                         duration: 500,
                                         onComplete: function () {
                                             that.canvas.fabricElement.remove(cardObject);
-                                            that.firstPlayer.removeCard(card);
+                                            playerOne.removeCard(card);
                                             cardObject.setTop(basicValue.top);
 
                                             let eventPromise:Promise<any> = new Promise((resolve, reject) => {
-                                                (that.game.allotCards(that.firstPlayer))
+                                                (that.game.allotCards(playerOne))
                                                     ? resolve()
                                                     : reject("Can`t set card active status to false!");
                                             });
                                             eventPromise.then(() => {
-                                                that.game.drawCards(that.canvas, that.game.firstPlayer);
+                                                that.game.drawCards(that.canvas, playerOne);
                                             }).then(()=> {
-                                                that.game.updateResources(that.firstPlayer.sources, that.secondPlayer.sources);
+                                                that.game.updateResources(playerOne.sources, playerTwo.sources);
                                                 that.canvas.fabricElement.renderAll();
-                                                that.game.secondPlayerMoved();
+                                                that.game.playerMoved(playerTwo);
                                             });
                                         }
                                     });
@@ -130,10 +130,12 @@ class Events {
                 }
             };
 
-            let discardCard = ():void => {
-                if (that.game.firstPlayerTurn) {
+            let discardCard = (player:Player):any => {
+                let playerOne = (player === that.firstPlayer) ? that.firstPlayer : that.secondPlayer;
+                let playerTwo = (player === that.firstPlayer) ? that.secondPlayer : that.firstPlayer;
+                if (that.game.getPlayerTurn(playerOne)) {
                     if (that.cards.isActive(cardName)) {
-                        that.game.firstPlayerMoved();
+                        that.game.playerMoved(playerOne);
                         let cardObjectTop:number = cardObject.getTop();
                         that.cards.deactivate(cardName);
                         cardObject.animate({
@@ -144,17 +146,18 @@ class Events {
                             duration: 500,
                             onComplete: function () {
                                 that.canvas.fabricElement.remove(cardObject);
-                                that.firstPlayer.removeCard(card);
+                                playerOne.removeCard(card);
                                 cardObject.setTop(cardObjectTop);
 
                                 let eventPromise:Promise<any> = new Promise((resolve, reject) => {
-                                    (that.game.allotCards(that.firstPlayer))
+                                    (that.game.allotCards(playerOne))
                                         ? resolve()
                                         : reject("Can`t set card active status to false!");
                                 });
                                 eventPromise.then(() => {
-                                    that.game.drawCards(that.canvas, that.game.firstPlayer);
-                                    that.game.secondPlayerMoved();
+                                    that.game.updateResources(playerOne.sources, playerTwo.sources);
+                                    that.game.drawCards(that.canvas, playerOne);
+                                    that.game.playerMoved(playerTwo);
                                 });
                             }
                         });
@@ -164,10 +167,14 @@ class Events {
             };
 
             for (let i = 0; i < 6; i++) {
-                cardObject._objects[i].on("mousedown", applyCard);
+                cardObject.getObjects()[i].on("mousedown", function () {
+                    applyCard(that.firstPlayer);
+                });
             }
             for (let i = 6; i < 8; i++) {
-                cardObject._objects[i].on("mousedown", discardCard);
+                cardObject.getObjects()[i].on("mousedown", function () {
+                    discardCard(that.firstPlayer);
+                });
             }
         }
     }
