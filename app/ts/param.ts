@@ -128,6 +128,7 @@ class Param {
                         "priceFontSize": 18,
                         "priceStrokeWidth": 1,
                         "discardHeight": 30,
+                        "discardFontSize": 16,
                         "mine": {
                             "color": "#d35400",
                             "textColor": "#2c3e50"
