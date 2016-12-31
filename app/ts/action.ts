@@ -11,8 +11,15 @@
             if (Loader.hideLoader()) {
 
                 game.allotCards(game.firstPlayer);
-                //game.allotCards(game.secondPlayer);
+                game.allotCards(game.secondPlayer);
                 game.drawCards(canvas, game.firstPlayer);
+
+                setInterval(function () {
+                    //console.log(game.firstPlayer.cards[0].object._objects[0])
+                    //game.firstPlayer.cards[0].object._objects[0].trigger("mousedown");
+                    //game.allotCards(game.secondPlayer);
+                    //game.drawCards(canvas, game.firstPlayer);
+                }, 1000);
                 /*canvas.fabricElement.add(CARDS.getCardObject("amethyst"));
                 canvas.fabricElement.add(CARDS.getCardObject("great_wall"));
                 canvas.fabricElement.add(CARDS.getCardObject("werewolf"));
