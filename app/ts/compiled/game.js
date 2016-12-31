@@ -23,13 +23,9 @@ class Arcomage {
     get secondPlayerTurn() {
         return this._playerTwoTurn;
     }
-    firstPlayerMoved() {
-        this._playerOneTurn = false;
-        this._playerTwoTurn = true;
-    }
-    secondPlayerMoved() {
-        this._playerTwoTurn = false;
-        this._playerOneTurn = true;
+
+    getPlayerTurn(player) {
+        return (player === this.firstPlayer) ? this.firstPlayerTurn : this.secondPlayerTurn;
     }
     get cardsValues() {
         return this._params.cardsValues;
@@ -40,9 +36,23 @@ class Arcomage {
     get cardsQuantity() {
         return this._cardsQuantity;
     }
+
+    firstPlayerMoved() {
+        this._playerOneTurn = false;
+        this._playerTwoTurn = true;
+    }
+
+    secondPlayerMoved() {
+        this._playerTwoTurn = false;
+        this._playerOneTurn = true;
+    }
+
+    playerMoved(player) {
+        return (player === this.firstPlayer) ? this.firstPlayerMoved() : this.secondPlayerMoved();
+    }
     applyCard(cardName, player, enemy) {
-        this._cards.getSingleCard(cardName).action(player, enemy);
-        //this.CARDS[cardName].isActive = false;
+        this.cards.getSingleCard(cardName).action(player, enemy);
+        this.cards.deactivate(cardName);
     }
     allotCards(player) {
         let cardsNames = this.cards.names;
@@ -58,7 +68,6 @@ class Arcomage {
         }
         return true;
     }
-
     drawCards(canvas, player) {
         let that = this;
         for (let i = 0; i < player.cards.length; i++) {
