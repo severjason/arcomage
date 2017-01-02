@@ -11,6 +11,7 @@ class Player {
     private _maxTowerLife:number;
     private _maxSources:any;
     private _maxResources:any;
+    private _playerNameObject:any;
     private _playerSourcesObject:any;
     private _playerResourcesObject:any;
     private _playerCards:Array<any>;
@@ -33,6 +34,7 @@ class Player {
         this._maxTowerLife = maxValues.tower;
         this._maxSources = maxValues.sources;
         this._maxResources = maxValues.resources;
+        this._playerNameObject = {};
         this._playerSourcesObject = {};
         this._playerResourcesObject = {};
         this._playerCards = [];
@@ -98,6 +100,24 @@ class Player {
      */
     get sources():any {
         return this._playerSources;
+    }
+
+    /**
+     * Get playerName fabric object
+     * @returns {any} _playerNameObject
+     */
+    get nameObject():any {
+        return this._playerNameObject;
+    }
+
+    /**
+     * Set new player name fabric object
+     * @param {any} newFabricObject
+     */
+    set nameObject(newFabricObject:any) {
+        if (typeof newFabricObject === "object") {
+            this._playerNameObject = newFabricObject;
+        }
     }
 
     /**
