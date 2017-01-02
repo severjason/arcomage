@@ -11,19 +11,15 @@ class Arcomage {
     get params() {
         return this._params;
     }
-
     get playerOne() {
         return this._playerOne;
     }
-
     get playerOneTurn() {
         return this._playerOneTurn;
     }
-
     get playerTwo() {
         return this._playerTwo;
     }
-
     get playerTwoTurn() {
         return this._playerTwoTurn;
     }
@@ -39,12 +35,10 @@ class Arcomage {
     get cardsQuantity() {
         return this._cardsQuantity;
     }
-
     playerOneMoved() {
         this._playerOneTurn = false;
         this._playerTwoTurn = true;
     }
-
     playerTwoMoved() {
         this._playerTwoTurn = false;
         this._playerOneTurn = true;
@@ -70,7 +64,6 @@ class Arcomage {
         }
         return true;
     }
-
     static clearCardsFromCanvas(canvas, player) {
         for (let i = 0; i < player.cards.length; i++) {
             let playerCardObject = player.cards[i].object;
