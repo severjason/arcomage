@@ -9,8 +9,8 @@ class Arcomage {
     private _playerTwoTurn:boolean;
 
     constructor(params:Param, cards:ArcomageCards) {
-        this._playerOne = new Player(params.firstPlayerName, params.firstPlayerValues, params.maxValues, params.mainCanvasValues);
-        this._playerTwo = new Player(params.secondPlayerName, params.secondPlayerValues, params.maxValues, params.mainCanvasValues);
+        this._playerOne = new Player(params.playerOneName, params.playerOneValues, params.maxValues, params.mainCanvasValues);
+        this._playerTwo = new Player(params.playerTwoName, params.playerTwoValues, params.maxValues, params.mainCanvasValues);
         this._cardsQuantity = params.cardsQuantity;
         this._cards = cards;
         this._params = params;
@@ -22,24 +22,24 @@ class Arcomage {
         return this._params;
     }
 
-    get firstPlayer():Player {
+    get playerOne():Player {
         return this._playerOne;
     }
 
-    get firstPlayerTurn():boolean {
+    get playerOneTurn():boolean {
         return this._playerOneTurn
     }
 
-    get secondPlayer():Player {
+    get playerTwo():Player {
         return this._playerTwo;
     }
 
-    get secondPlayerTurn():boolean {
+    get playerTwoTurn():boolean {
         return this._playerTwoTurn
     }
 
     getPlayerTurn(player:Player):boolean {
-        return (player === this.firstPlayer) ? this.firstPlayerTurn : this.secondPlayerTurn;
+        return (player === this.playerOne) ? this.playerOneTurn : this.playerTwoTurn;
     }
 
     get cardsValues():any {
@@ -54,18 +54,18 @@ class Arcomage {
         return this._cardsQuantity
     }
 
-    firstPlayerMoved():void {
+    playerOneMoved():void {
         this._playerOneTurn = false;
         this._playerTwoTurn = true;
     }
 
-    secondPlayerMoved():void {
+    playerTwoMoved():void {
         this._playerTwoTurn = false;
         this._playerOneTurn = true;
     }
 
     playerMoved(player:Player):void {
-        return (player === this.firstPlayer) ? this.firstPlayerMoved() : this.secondPlayerMoved();
+        return (player === this.playerOne) ? this.playerOneMoved() : this.playerTwoMoved();
     }
 
     applyCard(cardName:string, player:Player, enemy:Player) {
@@ -90,6 +90,13 @@ class Arcomage {
         return true;
     }
 
+    static clearCardsFromCanvas(canvas:Canvas, player:Player) {
+        for (let i = 0; i < player.cards.length; i++) {
+            let playerCardObject:IGroup = player.cards[i].object;
+            canvas.fabricElement.remove(playerCardObject);
+        }
+    }
+
     drawCards(canvas:Canvas, player:Player) {
         let that = this;
         for (let i = 0; i < player.cards.length; i++) {
@@ -111,8 +118,8 @@ class Arcomage {
             newResourcesPlayerOne[this.params.relations[sources[i]]] = playerOneSources[sources[i]];
             newResourcesPlayerTwo[this.params.relations[sources[i]]] = playerTwoSources[sources[i]];
         }
-        this.firstPlayer.updateResources(newResourcesPlayerOne);
-        this.secondPlayer.updateResources(newResourcesPlayerTwo);
+        this.playerOne.updateResources(newResourcesPlayerOne);
+        this.playerTwo.updateResources(newResourcesPlayerTwo);
     }
 
 

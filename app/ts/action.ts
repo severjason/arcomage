@@ -10,15 +10,15 @@
 
             if (Loader.hideLoader()) {
 
-                game.allotCards(game.firstPlayer);
-                game.allotCards(game.secondPlayer);
-                game.drawCards(canvas, game.firstPlayer);
+                game.allotCards(game.playerOne);
+                game.allotCards(game.playerTwo);
+                game.drawCards(canvas, game.playerOne);
 
                 setInterval(function () {
-                    //console.log(game.firstPlayer.cards[0].object._objects[0])
-                    //game.firstPlayer.cards[0].object._objects[0].trigger("mousedown");
-                    //game.allotCards(game.secondPlayer);
-                    //game.drawCards(canvas, game.firstPlayer);
+                    //console.log(game.playerOne.cards[0].object._objects[0])
+                    //game.playerOne.cards[0].object._objects[0].trigger("mousedown");
+                    //game.allotCards(game.playerTwo);
+                    //game.drawCards(canvas, game.playerOne);
                 }, 1000);
                 /*canvas.fabricElement.add(CARDS.getCardObject("amethyst"));
                 canvas.fabricElement.add(CARDS.getCardObject("great_wall"));
@@ -27,17 +27,17 @@
                  canvas.fabricElement.add(CARDS.getCardObject("earthquake"));*/
 
                 /*document.addEventListener("click", function () {
-                    game.applyCard("amethyst", game.secondPlayer, game.firstPlayer);
+                 game.applyCard("amethyst", game.playerTwo, game.playerOne);
                     canvas.fabricElement.renderAll();
-                    console.log(game.secondPlayer);
+                 console.log(game.playerTwo);
                  });*/
 
-                /*game.applyCard("new_equipment", game.firstPlayer, game.secondPlayer);
-                 game.allotCards(game.firstPlayer);
-                 game.allotCards(game.secondPlayer);
-                 game.applyCard("new_equipment", game.firstPlayer, game.secondPlayer);
-                 game.applyCard("werewolf", game.firstPlayer, game.secondPlayer);
-                 game.applyCard("werewolf", game.firstPlayer, game.secondPlayer);*/
+                /*game.applyCard("new_equipment", game.playerOne, game.playerTwo);
+                 game.allotCards(game.playerOne);
+                 game.allotCards(game.playerTwo);
+                 game.applyCard("new_equipment", game.playerOne, game.playerTwo);
+                 game.applyCard("werewolf", game.playerOne, game.playerTwo);
+                 game.applyCard("werewolf", game.playerOne, game.playerTwo);*/
             }
         });
     });

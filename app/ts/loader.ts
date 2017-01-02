@@ -92,10 +92,8 @@ class Loader {
                     that.cards,
                     that.params.cardsValues,
                     that.params.relations,
-                    that.params.firstPlayerName,
-                    that.game.firstPlayer,
-                    that.params.secondPlayerName,
-                    that.game.secondPlayer,
+                    that.game.playerOne,
+                    that.game.playerTwo,
                     that.params.mainCanvasValues);
                 return new Events(that.params, that.cards, that.canvas, that.game);
             })
