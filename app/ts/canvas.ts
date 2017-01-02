@@ -194,7 +194,7 @@ class Canvas {
 
     } //createCards
 
-    createNames(playerOneName:string, playerTwoName:string, canvasValues:any):void {
+    createNames(playerOne:Player, playerTwo:Player, canvasValues:any):void {
 
         function createText(text:string):ITextbox {
             return new fabric.Textbox(text, {
@@ -223,22 +223,24 @@ class Canvas {
             });
         }
 
-        let groupForPlayerOne:IGroup = new fabric.Group([createMainBody(), createText(playerOneName)], {
+        let groupForPlayerOne:IGroup = new fabric.Group([createMainBody(), createText(playerOne.name)], {
             left: canvasValues.playersNamesText.padding,
             top: 0,
             selectable: false,
             hoverCursor: "default"
         });
 
-        let groupForPlayerTwo:IGroup = new fabric.Group([createMainBody(), createText(playerTwoName)], {
+        let groupForPlayerTwo:IGroup = new fabric.Group([createMainBody(), createText(playerTwo.name)], {
             left: this.width - canvasValues.playersNamesText.width - canvasValues.playersNamesText.padding - canvasValues.playersNamesText.strokeWidth,
             top: 0,
             selectable: false,
             hoverCursor: "default"
         });
+        playerOne.nameObject = groupForPlayerOne;
+        playerTwo.nameObject = groupForPlayerTwo;
 
-        this._canvas.add(groupForPlayerOne);
-        this._canvas.add(groupForPlayerTwo);
+        this._canvas.add(playerOne.nameObject);
+        this._canvas.add(playerTwo.nameObject);
     } // createNames
 
     createOneSource(source:string, playerOne:Player, playerTwo:Player, canvasValues:any):void {
@@ -592,13 +594,11 @@ class Canvas {
     drawAll(CARDS:ArcomageCards,
             cardsValues:any,
             relations:any,
-            playerOneName:string,
             playerOne:Player,
-            playerTwoName:string,
             playerTwo:Player,
             canvasValues:any):void {
         this.createCards(CARDS, cardsValues, relations);
-        this.createNames(playerOneName, playerTwoName, canvasValues);
+        this.createNames(playerOne, playerTwo, canvasValues);
         this.createSources(playerOne, playerTwo, canvasValues);
         this.createTowers(playerOne, playerTwo, canvasValues);
         this.createWalls(playerOne, playerTwo, canvasValues);
