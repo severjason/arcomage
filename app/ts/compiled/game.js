@@ -1,7 +1,7 @@
 class Arcomage {
     constructor(params, cards) {
-        this._playerOne = new Player(params.firstPlayerName, params.firstPlayerValues, params.maxValues, params.mainCanvasValues);
-        this._playerTwo = new Player(params.secondPlayerName, params.secondPlayerValues, params.maxValues, params.mainCanvasValues);
+        this._playerOne = new Player(params.playerOneName, params.playerOneValues, params.maxValues, params.mainCanvasValues);
+        this._playerTwo = new Player(params.playerTwoName, params.playerTwoValues, params.maxValues, params.mainCanvasValues);
         this._cardsQuantity = params.cardsQuantity;
         this._cards = cards;
         this._params = params;
@@ -11,21 +11,24 @@ class Arcomage {
     get params() {
         return this._params;
     }
-    get firstPlayer() {
+
+    get playerOne() {
         return this._playerOne;
     }
-    get firstPlayerTurn() {
+
+    get playerOneTurn() {
         return this._playerOneTurn;
     }
-    get secondPlayer() {
+
+    get playerTwo() {
         return this._playerTwo;
     }
-    get secondPlayerTurn() {
+
+    get playerTwoTurn() {
         return this._playerTwoTurn;
     }
-
     getPlayerTurn(player) {
-        return (player === this.firstPlayer) ? this.firstPlayerTurn : this.secondPlayerTurn;
+        return (player === this.playerOne) ? this.playerOneTurn : this.playerTwoTurn;
     }
     get cardsValues() {
         return this._params.cardsValues;
@@ -37,18 +40,17 @@ class Arcomage {
         return this._cardsQuantity;
     }
 
-    firstPlayerMoved() {
+    playerOneMoved() {
         this._playerOneTurn = false;
         this._playerTwoTurn = true;
     }
 
-    secondPlayerMoved() {
+    playerTwoMoved() {
         this._playerTwoTurn = false;
         this._playerOneTurn = true;
     }
-
     playerMoved(player) {
-        return (player === this.firstPlayer) ? this.firstPlayerMoved() : this.secondPlayerMoved();
+        return (player === this.playerOne) ? this.playerOneMoved() : this.playerTwoMoved();
     }
     applyCard(cardName, player, enemy) {
         this.cards.getSingleCard(cardName).action(player, enemy);
@@ -67,6 +69,13 @@ class Arcomage {
                 this.allotCards(player);
         }
         return true;
+    }
+
+    static clearCardsFromCanvas(canvas, player) {
+        for (let i = 0; i < player.cards.length; i++) {
+            let playerCardObject = player.cards[i].object;
+            canvas.fabricElement.remove(playerCardObject);
+        }
     }
     drawCards(canvas, player) {
         let that = this;
@@ -88,7 +97,7 @@ class Arcomage {
             newResourcesPlayerOne[this.params.relations[sources[i]]] = playerOneSources[sources[i]];
             newResourcesPlayerTwo[this.params.relations[sources[i]]] = playerTwoSources[sources[i]];
         }
-        this.firstPlayer.updateResources(newResourcesPlayerOne);
-        this.secondPlayer.updateResources(newResourcesPlayerTwo);
+        this.playerOne.updateResources(newResourcesPlayerOne);
+        this.playerTwo.updateResources(newResourcesPlayerTwo);
     }
 }

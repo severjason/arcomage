@@ -7,7 +7,7 @@ class Param {
                 "sources": 50,
                 "resources": 300
             },
-            "firstPlayer": {
+        "playerOne": {
                 "towerLife": 10,
                 "wallLife": 50,
                 "resources": {
@@ -21,7 +21,7 @@ class Param {
                     "dungeon": 1
                 }
             },
-            "secondPlayer": {
+        "playerTwo": {
                 "towerLife": 15,
                 "wallLife": 10,
                 "resources": {
@@ -152,29 +152,29 @@ class Param {
      *
      * @returns {string} _playersValues.names[0]
      */
-    get firstPlayerName() {
+    get playerOneName() {
         return this._playersValues.names[0];
     }
     /**
      *
      * @returns {string} _playersValues.names[1]
      */
-    get secondPlayerName() {
+    get playerTwoName() {
         return this._playersValues.names[1];
     }
     /**
-     * Get first player defaults values
-     * @returns {any} _playersValues.firstPlayer
+     * Get player one defaults values
+     * @returns {any} _playersValues.playerOne
      */
-    get firstPlayerValues() {
-        return this._playersValues.firstPlayer;
+    get playerOneValues() {
+        return this._playersValues.playerOne;
     }
     /**
-     * Get second player defaults values
-     * @returns {any} _playersValues.secondPlayer
+     * Get player two defaults values
+     * @returns {any} _playersValues.playerTwo
      */
-    get secondPlayerValues() {
-        return this._playersValues.secondPlayer;
+    get playerTwoValues() {
+        return this._playersValues.playerTwo;
     }
     /**
      * Get all canvas basic values

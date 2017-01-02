@@ -62,7 +62,7 @@ class Loader {
             .then(function (canvas) {
             that.canvas = canvas;
             that.canvas.setCanvasDimensions();
-            that.canvas.drawAll(that.cards, that.params.cardsValues, that.params.relations, that.params.firstPlayerName, that.game.firstPlayer, that.params.secondPlayerName, that.game.secondPlayer, that.params.mainCanvasValues);
+                that.canvas.drawAll(that.cards, that.params.cardsValues, that.params.relations, that.game.playerOne, that.game.playerTwo, that.params.mainCanvasValues);
                 return new Events(that.params, that.cards, that.canvas, that.game);
         })
             .then(function (events) {

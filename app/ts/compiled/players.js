@@ -11,6 +11,7 @@ class Player {
         this._maxTowerLife = maxValues.tower;
         this._maxSources = maxValues.sources;
         this._maxResources = maxValues.resources;
+        this._playerNameObject = {};
         this._playerSourcesObject = {};
         this._playerResourcesObject = {};
         this._playerCards = [];
@@ -69,6 +70,24 @@ class Player {
      */
     get sources() {
         return this._playerSources;
+    }
+
+    /**
+     * Get playerName fabric object
+     * @returns {any} _playerNameObject
+     */
+    get nameObject() {
+        return this._playerNameObject;
+    }
+
+    /**
+     * Set new player name fabric object
+     * @param {any} newFabricObject
+     */
+    set nameObject(newFabricObject) {
+        if (typeof newFabricObject === "object") {
+            this._playerNameObject = newFabricObject;
+        }
     }
     /**
      * Get playerTower fabric object
