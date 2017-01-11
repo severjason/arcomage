@@ -46,12 +46,16 @@ class Param {
                 canvasValues:any = {
                     "playersNamesText": {
                         "width": 100,
-                        "height": 26,
+                        "height": 28,
                         "padding": 10,
                         "strokeWidth": 1,
                         "borderRadius": 2,
                         "fontSize": 24,
-                        "textColor": "#000"
+                        "textColor": "#000",
+                        "strokeColor": "#fff",
+                        "fillColor": "#fff",
+                        "activeFillColor": "#f1c40f"
+
                     },
                     "relations": {
                         "mine": "bricks",
@@ -198,7 +202,7 @@ class Param {
      * Get all canvas basic values
      * @returns {any} _canvasValues
      */
-    get mainCanvasValues():any {
+    get canvasValues():any {
         return this._canvasValues;
     }
 
