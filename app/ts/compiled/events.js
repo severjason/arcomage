@@ -17,11 +17,9 @@ class Events {
     get game() {
         return this._game;
     }
-
     get playerOne() {
         return this.game.playerOne;
     }
-
     get playerTwo() {
         return this.game.playerTwo;
     }
@@ -64,12 +62,12 @@ class Events {
             let applyCard = (player) => {
                 let playerOne = (player === that.playerOne) ? that.playerOne : that.playerTwo;
                 let playerTwo = (player === that.playerOne) ? that.playerTwo : that.playerOne;
-                if (that.game.getPlayerTurn(playerOne)) {
+                if (that.game.isOn() && that.game.getPlayerTurn(playerOne)) {
                     if (!that.cards.cardCanBeUsed(cardName, playerOne)) {
                         that.shakeCard(cardName);
                     }
                     else {
-                        if (that.cards.isActive(cardName)) {
+                        if (that.game.cardAvailable(cardName, playerOne)) {
                             that.game.playerMoved(playerOne);
                             let basicValue = {
                                 "top": cardObject.getTop(),
@@ -99,13 +97,11 @@ class Events {
                                                     : reject("Can`t set card active status to false!");
                                             });
                                             eventPromise.then(() => {
-                                                //that.game.drawCards(that.canvas, playerOne);
-                                            }).then(() => {
                                                 that.game.updateResources(playerOne.sources, playerTwo.sources);
                                                 that.canvas.fabricElement.renderAll();
                                                 Arcomage.clearCardsFromCanvas(that.canvas, playerOne);
-                                                //that.game.playerMoved(playerTwo);
                                             }).then(() => {
+                                                //that.game.CPUMove(that.canvas);
                                                 that.game.drawCards(that.canvas, playerTwo);
                                             });
                                         }
@@ -119,8 +115,8 @@ class Events {
             let discardCard = (player) => {
                 let playerOne = (player === that.playerOne) ? that.playerOne : that.playerTwo;
                 let playerTwo = (player === that.playerOne) ? that.playerTwo : that.playerOne;
-                if (that.game.getPlayerTurn(playerOne)) {
-                    if (that.cards.isActive(cardName)) {
+                if (that.game.isOn() && that.game.getPlayerTurn(playerOne)) {
+                    if (that.game.cardAvailable(cardName, playerOne)) {
                         that.game.playerMoved(playerOne);
                         let cardObjectTop = cardObject.getTop();
                         that.cards.deactivate(cardName);
@@ -140,10 +136,9 @@ class Events {
                                 });
                                 eventPromise.then(() => {
                                     that.game.updateResources(playerOne.sources, playerTwo.sources);
-                                    //that.game.drawCards(that.canvas, playerOne);
                                     Arcomage.clearCardsFromCanvas(that.canvas, playerOne);
-                                    //that.game.playerMoved(playerTwo);
                                 }).then(() => {
+                                    //that.game.CPUMove(that.canvas);
                                     that.game.drawCards(that.canvas, playerTwo);
                                 });
                             }

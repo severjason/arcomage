@@ -1,12 +1,13 @@
 class Arcomage {
     constructor(params, cards) {
-        this._playerOne = new Player(params.playerOneName, params.playerOneValues, params.maxValues, params.mainCanvasValues);
-        this._playerTwo = new Player(params.playerTwoName, params.playerTwoValues, params.maxValues, params.mainCanvasValues);
+        this._playerOne = new Player(params.playerOneName, params.playerOneValues, params.maxValues, params.canvasValues);
+        this._playerTwo = new Player(params.playerTwoName, params.playerTwoValues, params.maxValues, params.canvasValues);
         this._cardsQuantity = params.cardsQuantity;
         this._cards = cards;
         this._params = params;
         this._playerOneTurn = true;
         this._playerTwoTurn = false;
+        this._status = true;
     }
     get params() {
         return this._params;
@@ -35,6 +36,18 @@ class Arcomage {
     get cardsQuantity() {
         return this._cardsQuantity;
     }
+
+    get status() {
+        return this._status;
+    }
+
+    gameOver() {
+        this._status = false;
+    }
+
+    isOn() {
+        return this.status;
+    }
     playerOneMoved() {
         this._playerOneTurn = false;
         this._playerTwoTurn = true;
@@ -46,9 +59,32 @@ class Arcomage {
     playerMoved(player) {
         return (player === this.playerOne) ? this.playerOneMoved() : this.playerTwoMoved();
     }
+
+    highlightActivePlayer(player) {
+        let playerOne = (player === this.playerOne) ? this.playerOne : this.playerTwo;
+        let playerTwo = (player === this.playerOne) ? this.playerTwo : this.playerOne;
+        playerOne.nameObject.getObjects()[0].setFill(this.params.canvasValues.playersNamesText.activeFillColor);
+        playerTwo.nameObject.getObjects()[0].setFill(this.params.canvasValues.playersNamesText.fillColor);
+    }
     applyCard(cardName, player, enemy) {
         this.cards.getSingleCard(cardName).action(player, enemy);
         this.cards.deactivate(cardName);
+        if (player.towerLife === this.params.maxValues.tower || enemy.towerLife === 0)
+            this.gameOver();
+    }
+
+    cardAvailable(cardName, player) {
+        if (this.cards.isActive(cardName)) {
+            let switcher = false;
+            for (let i = 0; i < player.cards.length; i++) {
+                if (this.cards.getSingleCard(cardName) === player.cards[i]) {
+                    switcher = true;
+                }
+            }
+            return switcher;
+        }
+        else
+            return false;
     }
     allotCards(player) {
         let cardsNames = this.cards.names;
@@ -70,6 +106,14 @@ class Arcomage {
             canvas.fabricElement.remove(playerCardObject);
         }
     }
+
+    CPUMove(canvas) {
+        let that = this;
+        setTimeout(function () {
+            that.playerMoved(that.playerTwo);
+            that.drawCards(canvas, that.playerOne);
+        }, 1000);
+    }
     drawCards(canvas, player) {
         let that = this;
         for (let i = 0; i < player.cards.length; i++) {
@@ -81,6 +125,8 @@ class Arcomage {
             playerCardObject.setOpacity(1);
             canvas.fabricElement.add(playerCardObject);
         }
+        this.highlightActivePlayer(player);
+        canvas.fabricElement.renderAll();
     }
     updateResources(playerOneSources, playerTwoSources) {
         let sources = Object.keys(this.params.relations);

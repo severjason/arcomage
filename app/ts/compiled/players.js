@@ -71,7 +71,6 @@ class Player {
     get sources() {
         return this._playerSources;
     }
-
     /**
      * Get playerName fabric object
      * @returns {any} _playerNameObject
@@ -79,7 +78,6 @@ class Player {
     get nameObject() {
         return this._playerNameObject;
     }
-
     /**
      * Set new player name fabric object
      * @param {any} newFabricObject
