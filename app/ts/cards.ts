@@ -1,6 +1,7 @@
 class ArcomageCards {
 
     private _cards:any;
+    private _backOfCardSrc:string;
     private _discardText:string;
 
     constructor() {
@@ -22,7 +23,8 @@ class ArcomageCards {
                     player.updateWallLife(8);
                 },
                 "isActive": false,
-                "object": {}
+                "object": {},
+                "backObject": {}
             },
             "new_equipment": {
                 "source": "mine",
@@ -42,7 +44,8 @@ class ArcomageCards {
                     enemy.updateSources({"mine": 1});
                 },
                 "isActive": false,
-                "object": {}
+                "object": {},
+                "backObject": {}
             },
             "amethyst": {
                 "source": "magic",
@@ -61,7 +64,8 @@ class ArcomageCards {
                     player.updateTowerLife(3);
                 },
                 "isActive": false,
-                "object": {}
+                "object": {},
+                "backObject": {}
 
             },
             "werewolf": {
@@ -81,7 +85,8 @@ class ArcomageCards {
                     enemy.takeDamage(9);
                 },
                 "isActive": false,
-                "object": {}
+                "object": {},
+                "backObject": {}
             },
             "earthquake": {
                 "source": "mine",
@@ -98,10 +103,12 @@ class ArcomageCards {
                     enemy.updateSources({"mine": -1});
                 },
                 "isActive": false,
-                "object": {}
+                "object": {},
+                "backObject": {}
             }
         };
         this._discardText = "DISCARD";
+        this._backOfCardSrc = "./images/cards/back.png";
     }
 
     /**
@@ -110,6 +117,14 @@ class ArcomageCards {
      */
     get cards():any {
         return this._cards;
+    }
+
+    /**
+     * Get back of card src
+     * @returns {any} _backOfCardSrc
+     */
+    get backOfCardSrc():string {
+        return this._backOfCardSrc;
     }
 
     /**
@@ -139,12 +154,35 @@ class ArcomageCards {
 
     /**
      * Get card fabric object
-     * @param {string} card
+     * @param {string} cardName
      * @returns {any}
      */
-    getCardObject(card:string):any {
-        return this.getSingleCard(card).object;
+    getCardObject(cardName:string):any {
+        return this.getSingleCard(cardName).object;
     }
+
+    /**
+     * Set card fabric object
+     * @param {string} cardName
+     * @param {any} newObject
+     */
+    setCardObject(cardName:string, newObject:any):void {
+        if (typeof newObject === "object") {
+            this.getSingleCard(cardName).object = newObject;
+        }
+    }
+
+
+    getBackOfCardObject(cardName:string):any {
+        return this.getSingleCard(cardName).backObject;
+    }
+
+    setBackOfCardObject(cardName:string, newObject:any) {
+        if (typeof newObject === "object") {
+            this.getSingleCard(cardName).backObject = newObject;
+        }
+    }
+
 
     /**
      * Check if player have enough resources to use card
