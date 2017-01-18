@@ -56,7 +56,8 @@ class Canvas {
                 rx: cardsValues.cardsBordersRadius,
                 ry: cardsValues.cardsBordersRadius,
                 originX: 'right',
-                originY: 'top'
+                originY: 'top',
+                shadow: "2px 2px 10px rgba(0,0,0,0.2)"
             });
             let mainText = new fabric.Textbox(card.text["ru"], {
                 fontSize: mainTextFontSize,
@@ -142,10 +143,7 @@ class Canvas {
                         subTargetCheck: true,
                         hoverCursor: "pointer"
                     });
-                    function addCards() {
-                        CARDS.getSingleCard(cardName).object = group;
-                    }
-                    addCards();
+                    CARDS.setCardObject(cardName, group);
                     resolve();
                     reject(new Error("Can`t load cards images"));
                 };
@@ -153,7 +151,7 @@ class Canvas {
             that.cardsImagesLoaded.push(loadImage);
         }
     } //createCards
-    createBackOfCard(CARDS, cardsValues, relations) {
+    createBackOfCard(CARDS, cardsValues) {
         let that = this;
         let padding = cardsValues.padding;
         let cardWidth = cardsValues.width;
@@ -162,14 +160,10 @@ class Canvas {
         for (let i = 0; i < cardsNames.length; i++) {
             let cardName = cardsNames[i];
             let card = CARDS.getSingleCard(cardName);
-            let descriptionFontSize = (card.description.length >= 15) ? 14 : 16;
-            let mainTextFontSize = (card.text["ru"].length >= 15) ? 14 : 16;
-            let cardPrice = card.resource[relations[card.source]];
-            let circleRadius = cardsValues.priceCircleRadius;
             let mainBody = new fabric.Rect({
                 width: cardWidth,
-                height: cardHeight - cardsValues.discardHeight,
-                fill: cardsValues[card.source].color,
+                height: cardHeight,
+                fill: cardsValues.backColor,
                 stroke: cardsValues[card.source].textColor,
                 strokeWidth: cardsValues.cardsStrokeWidth,
                 rx: cardsValues.cardsBordersRadius,
@@ -177,96 +171,35 @@ class Canvas {
                 originX: 'right',
                 originY: 'top'
             });
-            let mainText = new fabric.Textbox(card.text["ru"], {
-                fontSize: mainTextFontSize,
+            let text = new fabric.Textbox("ARCOMAGE", {
+                fontSize: cardsValues.backTextFontSize,
                 width: cardWidth,
                 left: -cardWidth,
-                top: cardsValues.mainTextPadding,
-                fill: cardsValues[card.source].textColor,
-                editable: false,
-                textAlign: "center"
-            });
-            let descriptionText = new fabric.Textbox(card.description, {
-                fontSize: descriptionFontSize,
-                width: cardWidth,
-                left: -cardWidth,
-                top: padding,
-                fill: cardsValues[card.source].textColor,
-                editable: false,
-                textAlign: "center"
-            });
-            let priceText = new fabric.Textbox(cardPrice.toString(), {
-                fontSize: cardsValues.priceFontSize,
-                lineHeight: cardsValues.priceFontSize,
-                width: circleRadius * 2,
-                height: circleRadius * 2,
-                left: -circleRadius * 2 - padding,
-                top: cardHeight - cardsValues.discardHeight - circleRadius * 2 - padding,
-                fill: cardsValues[card.source].textColor,
-                editable: false,
-                textAlign: "center"
-            });
-            let circle = new fabric.Circle({
-                radius: circleRadius,
-                fill: cardsValues[card.source].color,
-                stroke: cardsValues[card.source].textColor,
-                strokeWidth: cardsValues.priceStrokeWidth,
-                left: -2 * circleRadius - padding - 1,
-                top: cardHeight - 2 * circleRadius - cardsValues.discardHeight - padding - 2
-            });
-            let discardRect = new fabric.Rect({
-                width: cardWidth,
-                height: cardsValues.discardHeight,
-                left: -cardWidth,
-                top: cardHeight + 2 - cardsValues.discardHeight,
-                fill: "#bdc3c7",
-                stroke: cardsValues[card.source].textColor,
-                strokeWidth: cardsValues.cardsStrokeWidth,
-                rx: cardsValues.cardsBordersRadius,
-                ry: cardsValues.cardsBordersRadius,
-            });
-            let discardText = new fabric.Textbox(CARDS.discardText, {
-                fontSize: cardsValues.discardFontSize,
-                width: cardWidth,
-                left: -cardWidth,
-                top: cardHeight - 3 * cardsValues.discardHeight / 4,
-                fill: cardsValues[card.source].textColor,
+                top: cardHeight - cardsValues.backTextPadding,
+                fill: cardsValues.backTextColor,
                 editable: false,
                 textAlign: "center"
             });
             let loadImage = new Promise(function (resolve, reject) {
                 let img = new Image();
-                img.src = card.src;
+                img.src = CARDS.backOfCardSrc;
                 img.onload = function () {
-                    let imgWidth = cardsValues.imageWidth;
                     let image = new fabric.Image(img, {
-                        width: imgWidth,
-                        height: cardsValues.imageHeight,
-                        left: -(imgWidth + cardWidth) / 2,
-                        top: cardsValues.imagePadding
+                        width: cardWidth,
+                        left: -cardWidth,
+                        top: img.height / 8
                     });
                     let group = new fabric.Group([
                         mainBody,
-                        descriptionText,
                         image,
-                        mainText,
-                        circle,
-                        priceText,
-                        discardRect,
-                        discardText], {
+                        text], {
                         left: padding,
-                        top: that.fabricElement.height - mainBody.getHeight() - 2 * padding - cardsValues.discardHeight,
+                        top: that.fabricElement.height - mainBody.getHeight() - 2 * padding,
                         selectable: false,
                         hasBorders: false,
-                        subTargetCheck: true,
-                        hoverCursor: "pointer"
+                        hoverCursor: "default"
                     });
-
-                    function addCards() {
-                        CARDS.getSingleCard(cardName).object = group;
-                    }
-
-                    addCards();
+                    CARDS.setBackOfCardObject(cardName, group);
                     resolve();
                     reject(new Error("Can`t load cards images"));
                 };
@@ -506,8 +439,6 @@ class Canvas {
                 width: canvasValues.towers.width,
                 height: canvasValues.towers.height,
                 fill: 'white',
-                stroke: canvasValues.playersNamesText.textColor,
-                strokeWidth: canvasValues.playersNamesText.strokeWidth,
                 originX: 'left',
                 originY: 'top'
             });
@@ -577,9 +508,7 @@ class Canvas {
             return new fabric.Rect({
                 width: canvasValues.walls.width,
                 height: canvasValues.towers.height,
-                fill: 'white',
-                stroke: canvasValues.playersNamesText.textColor,
-                strokeWidth: canvasValues.playersNamesText.strokeWidth,
+                fill: "white",
                 originX: 'left',
                 originY: 'top'
             });
@@ -620,6 +549,7 @@ class Canvas {
     }
     drawAll(CARDS, cardsValues, relations, playerOne, playerTwo, canvasValues) {
         this.createCards(CARDS, cardsValues, relations);
+        this.createBackOfCard(CARDS, cardsValues);
         this.createNames(playerOne, playerTwo, canvasValues);
         this.createSources(playerOne, playerTwo, canvasValues);
         this.createTowers(playerOne, playerTwo, canvasValues);

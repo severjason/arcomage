@@ -1,9 +1,5 @@
 class Loader {
     constructor() {
-        this._params = {};
-        this._cards = {};
-        this._game = {};
-        this._canvas = {};
     }
     get params() {
         return this._params;

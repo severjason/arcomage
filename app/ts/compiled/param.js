@@ -9,7 +9,7 @@ class Param {
             },
         "playerOne": {
                 "towerLife": 10,
-                "wallLife": 50,
+            "wallLife": 15,
                 "resources": {
                     "bricks": 10,
                     "gems": 10,
@@ -22,12 +22,12 @@ class Param {
                 }
             },
         "playerTwo": {
-                "towerLife": 15,
-                "wallLife": 10,
+            "towerLife": 10,
+            "wallLife": 15,
                 "resources": {
-                    "bricks": 10,
-                    "gems": 10,
-                    "beasts": 10
+                    "bricks": 1,
+                    "gems": 1,
+                    "beasts": 1
                 },
                 "sources": {
                     "mine": 3,
@@ -40,7 +40,7 @@ class Param {
                 "width": 100,
                 "height": 28,
                 "padding": 10,
-                "strokeWidth": 1,
+                "strokeWidth": 0,
                 "borderRadius": 2,
                 "fontSize": 24,
                 "textColor": "#000",
@@ -124,6 +124,10 @@ class Param {
                 "priceStrokeWidth": 1,
                 "discardHeight": 30,
                 "discardFontSize": 16,
+                "backColor": "#1a242f",
+                "backTextColor": "#e67e22",
+                "backTextFontSize": 18,
+                "backTextPadding": 50,
                 "mine": {
                     "color": "#d35400",
                     "textColor": "#2c3e50"

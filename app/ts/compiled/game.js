@@ -2,6 +2,7 @@ class Arcomage {
     constructor(params, cards) {
         this._playerOne = new Player(params.playerOneName, params.playerOneValues, params.maxValues, params.canvasValues);
         this._playerTwo = new Player(params.playerTwoName, params.playerTwoValues, params.maxValues, params.canvasValues);
+        this._CPU_AI = new CPU_AI(this._playerTwo);
         this._cardsQuantity = params.cardsQuantity;
         this._cards = cards;
         this._params = params;
@@ -24,6 +25,10 @@ class Arcomage {
     get playerTwoTurn() {
         return this._playerTwoTurn;
     }
+
+    get CPU_AI() {
+        return this._CPU_AI;
+    }
     getPlayerTurn(player) {
         return (player === this.playerOne) ? this.playerOneTurn : this.playerTwoTurn;
     }
@@ -36,15 +41,12 @@ class Arcomage {
     get cardsQuantity() {
         return this._cardsQuantity;
     }
-
     get status() {
         return this._status;
     }
-
     gameOver() {
         this._status = false;
     }
-
     isOn() {
         return this.status;
     }
@@ -57,9 +59,8 @@ class Arcomage {
         this._playerOneTurn = true;
     }
     playerMoved(player) {
-        return (player === this.playerOne) ? this.playerOneMoved() : this.playerTwoMoved();
+        (player === this.playerOne) ? this.playerOneMoved() : this.playerTwoMoved();
     }
-
     highlightActivePlayer(player) {
         let playerOne = (player === this.playerOne) ? this.playerOne : this.playerTwo;
         let playerTwo = (player === this.playerOne) ? this.playerTwo : this.playerOne;
@@ -72,7 +73,6 @@ class Arcomage {
         if (player.towerLife === this.params.maxValues.tower || enemy.towerLife === 0)
             this.gameOver();
     }
-
     cardAvailable(cardName, player) {
         if (this.cards.isActive(cardName)) {
             let switcher = false;
@@ -107,20 +107,44 @@ class Arcomage {
         }
     }
 
+    clearCPUBackOfCards(canvas) {
+        for (let i = 0; i < this.playerTwo.cards.length; i++) {
+            let playerCardObject = this.playerTwo.cards[i].backObject;
+            canvas.fabricElement.remove(playerCardObject);
+        }
+    }
     CPUMove(canvas) {
         let that = this;
+        this.drawBackOfCards(canvas, this.playerTwo);
         setTimeout(function () {
-            that.playerMoved(that.playerTwo);
-            that.drawCards(canvas, that.playerOne);
-        }, 1000);
+            if (that.CPU_AI.done()) {
+                that.playerMoved(that.playerTwo);
+                that.clearCPUBackOfCards(canvas);
+                that.updateResources(that.playerOne.sources, that.playerTwo.sources);
+                that.drawCards(canvas, that.playerOne);
+            }
+        }, 2000);
+    }
+
+    drawBackOfCards(canvas, player) {
+        for (let i = 0; i < player.cards.length; i++) {
+            let playerCardObject = player.cards[i].backObject;
+            let paddingLeft = (i === 0)
+                ? this.cardsValues.padding
+                : (this.cardsValues.width + 2 * this.cardsValues.padding) * i + this.cardsValues.padding;
+            playerCardObject.setLeft(paddingLeft);
+            playerCardObject.setOpacity(1);
+            canvas.fabricElement.add(playerCardObject);
+        }
+        this.highlightActivePlayer(player);
+        canvas.fabricElement.renderAll();
     }
     drawCards(canvas, player) {
-        let that = this;
         for (let i = 0; i < player.cards.length; i++) {
             let playerCardObject = player.cards[i].object;
             let paddingLeft = (i === 0)
                 ? this.cardsValues.padding
-                : (that.cardsValues.width + 2 * this.cardsValues.padding) * i + this.cardsValues.padding;
+                : (this.cardsValues.width + 2 * this.cardsValues.padding) * i + this.cardsValues.padding;
             playerCardObject.setLeft(paddingLeft);
             playerCardObject.setOpacity(1);
             canvas.fabricElement.add(playerCardObject);

@@ -18,7 +18,8 @@ class ArcomageCards {
                     player.updateWallLife(8);
                 },
                 "isActive": false,
-                "object": {}
+                "object": {},
+                "backObject": {}
             },
             "new_equipment": {
                 "source": "mine",
@@ -38,7 +39,8 @@ class ArcomageCards {
                     enemy.updateSources({"mine": 1});
                 },
                 "isActive": false,
-                "object": {}
+                "object": {},
+                "backObject": {}
             },
             "amethyst": {
                 "source": "magic",
@@ -57,7 +59,8 @@ class ArcomageCards {
                     player.updateTowerLife(3);
                 },
                 "isActive": false,
-                "object": {}
+                "object": {},
+                "backObject": {}
             },
             "werewolf": {
                 "source": "dungeon",
@@ -76,7 +79,8 @@ class ArcomageCards {
                     enemy.takeDamage(9);
                 },
                 "isActive": false,
-                "object": {}
+                "object": {},
+                "backObject": {}
             },
             "earthquake": {
                 "source": "mine",
@@ -93,10 +97,12 @@ class ArcomageCards {
                     enemy.updateSources({ "mine": -1 });
                 },
                 "isActive": false,
-                "object": {}
+                "object": {},
+                "backObject": {}
             }
         };
         this._discardText = "DISCARD";
+        this._backOfCardSrc = "./images/cards/back.png";
     }
     /**
      * Get all cards
@@ -105,6 +111,14 @@ class ArcomageCards {
     get cards() {
         return this._cards;
     }
+    /**
+     * Get back of card src
+     * @returns {any} _backOfCardSrc
+     */
+    get backOfCardSrc() {
+        return this._backOfCardSrc;
+    }
+
     /**
      * Get discard text
      * @returns {string} _discardText
@@ -129,11 +143,32 @@ class ArcomageCards {
     }
     /**
      * Get card fabric object
-     * @param {string} card
+     * @param {string} cardName
      * @returns {any}
      */
-    getCardObject(card) {
-        return this.getSingleCard(card).object;
+    getCardObject(cardName) {
+        return this.getSingleCard(cardName).object;
+    }
+
+    /**
+     * Set card fabric object
+     * @param {string} cardName
+     * @param {any} newObject
+     */
+    setCardObject(cardName, newObject) {
+        if (typeof newObject === "object") {
+            this.getSingleCard(cardName).object = newObject;
+        }
+    }
+
+    getBackOfCardObject(cardName) {
+        return this.getSingleCard(cardName).backObject;
+    }
+
+    setBackOfCardObject(cardName, newObject) {
+        if (typeof newObject === "object") {
+            this.getSingleCard(cardName).backObject = newObject;
+        }
     }
     /**
      * Check if player have enough resources to use card
