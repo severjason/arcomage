@@ -3,6 +3,7 @@ class Arcomage {
     private _params:Param;
     private _playerOne:Player;
     private _playerTwo:Player;
+    private _CPU_AI:CPU_AI;
     private _cardsQuantity:number;
     private _cards:ArcomageCards;
     private _playerOneTurn:boolean;
@@ -12,6 +13,7 @@ class Arcomage {
     constructor(params:Param, cards:ArcomageCards) {
         this._playerOne = new Player(params.playerOneName, params.playerOneValues, params.maxValues, params.canvasValues);
         this._playerTwo = new Player(params.playerTwoName, params.playerTwoValues, params.maxValues, params.canvasValues);
+        this._CPU_AI = new CPU_AI(this._playerTwo);
         this._cardsQuantity = params.cardsQuantity;
         this._cards = cards;
         this._params = params;
@@ -38,6 +40,10 @@ class Arcomage {
 
     get playerTwoTurn():boolean {
         return this._playerTwoTurn
+    }
+
+    get CPU_AI():CPU_AI {
+        return this._CPU_AI;
     }
 
     getPlayerTurn(player:Player):boolean {
@@ -79,7 +85,7 @@ class Arcomage {
     }
 
     playerMoved(player:Player):void {
-        return (player === this.playerOne) ? this.playerOneMoved() : this.playerTwoMoved();
+        (player === this.playerOne) ? this.playerOneMoved() : this.playerTwoMoved();
     }
 
     highlightActivePlayer(player:Player):void {
@@ -109,6 +115,7 @@ class Arcomage {
     }
 
     allotCards(player:Player):boolean {
+
         let cardsNames:Array<string> = this.cards.names;
 
         for (let i = 0; player.cards.length < this.cardsQuantity; i++) {
@@ -132,21 +139,46 @@ class Arcomage {
         }
     }
 
+    clearCPUBackOfCards(canvas:Canvas) {
+        for (let i = 0; i < this.playerTwo.cards.length; i++) {
+            let playerCardObject:IGroup = this.playerTwo.cards[i].backObject;
+            canvas.fabricElement.remove(playerCardObject);
+        }
+    }
+
     CPUMove(canvas:Canvas) {
         let that = this;
+        this.drawBackOfCards(canvas, this.playerTwo);
         setTimeout(function () {
-            that.playerMoved(that.playerTwo);
-            that.drawCards(canvas, that.playerOne);
-        }, 1000)
+            if (that.CPU_AI.done()) {
+                that.playerMoved(that.playerTwo);
+                that.clearCPUBackOfCards(canvas);
+                that.updateResources(that.playerOne.sources, that.playerTwo.sources);
+                that.drawCards(canvas, that.playerOne);
+            }
+        }, 2000)
+    }
+
+    drawBackOfCards(canvas:Canvas, player:Player) {
+        for (let i = 0; i < player.cards.length; i++) {
+            let playerCardObject:IGroup = player.cards[i].backObject;
+            let paddingLeft = (i === 0)
+                ? this.cardsValues.padding
+                : (this.cardsValues.width + 2 * this.cardsValues.padding) * i + this.cardsValues.padding;
+            playerCardObject.setLeft(paddingLeft);
+            playerCardObject.setOpacity(1);
+            canvas.fabricElement.add(playerCardObject);
+        }
+        this.highlightActivePlayer(player);
+        canvas.fabricElement.renderAll();
     }
 
     drawCards(canvas:Canvas, player:Player) {
-        let that = this;
         for (let i = 0; i < player.cards.length; i++) {
             let playerCardObject:IGroup = player.cards[i].object;
             let paddingLeft = (i === 0)
                 ? this.cardsValues.padding
-                : (that.cardsValues.width + 2 * this.cardsValues.padding) * i + this.cardsValues.padding;
+                : (this.cardsValues.width + 2 * this.cardsValues.padding) * i + this.cardsValues.padding;
             playerCardObject.setLeft(paddingLeft);
             playerCardObject.setOpacity(1);
             canvas.fabricElement.add(playerCardObject);
