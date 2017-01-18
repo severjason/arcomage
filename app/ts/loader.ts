@@ -1,16 +1,12 @@
 class Loader {
 
-    private _params:any;
-    private _cards:any;
-    private _game:any;
-    private _canvas:any;
+    private _params:Param;
+    private _cards:ArcomageCards;
+    private _game:Arcomage;
+    private _canvas:Canvas;
     private _events:Events;
 
-    constructor() { 
-        this._params = {};
-        this._cards = {};
-        this._game = {};
-        this._canvas = {};
+    constructor() {
     }
 
     get params():Param {
