@@ -56,8 +56,7 @@ class Canvas {
                 rx: cardsValues.cardsBordersRadius,
                 ry: cardsValues.cardsBordersRadius,
                 originX: 'right',
-                originY: 'top',
-                shadow: "2px 2px 10px rgba(0,0,0,0.2)"
+                originY: 'top'
             });
             let mainText = new fabric.Textbox(card.text["ru"], {
                 fontSize: mainTextFontSize,

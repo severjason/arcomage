@@ -6,7 +6,6 @@ class Events {
         this._params = params;
         this._cardShakeEventStarted = false;
     }
-
     get cardShakeEventStarted() {
         return this._cardShakeEventStarted;
     }
@@ -28,11 +27,9 @@ class Events {
     get playerTwo() {
         return this.game.playerTwo;
     }
-
     cardShakeOn() {
         this._cardShakeEventStarted = true;
     }
-
     cardShakeOff() {
         this._cardShakeEventStarted = false;
     }
@@ -72,7 +69,6 @@ class Events {
             });
         }
     }
-
     applyCard(player, cardName) {
         let that = this;
         let card = this.cards.getSingleCard(cardName);
@@ -129,7 +125,6 @@ class Events {
             }
         }
     }
-
     discardCard(player, cardName) {
         let that = this;
         let card = this.cards.getSingleCard(cardName);

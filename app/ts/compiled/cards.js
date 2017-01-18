@@ -118,7 +118,6 @@ class ArcomageCards {
     get backOfCardSrc() {
         return this._backOfCardSrc;
     }
-
     /**
      * Get discard text
      * @returns {string} _discardText
@@ -149,7 +148,6 @@ class ArcomageCards {
     getCardObject(cardName) {
         return this.getSingleCard(cardName).object;
     }
-
     /**
      * Set card fabric object
      * @param {string} cardName
@@ -160,11 +158,9 @@ class ArcomageCards {
             this.getSingleCard(cardName).object = newObject;
         }
     }
-
     getBackOfCardObject(cardName) {
         return this.getSingleCard(cardName).backObject;
     }
-
     setBackOfCardObject(cardName, newObject) {
         if (typeof newObject === "object") {
             this.getSingleCard(cardName).backObject = newObject;
