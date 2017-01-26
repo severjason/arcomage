@@ -133,12 +133,26 @@ class ArcomageCards {
         return Object.keys(this._cards);
     }
     /**
-     * Get one card
-     * @param {string} card
-     * @returns {any} cards[card]
+     * Get one card by name
+     * @param {string} cardName
+     * @returns {any}
      */
-    getSingleCard(card) {
-        return this.cards[card];
+    getSingleCard(cardName) {
+        return this.cards[cardName];
+    }
+
+    /**
+     * Get card name by card description
+     * @param {string} description
+     * @returns {string} cardName
+     */
+    getCardNameByDesc(description) {
+        for (let i = 0, length = this.names.length; i < length; i++) {
+            let cardDesc = this.getSingleCard(this.names[i]).description;
+            if (description === cardDesc) {
+                return this.names[i];
+            }
+        }
     }
     /**
      * Get card fabric object

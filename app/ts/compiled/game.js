@@ -2,13 +2,13 @@ class Arcomage {
     constructor(params, cards) {
         this._playerOne = new Player(params.playerOneName, params.playerOneValues, params.maxValues, params.canvasValues);
         this._playerTwo = new Player(params.playerTwoName, params.playerTwoValues, params.maxValues, params.canvasValues);
-        this._CPU_AI = new CPU_AI(this._playerTwo);
         this._cardsQuantity = params.cardsQuantity;
         this._cards = cards;
         this._params = params;
         this._playerOneTurn = true;
         this._playerTwoTurn = false;
         this._status = true;
+        this._CPU_AI = new CPU_AI(this._playerTwo, cards, params);
     }
     get params() {
         return this._params;
@@ -25,7 +25,6 @@ class Arcomage {
     get playerTwoTurn() {
         return this._playerTwoTurn;
     }
-
     get CPU_AI() {
         return this._CPU_AI;
     }
@@ -106,7 +105,6 @@ class Arcomage {
             canvas.fabricElement.remove(playerCardObject);
         }
     }
-
     clearCPUBackOfCards(canvas) {
         for (let i = 0; i < this.playerTwo.cards.length; i++) {
             let playerCardObject = this.playerTwo.cards[i].backObject;
@@ -115,17 +113,21 @@ class Arcomage {
     }
     CPUMove(canvas) {
         let that = this;
-        this.drawBackOfCards(canvas, this.playerTwo);
-        setTimeout(function () {
-            if (that.CPU_AI.done()) {
-                that.playerMoved(that.playerTwo);
+        that.drawBackOfCards(canvas, that.playerTwo);
+        that.CPU_AI.move(canvas, that).then(() => {
+            let eventPromise = new Promise((resolve, reject) => {
+                (that.allotCards(that.playerTwo))
+                    ? resolve()
+                    : reject("Can`t allot cards!");
+            });
+            eventPromise.then(() => {
                 that.clearCPUBackOfCards(canvas);
+            }).then(() => {
                 that.updateResources(that.playerOne.sources, that.playerTwo.sources);
                 that.drawCards(canvas, that.playerOne);
-            }
-        }, 2000);
+            });
+        });
     }
-
     drawBackOfCards(canvas, player) {
         for (let i = 0; i < player.cards.length; i++) {
             let playerCardObject = player.cards[i].backObject;
