@@ -13,13 +13,13 @@ class Arcomage {
     constructor(params:Param, cards:ArcomageCards) {
         this._playerOne = new Player(params.playerOneName, params.playerOneValues, params.maxValues, params.canvasValues);
         this._playerTwo = new Player(params.playerTwoName, params.playerTwoValues, params.maxValues, params.canvasValues);
-        this._CPU_AI = new CPU_AI(this._playerTwo);
         this._cardsQuantity = params.cardsQuantity;
         this._cards = cards;
         this._params = params;
         this._playerOneTurn = true;
         this._playerTwoTurn = false;
         this._status = true;
+        this._CPU_AI = new CPU_AI(this._playerTwo, cards, params);
     }
 
     get params():Param {
@@ -148,15 +148,20 @@ class Arcomage {
 
     CPUMove(canvas:Canvas) {
         let that = this;
-        this.drawBackOfCards(canvas, this.playerTwo);
-        setTimeout(function () {
-            if (that.CPU_AI.done()) {
-                that.playerMoved(that.playerTwo);
+        that.drawBackOfCards(canvas, that.playerTwo);
+        that.CPU_AI.move(canvas, that).then(()=> {
+            let eventPromise:Promise<any> = new Promise((resolve, reject) => {
+                (that.allotCards(that.playerTwo))
+                    ? resolve()
+                    : reject("Can`t allot cards!");
+            });
+            eventPromise.then(() => {
                 that.clearCPUBackOfCards(canvas);
+            }).then(()=> {
                 that.updateResources(that.playerOne.sources, that.playerTwo.sources);
                 that.drawCards(canvas, that.playerOne);
-            }
-        }, 2000)
+            });
+        });
     }
 
     drawBackOfCards(canvas:Canvas, player:Player) {
