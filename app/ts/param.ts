@@ -23,7 +23,7 @@ class Param {
                 "beasts": 10
             },
             "sources": {
-                "mine": 4,
+                "mine": 1,
                 "magic": 1,
                 "dungeon": 1
             }
@@ -32,13 +32,13 @@ class Param {
             "towerLife": 10,
             "wallLife": 15,
             "resources": {
-                "bricks": 1,
-                "gems": 1,
-                "beasts": 1
+                "bricks": 10,
+                "gems": 10,
+                "beasts": 10
             },
             "sources": {
-                "mine": 3,
-                "magic": 4,
+                "mine": 1,
+                "magic": 1,
                 "dungeon": 1
             }
         }
