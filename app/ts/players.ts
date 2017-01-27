@@ -17,6 +17,7 @@ class Player {
     private _playerCards:Array<any>;
     private _playerTowerObject:any;
     private _playerWallObject:any;
+    private _moves:number;
 
 
     constructor(name:string,
@@ -34,6 +35,7 @@ class Player {
         this._maxTowerLife = maxValues.tower;
         this._maxSources = maxValues.sources;
         this._maxResources = maxValues.resources;
+        this._moves = 0;
         this._playerNameObject = {};
         this._playerSourcesObject = {};
         this._playerResourcesObject = {};
@@ -96,7 +98,7 @@ class Player {
 
     /**
      * Get playerSources
-     * @returns {any} playerSources
+     * @returns {any} _playerSources
      */
     get sources():any {
         return this._playerSources;
@@ -265,6 +267,22 @@ class Player {
             return playerCard.description !== card.description;
         });
     }
+
+    /**
+     * Get player moves
+     * @returns {number} _moves
+     */
+    get moves():number {
+        return this._moves;
+    }
+
+    /**
+     * Increases player moves on 1 move
+     */
+    updateMoves():void {
+        this._moves++;
+    }
+
 
     /**
      * Updates player tower life and tower fabric object
