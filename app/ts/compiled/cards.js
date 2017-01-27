@@ -140,7 +140,6 @@ class ArcomageCards {
     getSingleCard(cardName) {
         return this.cards[cardName];
     }
-
     /**
      * Get card name by card description
      * @param {string} description

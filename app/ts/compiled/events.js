@@ -6,36 +6,88 @@ class Events {
         this._params = params;
         this._cardShakeEventStarted = false;
     }
+
+    /**
+     * Get switcher for card shake
+     * @returns {boolean} _cardShakeEventStarted
+     */
     get cardShakeEventStarted() {
         return this._cardShakeEventStarted;
     }
+
+    /**
+     * Get Canvas class
+     * @returns {Canvas} _canvas
+     */
     get canvas() {
         return this._canvas;
     }
+
+    /**
+     * Get Param class
+     * @returns {Param} _params
+     */
     get params() {
         return this._params;
     }
+
+    /**
+     * Get ArcomageCards class
+     * @returns {ArcomageCards} _cards
+     */
     get cards() {
         return this._cards;
     }
+
+    /**
+     * Get Arcomage class
+     * @returns {Arcomage} _game
+     */
     get game() {
         return this._game;
     }
+
+    /**
+     * Get player One
+     * @returns {Player} game.playerOne
+     */
     get playerOne() {
         return this.game.playerOne;
     }
+
+    /**
+     * Get player two
+     * @returns {Player} game.playerTwo
+     */
     get playerTwo() {
         return this.game.playerTwo;
     }
+
+    /**
+     * Start card shake event
+     */
     cardShakeOn() {
         this._cardShakeEventStarted = true;
     }
+
+    /**
+     * Stop card shake event
+     */
     cardShakeOff() {
         this._cardShakeEventStarted = false;
     }
+
+    /**
+     * Attach events
+     */
     init() {
         this.addEvents();
     }
+
+    /**
+     * Shake card if it is not available
+     * @param {string} cardName
+     */
     shakeCard(cardName) {
         let that = this;
         let cardObject = this.cards.getCardObject(cardName);
@@ -69,6 +121,12 @@ class Events {
             });
         }
     }
+
+    /**
+     * Apply player`s card by cardName
+     * @param {Player} player
+     * @param {string} cardName
+     */
     applyCard(player, cardName) {
         let that = this;
         let card = this.cards.getSingleCard(cardName);
@@ -126,12 +184,17 @@ class Events {
             }
         }
     }
+
+    /**
+     * Discard player`s card by cardName
+     * @param {Player} player
+     * @param {string} cardName
+     */
     discardCard(player, cardName) {
         let that = this;
         let card = this.cards.getSingleCard(cardName);
         let cardObject = this.cards.getCardObject(cardName);
         let playerOne = (player === that.playerOne) ? that.playerOne : that.playerTwo;
-        let playerTwo = (player === that.playerOne) ? that.playerTwo : that.playerOne;
         if (that.game.isOn() && that.game.getPlayerTurn(playerOne)) {
             if (that.game.cardAvailable(cardName, playerOne)) {
                 that.game.playerMoved(playerOne);
@@ -162,6 +225,10 @@ class Events {
             }
         }
     }
+
+    /**
+     * Attach events to all available cards
+     */
     addEvents() {
         let that = this;
         for (let i = 0; i < this.cards.names.length; i++) {
@@ -169,13 +236,11 @@ class Events {
             let cardObject = this.cards.getCardObject(cardName);
             for (let i = 0; i < 6; i++) {
                 cardObject.getObjects()[i].on("mousedown", function () {
-                    //let player = (that.game.getPlayerTurn(that.playerOne)) ? that.playerOne : that.playerTwo;
                     that.applyCard(that.playerOne, cardName);
                 });
             }
             for (let i = 6; i < 8; i++) {
                 cardObject.getObjects()[i].on("mousedown", function () {
-                    //let player = (that.game.getPlayerTurn(that.playerOne)) ? that.playerOne : that.playerTwo;
                     that.discardCard(that.playerOne, cardName);
                 });
             }

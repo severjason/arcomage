@@ -5,22 +5,45 @@ class CPU_AI {
         this._params = params;
     }
 
+    /**
+     * Get playerTwo (CPU)
+     * @returns {Player} _playerTwo
+     */
     get cpu() {
         return this._cpu;
     }
 
+    /**
+     * Get cards class
+     * @returns {ArcomageCards} _cards
+     */
     get cards() {
         return this._cards;
     }
 
+    /**
+     * Get relations from parameters
+     * @returns {{mine, magic, dungeon}|any} relations
+     */
     get relation() {
         return this._params.canvasValues.relations;
     }
 
+    /**
+     * Get Param class
+     * @returns {Param} _params
+     */
     get params() {
         return this._params;
     }
 
+    /**
+     * Apply card by card name  with small delay
+     * @param {string} cardName
+     * @param {Canvas} canvas
+     * @param {Arcomage} game
+     * @returns {Promise<any>}
+     */
     applyCard(cardName, canvas, game) {
         let that = this;
         let card = this.cards.getSingleCard(cardName);
@@ -70,7 +93,7 @@ class CPU_AI {
                                                 resolve();
                                             }
                                         });
-                                    }, 500);
+                                    }, 250);
                                 }
                             });
                         }
@@ -83,6 +106,13 @@ class CPU_AI {
         });
     }
 
+    /**
+     * Discard card by name
+     * @param {string} cardName
+     * @param {Canvas} canvas
+     * @param {Arcomage} game
+     * @returns {Promise<any>}
+     */
     discardCard(cardName, canvas, game) {
         let that = this;
         let card = this.cards.getSingleCard(cardName);
@@ -114,6 +144,11 @@ class CPU_AI {
         });
     }
 
+    /**
+     * Get less resourceful card name
+     * @param {any[]} cards
+     * @returns {string} cardName
+     */
     getLessResourcefulCard(cards) {
         let resultCard = cards[0];
         for (let i = 0, length = cards.length; i < length; i++) {
@@ -125,16 +160,11 @@ class CPU_AI {
         return this.cards.getCardNameByDesc(resultCard.description);
     }
 
-    cardsCanBeUsed() {
-        for (let i = 0, cardsLength = this.cpu.cards.length; i < cardsLength; i++) {
-            let cardName = this.cards.getCardNameByDesc(this.cpu.cards[i].description);
-            if (this.cards.cardCanBeUsed(cardName, this.cpu)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
+    /**
+     * Get ,ost resourceful card name
+     * @param {any[]} cards
+     * @returns {string} cardName
+     */
     getMostResourcefulCard(cards) {
         let resultCard = cards[0];
         for (let i = 0, length = cards.length; i < length; i++) {
@@ -146,6 +176,26 @@ class CPU_AI {
         return this.cards.getCardNameByDesc(resultCard.description);
     }
 
+    /**
+     * Check if any card can be used
+     * @returns {boolean}
+     */
+    cardsCanBeUsed() {
+        for (let i = 0, cardsLength = this.cpu.cards.length; i < cardsLength; i++) {
+            let cardName = this.cards.getCardNameByDesc(this.cpu.cards[i].description);
+            if (this.cards.cardCanBeUsed(cardName, this.cpu)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Apply most resourceful card if CPU can, else discard less resourceful card
+     * @param {Canvas} canvas
+     * @param {Arcomage} game
+     * @returns {Promise<any>} discardCard or applyCard
+     */
     move(canvas, game) {
         return (!this.cardsCanBeUsed())
             ? this.discardCard(this.getLessResourcefulCard(this.cpu.cards), canvas, game)

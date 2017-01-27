@@ -1,6 +1,6 @@
 class Arcomage {
-    constructor(params, cards) {
-        this._playerOne = new Player(params.playerOneName, params.playerOneValues, params.maxValues, params.canvasValues);
+    constructor(params, cards, playerOneName) {
+        this._playerOne = new Player(playerOneName || params.playerOneName, params.playerOneValues, params.maxValues, params.canvasValues);
         this._playerTwo = new Player(params.playerTwoName, params.playerTwoValues, params.maxValues, params.canvasValues);
         this._cardsQuantity = params.cardsQuantity;
         this._cards = cards;
@@ -10,68 +10,167 @@ class Arcomage {
         this._status = true;
         this._CPU_AI = new CPU_AI(this._playerTwo, cards, params);
     }
+
+    /**
+     * Get Param class
+     * @returns {Param} _params
+     */
     get params() {
         return this._params;
     }
+
+    /**
+     * Get player one
+     * @returns {Player} _playerOne
+     */
     get playerOne() {
         return this._playerOne;
     }
+
+    /**
+     * Get player one turn
+     * @returns {boolean} _playerOneTurn
+     */
     get playerOneTurn() {
         return this._playerOneTurn;
     }
+
+    /**
+     * Get player two
+     * @returns {Player} _playerTwo
+     */
     get playerTwo() {
         return this._playerTwo;
     }
+
+    /**
+     * Get player two turn
+     * @returns {boolean} _playerTwoTurn
+     */
     get playerTwoTurn() {
         return this._playerTwoTurn;
     }
+
+    /**
+     * Get CPU AI class
+     * @returns {CPU_AI} _CPU_AI
+     */
     get CPU_AI() {
         return this._CPU_AI;
     }
+
+    /**
+     * Get players turn
+     * @param {Player} player
+     * @returns {boolean}
+     */
     getPlayerTurn(player) {
         return (player === this.playerOne) ? this.playerOneTurn : this.playerTwoTurn;
     }
+
+    /**
+     * Get cardValues from params
+     * @returns {any} _params.cardsValues
+     */
     get cardsValues() {
         return this._params.cardsValues;
     }
+
+    /**
+     * Get card class
+     * @returns {ArcomageCards} _cards
+     */
     get cards() {
         return this._cards;
     }
+
+    /**
+     * Get cards quantity from params
+     * @returns {number} _cardsQuantity
+     */
     get cardsQuantity() {
         return this._cardsQuantity;
     }
+
+    /**
+     * Get game status
+     * @returns {boolean} _status
+     */
     get status() {
         return this._status;
     }
+
+    /**
+     * Set game status to false
+     */
     gameOver() {
         this._status = false;
     }
+
+    /**
+     * Check if game is on
+     * @returns {boolean} status
+     */
     isOn() {
         return this.status;
     }
+
+    /**
+     * Update player one moves and change turn to player two
+     */
     playerOneMoved() {
+        this.playerOne.updateMoves();
         this._playerOneTurn = false;
         this._playerTwoTurn = true;
     }
+
+    /**
+     * Update player two moves and change turn to player one
+     */
     playerTwoMoved() {
+        this.playerTwo.updateMoves();
         this._playerTwoTurn = false;
         this._playerOneTurn = true;
     }
+
+    /**
+     * Update player moves and change turn to another player
+     * @param {Player} player
+     */
     playerMoved(player) {
         (player === this.playerOne) ? this.playerOneMoved() : this.playerTwoMoved();
     }
+
+    /**
+     * Highlight active player
+     * @param {Player} player
+     */
     highlightActivePlayer(player) {
         let playerOne = (player === this.playerOne) ? this.playerOne : this.playerTwo;
         let playerTwo = (player === this.playerOne) ? this.playerTwo : this.playerOne;
         playerOne.nameObject.getObjects()[0].setFill(this.params.canvasValues.playersNamesText.activeFillColor);
         playerTwo.nameObject.getObjects()[0].setFill(this.params.canvasValues.playersNamesText.fillColor);
     }
+
+    /**
+     * Apply card by its name
+     * @param {string} cardName
+     * @param {Player} player
+     * @param {Player} enemy
+     */
     applyCard(cardName, player, enemy) {
         this.cards.getSingleCard(cardName).action(player, enemy);
         this.cards.deactivate(cardName);
         if (player.towerLife === this.params.maxValues.tower || enemy.towerLife === 0)
             this.gameOver();
     }
+
+    /**
+     * Check if player can use card
+     * @param {string} cardName
+     * @param {Player} player
+     * @returns {boolean}
+     */
     cardAvailable(cardName, player) {
         if (this.cards.isActive(cardName)) {
             let switcher = false;
@@ -85,6 +184,12 @@ class Arcomage {
         else
             return false;
     }
+
+    /**
+     * Randomly allot card to player
+     * @param {Player} player
+     * @returns {boolean}
+     */
     allotCards(player) {
         let cardsNames = this.cards.names;
         for (let i = 0; player.cards.length < this.cardsQuantity; i++) {
@@ -99,18 +204,34 @@ class Arcomage {
         }
         return true;
     }
+
+    /**
+     * Clear canvas from cards objects
+     * @param {Canvas} canvas
+     * @param {Player} player
+     */
     static clearCardsFromCanvas(canvas, player) {
         for (let i = 0; i < player.cards.length; i++) {
             let playerCardObject = player.cards[i].object;
             canvas.fabricElement.remove(playerCardObject);
         }
     }
+
+    /**
+     * Clear back of cards for CPU only
+     * @param {Canvas} canvas
+     */
     clearCPUBackOfCards(canvas) {
         for (let i = 0; i < this.playerTwo.cards.length; i++) {
             let playerCardObject = this.playerTwo.cards[i].backObject;
             canvas.fabricElement.remove(playerCardObject);
         }
     }
+
+    /**
+     * CPU move
+     * @param {Canvas} canvas
+     */
     CPUMove(canvas) {
         let that = this;
         that.drawBackOfCards(canvas, that.playerTwo);
@@ -128,6 +249,12 @@ class Arcomage {
             });
         });
     }
+
+    /**
+     * Draw back of cards from available cards
+     * @param {Canvas} canvas
+     * @param {Player} player
+     */
     drawBackOfCards(canvas, player) {
         for (let i = 0; i < player.cards.length; i++) {
             let playerCardObject = player.cards[i].backObject;
@@ -141,6 +268,12 @@ class Arcomage {
         this.highlightActivePlayer(player);
         canvas.fabricElement.renderAll();
     }
+
+    /**
+     * Draw cards from available cards
+     * @param {Canvas} canvas
+     * @param {Player} player
+     */
     drawCards(canvas, player) {
         for (let i = 0; i < player.cards.length; i++) {
             let playerCardObject = player.cards[i].object;
@@ -154,6 +287,12 @@ class Arcomage {
         this.highlightActivePlayer(player);
         canvas.fabricElement.renderAll();
     }
+
+    /**
+     * Update resources according to players sources
+     * @param {any} playerOneSources
+     * @param {any} playerTwoSources
+     */
     updateResources(playerOneSources, playerTwoSources) {
         let sources = Object.keys(this.params.relations);
         let newResourcesPlayerOne = {};

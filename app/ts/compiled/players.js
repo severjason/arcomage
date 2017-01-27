@@ -11,6 +11,7 @@ class Player {
         this._maxTowerLife = maxValues.tower;
         this._maxSources = maxValues.sources;
         this._maxResources = maxValues.resources;
+        this._moves = 0;
         this._playerNameObject = {};
         this._playerSourcesObject = {};
         this._playerResourcesObject = {};
@@ -66,7 +67,7 @@ class Player {
     }
     /**
      * Get playerSources
-     * @returns {any} playerSources
+     * @returns {any} _playerSources
      */
     get sources() {
         return this._playerSources;
@@ -215,6 +216,21 @@ class Player {
         this.cards = this.cards.filter(function (playerCard) {
             return playerCard.description !== card.description;
         });
+    }
+
+    /**
+     * Get player moves
+     * @returns {number} _moves
+     */
+    get moves() {
+        return this._moves;
+    }
+
+    /**
+     * Increases player moves on 1 move
+     */
+    updateMoves() {
+        this._moves++;
     }
     /**
      * Updates player tower life and tower fabric object
