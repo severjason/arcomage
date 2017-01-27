@@ -9,52 +9,100 @@ class Loader {
     constructor() {
     }
 
+    /**
+     * Get Param class
+     * @returns {Param} _params
+     */
     get params():Param {
         return this._params;
     }
 
+    /**
+     * Set Param class
+     * @param {Param} newParams
+     */
     set params(newParams:Param) {
         this._params = newParams;
     }
-    
+
+    /**
+     * Get ArcomageCards class
+     * @returns {ArcomageCards} _cards
+     */
     get cards():ArcomageCards {
         return this._cards;
     }
 
+    /**
+     * Set ArcomageCards
+     * @param {ArcomageCards} newCards
+     */
     set cards(newCards:ArcomageCards) {
         this._cards = newCards;
     }
 
+    /**
+     * Get Arcomage class
+     * @returns {Arcomage} _game
+     */
     get game():Arcomage {
         return this._game;
     }
 
+    /**
+     * Set Arcomage class
+     * @param {Arcomage} newGame
+     */
     set game(newGame:Arcomage) {
         this._game = newGame;
     }
 
-    get canvas():any {
+    /**
+     * Get canvas class
+     * @returns {Canvas} _canvas
+     */
+    get canvas():Canvas {
         return this._canvas;
     }
 
-    set canvas(newCanvas) {
+    /**
+     * Set Canvas class
+     * @param {Canvas} newCanvas _canvas
+     */
+    set canvas(newCanvas:Canvas) {
         this._canvas = newCanvas;
     }
 
+    /**
+     * Get Events class
+     * @returns {Events} _events
+     */
     get events():Events {
         return this._events;
     }
 
-    set events(newEvents) {
+    /**
+     * Set Events class
+     * @param {Events} newEvents
+     */
+    set events(newEvents:Events) {
         this._events = newEvents;
     }
 
+    /**
+     * Hides loader
+     * @returns {boolean}
+     */
     static hideLoader():boolean {
         let elem = <HTMLElement>document.querySelector("#loader");
         elem.style.display = "none";
         return true;
     }
-    
+
+    /**
+     * Loads all classes step by step
+     * @returns {Promise<any>}
+     */
     init() {
         let that:Loader = this;
 
