@@ -69,7 +69,7 @@ class Canvas {
             let cardName:string = cardsNames[i];
             let card:any = CARDS.getSingleCard(cardName);
             let descriptionFontSize:number = (card.description.length >= 15) ? 14 : 16;
-            let mainTextFontSize:number = (card.text["ru"].length >= 15) ? 14 : 16;
+            let mainTextFontSize:number = (card.text["ru"].length >= 20) ? 14 : 16;
             let cardPrice:number = card.resource[relations[card.source]];
             let circleRadius:number = cardsValues.priceCircleRadius;
 
@@ -272,6 +272,7 @@ class Canvas {
                 padding: canvasValues.playersNamesText.padding,
                 editable: false,
                 fontWeight: 'bold',
+                fontFamily: "'Lato', sans-serif",
                 textAlign: "center",
                 originX: 'right',
                 originY: 'top'
