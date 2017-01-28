@@ -31,6 +31,13 @@
     <div id="loader">
         <img src="images/loading.gif" alt="game loading gif">
     </div>
+    <div id="game_over">
+        <div class="container">
+            <h1 id="game_over_title">Congratulations! <br> You won, Player!</h1>
+
+        </div>
+
+    </div>
 
     <div id="arcomage">
 
@@ -46,8 +53,14 @@
 <script src="../node_modules/fabric/dist/fabric.js"></script>
 <!-- endbuild -->
 
+<!--build:js lib/lib.js  defer -->
+<script src="../node_modules/jquery/dist/jquery.min.js"></script>
+<script src="../node_modules/bootstrap-sass/assets/javascripts/bootstrap.min.js"></script>
+<!-- endbuild -->
+
 <!--build:js js/main.min.js  defer -->
 <script defer src="ts/compiled/param.js"></script>
+<script defer src="ts/compiled/cards_container.js"></script>
 <script defer src="ts/compiled/cards.js"></script>
 <script defer src="ts/compiled/players.js"></script>
 <script defer src="ts/compiled/game.js"></script>
@@ -57,5 +70,6 @@
 <script defer src="ts/compiled/loader.js"></script>
 <script defer src="ts/compiled/action.js"></script>
 <!-- endbuild -->
+<!-- Modal -->
 </body>
 </html>
