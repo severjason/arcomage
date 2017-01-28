@@ -180,7 +180,6 @@ class CPU_AI {
         }
         return availableCards;
     }
-
     /**
      * Check if at least one card can be used
      * @returns {boolean}

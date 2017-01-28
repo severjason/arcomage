@@ -12,7 +12,7 @@ class Param {
             "tower": 100,
             "wall": 150,
             "sources": 50,
-            "resources": 300
+            "resources": 999
         },
         "playerOne": {
             "towerLife": 10,

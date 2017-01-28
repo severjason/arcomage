@@ -69,7 +69,6 @@ class ArcomageCards extends ArcomageCardsContainer {
             this.getSingleCard(cardName).object = newObject;
         }
     }
-
     /**
      * Get back of card fabric object
      * @param {string} cardName
@@ -78,7 +77,6 @@ class ArcomageCards extends ArcomageCardsContainer {
     getBackOfCardObject(cardName) {
         return this.getSingleCard(cardName).backObject;
     }
-
     /**
      * Set back of card fabric object
      * @param {string} cardName
