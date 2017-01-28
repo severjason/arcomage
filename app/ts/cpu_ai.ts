@@ -164,11 +164,11 @@ class CPU_AI {
                 resultCard = cards[i];
             }
         }
-        return this.cards.getCardNameByDesc(resultCard.description);
+        return resultCard.name;
     }
 
     /**
-     * Get ,ost resourceful card name
+     * Get most resourceful card name
      * @param {any[]} cards
      * @returns {string} cardName
      */
@@ -180,16 +180,30 @@ class CPU_AI {
                 resultCard = cards[i];
             }
         }
-        return this.cards.getCardNameByDesc(resultCard.description);
+        return resultCard.name;
     }
 
     /**
-     * Check if any card can be used
+     * Get all cards that CPU can use from all available cards
+     * @returns {any[]}
+     */
+    getAllCardsThatCanBeUsed():any[] {
+        let availableCards:any[] = [];
+        for (let i = 0; i < this.cpu.cards.length; i++) {
+            if (this.cards.cardCanBeUsed(this.cpu.cards[i].name, this.cpu)) {
+                availableCards.push(this.cpu.cards[i]);
+            }
+        }
+        return availableCards;
+    }
+
+    /**
+     * Check if at least one card can be used
      * @returns {boolean}
      */
     cardsCanBeUsed():boolean {
         for (let i = 0, cardsLength = this.cpu.cards.length; i < cardsLength; i++) {
-            let cardName = this.cards.getCardNameByDesc(this.cpu.cards[i].description);
+            let cardName = this.cpu.cards[i].name;
             if (this.cards.cardCanBeUsed(cardName, this.cpu)) {
                 return true;
             }
@@ -206,6 +220,6 @@ class CPU_AI {
     move(canvas:Canvas, game:Arcomage):Promise<any> {
         return (!this.cardsCanBeUsed())
             ? this.discardCard(this.getLessResourcefulCard(this.cpu.cards), canvas, game)
-            : this.applyCard(this.getMostResourcefulCard(this.cpu.cards), canvas, game);
+            : this.applyCard(this.getMostResourcefulCard(this.getAllCardsThatCanBeUsed()), canvas, game);
     }
 }
