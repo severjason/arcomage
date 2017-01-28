@@ -10,7 +10,6 @@ class Arcomage {
         this._status = true;
         this._CPU_AI = new CPU_AI(this._playerTwo, cards, params);
     }
-
     /**
      * Get Param class
      * @returns {Param} _params
@@ -18,7 +17,6 @@ class Arcomage {
     get params() {
         return this._params;
     }
-
     /**
      * Get player one
      * @returns {Player} _playerOne
@@ -26,7 +24,6 @@ class Arcomage {
     get playerOne() {
         return this._playerOne;
     }
-
     /**
      * Get player one turn
      * @returns {boolean} _playerOneTurn
@@ -34,7 +31,6 @@ class Arcomage {
     get playerOneTurn() {
         return this._playerOneTurn;
     }
-
     /**
      * Get player two
      * @returns {Player} _playerTwo
@@ -42,7 +38,6 @@ class Arcomage {
     get playerTwo() {
         return this._playerTwo;
     }
-
     /**
      * Get player two turn
      * @returns {boolean} _playerTwoTurn
@@ -50,7 +45,6 @@ class Arcomage {
     get playerTwoTurn() {
         return this._playerTwoTurn;
     }
-
     /**
      * Get CPU AI class
      * @returns {CPU_AI} _CPU_AI
@@ -58,7 +52,6 @@ class Arcomage {
     get CPU_AI() {
         return this._CPU_AI;
     }
-
     /**
      * Get players turn
      * @param {Player} player
@@ -67,7 +60,6 @@ class Arcomage {
     getPlayerTurn(player) {
         return (player === this.playerOne) ? this.playerOneTurn : this.playerTwoTurn;
     }
-
     /**
      * Get cardValues from params
      * @returns {any} _params.cardsValues
@@ -75,7 +67,6 @@ class Arcomage {
     get cardsValues() {
         return this._params.cardsValues;
     }
-
     /**
      * Get card class
      * @returns {ArcomageCards} _cards
@@ -83,7 +74,6 @@ class Arcomage {
     get cards() {
         return this._cards;
     }
-
     /**
      * Get cards quantity from params
      * @returns {number} _cardsQuantity
@@ -91,7 +81,6 @@ class Arcomage {
     get cardsQuantity() {
         return this._cardsQuantity;
     }
-
     /**
      * Get game status
      * @returns {boolean} _status
@@ -99,14 +88,12 @@ class Arcomage {
     get status() {
         return this._status;
     }
-
     /**
      * Set game status to false
      */
     gameOver() {
         this._status = false;
     }
-
     /**
      * Check if game is on
      * @returns {boolean} status
@@ -114,7 +101,6 @@ class Arcomage {
     isOn() {
         return this.status;
     }
-
     /**
      * Update player one moves and change turn to player two
      */
@@ -123,7 +109,6 @@ class Arcomage {
         this._playerOneTurn = false;
         this._playerTwoTurn = true;
     }
-
     /**
      * Update player two moves and change turn to player one
      */
@@ -132,7 +117,6 @@ class Arcomage {
         this._playerTwoTurn = false;
         this._playerOneTurn = true;
     }
-
     /**
      * Update player moves and change turn to another player
      * @param {Player} player
@@ -140,7 +124,6 @@ class Arcomage {
     playerMoved(player) {
         (player === this.playerOne) ? this.playerOneMoved() : this.playerTwoMoved();
     }
-
     /**
      * Highlight active player
      * @param {Player} player
@@ -151,7 +134,6 @@ class Arcomage {
         playerOne.nameObject.getObjects()[0].setFill(this.params.canvasValues.playersNamesText.activeFillColor);
         playerTwo.nameObject.getObjects()[0].setFill(this.params.canvasValues.playersNamesText.fillColor);
     }
-
     /**
      * Apply card by its name
      * @param {string} cardName
@@ -164,7 +146,6 @@ class Arcomage {
         if (player.towerLife === this.params.maxValues.tower || enemy.towerLife === 0)
             this.gameOver();
     }
-
     /**
      * Check if player can use card
      * @param {string} cardName
@@ -184,7 +165,6 @@ class Arcomage {
         else
             return false;
     }
-
     /**
      * Randomly allot card to player
      * @param {Player} player
@@ -204,7 +184,6 @@ class Arcomage {
         }
         return true;
     }
-
     /**
      * Clear canvas from cards objects
      * @param {Canvas} canvas
@@ -216,7 +195,6 @@ class Arcomage {
             canvas.fabricElement.remove(playerCardObject);
         }
     }
-
     /**
      * Clear back of cards for CPU only
      * @param {Canvas} canvas
@@ -227,7 +205,6 @@ class Arcomage {
             canvas.fabricElement.remove(playerCardObject);
         }
     }
-
     /**
      * CPU move
      * @param {Canvas} canvas
@@ -249,7 +226,6 @@ class Arcomage {
             });
         });
     }
-
     /**
      * Draw back of cards from available cards
      * @param {Canvas} canvas
@@ -268,7 +244,6 @@ class Arcomage {
         this.highlightActivePlayer(player);
         canvas.fabricElement.renderAll();
     }
-
     /**
      * Draw cards from available cards
      * @param {Canvas} canvas
@@ -287,7 +262,6 @@ class Arcomage {
         this.highlightActivePlayer(player);
         canvas.fabricElement.renderAll();
     }
-
     /**
      * Update resources according to players sources
      * @param {any} playerOneSources

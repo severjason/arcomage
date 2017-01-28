@@ -217,7 +217,6 @@ class Player {
             return playerCard.description !== card.description;
         });
     }
-
     /**
      * Get player moves
      * @returns {number} _moves
@@ -225,7 +224,6 @@ class Player {
     get moves() {
         return this._moves;
     }
-
     /**
      * Increases player moves on 1 move
      */

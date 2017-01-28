@@ -44,7 +44,7 @@ class Canvas {
             let cardName = cardsNames[i];
             let card = CARDS.getSingleCard(cardName);
             let descriptionFontSize = (card.description.length >= 15) ? 14 : 16;
-            let mainTextFontSize = (card.text["ru"].length >= 15) ? 14 : 16;
+            let mainTextFontSize = (card.text["ru"].length >= 20) ? 14 : 16;
             let cardPrice = card.resource[relations[card.source]];
             let circleRadius = cardsValues.priceCircleRadius;
             let mainBody = new fabric.Rect({
@@ -214,6 +214,7 @@ class Canvas {
                 padding: canvasValues.playersNamesText.padding,
                 editable: false,
                 fontWeight: 'bold',
+                fontFamily: "'Lato', sans-serif",
                 textAlign: "center",
                 originX: 'right',
                 originY: 'top'

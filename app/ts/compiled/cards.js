@@ -1,108 +1,6 @@
-class ArcomageCards {
+class ArcomageCards extends ArcomageCardsContainer {
     constructor() {
-        this._cards = {
-            "great_wall": {
-                "source": "mine",
-                "description": "Great Wall",
-                "text": {
-                    "ru": "+8 to wall"
-                },
-                "src": "./images/cards/great_wall.jpg",
-                "resource": {
-                    "bricks": 2
-                },
-                "action": function (player, enemy) {
-                    player.updateResources({
-                        "bricks": -2
-                    });
-                    player.updateWallLife(8);
-                },
-                "isActive": false,
-                "object": {},
-                "backObject": {}
-            },
-            "new_equipment": {
-                "source": "mine",
-                "description": "New equipment",
-                "text": {
-                    "ru": "+1 to all mines"
-                },
-                "src": "./images/cards/new_equipment.jpg",
-                "resource": {
-                    "bricks": 2
-                },
-                "action": function (player, enemy) {
-                    player.updateResources({
-                        "bricks": -2
-                    });
-                    player.updateSources({"mine": 1});
-                    enemy.updateSources({"mine": 1});
-                },
-                "isActive": false,
-                "object": {},
-                "backObject": {}
-            },
-            "amethyst": {
-                "source": "magic",
-                "description": "Amethyst",
-                "text": {
-                    "ru": "+3 to tower"
-                },
-                "src": "./images/cards/amethyst.jpg",
-                "resource": {
-                    "gems": 8
-                },
-                "action": function (player, enemy) {
-                    player.updateResources({
-                        "gems": -8
-                    });
-                    player.updateTowerLife(3);
-                },
-                "isActive": false,
-                "object": {},
-                "backObject": {}
-            },
-            "werewolf": {
-                "source": "dungeon",
-                "description": "Оборотень",
-                "text": {
-                    "ru": "Если стена больше,\nчем у врага, то\n6 урона башне врага,\nиначе 9 урона"
-                },
-                "src": "./images/cards/werewolf.jpg",
-                "resource": {
-                    "beasts": 5
-                },
-                "action": function (player, enemy) {
-                    player.updateResources({
-                        "beasts": -5
-                    });
-                    enemy.takeDamage(9);
-                },
-                "isActive": false,
-                "object": {},
-                "backObject": {}
-            },
-            "earthquake": {
-                "source": "mine",
-                "description": "Землетрясение",
-                "text": {
-                    "ru": "-1 шахты всех игроков"
-                },
-                "src": "./images/cards/earthquake.jpg",
-                "resource": {
-                    "bricks": 0
-                },
-                "action": function (player, enemy) {
-                    player.updateSources({ "mine": -1 });
-                    enemy.updateSources({ "mine": -1 });
-                },
-                "isActive": false,
-                "object": {},
-                "backObject": {}
-            }
-        };
-        this._discardText = "DISCARD";
-        this._backOfCardSrc = "./images/cards/back.png";
+        super();
     }
     /**
      * Get all cards
@@ -171,9 +69,21 @@ class ArcomageCards {
             this.getSingleCard(cardName).object = newObject;
         }
     }
+
+    /**
+     * Get back of card fabric object
+     * @param {string} cardName
+     * @returns {any}
+     */
     getBackOfCardObject(cardName) {
         return this.getSingleCard(cardName).backObject;
     }
+
+    /**
+     * Set back of card fabric object
+     * @param {string} cardName
+     * @param {any} newObject
+     */
     setBackOfCardObject(cardName, newObject) {
         if (typeof newObject === "object") {
             this.getSingleCard(cardName).backObject = newObject;

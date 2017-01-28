@@ -1,7 +1,6 @@
 class Loader {
     constructor() {
     }
-
     /**
      * Get Param class
      * @returns {Param} _params
@@ -9,7 +8,6 @@ class Loader {
     get params() {
         return this._params;
     }
-
     /**
      * Set Param class
      * @param {Param} newParams
@@ -17,7 +15,6 @@ class Loader {
     set params(newParams) {
         this._params = newParams;
     }
-
     /**
      * Get ArcomageCards class
      * @returns {ArcomageCards} _cards
@@ -25,7 +22,6 @@ class Loader {
     get cards() {
         return this._cards;
     }
-
     /**
      * Set ArcomageCards
      * @param {ArcomageCards} newCards
@@ -33,7 +29,6 @@ class Loader {
     set cards(newCards) {
         this._cards = newCards;
     }
-
     /**
      * Get Arcomage class
      * @returns {Arcomage} _game
@@ -41,7 +36,6 @@ class Loader {
     get game() {
         return this._game;
     }
-
     /**
      * Set Arcomage class
      * @param {Arcomage} newGame
@@ -49,7 +43,6 @@ class Loader {
     set game(newGame) {
         this._game = newGame;
     }
-
     /**
      * Get canvas class
      * @returns {Canvas} _canvas
@@ -57,7 +50,6 @@ class Loader {
     get canvas() {
         return this._canvas;
     }
-
     /**
      * Set Canvas class
      * @param {Canvas} newCanvas _canvas
@@ -65,7 +57,6 @@ class Loader {
     set canvas(newCanvas) {
         this._canvas = newCanvas;
     }
-
     /**
      * Get Events class
      * @returns {Events} _events
@@ -73,7 +64,6 @@ class Loader {
     get events() {
         return this._events;
     }
-
     /**
      * Set Events class
      * @param {Events} newEvents
@@ -81,7 +71,6 @@ class Loader {
     set events(newEvents) {
         this._events = newEvents;
     }
-
     /**
      * Hides loader
      * @returns {boolean}
@@ -91,7 +80,6 @@ class Loader {
         elem.style.display = "none";
         return true;
     }
-
     /**
      * Loads all classes step by step
      * @returns {Promise<any>}

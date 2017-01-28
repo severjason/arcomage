@@ -6,7 +6,6 @@ class Events {
         this._params = params;
         this._cardShakeEventStarted = false;
     }
-
     /**
      * Get switcher for card shake
      * @returns {boolean} _cardShakeEventStarted
@@ -14,7 +13,6 @@ class Events {
     get cardShakeEventStarted() {
         return this._cardShakeEventStarted;
     }
-
     /**
      * Get Canvas class
      * @returns {Canvas} _canvas
@@ -22,7 +20,6 @@ class Events {
     get canvas() {
         return this._canvas;
     }
-
     /**
      * Get Param class
      * @returns {Param} _params
@@ -30,7 +27,6 @@ class Events {
     get params() {
         return this._params;
     }
-
     /**
      * Get ArcomageCards class
      * @returns {ArcomageCards} _cards
@@ -38,7 +34,6 @@ class Events {
     get cards() {
         return this._cards;
     }
-
     /**
      * Get Arcomage class
      * @returns {Arcomage} _game
@@ -46,7 +41,6 @@ class Events {
     get game() {
         return this._game;
     }
-
     /**
      * Get player One
      * @returns {Player} game.playerOne
@@ -54,7 +48,6 @@ class Events {
     get playerOne() {
         return this.game.playerOne;
     }
-
     /**
      * Get player two
      * @returns {Player} game.playerTwo
@@ -62,28 +55,24 @@ class Events {
     get playerTwo() {
         return this.game.playerTwo;
     }
-
     /**
      * Start card shake event
      */
     cardShakeOn() {
         this._cardShakeEventStarted = true;
     }
-
     /**
      * Stop card shake event
      */
     cardShakeOff() {
         this._cardShakeEventStarted = false;
     }
-
     /**
      * Attach events
      */
     init() {
         this.addEvents();
     }
-
     /**
      * Shake card if it is not available
      * @param {string} cardName
@@ -121,7 +110,6 @@ class Events {
             });
         }
     }
-
     /**
      * Apply player`s card by cardName
      * @param {Player} player
@@ -184,7 +172,6 @@ class Events {
             }
         }
     }
-
     /**
      * Discard player`s card by cardName
      * @param {Player} player
@@ -225,7 +212,6 @@ class Events {
             }
         }
     }
-
     /**
      * Attach events to all available cards
      */
