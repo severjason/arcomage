@@ -20,7 +20,7 @@ class Player {
         this._playerWallObject = {};
     }
     /**
-     * Get playerName
+     * Get player name
      * @returns {string} _playerName
      */
     get name() {

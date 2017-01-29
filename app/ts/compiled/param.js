@@ -22,8 +22,8 @@ class Param {
                 }
             },
         "playerTwo": {
-            "towerLife": 10,
-            "wallLife": 15,
+            "towerLife": 5,
+            "wallLife": 0,
                 "resources": {
                     "bricks": 10,
                     "gems": 10,
@@ -37,6 +37,7 @@ class Param {
             }
         }, canvasValues = {
             "playersNamesText": {
+                "maxLetters": 7,
                 "width": 100,
                 "height": 28,
                 "padding": 10,

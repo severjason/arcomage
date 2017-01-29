@@ -1,3 +1,4 @@
+/// <reference path="@types/js-cookie/js-cookie.d.ts" />
 class Loader {
     constructor() {
     }
@@ -72,19 +73,52 @@ class Loader {
         this._events = newEvents;
     }
     /**
+     * Get DOM class
+     * @returns {DOM} _dom
+     */
+    get dom() {
+        return this._dom;
+    }
+
+    /**
+     * Set DOM class
+     * @param {DOM} newDOM
+     */
+    set dom(newDOM) {
+        this._dom = newDOM;
+    }
+
+    /**
      * Hides loader
-     * @returns {boolean}
      */
     static hideLoader() {
         let elem = document.querySelector("#loader");
         elem.style.display = "none";
-        return true;
     }
     /**
+     * Analog of htmlspecialchars
+     * @param {string } string
+     * @returns {string}
+     */
+    static escapeHtml(string) {
+        var map = {
+            '&': '&amp;',
+            '<': '&lt;',
+            '>': '&gt;',
+            '"': '&quot;',
+            "'": '&#039;'
+        };
+        return string.replace(/[&<>"']/g, function (m) {
+            return map[m];
+        });
+    }
+
+    /**
      * Loads all classes step by step
+     * @param {string} newPlayerOneName
      * @returns {Promise<any>}
      */
-    init() {
+    init(newPlayerOneName) {
         let that = this;
         let promiseChain = new Promise((resolve, reject) => {
             resolve(new Param());
@@ -93,14 +127,16 @@ class Loader {
         return promiseChain
             .then(function (param) {
             that.params = param;
+                that.dom = new DOM();
             return new ArcomageCards();
         })
             .then(function (cards) {
             that.cards = cards;
-            return new Arcomage(that.params, that.cards);
+                return new Arcomage(that.params, that.cards, that.dom, newPlayerOneName);
         })
             .then(function (game) {
             that.game = game;
+                Cookies.set("Arcomage", "sadas");
             return new Canvas(that.params.canvasDivId, that.params.canvasId);
         })
             .then(function (canvas) {
@@ -115,6 +151,18 @@ class Loader {
         })
             .then(function (imagesPromises) {
             return Promise.all(imagesPromises);
+            });
+    }
+
+    start(newPlayerOneName) {
+        let that = this;
+        this.init(Loader.escapeHtml(newPlayerOneName)).then(function () {
+            that.events.init();
+            Loader.hideLoader();
+            that.game.allotCards(that.game.playerOne);
+            that.game.allotCards(that.game.playerTwo);
+            that.game.drawCards(that.canvas, that.game.playerOne);
+            console.log(Cookies.get());
         });
     }
 }

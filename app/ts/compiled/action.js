@@ -1,15 +1,11 @@
+/// <reference path="../../node_modules/@types/jquery/index.d.ts" />
 (function () {
     document.addEventListener("DOMContentLoaded", function () {
         let loader = new Loader();
-        loader.init().then(function () {
-            loader.events.init();
-            let game = loader.game;
-            let canvas = loader.canvas;
-            if (Loader.hideLoader()) {
-                game.allotCards(game.playerOne);
-                game.allotCards(game.playerTwo);
-                game.drawCards(canvas, game.playerOne);
-            }
+        $("body").on("click", "#start_game_button", function () {
+            let newName = $("#player_name_input").val();
+            $("#start_field").hide();
+            loader.start(newName);
         });
     });
 }());

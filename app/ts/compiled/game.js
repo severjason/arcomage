@@ -1,6 +1,7 @@
 class Arcomage {
-    constructor(params, cards, playerOneName) {
-        this._playerOne = new Player(playerOneName || params.playerOneName, params.playerOneValues, params.maxValues, params.canvasValues);
+    constructor(params, cards, dom, playerOneName) {
+        this._playerOne = new Player(playerOneName ||
+            params.playerOneName, params.playerOneValues, params.maxValues, params.canvasValues);
         this._playerTwo = new Player(params.playerTwoName, params.playerTwoValues, params.maxValues, params.canvasValues);
         this._cardsQuantity = params.cardsQuantity;
         this._cards = cards;
@@ -8,6 +9,7 @@ class Arcomage {
         this._playerOneTurn = true;
         this._playerTwoTurn = false;
         this._status = true;
+        this._DOM = dom;
         this._CPU_AI = new CPU_AI(this._playerTwo, cards, params);
     }
     /**
@@ -89,10 +91,21 @@ class Arcomage {
         return this._status;
     }
     /**
-     * Set game status to false
+     * Get DOM class
+     * @returns {DOM} _DOM
      */
-    gameOver() {
+    get DOM() {
+        return this._DOM;
+    }
+
+    /**
+     * Change game status to false and show gameOver message
+     * @param {Player} player
+     */
+    gameOver(player) {
+        let playerOneWin = (player === this.playerOne) ? true : false;
         this._status = false;
+        this.DOM.showGameOverMessage(playerOneWin, this.playerOne.moves);
     }
     /**
      * Check if game is on
@@ -144,7 +157,7 @@ class Arcomage {
         this.cards.getSingleCard(cardName).action(player, enemy);
         this.cards.deactivate(cardName);
         if (player.towerLife === this.params.maxValues.tower || enemy.towerLife === 0)
-            this.gameOver();
+            this.gameOver(player);
     }
     /**
      * Check if player can use card
