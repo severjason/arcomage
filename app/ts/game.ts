@@ -9,16 +9,29 @@ class Arcomage {
     private _playerOneTurn:boolean;
     private _playerTwoTurn:boolean;
     private _status:boolean;
+    private _DOM:DOM;
 
-    constructor(params:Param, cards:ArcomageCards, playerOneName?:string) {
-        this._playerOne = new Player(playerOneName || params.playerOneName, params.playerOneValues, params.maxValues, params.canvasValues);
-        this._playerTwo = new Player(params.playerTwoName, params.playerTwoValues, params.maxValues, params.canvasValues);
+    constructor(params:Param,
+                cards:ArcomageCards,
+                dom:DOM,
+                playerOneName?:string) {
+        this._playerOne = new Player(playerOneName ||
+            params.playerOneName,
+            params.playerOneValues,
+            params.maxValues,
+            params.canvasValues);
+        this._playerTwo = new Player(
+            params.playerTwoName,
+            params.playerTwoValues,
+            params.maxValues,
+            params.canvasValues);
         this._cardsQuantity = params.cardsQuantity;
         this._cards = cards;
         this._params = params;
         this._playerOneTurn = true;
         this._playerTwoTurn = false;
         this._status = true;
+        this._DOM = dom;
         this._CPU_AI = new CPU_AI(this._playerTwo, cards, params);
     }
 
@@ -112,10 +125,21 @@ class Arcomage {
     }
 
     /**
-     * Set game status to false
+     * Get DOM class
+     * @returns {DOM} _DOM
      */
-    gameOver():void {
+    get DOM():DOM {
+        return this._DOM;
+    }
+
+    /**
+     * Change game status to false and show gameOver message
+     * @param {Player} player
+     */
+    gameOver(player:Player):void {
+        let playerOneWin = (player === this.playerOne) ? true : false;
         this._status = false;
+        this.DOM.showGameOverMessage(playerOneWin, this.playerOne.moves);
     }
 
     /**
@@ -173,7 +197,7 @@ class Arcomage {
     applyCard(cardName:string, player:Player, enemy:Player) {
         this.cards.getSingleCard(cardName).action(player, enemy);
         this.cards.deactivate(cardName);
-        if (player.towerLife === this.params.maxValues.tower || enemy.towerLife === 0) this.gameOver();
+        if (player.towerLife === this.params.maxValues.tower || enemy.towerLife === 0) this.gameOver(player);
     }
 
     /**
