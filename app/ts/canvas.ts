@@ -269,12 +269,11 @@ class Canvas {
             return new fabric.Textbox(text, {
                 fontSize: canvasValues.playersNamesText.fontSize,
                 width: canvasValues.playersNamesText.width,
-                padding: canvasValues.playersNamesText.padding,
                 editable: false,
                 fontWeight: 'bold',
                 fontFamily: "'Lato', sans-serif",
-                textAlign: "center",
-                originX: 'right',
+                textAlign: 'center',
+                originX: 'left',
                 originY: 'top'
             });
         }
@@ -288,21 +287,24 @@ class Canvas {
                 strokeWidth: canvasValues.playersNamesText.strokeWidth,
                 rx: canvasValues.playersNamesText.borderRadius,
                 ry: canvasValues.playersNamesText.borderRadius,
-                originX: 'right',
+                originX: 'left',
                 originY: 'top'
             });
         }
 
-        let groupForPlayerOne:IGroup = new fabric.Group([createMainBody(), createText(playerOne.name)], {
+        let groupForPlayerOne:IGroup = new fabric.Group([
+            createMainBody(),
+            createText(playerOne.name.substring(0, canvasValues.playersNamesText.maxLetters))], {
             left: canvasValues.playersNamesText.padding,
             top: 0,
-            selectable: false,
+            selectable: true,
             objectCaching: false,
             hoverCursor: "default"
         });
 
         let groupForPlayerTwo:IGroup = new fabric.Group([createMainBody(), createText(playerTwo.name)], {
-            left: this.width - canvasValues.playersNamesText.width - canvasValues.playersNamesText.padding - canvasValues.playersNamesText.strokeWidth,
+            left: this.width - canvasValues.playersNamesText.width
+            - canvasValues.playersNamesText.padding - canvasValues.playersNamesText.strokeWidth,
             top: 0,
             selectable: false,
             objectCaching: false,

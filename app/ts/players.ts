@@ -45,7 +45,7 @@ class Player {
     }
 
     /**
-     * Get playerName
+     * Get player name
      * @returns {string} _playerName
      */
     get name():string {

@@ -76,7 +76,7 @@ class ArcomageCardsContainer {
                 "source": "dungeon",
                 "description": "Werewolf",
                 "text": {
-                    "ru": "If your wall bigger,\nthen your enemy wall,\n6 damage to enemy wall,\nelse - 9 damage"
+                    "ru": "If your wall bigger,\nthen your enemy wall,\n6 damage to enemy wall,\nelse 9 damage"
                 },
                 "src": "./images/cards/werewolf.jpg",
                 "resource": {
