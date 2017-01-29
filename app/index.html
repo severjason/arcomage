@@ -33,8 +33,22 @@
     </div>
     <div id="game_over">
         <div class="container">
-            <h1 id="game_over_title">Congratulations! <br> You won, Player!</h1>
-
+            <h1 id="game_over_title"></h1>
+            <br>
+            <h3 id="game_over_moves"></h3>
+        </div>
+    </div>
+    <div id="start_field" class="text-center">
+        <div class="container">
+            <h3>
+                Please enter your name:
+            </h3>
+            <label>
+                <input id="player_name_input" class="input-group text-center" type="text" maxlength="7">
+            </label>
+            <button id="start_game_button" class="btn-default btn">
+                Start game
+            </button>
         </div>
 
     </div>
@@ -56,10 +70,12 @@
 <!--build:js lib/lib.js  defer -->
 <script src="../node_modules/jquery/dist/jquery.min.js"></script>
 <script src="../node_modules/bootstrap-sass/assets/javascripts/bootstrap.min.js"></script>
+<script src="../node_modules/js-cookie/src/js.cookie.js"></script>
 <!-- endbuild -->
 
 <!--build:js js/main.min.js  defer -->
 <script defer src="ts/compiled/param.js"></script>
+<script defer src="ts/compiled/dom.js"></script>
 <script defer src="ts/compiled/cards_container.js"></script>
 <script defer src="ts/compiled/cards.js"></script>
 <script defer src="ts/compiled/players.js"></script>
