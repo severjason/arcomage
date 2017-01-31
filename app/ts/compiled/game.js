@@ -1,8 +1,7 @@
 class Arcomage {
-    constructor(params, cards, dom, cookie, playerOneName, playerOneValuesFromCookie, playerTwoValuesFromCookie) {
-        this._playerOne = new Player(playerOneName ||
-            params.playerOneName, playerOneValuesFromCookie || params.playerOneValues, params.maxValues, params.canvasValues);
-        this._playerTwo = new Player(params.playerTwoName, playerTwoValuesFromCookie || params.playerTwoValues, params.maxValues, params.canvasValues);
+    constructor(params, cards, dom, cookie, playerOneName, playerTwoName, playerOneValuesFromCookie, playerTwoValuesFromCookie) {
+        this._playerOne = new Player(playerOneName || params.playerOneName, playerOneValuesFromCookie || params.playerOneValues, params.maxValues, params.canvasValues);
+        this._playerTwo = new Player(playerTwoName || params.playerTwoName, playerTwoValuesFromCookie || params.playerTwoValues, params.maxValues, params.canvasValues);
         this._cardsQuantity = params.cardsQuantity;
         this._cards = cards;
         this._params = params;
@@ -105,7 +104,6 @@ class Arcomage {
     get cookie() {
         return this._cookie;
     }
-
     /**
      * Change game status to false, destroy cookie and show gameOver message
      * @param {Player} player
@@ -221,7 +219,6 @@ class Arcomage {
             this.playerTwo.updateCards(this.cards.getSingleCard(playerTwoCards[i]));
         }
     }
-
     /**
      * Clear canvas from cards objects
      * @param {Canvas} canvas

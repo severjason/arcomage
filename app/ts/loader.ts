@@ -187,6 +187,7 @@ class Loader {
                     that.dom,
                     that.cookie,
                     newPlayerOneName,
+                    that.cookie.getPlayerTwoName(),
                     that.cookie.getPlayerOneValues(),
                     that.cookie.getPlayerTwoValues())
                     : new Arcomage(

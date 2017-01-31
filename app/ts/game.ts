@@ -17,15 +17,16 @@ class Arcomage {
                 dom:DOM,
                 cookie:Cookie,
                 playerOneName?:string,
+                playerTwoName?:string,
                 playerOneValuesFromCookie?:any,
                 playerTwoValuesFromCookie?:any) {
-        this._playerOne = new Player(playerOneName ||
-            params.playerOneName,
+        this._playerOne = new Player(
+            playerOneName || params.playerOneName,
             playerOneValuesFromCookie || params.playerOneValues,
             params.maxValues,
             params.canvasValues);
         this._playerTwo = new Player(
-            params.playerTwoName,
+            playerTwoName || params.playerTwoName,
             playerTwoValuesFromCookie || params.playerTwoValues,
             params.maxValues,
             params.canvasValues);

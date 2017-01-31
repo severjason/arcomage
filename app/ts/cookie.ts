@@ -86,6 +86,14 @@ class Cookie {
     }
 
     /**
+     * Get player two name
+     * @returns {any}
+     */
+    getPlayerTwoName():string {
+        return this.getPlayerTwoValues().name;
+    }
+
+    /**
      * Check if cookies are set
      * @returns {boolean}
      */

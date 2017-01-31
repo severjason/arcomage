@@ -1,15 +1,15 @@
 class Param {
     constructor(playersValues = {
-            "names": ["Player", "CPU"],
             "max": {
                 "tower": 100,
                 "wall": 150,
                 "sources": 50,
                 "resources": 999
             },
-        "playerOne": {
-            "towerLife": 5,
-            "wallLife": 0,
+            "playerOne": {
+                "name": "Player1",
+                "towerLife": 5,
+                "wallLife": 0,
                 "resources": {
                     "bricks": 10,
                     "gems": 10,
@@ -21,9 +21,10 @@ class Param {
                     "dungeon": 1
                 }
             },
-        "playerTwo": {
-            "towerLife": 5,
-            "wallLife": 0,
+            "playerTwo": {
+                "name": ["CPU0", "CPU1", "CPU2", "CPU3", "CPU4", "CPU5", "CPU6"],
+                "towerLife": 5,
+                "wallLife": 0,
                 "resources": {
                     "bricks": 10,
                     "gems": 10,
@@ -158,17 +159,17 @@ class Param {
     }
     /**
      *
-     * @returns {string} _playersValues.names[0]
+     * @returns {string} _playersValues.playerOne.name
      */
     get playerOneName() {
-        return this._playersValues.names[0];
+        return this._playersValues.playerOne.name;
     }
     /**
      *
-     * @returns {string} _playersValues.names[1]
+     * @returns {string} _playersValues.playerTwo.name
      */
     get playerTwoName() {
-        return this._playersValues.names[1];
+        return this._playersValues.playerTwo.name[Math.floor(Math.random() * (this._playersValues.playerTwo.name.length))];
     }
     /**
      * Get player one defaults values

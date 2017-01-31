@@ -92,7 +92,6 @@ class Loader {
     get cookie() {
         return this._cookie;
     }
-
     /**
      * Set Cookie class
      * @param {Cookie} newCookie
@@ -100,7 +99,6 @@ class Loader {
     set cookie(newCookie) {
         this._cookie = newCookie;
     }
-
     /**
      * Hides loader
      */
@@ -125,7 +123,6 @@ class Loader {
             return map[m];
         });
     }
-
     initCookie() {
         this.cookie = new Cookie();
         if (this.cookie.gameIsOff()) {
@@ -152,7 +149,7 @@ class Loader {
             .then(function (cards) {
             that.cards = cards;
                 return (that.cookie.cookiesAreSet())
-                    ? new Arcomage(that.params, that.cards, that.dom, that.cookie, newPlayerOneName, that.cookie.getPlayerOneValues(), that.cookie.getPlayerTwoValues())
+                    ? new Arcomage(that.params, that.cards, that.dom, that.cookie, newPlayerOneName, that.cookie.getPlayerTwoName(), that.cookie.getPlayerOneValues(), that.cookie.getPlayerTwoValues())
                     : new Arcomage(that.params, that.cards, that.dom, that.cookie, newPlayerOneName);
         })
             .then(function (game) {
@@ -173,7 +170,6 @@ class Loader {
             return Promise.all(imagesPromises);
             });
     }
-
     /**
      * Game launcher
      * @param {string} newPlayerOneName
