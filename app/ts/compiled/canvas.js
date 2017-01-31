@@ -232,7 +232,6 @@ class Canvas {
                 originY: 'top'
             });
         }
-
         let groupForPlayerOne = new fabric.Group([
             createMainBody(),
             createText(playerOne.name.substring(0, canvasValues.playersNamesText.maxLetters))], {

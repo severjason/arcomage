@@ -88,6 +88,7 @@ div#wrapper #game_over .container h3 {
 
 div#wrapper #start_field {
   z-index: 110;
+  display: none;
 }
 
 div#wrapper #start_field .container {

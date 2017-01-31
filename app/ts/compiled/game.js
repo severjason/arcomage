@@ -1,8 +1,8 @@
 class Arcomage {
-    constructor(params, cards, dom, playerOneName) {
+    constructor(params, cards, dom, cookie, playerOneName, playerOneValuesFromCookie, playerTwoValuesFromCookie) {
         this._playerOne = new Player(playerOneName ||
-            params.playerOneName, params.playerOneValues, params.maxValues, params.canvasValues);
-        this._playerTwo = new Player(params.playerTwoName, params.playerTwoValues, params.maxValues, params.canvasValues);
+            params.playerOneName, playerOneValuesFromCookie || params.playerOneValues, params.maxValues, params.canvasValues);
+        this._playerTwo = new Player(params.playerTwoName, playerTwoValuesFromCookie || params.playerTwoValues, params.maxValues, params.canvasValues);
         this._cardsQuantity = params.cardsQuantity;
         this._cards = cards;
         this._params = params;
@@ -10,6 +10,7 @@ class Arcomage {
         this._playerTwoTurn = false;
         this._status = true;
         this._DOM = dom;
+        this._cookie = cookie;
         this._CPU_AI = new CPU_AI(this._playerTwo, cards, params);
     }
     /**
@@ -97,14 +98,22 @@ class Arcomage {
     get DOM() {
         return this._DOM;
     }
+    /**
+     * Get Cookie class
+     * @returns {Cookie} _cookie
+     */
+    get cookie() {
+        return this._cookie;
+    }
 
     /**
-     * Change game status to false and show gameOver message
+     * Change game status to false, destroy cookie and show gameOver message
      * @param {Player} player
      */
     gameOver(player) {
-        let playerOneWin = (player === this.playerOne) ? true : false;
         this._status = false;
+        let playerOneWin = (player === this.playerOne) ? true : false;
+        this.cookie.setStatusCookie(this.status);
         this.DOM.showGameOverMessage(playerOneWin, this.playerOne.moves);
     }
     /**
@@ -198,6 +207,22 @@ class Arcomage {
         return true;
     }
     /**
+     * Allot cards for both players from cookies
+     */
+    allotCardsFromCookies() {
+        let playerOneCards = this.cookie.getPlayerOneValues().cards;
+        let playerTwoCards = this.cookie.getPlayerTwoValues().cards;
+        for (let i = 0; i < playerOneCards.length; i++) {
+            this.cards.activate(playerOneCards[i]);
+            this.playerOne.updateCards(this.cards.getSingleCard(playerOneCards[i]));
+        }
+        for (let i = 0; i < playerTwoCards.length; i++) {
+            this.cards.activate(playerTwoCards[i]);
+            this.playerTwo.updateCards(this.cards.getSingleCard(playerTwoCards[i]));
+        }
+    }
+
+    /**
      * Clear canvas from cards objects
      * @param {Canvas} canvas
      * @param {Player} player
@@ -276,7 +301,7 @@ class Arcomage {
         canvas.fabricElement.renderAll();
     }
     /**
-     * Update resources according to players sources
+     * Update resources according to players sources and set cookies
      * @param {any} playerOneSources
      * @param {any} playerTwoSources
      */
@@ -290,5 +315,6 @@ class Arcomage {
         }
         this.playerOne.updateResources(newResourcesPlayerOne);
         this.playerTwo.updateResources(newResourcesPlayerTwo);
+        this.cookie.setCookie(this.playerOne, this.playerTwo);
     }
 }

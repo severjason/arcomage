@@ -11,7 +11,7 @@ class Player {
         this._maxTowerLife = maxValues.tower;
         this._maxSources = maxValues.sources;
         this._maxResources = maxValues.resources;
-        this._moves = 0;
+        this._moves = playerValues.moves || 0;
         this._playerNameObject = {};
         this._playerSourcesObject = {};
         this._playerResourcesObject = {};

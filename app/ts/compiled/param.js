@@ -8,8 +8,8 @@ class Param {
                 "resources": 999
             },
         "playerOne": {
-                "towerLife": 10,
-            "wallLife": 15,
+            "towerLife": 5,
+            "wallLife": 0,
                 "resources": {
                     "bricks": 10,
                     "gems": 10,

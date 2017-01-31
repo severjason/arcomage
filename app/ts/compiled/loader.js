@@ -1,4 +1,3 @@
-/// <reference path="@types/js-cookie/js-cookie.d.ts" />
 class Loader {
     constructor() {
     }
@@ -79,13 +78,27 @@ class Loader {
     get dom() {
         return this._dom;
     }
-
     /**
      * Set DOM class
      * @param {DOM} newDOM
      */
     set dom(newDOM) {
         this._dom = newDOM;
+    }
+    /**
+     * Get Cookie class
+     * @returns {Cookie} _cookie
+     */
+    get cookie() {
+        return this._cookie;
+    }
+
+    /**
+     * Set Cookie class
+     * @param {Cookie} newCookie
+     */
+    set cookie(newCookie) {
+        this._cookie = newCookie;
     }
 
     /**
@@ -113,6 +126,12 @@ class Loader {
         });
     }
 
+    initCookie() {
+        this.cookie = new Cookie();
+        if (this.cookie.gameIsOff()) {
+            this.cookie.removeAll();
+        }
+    }
     /**
      * Loads all classes step by step
      * @param {string} newPlayerOneName
@@ -132,11 +151,12 @@ class Loader {
         })
             .then(function (cards) {
             that.cards = cards;
-                return new Arcomage(that.params, that.cards, that.dom, newPlayerOneName);
+                return (that.cookie.cookiesAreSet())
+                    ? new Arcomage(that.params, that.cards, that.dom, that.cookie, newPlayerOneName, that.cookie.getPlayerOneValues(), that.cookie.getPlayerTwoValues())
+                    : new Arcomage(that.params, that.cards, that.dom, that.cookie, newPlayerOneName);
         })
             .then(function (game) {
             that.game = game;
-                Cookies.set("Arcomage", "sadas");
             return new Canvas(that.params.canvasDivId, that.params.canvasId);
         })
             .then(function (canvas) {
@@ -154,15 +174,23 @@ class Loader {
             });
     }
 
+    /**
+     * Game launcher
+     * @param {string} newPlayerOneName
+     */
     start(newPlayerOneName) {
         let that = this;
         this.init(Loader.escapeHtml(newPlayerOneName)).then(function () {
             that.events.init();
             Loader.hideLoader();
-            that.game.allotCards(that.game.playerOne);
-            that.game.allotCards(that.game.playerTwo);
+            if (that.cookie.cookiesAreSet()) {
+                that.game.allotCardsFromCookies();
+            }
+            else {
+                that.game.allotCards(that.game.playerOne);
+                that.game.allotCards(that.game.playerTwo);
+            }
             that.game.drawCards(that.canvas, that.game.playerOne);
-            console.log(Cookies.get());
         });
     }
 }

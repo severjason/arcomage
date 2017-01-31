@@ -2,6 +2,13 @@
 (function () {
     document.addEventListener("DOMContentLoaded", function () {
         let loader = new Loader();
+        loader.initCookie();
+        if (loader.cookie.cookiesAreSet()) {
+            loader.start(loader.cookie.getPlayerOneName());
+        }
+        else {
+            $("#start_field").show();
+        }
         $("body").on("click", "#start_game_button", function () {
             let newName = $("#player_name_input").val();
             $("#start_field").hide();
