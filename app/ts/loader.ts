@@ -1,5 +1,3 @@
-/// <reference path="@types/js-cookie/js-cookie.d.ts" />
-
 class Loader {
 
     private _params:Param;
@@ -8,6 +6,7 @@ class Loader {
     private _canvas:Canvas;
     private _events:Events;
     private _dom:DOM;
+    private _cookie:Cookie;
 
     constructor() {
     }
@@ -109,6 +108,22 @@ class Loader {
     }
 
     /**
+     * Get Cookie class
+     * @returns {Cookie} _cookie
+     */
+    get cookie():Cookie {
+        return this._cookie;
+    }
+
+    /**
+     * Set Cookie class
+     * @param {Cookie} newCookie
+     */
+    set cookie(newCookie:Cookie) {
+        this._cookie = newCookie;
+    }
+
+    /**
      * Hides loader
      */
     static hideLoader() {
@@ -132,6 +147,13 @@ class Loader {
         return string.replace(/[&<>"']/g, function (m) {
             return map[m];
         });
+    }
+
+    initCookie() {
+        this.cookie = new Cookie();
+        if (this.cookie.gameIsOff()) {
+            this.cookie.removeAll();
+        }
     }
 
     /**
@@ -158,15 +180,24 @@ class Loader {
             })
             .then(function (cards:ArcomageCards) {
                 that.cards = cards;
-                return new Arcomage(
+                return (that.cookie.cookiesAreSet())
+                    ? new Arcomage(
                     that.params,
                     that.cards,
                     that.dom,
+                    that.cookie,
+                    newPlayerOneName,
+                    that.cookie.getPlayerOneValues(),
+                    that.cookie.getPlayerTwoValues())
+                    : new Arcomage(
+                    that.params,
+                    that.cards,
+                    that.dom,
+                    that.cookie,
                     newPlayerOneName);
             })
             .then(function (game:Arcomage) {
                 that.game = game;
-                Cookies.set("Arcomage", "sadas");
                 return new Canvas(that.params.canvasDivId, that.params.canvasId);
             })
             .then(function (canvas:any) {
@@ -190,15 +221,23 @@ class Loader {
             })
     }
 
+    /**
+     * Game launcher
+     * @param {string} newPlayerOneName
+     */
     start(newPlayerOneName:string):void {
         let that = this;
         this.init(Loader.escapeHtml(newPlayerOneName)).then(function () {
             that.events.init();
             Loader.hideLoader();
-            that.game.allotCards(that.game.playerOne);
-            that.game.allotCards(that.game.playerTwo);
+            if (that.cookie.cookiesAreSet()) {
+                that.game.allotCardsFromCookies();
+            }
+            else {
+                that.game.allotCards(that.game.playerOne);
+                that.game.allotCards(that.game.playerTwo);
+            }
             that.game.drawCards(that.canvas, that.game.playerOne);
-            console.log(Cookies.get());
         });
     }
 
