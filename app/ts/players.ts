@@ -314,7 +314,7 @@ class Player {
             }
         }
         this.towerObject.getObjects()[1].setHeight(this.towerLife * this.canvasTowerHeightStep);
-        this.towerObject.getObjects()[3].text = this.towerLife.toString();
+        this.towerObject.getObjects()[3].setText(this.towerLife.toString());
     }
 
     /**
@@ -331,14 +331,14 @@ class Player {
             let remainder = newValue + this.wallLife;
             this.wallLife = 0;
             this.wallObject.getObjects()[0].setHeight(this.wallLife * this.canvasWallHeightStep);
-            this.wallObject.getObjects()[2].text = this.wallLife.toString();
+            this.wallObject.getObjects()[2].setText(this.wallLife.toString());
             return remainder;
         }
         else {
             this.wallLife += newValue;
         }
         this.wallObject.getObjects()[0].setHeight(this.wallLife * this.canvasWallHeightStep);
-        this.wallObject.getObjects()[2].text = this.wallLife.toString();
+        this.wallObject.getObjects()[2].setText(this.wallLife.toString());
 
     }
 
@@ -358,7 +358,7 @@ class Player {
                 else {
                     this.sources[key] = 1;
                 }
-                this.sourcesObject[key].getObjects()[2].text = this.sources[key].toString();
+                this.sourcesObject[key].setText(this.sources[key].toString());
             }
         }
     }
@@ -378,7 +378,7 @@ class Player {
                 } else {
                     this.resources[key] = 0;
                 }
-                this.resourcesObject[key].getObjects()[2].text = this.resources[key].toString();
+                this.resourcesObject[key].setText(this.resources[key].toString());
             }
         }
     }
