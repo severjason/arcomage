@@ -99,7 +99,7 @@ div#wrapper #game_over .container h3 {
 }
 
 div#wrapper #start_field {
-    z-index: 110;
+    z-index: 200;
     display: none
 }
 

@@ -119,7 +119,7 @@ class Loader {
             '"': '&quot;',
             "'": '&#039;'
         };
-        return string.replace(/[&<>"']/g, function (m) {
+        return string.replace(/[&<>"']/g, (m) => {
             return map[m];
         });
     }
@@ -141,34 +141,35 @@ class Loader {
             reject(new Error("Can`t create Default Parameters!"));
         });
         return promiseChain
-            .then(function (param) {
+            .then((param) => {
             that.params = param;
-                that.dom = new DOM();
+            that.dom = new DOM();
             return new ArcomageCards();
         })
-            .then(function (cards) {
+            .then((cards) => {
             that.cards = cards;
-                return (that.cookie.cookiesAreSet())
-                    ? new Arcomage(that.params, that.cards, that.dom, that.cookie, newPlayerOneName, that.cookie.getPlayerTwoName(), that.cookie.getPlayerOneValues(), that.cookie.getPlayerTwoValues())
-                    : new Arcomage(that.params, that.cards, that.dom, that.cookie, newPlayerOneName);
+            return (that.cookie.cookiesAreSet())
+                ? new Arcomage(that.params, that.cards, that.dom, that.cookie, newPlayerOneName, that.cookie.getPlayerTwoName(), that.cookie.getPlayerOneValues(), that.cookie.getPlayerTwoValues())
+                : new Arcomage(that.params, that.cards, that.dom, that.cookie, newPlayerOneName);
         })
-            .then(function (game) {
+            .then((game) => {
             that.game = game;
             return new Canvas(that.params.canvasDivId, that.params.canvasId);
-        })
-            .then(function (canvas) {
+        }).then((canvas) => {
             that.canvas = canvas;
             that.canvas.setCanvasDimensions();
-                that.canvas.drawAll(that.cards, that.params.cardsValues, that.params.relations, that.game.playerOne, that.game.playerTwo, that.params.canvasValues);
-                return new Events(that.params, that.cards, that.canvas, that.game);
         })
-            .then(function (events) {
+            .then(() => {
+            that.canvas.drawAll(that.cards, that.params.cardsValues, that.params.relations, that.game.playerOne, that.game.playerTwo, that.params.canvasValues);
+            return new Events(that.params, that.cards, that.canvas, that.game);
+        })
+            .then((events) => {
             that.events = events;
             return that.canvas.cardsImagesLoaded;
         })
-            .then(function (imagesPromises) {
+            .then((imagesPromises) => {
             return Promise.all(imagesPromises);
-            });
+        });
     }
     /**
      * Game launcher
@@ -176,7 +177,7 @@ class Loader {
      */
     start(newPlayerOneName) {
         let that = this;
-        this.init(Loader.escapeHtml(newPlayerOneName)).then(function () {
+        this.init(Loader.escapeHtml(newPlayerOneName)).then(() => {
             that.events.init();
             Loader.hideLoader();
             if (that.cookie.cookiesAreSet()) {

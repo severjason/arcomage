@@ -7,7 +7,7 @@ class Param {
                 "resources": 999
             },
             "playerOne": {
-                "name": "Player1",
+                "name": "Player",
                 "towerLife": 5,
                 "wallLife": 0,
                 "resources": {
@@ -22,7 +22,7 @@ class Param {
                 }
             },
             "playerTwo": {
-                "name": ["CPU0", "CPU1", "CPU2", "CPU3", "CPU4", "CPU5", "CPU6"],
+                "name": ["CPU", "Stan", "Cartman", "Batman", "Chuck", "Goblin", "Mr. Bot"],
                 "towerLife": 5,
                 "wallLife": 0,
                 "resources": {

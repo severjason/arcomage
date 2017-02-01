@@ -1,6 +1,6 @@
 /// <reference path="../../node_modules/@types/jquery/index.d.ts" />
 (function () {
-    document.addEventListener("DOMContentLoaded", function () {
+    $(document).ready(() => {
         let loader = new Loader();
         loader.initCookie();
         if (loader.cookie.cookiesAreSet()) {

@@ -144,7 +144,7 @@ class Loader {
             '"': '&quot;',
             "'": '&#039;'
         };
-        return string.replace(/[&<>"']/g, function (m) {
+        return string.replace(/[&<>"']/g, (m)=> {
             return map[m];
         });
     }
@@ -173,12 +173,12 @@ class Loader {
         });
 
         return promiseChain
-            .then(function (param:Param) {
+            .then((param:Param)=> {
                 that.params = param;
                 that.dom = new DOM();
                 return new ArcomageCards();
             })
-            .then(function (cards:ArcomageCards) {
+            .then((cards:ArcomageCards)=> {
                 that.cards = cards;
                 return (that.cookie.cookiesAreSet())
                     ? new Arcomage(
@@ -197,13 +197,14 @@ class Loader {
                     that.cookie,
                     newPlayerOneName);
             })
-            .then(function (game:Arcomage) {
+            .then((game:Arcomage)=> {
                 that.game = game;
                 return new Canvas(that.params.canvasDivId, that.params.canvasId);
-            })
-            .then(function (canvas:any) {
+            }).then((canvas:Canvas)=> {
                 that.canvas = canvas;
                 that.canvas.setCanvasDimensions();
+            })
+            .then(() => {
                 that.canvas.drawAll(
                     that.cards,
                     that.params.cardsValues,
@@ -213,11 +214,11 @@ class Loader {
                     that.params.canvasValues);
                 return new Events(that.params, that.cards, that.canvas, that.game);
             })
-            .then(function (events) {
+            .then((events:Events)=> {
                 that.events = events;
                 return that.canvas.cardsImagesLoaded;
             })
-            .then(function (imagesPromises:Array<Promise<any>>) {
+            .then((imagesPromises:Array<Promise<any>>)=> {
                 return Promise.all(imagesPromises);
             })
     }
@@ -228,7 +229,7 @@ class Loader {
      */
     start(newPlayerOneName:string):void {
         let that = this;
-        this.init(Loader.escapeHtml(newPlayerOneName)).then(function () {
+        this.init(Loader.escapeHtml(newPlayerOneName)).then(()=> {
             that.events.init();
             Loader.hideLoader();
             if (that.cookie.cookiesAreSet()) {

@@ -1,10 +1,10 @@
 /// <reference path="../../node_modules/@types/jquery/index.d.ts" />
 
 (function () {
-    document.addEventListener("DOMContentLoaded", function () {
+    $(document).ready(()=> {
         let loader:Loader = new Loader();
         loader.initCookie();
-
+        
         if (loader.cookie.cookiesAreSet()) {
             loader.start(loader.cookie.getPlayerOneName());
         }
