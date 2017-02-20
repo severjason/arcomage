@@ -8,8 +8,8 @@ class Param {
             },
             "playerOne": {
                 "name": "Player",
-                "towerLife": 5,
-                "wallLife": 0,
+                "towerLife": 15,
+                "wallLife": 10,
                 "resources": {
                     "bricks": 10,
                     "gems": 10,
@@ -23,8 +23,8 @@ class Param {
             },
             "playerTwo": {
                 "name": ["CPU", "Stan", "Cartman", "Batman", "Chuck", "Goblin", "Mr. Bot"],
-                "towerLife": 5,
-                "wallLife": 0,
+                "towerLife": 15,
+                "wallLife": 10,
                 "resources": {
                     "bricks": 10,
                     "gems": 10,
@@ -94,7 +94,7 @@ class Param {
                 "height": 30,
                 "roofWidth": 70,
                 "roofHeight": 50,
-                "heightStep": 4,
+                "heightStep": 2.5,
                 "padding": 150,
                 "fontSize": 24,
                 "textColor": "#34495e",
@@ -104,7 +104,7 @@ class Param {
             "walls": {
                 "positionY": 300,
                 "width": 30,
-                "heightStep": 3,
+                "heightStep": 2.5,
                 "padding": 250,
                 "fontSize": 20,
                 "textColor": "#34495e",
@@ -112,15 +112,16 @@ class Param {
                 "src": "./images/temp/bricks.jpg"
             },
             "cards": {
-                "width": 150,
-                "height": 240,
-                "padding": 5,
-                "mainTextPadding": 100,
-                "cardsStrokeWidth": 0,
+                "width": 141,
+                "height": 235,
+                "padding": 4,
+                "mainTextPadding": 110,
+                "cardsStrokeWidth": 2,
                 "cardsBordersRadius": 2,
-                "imageWidth": 90,
-                "imageHeight": 60,
-                "imagePadding": 30,
+                "cardsBodyColor": "#f8ecc2",
+                "imageWidth": 140,
+                "imageHeight": 90,
+                "imagePadding": 22,
                 "priceCircleRadius": 12,
                 "priceFontSize": 18,
                 "priceStrokeWidth": 1,
@@ -143,7 +144,7 @@ class Param {
                     "textColor": "#2c3e50"
                 }
             }
-        }, cardsQuantity = 2, divIdForCanvas = "arcomage", idForCanvas = "arcomage_canvas") {
+    }, cardsQuantity = 5, divIdForCanvas = "arcomage", idForCanvas = "arcomage_canvas") {
         this._playersValues = playersValues;
         this._canvasValues = canvasValues;
         this._cardsPerPlayer = cardsQuantity;

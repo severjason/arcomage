@@ -214,7 +214,7 @@ class Player {
      */
     removeCard(card) {
         this.cards = this.cards.filter(function (playerCard) {
-            return playerCard.description !== card.description;
+            return playerCard.name !== card.name;
         });
     }
     /**

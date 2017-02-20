@@ -82,16 +82,16 @@ div#wrapper #game_over {
 
 div#wrapper #game_over .container {
     position: absolute;
-    width: 800px;
-    height: 800px;
+    width: 765px;
+    height: 765px;
     left: 50%;
     top: 50%;
-    margin-left: -400px;
-    margin-top: -400px
+    margin-left: -382.5px;
+    margin-top: -382.5px
 }
 
 div#wrapper #game_over .container h1 {
-    margin-top: 200px
+    margin-top: 191.25px
 }
 
 div#wrapper #game_over .container h3 {
@@ -119,12 +119,13 @@ div#wrapper #start_field button {
 
 #arcomage {
     position: absolute;
-    width: 800px;
-    height: 800px;
+    width: 765px;
+    height: 765px;
     left: 50%;
     top: 50%;
-    margin-left: -400px;
-    margin-top: -400px
+    margin-left: -382.5px;
+    margin-top: -382.5px;
+    border: 1px solid #efefef
 }
 
 /*# sourceMappingURL=main.css.map */
