@@ -327,7 +327,7 @@ class Arcomage {
             let playerCardObject:IGroup = player.cards[i].backObject;
             let paddingLeft = (i === 0)
                 ? this.cardsValues.padding
-                : (this.cardsValues.width + 2 * this.cardsValues.padding) * i + this.cardsValues.padding;
+                : (player.cards[i].backObject.getWidth() + 2 * this.cardsValues.padding) * i + this.cardsValues.padding;
             playerCardObject.setLeft(paddingLeft);
             playerCardObject.setOpacity(1);
             canvas.fabricElement.add(playerCardObject);
@@ -345,10 +345,11 @@ class Arcomage {
         for (let i = 0; i < player.cards.length; i++) {
             let playerCardObject:IGroup = player.cards[i].object;
             let paddingLeft = (i === 0)
-                ? this.cardsValues.padding
-                : (this.cardsValues.width + 2 * this.cardsValues.padding) * i + this.cardsValues.padding;
+                ? 2 * this.cardsValues.padding
+                : (player.cards[i].object.getWidth() + 2 * this.cardsValues.padding) * i + this.cardsValues.padding;
+
             playerCardObject.setLeft(paddingLeft);
-            playerCardObject.setOpacity(1);
+            playerCardObject.setOpacity(0.9);
             canvas.fabricElement.add(playerCardObject);
         }
         this.highlightActivePlayer(player);

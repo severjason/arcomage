@@ -57,6 +57,8 @@ class Canvas {
         let padding:number = cardsValues.padding;
         let cardWidth:number = cardsValues.width;
         let cardHeight:number = cardsValues.height;
+        //let cardWidth:number = (this.width >= 800) ? cardsValues.width : Math.floor(this.width / 5);
+        //let cardHeight:number = (this.height >= 800) ? cardsValues.height : Math.floor(this.width * 0.5);
 
         let cardsNames:Array<string> = CARDS.names;
 
@@ -64,35 +66,35 @@ class Canvas {
 
             let cardName:string = cardsNames[i];
             let card:any = CARDS.getSingleCard(cardName);
-            let descriptionFontSize:number = (card.description.length >= 15) ? 14 : 16;
-            let mainTextFontSize:number = (card.text["ru"].length >= 20) ? 14 : 16;
+            let descriptionFontSize:number = (card.description["eng"].length >= 15) ? 14 : 15;
+            let mainTextFontSize:number = (card.text["eng"].length >= 20) ? 14 : 15;
             let cardPrice:number = card.resource[relations[card.source]];
             let circleRadius:number = cardsValues.priceCircleRadius;
 
             let mainBody:IRect = new fabric.Rect({
                 width: cardWidth,
                 height: cardHeight - cardsValues.discardHeight,
-                fill: cardsValues[card.source].color,
-                stroke: cardsValues[card.source].textColor,
+                fill: cardsValues.cardsBodyColor,
+                stroke: cardsValues[card.source].color,
                 strokeWidth: cardsValues.cardsStrokeWidth,
                 rx: cardsValues.cardsBordersRadius,
                 ry: cardsValues.cardsBordersRadius,
                 originX: 'right',
                 originY: 'top'
             });
-            let mainText:ITextbox = new fabric.Textbox(card.text["ru"], {
+            let mainText:ITextbox = new fabric.Textbox(card.text["eng"], {
                 fontSize: mainTextFontSize,
-                width: cardWidth,
-                left: -cardWidth,
+                width: cardWidth - cardsValues.cardsStrokeWidth,
+                left: -cardWidth - cardsValues.cardsStrokeWidth,
                 top: cardsValues.mainTextPadding,
                 fill: cardsValues[card.source].textColor,
                 editable: false,
                 textAlign: "center"
             });
-            let descriptionText:ITextbox = new fabric.Textbox(card.description, {
+            let descriptionText:ITextbox = new fabric.Textbox(card.description["eng"], {
                 fontSize: descriptionFontSize,
-                width: cardWidth,
-                left: -cardWidth,
+                width: cardWidth - cardsValues.cardsStrokeWidth,
+                left: -cardWidth - cardsValues.cardsStrokeWidth,
                 top: padding,
                 fill: cardsValues[card.source].textColor,
                 editable: false,
@@ -100,12 +102,13 @@ class Canvas {
             });
             let priceText:ITextbox = new fabric.Textbox(cardPrice.toString(), {
                 fontSize: cardsValues.priceFontSize,
+                fontWeight: "bold",
                 lineHeight: cardsValues.priceFontSize,
                 width: circleRadius * 2,
                 height: circleRadius * 2,
                 left: -circleRadius * 2 - padding,
                 top: cardHeight - cardsValues.discardHeight - circleRadius * 2 - padding,
-                fill: cardsValues[card.source].textColor,
+                fill: cardsValues[card.source].color,
                 editable: false,
                 textAlign: "center"
             });
@@ -118,20 +121,20 @@ class Canvas {
                 top: cardHeight - 2 * circleRadius - cardsValues.discardHeight - padding - 2
             });
             let discardRect:IRect = new fabric.Rect({
-                width: cardWidth,
+                width: cardWidth + cardsValues.priceStrokeWidth,
                 height: cardsValues.discardHeight,
-                left: -cardWidth,
-                top: cardHeight + 2 - cardsValues.discardHeight,
+                left: -cardWidth - padding / 2,
+                top: cardHeight + padding / 2 - cardsValues.discardHeight,
                 fill: "#bdc3c7",
-                stroke: cardsValues[card.source].textColor,
-                strokeWidth: cardsValues.cardsStrokeWidth,
+                //stroke: cardsValues[card.source].textColor,
+                //strokeWidth:0,
                 rx: cardsValues.cardsBordersRadius,
                 ry: cardsValues.cardsBordersRadius,
             });
             let discardText:ITextbox = new fabric.Textbox(CARDS.discardText, {
                 fontSize: cardsValues.discardFontSize,
                 width: cardWidth,
-                left: -cardWidth,
+                left: -cardWidth - padding / 2,
                 top: cardHeight - 3 * cardsValues.discardHeight / 4,
                 fill: cardsValues[card.source].textColor,
                 editable: false,
@@ -147,12 +150,13 @@ class Canvas {
 
                 img.onload = function () {
 
+                    //let imgWidth:number = (cardWidth >= img.width) ? cardsValues.imageWidth : Math.floor(that.width / 5);
                     let imgWidth:number = cardsValues.imageWidth;
 
                     let image:IImage = new fabric.Image(img, {
                         width: imgWidth,
                         height: cardsValues.imageHeight,
-                        left: -(imgWidth + cardWidth) / 2,
+                        left: -(imgWidth + cardWidth + padding) / 2,
                         top: cardsValues.imagePadding
                     });
                     let group = new fabric.Group([
@@ -160,13 +164,15 @@ class Canvas {
                         descriptionText,
                         image,
                         mainText,
-                        circle,
+                        /*circle,*/
                         priceText,
                         discardRect,
                         discardText], {
                         left: padding,
                         top: that.fabricElement.height - mainBody.getHeight() - 2 * padding - cardsValues.discardHeight,
                         selectable: false,
+                        lockMovementY: true,
+                        hasControls: false,
                         hasBorders: false,
                         subTargetCheck: true,
                         hoverCursor: "pointer"
@@ -203,7 +209,7 @@ class Canvas {
                 width: cardWidth,
                 height: cardHeight,
                 fill: cardsValues.backColor,
-                stroke: cardsValues[card.source].textColor,
+                stroke: cardsValues.backTextColor,
                 strokeWidth: cardsValues.cardsStrokeWidth,
                 rx: cardsValues.cardsBordersRadius,
                 ry: cardsValues.cardsBordersRadius,
@@ -231,6 +237,7 @@ class Canvas {
 
                     let image:IImage = new fabric.Image(img, {
                         width: cardWidth,
+                        height: cardWidth,
                         left: -cardWidth,
                         top: img.height / 8
                     });
@@ -246,7 +253,7 @@ class Canvas {
                     });
 
                     CARDS.setBackOfCardObject(cardName, group);
-                    
+
                     resolve();
 
                     reject(new Error("Can`t load cards images"));
@@ -293,7 +300,7 @@ class Canvas {
             createText(playerOne.name.substring(0, canvasValues.playersNamesText.maxLetters))], {
             left: canvasValues.playersNamesText.padding,
             top: 0,
-            selectable: true,
+            selectable: false,
             objectCaching: false,
             hoverCursor: "default"
         });
@@ -510,6 +517,7 @@ class Canvas {
 
         let that:Canvas = this;
 
+
         function createTowerRoof(player:Player):IPath {
 
             let pos1:string = `0 ${canvasValues.towers.roofHeight}`;
@@ -525,16 +533,6 @@ class Canvas {
             });
         }
 
-        function createTower(player:Player):IRect {
-
-            return new fabric.Rect({
-                width: canvasValues.towers.width,
-                height: canvasValues.towers.heightStep * player.towerLife,
-                fill: canvasValues.towers.towerColor,
-                originX: 'left',
-                originY: 'bottom'
-            });
-        }
 
         function createTowerText(player:Player):ITextbox {
             return new fabric.Textbox(player.towerLife.toString(), {
@@ -556,6 +554,18 @@ class Canvas {
                 originX: 'left',
                 originY: 'top'
             });
+        }
+
+        function createTower(player:Player):IRect {
+
+            return new fabric.Rect({
+                width: canvasValues.towers.width,
+                height: canvasValues.towers.heightStep * player.towerLife,
+                fill: canvasValues.towers.towerColor,
+                originX: 'left',
+                originY: 'bottom'
+            });
+
         }
 
         let towerObjectPlayerOne:IGroup = new fabric.Group([
@@ -596,6 +606,7 @@ class Canvas {
         }
 
         addObjects();
+
 
     } // createTowers
 

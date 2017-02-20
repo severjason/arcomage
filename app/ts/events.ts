@@ -155,7 +155,8 @@ class Events {
                     };
                     cardObject.animate({
                         "top": 100,
-                        "left": (that.canvas.width - that.params.cardsValues.width) / 2
+                        "left": (that.canvas.width - that.params.cardsValues.width) / 2,
+                        "opacity": 1
                     }, {
                         onChange: that.canvas.fabricElement.renderAll.bind(that.canvas.fabricElement),
                         easing: fabric.util.ease.easeInCubic,
@@ -247,15 +248,26 @@ class Events {
             let cardName:string = this.cards.names[i];
             let cardObject:IGroup = this.cards.getCardObject(cardName);
 
-            for (let i = 0; i < 6; i++) {
-                cardObject.getObjects()[i].on("mousedown", function () {
+            cardObject.on("mouseover", () => {
+                cardObject.setOpacity(1);
+                that.canvas.fabricElement.renderAll();
+            });
+            cardObject.on("mouseout", () => {
+                cardObject.setOpacity(0.9);
+                that.canvas.fabricElement.renderAll();
+            });
+
+
+            for (let i = 0; i < 5; i++) {
+                cardObject.getObjects()[i].on("mousedown", ()=> {
                     that.applyCard(that.playerOne, cardName);
                 });
             }
-            for (let i = 6; i < 8; i++) {
-                cardObject.getObjects()[i].on("mousedown", function () {
+            for (let i = 5; i < 7; i++) {
+                cardObject.getObjects()[i].on("mousedown", ()=> {
                     that.discardCard(that.playerOne, cardName);
                 });
+
             }
         }
     }

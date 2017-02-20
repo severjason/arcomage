@@ -9,13 +9,19 @@
             loader.start(loader.cookie.getPlayerOneName());
         }
         else {
-            $("#start_field").show();
+            //$("#start_field").show();
+            loader.start("Player1");
         }
         
         $("body").on("click", "#start_game_button", function () {
             let newName:string = $("#player_name_input").val();
             $("#start_field").hide();
             loader.start(newName);
+        });
+
+        $("body").on("click", "#clear_cookie_button", function () {
+            loader.cookie.removeAll();
+            window.location.reload();
         });
 
     });
