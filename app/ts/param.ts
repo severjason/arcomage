@@ -124,7 +124,7 @@ class Param {
                         "width": 141,
                         "height": 235,
                         "padding": 4,
-                        "mainTextPadding": 110,
+                        "mainTextPadding": 120,
                         "cardsStrokeWidth": 2,
                         "cardsBordersRadius": 2,
                         "cardsBodyColor": "#f8ecc2",
