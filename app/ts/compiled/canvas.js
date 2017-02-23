@@ -457,7 +457,6 @@ class Canvas {
                 originY: 'top'
             });
         }
-
         function createTower(player) {
             return new fabric.Rect({
                 width: canvasValues.towers.width,
