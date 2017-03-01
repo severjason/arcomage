@@ -53,10 +53,9 @@ class ArcomageCardsContainer {
              "isActive": false,
              "object": {},
              "backObject": {}
-
              },
              */
-            /*"apprentice": {
+            "apprentice": {
              "name": "apprentice",
              "source": "magic",
              "description": {
@@ -82,7 +81,7 @@ class ArcomageCardsContainer {
              "backObject": {}
 
              },
-             "bag_of_baubles": {
+            "bag_of_baubles": {
              "name": "bag_of_baubles",
              "source": "magic",
              "description": {
@@ -103,7 +102,7 @@ class ArcomageCardsContainer {
              "backObject": {}
 
              },
-             "barracks": {
+            "barracks": {
              "name": "barracks",
                 "source": "mine",
                 "description": {
@@ -128,7 +127,7 @@ class ArcomageCardsContainer {
              "object": {},
              "backObject": {}
 
-             },*/
+            },
             "basic_wall": {
                 "name": "basic_wall",
                 "source": "mine",
@@ -321,7 +320,7 @@ class ArcomageCardsContainer {
                     "eng": "crumblestone"
                 },
                 "text": {
-                    "eng": "+5 tower\nenemy loses 6 bricks"
+                    "eng": "+5 tower,\nenemy loses 6 bricks"
                 },
                 "src": "./images/cards/crumblestone.png",
                 "resource": {
@@ -346,7 +345,7 @@ class ArcomageCardsContainer {
                     "eng": "Crystallize"
                 },
                 "text": {
-                    "eng": "+11 tower\n-6 wall"
+                    "eng": "+11 tower,\n-6 wall"
                 },
                 "src": "./images/cards/crystallize.png",
                 "resource": {
@@ -371,7 +370,7 @@ class ArcomageCardsContainer {
                     "eng": "Crystal matrix"
                 },
                 "text": {
-                    "eng": "+1 magic\n+3 tower\n+1 enemy tower"
+                    "eng": "+1 magic,\n+3 tower,\n+1 enemy tower"
                 },
                 "src": "./images/cards/crystal_matrix.png",
                 "resource": {
@@ -397,7 +396,7 @@ class ArcomageCardsContainer {
                     "eng": "Crystal rock"
                 },
                 "text": {
-                    "eng": "+7 wall\ngain 7 gems"
+                    "eng": "+7 wall,\ngain 7 gems"
                 },
                 "src": "./images/cards/crystal_rock.png",
                 "resource": {
@@ -422,7 +421,7 @@ class ArcomageCardsContainer {
                     "eng": "Crystal shield"
                 },
                 "text": {
-                    "eng": "+8 tower\n+3 wall"
+                    "eng": "+8 tower,\n+3 wall"
                 },
                 "src": "./images/cards/crystal_shield.png",
                 "resource": {
@@ -460,6 +459,30 @@ class ArcomageCardsContainer {
                     enemy.updateResources({
                         "bricks": -8
                     });
+                },
+                "isActive": false,
+                "object": {},
+                "backObject": {}
+
+            },
+            "defence_magic": {
+                "name": "defence_magic",
+                "source": "magic",
+                "description": {
+                    "eng": "Defence magic"
+                },
+                "text": {
+                    "eng": "+20 tower"
+                },
+                "src": "./images/cards/defence_magic.png",
+                "resource": {
+                    "gems": 21
+                },
+                "action": function (player:Player, enemy:Player) {
+                    player.updateResources({
+                        "gems": -21
+                    });
+                    player.updateTowerLife(20);
                 },
                 "isActive": false,
                 "object": {},
@@ -574,7 +597,7 @@ class ArcomageCardsContainer {
                     "eng": "Dragon heart"
                 },
                 "text": {
-                    "eng": "+20 wall\n+8 tower"
+                    "eng": "+20 wall,\n+8 tower"
                 },
                 "src": "./images/cards/dragon_heart.png",
                 "resource": {
@@ -592,6 +615,30 @@ class ArcomageCardsContainer {
                 "backObject": {}
 
             },
+            "dwarf_merchant": {
+                "name": "dwarf_merchant",
+                "source": "mine",
+                "description": {
+                    "eng": "Dwarf merchant"
+                },
+                "text": {
+                    "eng": "+5 wall,\nyou lose 6 gems"
+                },
+                "src": "./images/cards/dwarf_merchant.png",
+                "resource": {
+                    "bricks": 2
+                },
+                "action": function (player:Player, enemy:Player) {
+                    player.updateResources({
+                        "bricks": -2,
+                        "gems": -6
+                    });
+                    player.updateWallLife(5);
+                },
+                "isActive": false,
+                "object": {},
+                "backObject": {}
+            },
             "dwarf_miner": {
                 "name": "dwarf_miner",
                 "source": "mine",
@@ -599,7 +646,7 @@ class ArcomageCardsContainer {
                     "eng": "Dwarf miner"
                 },
                 "text": {
-                    "eng": "+4 wall\n+1 mine"
+                    "eng": "+4 wall,\n+1 mine"
                 },
                 "src": "./images/cards/dwarf_miner.png",
                 "resource": {
@@ -626,7 +673,7 @@ class ArcomageCardsContainer {
                     "eng": "Dwarfs"
                 },
                 "text": {
-                    "eng": "4 damage\n+3 wall"
+                    "eng": "4 damage,\n+3 wall"
                 },
                 "src": "./images/cards/dwarfs.png",
                 "resource": {
@@ -890,6 +937,679 @@ class ArcomageCardsContainer {
                 "backObject": {}
 
             },
+            "gargoyle": {
+                "name": "gargoyle",
+                "source": "dungeon",
+                "description": {
+                    "eng": "Gargoyle"
+                },
+                "text": {
+                    "eng": "2 damage,\n+4 wall,\n+2 tower"
+                },
+                "src": "./images/cards/gargoyle.png",
+                "resource": {
+                    "beasts": 8
+                },
+                "action": function (player:Player, enemy:Player) {
+                    player.updateResources({
+                        "beasts": -8
+                    });
+                    player.updateWallLife(4);
+                    player.updateTowerLife(2);
+                    enemy.takeDamage(2);
+                },
+                "isActive": false,
+                "object": {},
+                "backObject": {}
+
+            },
+            "gem_spear": {
+                "name": "gem_spear",
+                "source": "magic",
+                "description": {
+                    "eng": "Gem spear"
+                },
+                "text": {
+                    "eng": "5 damage to\nenemy tower"
+                },
+                "src": "./images/cards/gem_spear.png",
+                "resource": {
+                    "gems": 4
+                },
+                "action": function (player:Player, enemy:Player) {
+                    player.updateResources({
+                        "gems": -4
+                    });
+                    enemy.updateTowerLife(-5);
+                },
+                "isActive": false,
+                "object": {},
+                "backObject": {}
+
+            },
+            "gemstone_flaw": {
+                "name": "gemstone_flaw",
+                "source": "magic",
+                "description": {
+                    "eng": "Gemstone flaw"
+                },
+                "text": {
+                    "eng": "3 damage to\nenemy tower"
+                },
+                "src": "./images/cards/gemstone_flaw.png",
+                "resource": {
+                    "gems": 2
+                },
+                "action": function (player:Player, enemy:Player) {
+                    player.updateResources({
+                        "gems": -2
+                    });
+                    enemy.updateTowerLife(-3);
+                },
+                "isActive": false,
+                "object": {},
+                "backObject": {}
+
+            },
+            "gnoll": {
+                "name": "gnoll",
+                "source": "dungeon",
+                "description": {
+                    "eng": "Gnoll"
+                },
+                "text": {
+                    "eng": "3 damage,\n+1 gem"
+                },
+                "src": "./images/cards/gnoll.png",
+                "resource": {
+                    "beasts": 2
+                },
+                "action": function (player:Player, enemy:Player) {
+                    player.updateResources({
+                        "beasts": -2,
+                        "gems": 1
+                    });
+                    enemy.takeDamage(3);
+                },
+                "isActive": false,
+                "object": {},
+                "backObject": {}
+
+            },
+            "goblin_archer": {
+                "name": "goblin_archer",
+                "source": "dungeon",
+                "description": {
+                    "eng": "Goblin archer"
+                },
+                "text": {
+                    "eng": "3 damage to\nenemy tower,\nyou take\n1 damage"
+                },
+                "src": "./images/cards/goblin_archer.png",
+                "resource": {
+                    "beasts": 4
+                },
+                "action": function (player:Player, enemy:Player) {
+                    player.updateResources({
+                        "beasts": -4
+                    });
+                    enemy.updateTowerLife(-3);
+                    player.takeDamage(1);
+                },
+                "isActive": false,
+                "object": {},
+                "backObject": {}
+
+            },
+            "goblin_mob": {
+                "name": "goblin_mob",
+                "source": "dungeon",
+                "description": {
+                    "eng": "Goblin mob"
+                },
+                "text": {
+                    "eng": "6 damage,\n you take\n3 damage"
+                },
+                "src": "./images/cards/goblin_mob.png",
+                "resource": {
+                    "beasts": 3
+                },
+                "action": function (player:Player, enemy:Player) {
+                    player.updateResources({
+                        "beasts": -3
+                    });
+                    enemy.takeDamage(6);
+                    player.takeDamage(3);
+                },
+                "isActive": false,
+                "object": {},
+                "backObject": {}
+
+            },
+            "gold_mine": {
+                "name": "gold_mine",
+                "source": "mine",
+                "description": {
+                    "eng": "Gold mine"
+                },
+                "text": {
+                    "eng": "If mine < enemy\nmine, +2 mine,\nelse +1 mine"
+                },
+                "src": "./images/cards/gold_mine.png",
+                "resource": {
+                    "bricks": 4
+                },
+                "action": function (player:Player, enemy:Player) {
+                    player.updateResources({
+                        "bricks": -4
+                    });
+                    (player.sources["mine"] < enemy.sources["mine"])
+                        ? player.updateSources({"mine": 2})
+                        : player.updateSources({"mine": 1});
+                },
+                "isActive": false,
+                "object": {},
+                "backObject": {}
+
+            },
+            "great_wall": {
+                "name": "great_wall",
+                "source": "mine",
+                "description": {
+                    "eng": "Great wall"
+                },
+                "text": {
+                    "eng": "+15 wall"
+                },
+                "src": "./images/cards/great_wall.png",
+                "resource": {
+                    "bricks": 16
+                },
+                "action": function (player:Player, enemy:Player) {
+                    player.updateResources({
+                        "bricks": -16
+                    });
+                    player.updateWallLife(15);
+                },
+                "isActive": false,
+                "object": {},
+                "backObject": {}
+
+            },
+            "harmonic_ore": {
+                "name": "harmonic_ore",
+                "source": "mine",
+                "description": {
+                    "eng": "Harmonic ore"
+                },
+                "text": {
+                    "eng": "+6 wall,\n+3 tower"
+                },
+                "src": "./images/cards/harmonic_ore.png",
+                "resource": {
+                    "bricks": 11
+                },
+                "action": function (player:Player, enemy:Player) {
+                    player.updateResources({
+                        "bricks": -11
+                    });
+                    player.updateWallLife(6);
+                    player.updateTowerLife(3);
+                },
+                "isActive": false,
+                "object": {},
+                "backObject": {}
+
+            },
+            "harmony": {
+                "name": "harmony",
+                "source": "magic",
+                "description": {
+                    "eng": "Harmony"
+                },
+                "text": {
+                    "eng": "+1 magic,\n+3 tower,\n+3 wall"
+                },
+                "src": "./images/cards/harmony.png",
+                "resource": {
+                    "gems": 7
+                },
+                "action": function (player:Player, enemy:Player) {
+                    player.updateResources({
+                        "gems": -7
+                    });
+                    player.updateSources({"magic": 1});
+                    player.updateWallLife(3);
+                    player.updateTowerLife(3);
+                },
+                "isActive": false,
+                "object": {},
+                "backObject": {}
+
+            },
+            "hydralisk": {
+                "name": "hydralisk",
+                "source": "dungeon",
+                "description": {
+                    "eng": "Hydralisk"
+                },
+                "text": {
+                    "eng": "If enemy wall\n=0, 10 damage,\nelse 6 damage"
+                },
+                "src": "./images/cards/hydralisk.png",
+                "resource": {
+                    "beasts": 8
+                },
+                "action": function (player:Player, enemy:Player) {
+                    player.updateResources({
+                        "beasts": -8
+                    });
+                    (enemy.wallLife === 0) ? enemy.takeDamage(10) : enemy.takeDamage(6);
+                },
+                "isActive": false,
+                "object": {},
+                "backObject": {}
+
+            },
+            "imp": {
+                "name": "imp",
+                "source": "dungeon",
+                "description": {
+                    "eng": "Imp"
+                },
+                "text": {
+                    "eng": "6 damage, all\nplayers lose 5 bricks, gems and beasts"
+                },
+                "src": "./images/cards/imp.png",
+                "resource": {
+                    "beasts": 5
+                },
+                "action": function (player:Player, enemy:Player) {
+                    player.updateResources({
+                        "beasts": -10,
+                        "bricks": -5,
+                        "gems": -5
+                    });
+                    enemy.updateResources({
+                        "beasts": -5,
+                        "bricks": -5,
+                        "gems": -5
+                    });
+                    enemy.takeDamage(6);
+                },
+                "isActive": false,
+                "object": {},
+                "backObject": {}
+
+            },
+            "innovations": {
+                "name": "innovations",
+                "source": "mine",
+                "description": {
+                    "eng": "Innovations"
+                },
+                "text": {
+                    "eng": "+1 to all player`s mines, you gain 4 gems"
+                },
+                "src": "./images/cards/innovations.png",
+                "resource": {
+                    "bricks": 2
+                },
+                "action": function (player:Player, enemy:Player) {
+                    player.updateResources({
+                        "bricks": -2,
+                        "gems": 4
+                    });
+                    player.updateSources({"mine": 1});
+                    enemy.updateSources({"mine": 1});
+                },
+                "isActive": false,
+                "object": {},
+                "backObject": {}
+
+            },
+            "lightning_shard": {
+                "name": "lightning_shard",
+                "source": "magic",
+                "description": {
+                    "eng": "Lightning shard"
+                },
+                "text": {
+                    "eng": "If tower > enemy\nwall, 8 damage\nto enemy tower,\nelse 8 damage"
+                },
+                "src": "./images/cards/lightning_shard.png",
+                "resource": {
+                    "gems": 11
+                },
+                "action": function (player:Player, enemy:Player) {
+                    player.updateResources({
+                        "gems": -11
+                    });
+                    (player.towerLife > enemy.wallLife) ? enemy.updateTowerLife(-8) : enemy.takeDamage(8);
+
+                },
+                "isActive": false,
+                "object": {},
+                "backObject": {}
+
+            },
+            "lodestone": {
+                "name": "lodestone",
+                "source": "magic",
+                "description": {
+                    "eng": "Lodestone"
+                },
+                "text": {
+                    "eng": "+3 tower, this\n card can`t be discarded without playing it"
+                },
+                "src": "./images/cards/lodestone.png",
+                "resource": {
+                    "gems": 5
+                },
+                "action": function (player:Player, enemy:Player) {
+                    player.updateResources({
+                        "gems": -5
+                    });
+                    player.updateTowerLife(3);
+                },
+                "isActive": false,
+                "object": {},
+                "backObject": {}
+
+            },
+            "lucky_coin": {
+                "name": "lucky_coin",
+                "source": "mine",
+                "description": {
+                    "eng": "Lucky coin"
+                },
+                "text": {
+                    "eng": "+2 bricks,\n+2 gems,\nplay again"
+                },
+                "src": "./images/cards/lucky_coin.png",
+                "resource": {
+                    "bricks": 0
+                },
+                "action": function (player:Player, enemy:Player) {
+                    player.updateResources({
+                        "bricks": 2,
+                        "gems": 2
+                    });
+                },
+                "isActive": false,
+                "playAgain": true,
+                "object": {},
+                "backObject": {}
+
+            },
+            "mad_cow_disease": {
+                "name": "mad_cow_disease",
+                "source": "dungeon",
+                "description": {
+                    "eng": "Mad cow disease"
+                },
+                "text": {
+                    "eng": "All players lose 6 beasts"
+                },
+                "src": "./images/cards/mad_cow_disease.png",
+                "resource": {
+                    "beasts": 0
+                },
+                "action": function (player:Player, enemy:Player) {
+                    player.updateResources({
+                        "beasts": -6
+                    });
+                    enemy.updateResources({
+                        "beasts": -6
+                    });
+                },
+                "isActive": false,
+                "object": {},
+                "backObject": {}
+
+            },
+            "magic_book": {
+                "name": "magic_book",
+                "source": "magic",
+                "description": {
+                    "eng": "Magic book"
+                },
+                "text": {
+                    "eng": "+8 tower,\n+1 dungeon"
+                },
+                "src": "./images/cards/magic_book.png",
+                "resource": {
+                    "gems": 14
+                },
+                "action": function (player:Player, enemy:Player) {
+                    player.updateResources({
+                        "gems": -14
+                    });
+                    player.updateSources({"dungeon": 1});
+                    player.updateTowerLife(8);
+                },
+                "isActive": false,
+                "object": {},
+                "backObject": {}
+
+            },
+            "meditation": {
+                "name": "meditation",
+                "source": "magic",
+                "description": {
+                    "eng": "Meditation"
+                },
+                "text": {
+                    "eng": "+13 tower,\n+6 beasts,\n+6 bricks"
+                },
+                "src": "./images/cards/meditation.png",
+                "resource": {
+                    "gems": 18
+                },
+                "action": function (player:Player, enemy:Player) {
+                    player.updateResources({
+                        "beasts": 6,
+                        "bricks": 6,
+                        "gems": -18,
+                    });
+                    player.updateTowerLife(13);
+                },
+                "isActive": false,
+                "object": {},
+                "backObject": {}
+
+            },
+            "medusa": {
+                "name": "medusa",
+                "source": "dungeon",
+                "description": {
+                    "eng": "Medusa"
+                },
+                "text": {
+                    "eng": "6 damage,\n enemy loses\n 3 beasts"
+                },
+                "src": "./images/cards/medusa.png",
+                "resource": {
+                    "beasts": 6
+                },
+                "action": function (player:Player, enemy:Player) {
+                    player.updateResources({
+                        "beasts": -6
+                    });
+                    enemy.updateResources({
+                        "beasts": -3
+                    });
+                    enemy.takeDamage(6);
+                },
+                "isActive": false,
+                "object": {},
+                "backObject": {}
+            },
+            "miners": {
+                "name": "miners",
+                "source": "mine",
+                "description": {
+                    "eng": "Miners"
+                },
+                "text": {
+                    "eng": "+1 mine"
+                },
+                "src": "./images/cards/miners.png",
+                "resource": {
+                    "bricks": 3
+                },
+                "action": function (player:Player, enemy:Player) {
+                    player.updateResources({
+                        "bricks": -3
+                    });
+                    player.updateSources({"mine": 1});
+                },
+                "isActive": false,
+                "object": {},
+                "backObject": {}
+
+            },
+            "minotaur": {
+                "name": "minotaur",
+                "source": "dungeon",
+                "description": {
+                    "eng": "Minotaur"
+                },
+                "text": {
+                    "eng": "+1 dungeon"
+                },
+                "src": "./images/cards/minotaur.png",
+                "resource": {
+                    "beasts": 3
+                },
+                "action": function (player:Player, enemy:Player) {
+                    player.updateResources({
+                        "beasts": -3
+                    });
+                    player.updateSources({"dungeon": 1});
+                },
+                "isActive": false,
+                "object": {},
+                "backObject": {}
+
+            },
+            "mondo_wall": {
+                "name": "mondo_wall",
+                "source": "mine",
+                "description": {
+                    "eng": "Mondo wall"
+                },
+                "text": {
+                    "eng": "+12 wall"
+                },
+                "src": "./images/cards/mondo_wall.png",
+                "resource": {
+                    "bricks": 13
+                },
+                "action": function (player:Player, enemy:Player) {
+                    player.updateResources({
+                        "bricks": -13
+                    });
+                    player.updateWallLife(12);
+                },
+                "isActive": false,
+                "object": {},
+                "backObject": {}
+
+            },
+            "moody_goblins": {
+                "name": "moody_goblins",
+                "source": "dungeon",
+                "description": {
+                    "eng": "Moody goblins"
+                },
+                "text": {
+                    "eng": "4 damage,\nyou lose 3 gems"
+                },
+                "src": "./images/cards/moody_goblins.png",
+                "resource": {
+                    "beasts": 1
+                },
+                "action": function (player:Player, enemy:Player) {
+                    player.updateResources({
+                        "beasts": -1,
+                        "gems": -3
+                    });
+                    enemy.takeDamage(4);
+                },
+                "isActive": false,
+                "object": {},
+                "backObject": {}
+            },
+            "new_equipment": {
+                "name": "new_equipment",
+                "source": "mine",
+                "description": {
+                    "eng": "New equipment"
+                },
+                "text": {
+                    "eng": "+2 mine"
+                },
+                "src": "./images/cards/new_equipment.png",
+                "resource": {
+                    "bricks": 6
+                },
+                "action": function (player:Player, enemy:Player) {
+                    player.updateResources({
+                        "bricks": -6
+                    });
+                    player.updateSources({"mine": 2});
+                },
+                "isActive": false,
+                "object": {},
+                "backObject": {}
+            },
+            "ogre": {
+                "name": "ogre",
+                "source": "dungeon",
+                "description": {
+                    "eng": "Ogre"
+                },
+                "text": {
+                    "eng": "7 damage"
+                },
+                "src": "./images/cards/ogre.png",
+                "resource": {
+                    "beasts": 6
+                },
+                "action": function (player:Player, enemy:Player) {
+                    player.updateResources({
+                        "beasts": -6
+                    });
+                    enemy.takeDamage(7);
+                },
+                "isActive": false,
+                "object": {},
+                "backObject": {}
+            },
+            "orc": {
+                "name": "orc",
+                "source": "dungeon",
+                "description": {
+                    "eng": "Orc"
+                },
+                "text": {
+                    "eng": "5 damage"
+                },
+                "src": "./images/cards/orc.png",
+                "resource": {
+                    "beasts": 3
+                },
+                "action": function (player:Player, enemy:Player) {
+                    player.updateResources({
+                        "beasts": -3
+                    });
+                    enemy.takeDamage(5);
+                },
+                "isActive": false,
+                "object": {},
+                "backObject": {}
+            },
             "werewolf": {
                 "name": "werewolf",
                 "source": "dungeon",
@@ -913,6 +1633,7 @@ class ArcomageCardsContainer {
                 "object": {},
                 "backObject": {}
             }
+
         };
         this._discardText = "DISCARD";
         this._backOfCardSrc = "./images/cards/back.png";
