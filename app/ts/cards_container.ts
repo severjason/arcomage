@@ -30,102 +30,56 @@ class ArcomageCardsContainer {
                 "backObject": {}
 
             },
-            /*
-             "": {
-             "name": "",
-             "source": "",
-             "description": {
-             "eng": ""
-             },
-             "text": {
-             "eng": ""
-             },
-             "src": "./images/cards/.png",
-             "resource": {
-             "gems": 2
-             },
-             "action": function (player:Player, enemy:Player) {
-             player.updateResources({
-             "gems": -2
-             });
-             player.updateTowerLife(3);
-             },
-             "isActive": false,
-             "object": {},
-             "backObject": {}
-             },
-             */
             "apprentice": {
-             "name": "apprentice",
-             "source": "magic",
-             "description": {
-             "eng": "Apprentice"
-             },
-             "text": {
-             "eng": "+4 tower,\nyou lose 3 beasts,\n2 damage to enemy tower"
-             },
-             "src": "./images/cards/apprentice.png",
-             "resource": {
-             "gems": 5
-             },
-             "action": function (player:Player, enemy:Player) {
-             player.updateResources({
-             "gems": -5,
-             "beasts":-3
-             });
-             player.updateTowerLife(4);
-             enemy.updateTowerLife(-2);
-             },
-             "isActive": false,
-             "object": {},
-             "backObject": {}
-
-             },
-            "bag_of_baubles": {
-             "name": "bag_of_baubles",
-             "source": "magic",
-             "description": {
-             "eng": "Bag of Baubles"
-             },
-             "text": {
-             "eng": "If tower <\nenemy tower\n+2 tower,\nelse +1 tower"
-             },
-             "src": "./images/cards/bag_of_baubles.png",
-             "resource": {
-             "gems": 0
-             },
-             "action": function (player:Player, enemy:Player) {
-             (player.towerLife < enemy.towerLife) ? player.updateTowerLife(2) : player.updateTowerLife(1);
-             },
-             "isActive": false,
-             "object": {},
-             "backObject": {}
-
-             },
-            "barracks": {
-             "name": "barracks",
-                "source": "mine",
+                "name": "apprentice",
+                "source": "magic",
                 "description": {
-             "eng": "Barracks"
+                    "eng": "Apprentice"
                 },
                 "text": {
-             "eng": "+6 beasts, +6 wall,\nif dungeon <\nenemy dungeon,\n+1 dungeon"
+                    "eng": "+4 tower,\nyou lose 3 beasts,\n2 damage to enemy tower"
                 },
-             "src": "./images/cards/barracks.png",
+                "src": "./images/cards/apprentice.png",
                 "resource": {
-             "bricks": 10
-             },
-             "action": function (player:Player, enemy:Player) {
-             player.updateResources({
-             "bricks": -10,
-             "beasts": 6,
-             });
-             player.updateWallLife(6);
-             if (player.sources["dungeon"] < enemy.sources["dungeon"]) player.updateSources({"dungeon":1});
-             },
-             "isActive": false,
-             "object": {},
-             "backObject": {}
+                    "gems": 5
+                },
+                "action": function (player:Player, enemy:Player) {
+                    player.updateResources({
+                        "gems": -5,
+                        "beasts": -3
+                    });
+                    player.updateTowerLife(4);
+                    enemy.updateTowerLife(-2);
+                },
+                "isActive": false,
+                "object": {},
+                "backObject": {}
+
+            },
+            "barracks": {
+                "name": "barracks",
+                "source": "mine",
+                "description": {
+                    "eng": "Barracks"
+                },
+                "text": {
+                    "eng": "+6 beasts, +6 wall,\nif dungeon <\nenemy dungeon,\n+1 dungeon"
+                },
+                "src": "./images/cards/barracks.png",
+                "resource": {
+                    "bricks": 10
+                },
+                "action": function (player:Player, enemy:Player) {
+                    player.updateResources({
+                        "bricks": -10,
+                        "beasts": 6,
+                    });
+                    player.updateWallLife(6);
+                    if (player.sources["dungeon"] < enemy.sources["dungeon"]) player.updateSources({"dungeon": 1});
+                },
+                "isActive": false,
+                "object": {},
+                "backObject": {}
 
             },
             "basic_wall": {
@@ -357,32 +311,6 @@ class ArcomageCardsContainer {
                     });
                     player.updateTowerLife(11);
                     player.updateWallLife(-6);
-                },
-                "isActive": false,
-                "object": {},
-                "backObject": {}
-
-            },
-            "crystal_matrix": {
-                "name": "crystal_matrix",
-                "source": "magic",
-                "description": {
-                    "eng": "Crystal matrix"
-                },
-                "text": {
-                    "eng": "+1 magic,\n+3 tower,\n+1 enemy tower"
-                },
-                "src": "./images/cards/crystal_matrix.png",
-                "resource": {
-                    "gems": 6
-                },
-                "action": function (player:Player, enemy:Player) {
-                    player.updateResources({
-                        "gems": -6
-                    });
-                    player.updateSources({"magic": 1});
-                    player.updateTowerLife(3);
-                    enemy.updateTowerLife(1);
                 },
                 "isActive": false,
                 "object": {},
@@ -1610,6 +1538,855 @@ class ArcomageCardsContainer {
                 "object": {},
                 "backObject": {}
             },
+            "parity": {
+                "name": "parity",
+                "source": "magic",
+                "description": {
+                    "eng": "Parity"
+                },
+                "text": {
+                    "eng": "All player`s magic equals the highest player`s magic"
+                },
+                "src": "./images/cards/parity.png",
+                "resource": {
+                    "gems": 7
+                },
+                "action": function (player:Player, enemy:Player) {
+                    player.updateResources({
+                        "gems": -7
+                    });
+                    (player.sources["magic"] > enemy.sources["magic"])
+                        ? enemy.updateSources({"magic": player.sources["magic"] - enemy.sources["magic"]})
+                        : player.updateSources({"magic": enemy.sources["magic"] - player.sources["magic"]})
+
+                },
+                "isActive": false,
+                "object": {},
+                "backObject": {}
+            },
+            "pearl_of_wisdom": {
+                "name": "pearl_of_wisdom",
+                "source": "magic",
+                "description": {
+                    "eng": "Pearl of wisdom"
+                },
+                "text": {
+                    "eng": "+5 tower\n+1 magic"
+                },
+                "src": "./images/cards/pearl_of_wisdom.png",
+                "resource": {
+                    "gems": 9
+                },
+                "action": function (player:Player, enemy:Player) {
+                    player.updateResources({
+                        "gems": -9
+                    });
+                    player.updateTowerLife(5);
+                    player.updateSources({"magic": 1});
+                },
+                "isActive": false,
+                "object": {},
+                "backObject": {}
+            },
+            "pegasus": {
+                "name": "pegasus",
+                "source": "dungeon",
+                "description": {
+                    "eng": "Pegasus"
+                },
+                "text": {
+                    "eng": "12 damage to\n enemy tower"
+                },
+                "src": "./images/cards/pegasus.png",
+                "resource": {
+                    "beasts": 18
+                },
+                "action": function (player:Player, enemy:Player) {
+                    player.updateResources({
+                        "beasts": -18
+                    });
+                    enemy.updateTowerLife(-12);
+                },
+                "isActive": false,
+                "object": {},
+                "backObject": {}
+            },
+            "portcullis": {
+                "name": "portcullis",
+                "source": "mine",
+                "description": {
+                    "eng": "Portcullis"
+                },
+                "text": {
+                    "eng": "+5 wall\n+1 dungeon"
+                },
+                "src": "./images/cards/portcullis.png",
+                "resource": {
+                    "bricks": 9
+                },
+                "action": function (player:Player, enemy:Player) {
+                    player.updateResources({
+                        "bricks": -9
+                    });
+                    player.updateWallLife(5);
+                    player.updateSources({"dungeon": 1});
+                },
+                "isActive": false,
+                "object": {},
+                "backObject": {}
+            },
+            "power_burn": {
+                "name": "power_burn",
+                "source": "magic",
+                "description": {
+                    "eng": "Power burn"
+                },
+                "text": {
+                    "eng": "5 damage to\nyour tower,\n+2 magic"
+                },
+                "src": "./images/cards/power_burn.png",
+                "resource": {
+                    "gems": 3
+                },
+                "action": function (player:Player, enemy:Player) {
+                    player.updateResources({
+                        "gems": -3
+                    });
+                    player.updateTowerLife(-5);
+                    player.updateSources({"magic": 2});
+                },
+                "isActive": false,
+                "object": {},
+                "backObject": {}
+            },
+            "prism": {
+                "name": "prism",
+                "source": "magic",
+                "description": {
+                    "eng": "Prism"
+                },
+                "text": {
+                    "eng": "If tower <\nenemy tower\n+2 tower,\nelse +1 tower"
+                },
+                "src": "./images/cards/prism.png",
+                "resource": {
+                    "gems": 0
+                },
+                "action": function (player:Player, enemy:Player) {
+                    (player.towerLife < enemy.towerLife) ? player.updateTowerLife(2) : player.updateTowerLife(1);
+                },
+                "isActive": false,
+                "object": {},
+                "backObject": {}
+            },
+            "quarrys_help": {
+                "name": "quarrys_help",
+                "source": "magic",
+                "description": {
+                    "eng": "Quarry`s help"
+                },
+                "text": {
+                    "eng": "+7 tower,\nlose 10 bricks"
+                },
+                "src": "./images/cards/quarrys_help.png",
+                "resource": {
+                    "gems": 4
+                },
+                "action": function (player:Player, enemy:Player) {
+                    player.updateResources({
+                        "gems": -4,
+                        "bricks": -10
+                    });
+                    player.updateTowerLife(7);
+                },
+                "isActive": false,
+                "object": {},
+                "backObject": {}
+            },
+            "quartz": {
+                "name": "quartz",
+                "source": "magic",
+                "description": {
+                    "eng": "Quartz"
+                },
+                "text": {
+                    "eng": "+1 tower,\nplay again"
+                },
+                "src": "./images/cards/quartz.png",
+                "resource": {
+                    "gems": 1
+                },
+                "action": function (player:Player, enemy:Player) {
+                    player.updateResources({
+                        "gems": -1
+                    });
+                    player.updateTowerLife(1);
+                },
+                "isActive": false,
+                "playAgain": true,
+                "object": {},
+                "backObject": {}
+            },
+            "rainbow": {
+                "name": "rainbow",
+                "source": "magic",
+                "description": {
+                    "eng": "Rainbow"
+                },
+                "text": {
+                    "eng": "+1 tower to\nall players,\nyou gain 3 gems"
+                },
+                "src": "./images/cards/rainbow.png",
+                "resource": {
+                    "gems": 0
+                },
+                "action": function (player:Player, enemy:Player) {
+                    player.updateResources({
+                        "gems": 3
+                    });
+                    player.updateTowerLife(1);
+                    enemy.updateTowerLife(1);
+                },
+                "isActive": false,
+                "object": {},
+                "backObject": {}
+            },
+            "rare_ring": {
+                "name": "rare_ring",
+                "source": "magic",
+                "description": {
+                    "eng": "Rare ring"
+                },
+                "text": {
+                    "eng": "+1 magic,\n+3 tower,\n+1 enemy tower"
+                },
+                "src": "./images/cards/rare_ring.png",
+                "resource": {
+                    "gems": 6
+                },
+                "action": function (player:Player, enemy:Player) {
+                    player.updateResources({
+                        "gems": -6
+                    });
+                    player.updateSources({"magic": 1});
+                    player.updateTowerLife(3);
+                    enemy.updateTowerLife(1);
+                },
+                "isActive": false,
+                "object": {},
+                "backObject": {}
+
+            },
+            "reinforced_wall": {
+                "name": "reinforced_wall",
+                "source": "mine",
+                "description": {
+                    "eng": "Reinforced wall"
+                },
+                "text": {
+                    "eng": "+8 wall"
+                },
+                "src": "./images/cards/reinforced_wall.png",
+                "resource": {
+                    "bricks": 8
+                },
+                "action": function (player:Player, enemy:Player) {
+                    player.updateResources({
+                        "bricks": -8
+                    });
+                    player.updateWallLife(8);
+                },
+                "isActive": false,
+                "object": {},
+                "backObject": {}
+            },
+            "rock_garden": {
+                "name": "rock_garden",
+                "source": "mine",
+                "description": {
+                    "eng": "Rock garden"
+                },
+                "text": {
+                    "eng": "+1 wall,\n+1 tower,\n+2 beasts"
+                },
+                "src": "./images/cards/rock_garden.png",
+                "resource": {
+                    "bricks": 1
+                },
+                "action": function (player:Player, enemy:Player) {
+                    player.updateResources({
+                        "bricks": -1,
+                        "beasts": 2
+                    });
+                    player.updateTowerLife(1);
+                    player.updateWallLife(1);
+                },
+                "isActive": false,
+                "object": {},
+                "backObject": {}
+            },
+            "rock_launcher": {
+                "name": "rock_launcher",
+                "source": "mine",
+                "description": {
+                    "eng": "Rock launcher"
+                },
+                "text": {
+                    "eng": "+6 wall,\n10 damage"
+                },
+                "src": "./images/cards/rock_launcher.png",
+                "resource": {
+                    "bricks": 18
+                },
+                "action": function (player:Player, enemy:Player) {
+                    player.updateResources({
+                        "bricks": -18
+                    });
+                    player.updateWallLife(6);
+                    enemy.takeDamage(10);
+                },
+                "isActive": false,
+                "object": {},
+                "backObject": {}
+            },
+            "ruby": {
+                "name": "ruby",
+                "source": "magic",
+                "description": {
+                    "eng": "Ruby"
+                },
+                "text": {
+                    "eng": "+5 tower"
+                },
+                "src": "./images/cards/ruby.png",
+                "resource": {
+                    "gems": 3
+                },
+                "action": function (player:Player, enemy:Player) {
+                    player.updateResources({
+                        "gems": -3
+                    });
+                    player.updateTowerLife(5);
+                },
+                "isActive": false,
+                "object": {},
+                "backObject": {}
+            },
+            "sapphire": {
+                "name": "sapphire",
+                "source": "magic",
+                "description": {
+                    "eng": "Sapphire"
+                },
+                "text": {
+                    "eng": "+11 tower"
+                },
+                "src": "./images/cards/sapphire.png",
+                "resource": {
+                    "gems": 10
+                },
+                "action": function (player:Player, enemy:Player) {
+                    player.updateResources({
+                        "gems": -10
+                    });
+                    player.updateTowerLife(11);
+                },
+                "isActive": false,
+                "object": {},
+                "backObject": {}
+            },
+            "secret_cave": {
+                "name": "secret_cave",
+                "source": "mine",
+                "description": {
+                    "eng": "Secret cave"
+                },
+                "text": {
+                    "eng": "+1 magic,\nplay again"
+                },
+                "src": "./images/cards/secret_cave.png",
+                "resource": {
+                    "bricks": 8
+                },
+                "action": function (player:Player, enemy:Player) {
+                    player.updateResources({
+                        "bricks": -8
+                    });
+                    player.updateSources({"magic": 1});
+                },
+                "isActive": false,
+                "playAgain": true,
+                "object": {},
+                "backObject": {}
+            },
+            "shadow_fairy": {
+                "name": "shadow_fairy",
+                "source": "magic",
+                "description": {
+                    "eng": "Shadow fairy"
+                },
+                "text": {
+                    "eng": "2 damage to\nenemy tower,\nplay again"
+                },
+                "src": "./images/cards/shadow_fairy.png",
+                "resource": {
+                    "gems": 6
+                },
+                "action": function (player:Player, enemy:Player) {
+                    player.updateResources({
+                        "gems": -6
+                    });
+                    enemy.updateTowerLife(-2);
+                },
+                "isActive": false,
+                "playAgain": true,
+                "object": {},
+                "backObject": {}
+            },
+            "shatterer": {
+                "name": "shatterer",
+                "source": "magic",
+                "description": {
+                    "eng": "Shatterer"
+                },
+                "text": {
+                    "eng": "-1 magic,\n9 damage to\nenemy tower"
+                },
+                "src": "./images/cards/shatterer.png",
+                "resource": {
+                    "gems": 8
+                },
+                "action": function (player:Player, enemy:Player) {
+                    player.updateResources({
+                        "gems": -8
+                    });
+                    player.updateSources({"magic": -1});
+                    enemy.updateTowerLife(-9);
+                },
+                "isActive": false,
+                "object": {},
+                "backObject": {}
+            },
+            "shift": {
+                "name": "shift",
+                "source": "mine",
+                "description": {
+                    "eng": "Shift"
+                },
+                "text": {
+                    "eng": "Switch your wall with enemy wall"
+                },
+                "src": "./images/cards/shift.png",
+                "resource": {
+                    "bricks": 17
+                },
+                "action": function (player:Player, enemy:Player) {
+                    player.updateResources({
+                        "bricks": -17
+                    });
+                    let playerWall:number = player.wallLife;
+                    let enemyWall:number = enemy.wallLife;
+                    player.updateWallLife(enemyWall - playerWall);
+                    enemy.updateWallLife(playerWall - enemyWall);
+                },
+                "isActive": false,
+                "object": {},
+                "backObject": {}
+            },
+            "smoky_quartz": {
+                "name": "smoky_quartz",
+                "source": "magic",
+                "description": {
+                    "eng": "Smoky quartz"
+                },
+                "text": {
+                    "eng": "1 damage to\nenemy tower,\nplay again"
+                },
+                "src": "./images/cards/smoky_quartz.png",
+                "resource": {
+                    "gems": 2
+                },
+                "action": function (player:Player, enemy:Player) {
+                    player.updateResources({
+                        "gems": -2
+                    });
+                    enemy.updateTowerLife(-1);
+                },
+                "isActive": false,
+                "playAgain": true,
+                "object": {},
+                "backObject": {}
+            },
+            "snake": {
+                "name": "snake",
+                "source": "dungeon",
+                "description": {
+                    "eng": "Snake"
+                },
+                "text": {
+                    "eng": "4 damage to\n enemy tower"
+                },
+                "src": "./images/cards/snake.png",
+                "resource": {
+                    "beasts": 6
+                },
+                "action": function (player:Player, enemy:Player) {
+                    player.updateResources({
+                        "beasts": -6
+                    });
+                    enemy.updateTowerLife(-4);
+                },
+                "isActive": false,
+                "object": {},
+                "backObject": {}
+            },
+            "solar_flare": {
+                "name": "solar_flare",
+                "source": "magic",
+                "description": {
+                    "eng": "Solar flare"
+                },
+                "text": {
+                    "eng": "+2 tower,\n2 damage to\nenemy tower"
+                },
+                "src": "./images/cards/solar_flare.png",
+                "resource": {
+                    "gems": 4
+                },
+                "action": function (player:Player, enemy:Player) {
+                    player.updateResources({
+                        "gems": -4
+                    });
+                    player.updateTowerLife(2);
+                    enemy.updateTowerLife(-2);
+                },
+                "isActive": false,
+                "object": {},
+                "backObject": {}
+            },
+            "spearman": {
+                "name": "spearman",
+                "source": "dungeon",
+                "description": {
+                    "eng": "Spearman"
+                },
+                "text": {
+                    "eng": "If wall > enemy\nwall do 3 damage,\nelse do 2 damage"
+                },
+                "src": "./images/cards/spearman.png",
+                "resource": {
+                    "beasts": 2
+                },
+                "action": function (player:Player, enemy:Player) {
+                    player.updateResources({
+                        "beasts": -2
+                    });
+                    (player.wallLife > enemy.wallLife) ? enemy.takeDamage(3) : enemy.takeDamage(2);
+                },
+                "isActive": false,
+                "object": {},
+                "backObject": {}
+            },
+            "spell_weavers": {
+                "name": "spell_weavers",
+                "source": "magic",
+                "description": {
+                    "eng": "Spell weavers"
+                },
+                "text": {
+                    "eng": "+1 magic"
+                },
+                "src": "./images/cards/spell_weavers.png",
+                "resource": {
+                    "gems": 3
+                },
+                "action": function (player:Player, enemy:Player) {
+                    player.updateResources({
+                        "gems": -3
+                    });
+                    player.updateSources({"magic": 1});
+                },
+                "isActive": false,
+                "object": {},
+                "backObject": {}
+            },
+            "stone_giant": {
+                "name": "stone_giant",
+                "source": "dungeon",
+                "description": {
+                    "eng": "Stone giant"
+                },
+                "text": {
+                    "eng": "10 damage,\n+4 wall"
+                },
+                "src": "./images/cards/stone_giant.png",
+                "resource": {
+                    "beasts": 15
+                },
+                "action": function (player:Player, enemy:Player) {
+                    player.updateResources({
+                        "beasts": -15
+                    });
+                    player.updateWallLife(4);
+                    enemy.takeDamage(10);
+                },
+                "isActive": false,
+                "object": {},
+                "backObject": {}
+            },
+            "strudy_wall": {
+                "name": "strudy_wall",
+                "source": "mine",
+                "description": {
+                    "eng": "Strudy wall"
+                },
+                "text": {
+                    "eng": "+4 wall"
+                },
+                "src": "./images/cards/strudy_wall.png",
+                "resource": {
+                    "bricks": 3
+                },
+                "action": function (player:Player, enemy:Player) {
+                    player.updateResources({
+                        "bricks": -3
+                    });
+                    player.updateWallLife(4);
+                },
+                "isActive": false,
+                "object": {},
+                "backObject": {}
+            },
+            "succubus": {
+                "name": "succubus",
+                "source": "dungeon",
+                "description": {
+                    "eng": "Succubus"
+                },
+                "text": {
+                    "eng": "5 damage to\nenemy tower,\nenemy loses\n8 beasts"
+                },
+                "src": "./images/cards/succubus.png",
+                "resource": {
+                    "beasts": 14
+                },
+                "action": function (player:Player, enemy:Player) {
+                    player.updateResources({
+                        "beasts": -14
+                    });
+                    enemy.updateResources({
+                        "beasts": -8
+                    });
+                    enemy.updateTowerLife(-5);
+                },
+                "isActive": false,
+                "object": {},
+                "backObject": {}
+            },
+            "technology_copping": {
+                "name": "technology_copping",
+                "source": "mine",
+                "description": {
+                    "eng": "Technology copping"
+                },
+                "text": {
+                    "eng": "If mine < enemy\nmine, mine =\nenemy mine"
+                },
+                "src": "./images/cards/technology_copping.png",
+                "resource": {
+                    "bricks": 5
+                },
+                "action": function (player:Player, enemy:Player) {
+                    player.updateResources({
+                        "bricks": -5
+                    });
+                    if (player.sources["mine"] < enemy.sources["mine"]) {
+                        player.updateSources({"mine": enemy.sources["mine"] - player.sources["mine"]});
+                    }
+                },
+                "isActive": false,
+                "object": {},
+                "backObject": {}
+            },
+            "thief": {
+                "name": "thief",
+                "source": "dungeon",
+                "description": {
+                    "eng": "Thief"
+                },
+                "text": {
+                    "eng": "Enemy loses 10 gems,\n 6 bricks, you gain half of that"
+                },
+                "src": "./images/cards/thief.png",
+                "resource": {
+                    "beasts": 12
+                },
+                "action": function (player:Player, enemy:Player) {
+                    let enemyGems:number = ((enemy.resources["gems"] - 10) > 0)
+                        ? (enemy.resources["gems"] - 10)
+                        : enemy.resources["gems"];
+                    let enemyBricks:number = ((enemy.resources["bricks"] - 6) > 0)
+                        ? (enemy.resources["bricks"] - 6)
+                        : enemy.resources["bricks"];
+                    player.updateResources({
+                        "beasts": -12,
+                        "gems": Math.floor(enemyGems / 2),
+                        "bricks": Math.floor(enemyBricks / 2)
+                    });
+                    enemy.updateResources({
+                        "gems": -10,
+                        "bricks": -6
+                    });
+                },
+                "isActive": false,
+                "object": {},
+                "backObject": {}
+            },
+            "topaz": {
+                "name": "topaz",
+                "source": "magic",
+                "description": {
+                    "eng": "Topaz"
+                },
+                "text": {
+                    "eng": "+12 tower,\n6 damage to\nenemy wall and tower"
+                },
+                "src": "./images/cards/topaz.png",
+                "resource": {
+                    "gems": 17
+                },
+                "action": function (player:Player, enemy:Player) {
+                    player.updateResources({
+                        "gems": -17
+                    });
+                    player.updateTowerLife(12);
+                    enemy.updateWallLife(-6);
+                    enemy.updateTowerLife(-6);
+                },
+                "isActive": false,
+                "object": {},
+                "backObject": {}
+            },
+            "tremor": {
+                "name": "tremor",
+                "source": "mine",
+                "description": {
+                    "eng": "Tremor"
+                },
+                "text": {
+                    "eng": "All walls take\n 5 damage,\nplay again"
+                },
+                "src": "./images/cards/tremor.png",
+                "resource": {
+                    "bricks": 7
+                },
+                "action": function (player:Player, enemy:Player) {
+                    player.updateResources({
+                        "bricks": -7
+                    });
+                    player.updateWallLife(-5);
+                    enemy.updateWallLife(-5);
+                },
+                "isActive": false,
+                "playAgain": true,
+                "object": {},
+                "backObject": {}
+            },
+            "troll": {
+                "name": "troll",
+                "source": "dungeon",
+                "description": {
+                    "eng": "Troll"
+                },
+                "text": {
+                    "eng": "+2 dungeon"
+                },
+                "src": "./images/cards/troll.png",
+                "resource": {
+                    "beasts": 7
+                },
+                "action": function (player:Player, enemy:Player) {
+                    player.updateResources({
+                        "beasts": -7
+                    });
+                    player.updateSources({"dungeon": 2});
+                },
+                "isActive": false,
+                "object": {},
+                "backObject": {}
+            },
+            "unicorn": {
+                "name": "unicorn",
+                "source": "dungeon",
+                "description": {
+                    "eng": "Unicorn"
+                },
+                "text": {
+                    "eng": "If magic > enemy\nmagic, 12 damage,\nelse 8 damage"
+                },
+                "src": "./images/cards/unicorn.png",
+                "resource": {
+                    "beasts": 9
+                },
+                "action": function (player:Player, enemy:Player) {
+                    player.updateResources({
+                        "beasts": -9
+                    });
+                    (player.sources["magic"] > enemy.sources["magic"]) ? enemy.takeDamage(12) : enemy.takeDamage(8);
+                },
+                "isActive": false,
+                "object": {},
+                "backObject": {}
+            },
+            "vampire": {
+                "name": "vampire",
+                "source": "dungeon",
+                "description": {
+                    "eng": "Vampire"
+                },
+                "text": {
+                    "eng": "10 damage,\nenemy loses 5 beasts,\n-1 enemy dungeon"
+                },
+                "src": "./images/cards/vampire.png",
+                "resource": {
+                    "beasts": 17
+                },
+                "action": function (player:Player, enemy:Player) {
+                    player.updateResources({
+                        "beasts": -17
+                    });
+                    enemy.takeDamage(10);
+                    enemy.updateResources({"beasts": -5});
+                    enemy.updateSources({"dungeon": -1});
+                },
+                "isActive": false,
+                "object": {},
+                "backObject": {}
+            },
+            "warlord": {
+                "name": "warlord",
+                "source": "dungeon",
+                "description": {
+                    "eng": "Warlord"
+                },
+                "text": {
+                    "eng": "13 damage,\nyou lose 3 gems"
+                },
+                "src": "./images/cards/warlord.png",
+                "resource": {
+                    "beasts": 13
+                },
+                "action": function (player:Player, enemy:Player) {
+                    player.updateResources({
+                        "beasts": -13,
+                        "gems": 3
+                    });
+                    enemy.takeDamage(13);
+                },
+                "isActive": false,
+                "object": {},
+                "backObject": {}
+            },
             "werewolf": {
                 "name": "werewolf",
                 "source": "dungeon",
@@ -1628,6 +2405,30 @@ class ArcomageCardsContainer {
                         "beasts": -5
                     });
                     enemy.takeDamage(9);
+                },
+                "isActive": false,
+                "object": {},
+                "backObject": {}
+            },
+            "wolf_sign": {
+                "name": "wolf_sign",
+                "source": "dungeon",
+                "description": {
+                    "eng": "Wolf sign"
+                },
+                "text": {
+                    "eng": "8 damage,\n-1 enemy mine"
+                },
+                "src": "./images/cards/wolf_sign.png",
+                "resource": {
+                    "beasts": 11
+                },
+                "action": function (player:Player, enemy:Player) {
+                    player.updateResources({
+                        "beasts": -11
+                    });
+                    enemy.takeDamage(8);
+                    enemy.updateSources({"mine": -1});
                 },
                 "isActive": false,
                 "object": {},
