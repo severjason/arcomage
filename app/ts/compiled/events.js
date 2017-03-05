@@ -127,7 +127,9 @@ class Events {
             }
             else {
                 if (that.game.cardAvailable(cardName, playerOne)) {
-                    that.game.playerMoved(playerOne);
+                    if (!card.playAgain) {
+                        that.game.playerMoved(playerOne);
+                    }
                     let basicValue = {
                         "top": cardObject.getTop(),
                         "left": cardObject.getLeft()
@@ -156,13 +158,18 @@ class Events {
                                         let eventPromise = new Promise((resolve, reject) => {
                                             (that.game.allotCards(playerOne))
                                                 ? resolve()
-                                                : reject("Can`t set card active status to false!");
+                                                : reject("Can`t allot cards!");
                                         });
                                         eventPromise.then(() => {
                                             that.canvas.fabricElement.renderAll();
                                             Arcomage.clearCardsFromCanvas(that.canvas, playerOne);
                                         }).then(() => {
-                                            that.game.CPUMove(that.canvas);
+                                            if (card.playAgain) {
+                                                that.game.drawCards(that.canvas, playerOne);
+                                            }
+                                            else {
+                                                that.game.CPUMove(that.canvas);
+                                            }
                                         });
                                     }
                                 }

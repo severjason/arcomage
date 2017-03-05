@@ -33,109 +33,109 @@ class CPU_AI {
         return this._params;
     }
     /**
-     * Apply card by card name  with small delay
+     * Apply card by its name
      * @param {string} cardName
      * @param {Canvas} canvas
      * @param {Arcomage} game
-     * @returns {Promise<any>}
      */
     applyCard(cardName, canvas, game) {
         let that = this;
         let card = this.cards.getSingleCard(cardName);
         let backOfCardObject = this.cards.getBackOfCardObject(cardName);
         let cardObject = this.cards.getCardObject(cardName);
-        return new Promise((resolve, reject) => {
-            if (game.isOn() && game.getPlayerTurn(that.cpu)) {
-                if (game.cardAvailable(cardName, that.cpu)) {
+        if (game.isOn() && game.getPlayerTurn(that.cpu)) {
+            if (game.cardAvailable(cardName, that.cpu)) {
+                if (!card.playAgain) {
                     game.playerMoved(that.cpu);
-                    let basicValue = {
-                        "top": backOfCardObject.getTop(),
-                        "left": backOfCardObject.getLeft()
-                    };
-                    cardObject.setTop(100);
-                    cardObject.setLeft((canvas.width - that.params.cardsValues.width) / 2);
-                    backOfCardObject.animate({
-                        "top": 100,
-                        "left": (canvas.width - that.params.cardsValues.width) / 2
-                    }, {
-                        onChange: canvas.fabricElement.renderAll.bind(canvas.fabricElement),
-                        easing: fabric.util.ease.easeInCubic,
-                        duration: 500,
-                        onComplete: function () {
-                            canvas.fabricElement.remove(backOfCardObject);
-                            cardObject.setOpacity(1);
-                            canvas.fabricElement.add(cardObject);
-                            backOfCardObject.setTop(basicValue.top);
-                            game.applyCard(cardName, that.cpu, game.playerOne);
-                            backOfCardObject.animate({
-                                "opacity": 0
-                            }, {
-                                onChange: canvas.fabricElement.renderAll.bind(canvas.fabricElement),
-                                duration: 100,
-                                onComplete: function () {
-                                    setTimeout(() => {
-                                        cardObject.animate({
-                                            "top": 0,
-                                            "opacity": 0
-                                        }, {
-                                            onChange: canvas.fabricElement.renderAll.bind(canvas.fabricElement),
-                                            duration: 500,
-                                            onComplete: function () {
-                                                that.cpu.removeCard(card);
-                                                cardObject.setTop(basicValue.top);
-                                                cardObject.setOpacity(1);
-                                                canvas.fabricElement.remove(cardObject);
-                                                resolve();
+                }
+                let basicValue = {
+                    "top": backOfCardObject.getTop(),
+                    "left": backOfCardObject.getLeft()
+                };
+                cardObject.setTop(100);
+                cardObject.setLeft((canvas.width - that.params.cardsValues.width) / 2);
+                backOfCardObject.animate({
+                    "top": 100,
+                    "left": (canvas.width - that.params.cardsValues.width) / 2
+                }, {
+                    onChange: canvas.fabricElement.renderAll.bind(canvas.fabricElement),
+                    easing: fabric.util.ease.easeInCubic,
+                    duration: 500,
+                    onComplete: function () {
+                        canvas.fabricElement.remove(backOfCardObject);
+                        cardObject.setOpacity(1);
+                        canvas.fabricElement.add(cardObject);
+                        backOfCardObject.setTop(basicValue.top);
+                        game.applyCard(cardName, that.cpu, game.playerOne);
+                        backOfCardObject.animate({
+                            "opacity": 0
+                        }, {
+                            onChange: canvas.fabricElement.renderAll.bind(canvas.fabricElement),
+                            duration: 100,
+                            onComplete: function () {
+                                setTimeout(() => {
+                                    cardObject.animate({
+                                        "top": 0,
+                                        "opacity": 0
+                                    }, {
+                                        onChange: canvas.fabricElement.renderAll.bind(canvas.fabricElement),
+                                        duration: 500,
+                                        onComplete: function () {
+                                            that.cpu.removeCard(card);
+                                            cardObject.setTop(basicValue.top);
+                                            cardObject.setOpacity(1);
+                                            canvas.fabricElement.remove(cardObject);
+                                            if (game.allotCards(that.cpu)) {
+                                                if (card.playAgain) {
+                                                    game.drawBackOfCards(canvas, that.cpu);
+                                                    that.move(canvas, game);
+                                                }
+                                                else {
+                                                    document.dispatchEvent(new CustomEvent("CPU moved"));
+                                                }
                                             }
-                                        });
-                                    }, 250);
-                                }
-                            });
-                        }
-                    });
-                }
-                else {
-                    reject("CPU can`t apply card!");
-                }
+                                        }
+                                    });
+                                }, 250);
+                            }
+                        });
+                    }
+                });
             }
-        });
+        }
     }
     /**
-     * Discard card by name
+     * Discard card by its name
      * @param {string} cardName
      * @param {Canvas} canvas
      * @param {Arcomage} game
-     * @returns {Promise<any>}
      */
     discardCard(cardName, canvas, game) {
         let that = this;
         let card = this.cards.getSingleCard(cardName);
         let backOfCardObject = this.cards.getBackOfCardObject(cardName);
         let backOfCardObjectTop = backOfCardObject.getTop();
-        return new Promise((resolve, reject) => {
-            if (game.isOn() && game.getPlayerTurn(that.cpu)) {
-                if (game.cardAvailable(cardName, that.cpu)) {
-                    game.playerMoved(that.cpu);
-                    that.cards.deactivate(cardName);
-                    backOfCardObject.animate({
-                        "top": 0,
-                        "opacity": 0
-                    }, {
-                        onChange: canvas.fabricElement.renderAll.bind(canvas.fabricElement),
-                        duration: 500,
-                        onComplete: function () {
-                            that.cpu.removeCard(card);
-                            backOfCardObject.setTop(backOfCardObjectTop);
-                            canvas.fabricElement.remove(backOfCardObject);
-                            resolve();
+        if (game.isOn() && game.getPlayerTurn(that.cpu)) {
+            if (game.cardAvailable(cardName, that.cpu)) {
+                game.playerMoved(that.cpu);
+                that.cards.deactivate(cardName);
+                backOfCardObject.animate({
+                    "top": 0,
+                    "opacity": 0
+                }, {
+                    onChange: canvas.fabricElement.renderAll.bind(canvas.fabricElement),
+                    duration: 500,
+                    onComplete: function () {
+                        that.cpu.removeCard(card);
+                        backOfCardObject.setTop(backOfCardObjectTop);
+                        canvas.fabricElement.remove(backOfCardObject);
+                        if (game.allotCards(that.cpu)) {
+                            document.dispatchEvent(new CustomEvent("CPU moved"));
                         }
-                    });
-                }
-                else {
-                    reject("Card is not active!");
-                }
+                    }
+                });
             }
-        });
+        }
     }
     /**
      * Get less resourceful card name
@@ -197,7 +197,6 @@ class CPU_AI {
      * Apply most resourceful card if CPU can, else discard less resourceful card
      * @param {Canvas} canvas
      * @param {Arcomage} game
-     * @returns {Promise<any>} discardCard or applyCard
      */
     move(canvas, game) {
         return (!this.cardsCanBeUsed())

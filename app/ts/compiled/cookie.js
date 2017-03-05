@@ -4,7 +4,6 @@ class Cookie {
         this.gameCookieName = "arcomage";
         this.gameStatusCookie = "arcomage_status";
     }
-
     /**
      * Set cookies using js-cookie
      * @param {Player} playerOne
@@ -37,7 +36,6 @@ class Cookie {
             }
         });
     }
-
     /**
      * Set cookie for game status
      * @param {boolean} status
@@ -45,7 +43,6 @@ class Cookie {
     setStatusCookie(status) {
         Cookies.set(this.gameStatusCookie, status);
     }
-
     /**
      * Check if game status is false
      * @returns {boolean}
@@ -53,7 +50,6 @@ class Cookie {
     gameIsOff() {
         return Cookies.getJSON(this.gameStatusCookie) === false;
     }
-
     /**
      * Get player one values
      * @returns {any} playerOne
@@ -61,7 +57,6 @@ class Cookie {
     getPlayerOneValues() {
         return this.getCookie().playerOne;
     }
-
     /**
      * Get player two values
      * @returns {any} playerTwo
@@ -69,7 +64,6 @@ class Cookie {
     getPlayerTwoValues() {
         return this.getCookie().playerTwo;
     }
-
     /**
      * Get player one name
      * @returns {any}
@@ -77,7 +71,6 @@ class Cookie {
     getPlayerOneName() {
         return this.getPlayerOneValues().name;
     }
-
     /**
      * Get player two name
      * @returns {any}
@@ -85,7 +78,6 @@ class Cookie {
     getPlayerTwoName() {
         return this.getPlayerTwoValues().name;
     }
-
     /**
      * Check if cookies are set
      * @returns {boolean}
@@ -93,7 +85,6 @@ class Cookie {
     cookiesAreSet() {
         return (Cookies.get(this.gameCookieName)) ? true : false;
     }
-
     /**
      * Get both players cookies
      * @returns {any}
@@ -101,21 +92,18 @@ class Cookie {
     getCookie() {
         return Cookies.getJSON(this.gameCookieName);
     }
-
     /**
      * Delete status cookie
      */
     removeStatusCookie() {
         Cookies.remove(this.gameStatusCookie);
     }
-
     /**
      * Delete both players cookie
      */
     removeCookie() {
         Cookies.remove(this.gameCookieName);
     }
-
     /**
      * Remove all cookies
      */

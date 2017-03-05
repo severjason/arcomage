@@ -6,7 +6,6 @@ class DOM {
         this.winText = "Congratulations!<br>You win!";
         this.loseText = "Sorry, pal!<br>You lose...";
     }
-
     showGameOverMessage(playerOneWin, playerOneMoves) {
         let text = (playerOneWin) ? this.winText : this.loseText;
         let movesText = `Your moves: ${playerOneMoves}`;
