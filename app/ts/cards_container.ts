@@ -28,7 +28,6 @@ class ArcomageCardsContainer {
                 "isActive": false,
                 "object": {},
                 "backObject": {}
-
             },
             "apprentice": {
                 "name": "apprentice",
@@ -54,7 +53,6 @@ class ArcomageCardsContainer {
                 "isActive": false,
                 "object": {},
                 "backObject": {}
-
             },
             "barracks": {
                 "name": "barracks",
@@ -154,7 +152,6 @@ class ArcomageCardsContainer {
                 "isActive": false,
                 "object": {},
                 "backObject": {}
-
             },
             "big_wall": {
                 "name": "big_wall",
@@ -178,7 +175,6 @@ class ArcomageCardsContainer {
                 "isActive": false,
                 "object": {},
                 "backObject": {}
-
             },
             "cave_river": {
                 "name": "cave_river",
