@@ -43,22 +43,22 @@ class CPU_AI {
     }
 
     /**
-     * Apply card by card name  with small delay
+     * Apply card by its name
      * @param {string} cardName
      * @param {Canvas} canvas
      * @param {Arcomage} game
-     * @returns {Promise<any>}
      */
-    applyCard(cardName:string, canvas:Canvas, game:Arcomage):Promise<any> {
+    applyCard(cardName:string, canvas:Canvas, game:Arcomage):void {
         let that = this;
         let card:any = this.cards.getSingleCard(cardName);
         let backOfCardObject:IGroup = this.cards.getBackOfCardObject(cardName);
         let cardObject:IGroup = this.cards.getCardObject(cardName);
 
-        return new Promise((resolve, reject)=> {
             if (game.isOn() && game.getPlayerTurn(that.cpu)) {
                 if (game.cardAvailable(cardName, that.cpu)) {
-                    game.playerMoved(that.cpu);
+                    if (!card.playAgain) {
+                        game.playerMoved(that.cpu);
+                    }
                     let basicValue:any = {
                         "top": backOfCardObject.getTop(),
                         "left": backOfCardObject.getLeft()
@@ -96,7 +96,14 @@ class CPU_AI {
                                                 cardObject.setTop(basicValue.top);
                                                 cardObject.setOpacity(1);
                                                 canvas.fabricElement.remove(cardObject);
-                                                resolve();
+                                                if (game.allotCards(that.cpu)) {
+                                                    if (card.playAgain) {
+                                                        game.drawBackOfCards(canvas, that.cpu);
+                                                        that.move(canvas, game);
+                                                    } else {
+                                                        document.dispatchEvent(new CustomEvent("CPU moved"));
+                                                    }
+                                                }
                                             }
                                         });
                                     }, 250);
@@ -105,27 +112,22 @@ class CPU_AI {
                         }
                     });
                 }
-                else {
-                    reject("CPU can`t apply card!");
-                }
             }
-        });
     }
 
+
     /**
-     * Discard card by name
+     * Discard card by its name
      * @param {string} cardName
      * @param {Canvas} canvas
      * @param {Arcomage} game
-     * @returns {Promise<any>}
      */
-    discardCard(cardName:string, canvas:Canvas, game:Arcomage):Promise<any> {
+    discardCard(cardName:string, canvas:Canvas, game:Arcomage):void {
         let that = this;
         let card:any = this.cards.getSingleCard(cardName);
         let backOfCardObject:IGroup = this.cards.getBackOfCardObject(cardName);
         let backOfCardObjectTop:number = backOfCardObject.getTop();
 
-        return new Promise((resolve, reject)=> {
             if (game.isOn() && game.getPlayerTurn(that.cpu)) {
                 if (game.cardAvailable(cardName, that.cpu)) {
                     game.playerMoved(that.cpu);
@@ -140,15 +142,13 @@ class CPU_AI {
                             that.cpu.removeCard(card);
                             backOfCardObject.setTop(backOfCardObjectTop);
                             canvas.fabricElement.remove(backOfCardObject);
-                            resolve();
+                            if (game.allotCards(that.cpu)) {
+                                document.dispatchEvent(new CustomEvent("CPU moved"));
+                            }
                         }
                     });
                 }
-                else {
-                    reject("Card is not active!");
-                }
             }
-        });
     }
 
     /**
@@ -215,9 +215,8 @@ class CPU_AI {
      * Apply most resourceful card if CPU can, else discard less resourceful card
      * @param {Canvas} canvas
      * @param {Arcomage} game
-     * @returns {Promise<any>} discardCard or applyCard
      */
-    move(canvas:Canvas, game:Arcomage):Promise<any> {
+    move(canvas:Canvas, game:Arcomage):void {
         return (!this.cardsCanBeUsed())
             ? this.discardCard(this.getLessResourcefulCard(this.cpu.cards), canvas, game)
             : this.applyCard(this.getMostResourcefulCard(this.getAllCardsThatCanBeUsed()), canvas, game);

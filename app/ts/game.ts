@@ -204,7 +204,7 @@ class Arcomage {
     }
 
     /**
-     * Apply card by its name
+     * Apply card by its name and check if game is over
      * @param {string} cardName
      * @param {Player} player
      * @param {Player} enemy
@@ -302,16 +302,16 @@ class Arcomage {
     CPUMove(canvas:Canvas) {
         let that = this;
         that.drawBackOfCards(canvas, that.playerTwo);
-        that.CPU_AI.move(canvas, that).then(()=> {
+        that.CPU_AI.move(canvas, that);
+        document.addEventListener("CPU moved", function (e) {
+            e.stopImmediatePropagation();
             let eventPromise:Promise<any> = new Promise((resolve, reject) => {
-                (that.allotCards(that.playerTwo))
-                    ? resolve()
-                    : reject("Can`t allot cards!");
-            });
-            eventPromise.then(() => {
                 that.clearCPUBackOfCards(canvas);
-            }).then(()=> {
+                resolve();
+            });
+            eventPromise.then(()=> {
                 that.updateResources(that.playerOne.sources, that.playerTwo.sources);
+            }).then(()=> {
                 that.drawCards(canvas, that.playerOne);
             });
         });
@@ -323,6 +323,7 @@ class Arcomage {
      * @param {Player} player
      */
     drawBackOfCards(canvas:Canvas, player:Player) {
+        this.clearCPUBackOfCards(canvas);
         for (let i = 0; i < player.cards.length; i++) {
             let playerCardObject:IGroup = player.cards[i].backObject;
             let paddingLeft = (i === 0)
@@ -337,11 +338,12 @@ class Arcomage {
     }
 
     /**
-     * Draw cards from available cards
+     * Clear old cards from canvas and draws cards from available cards
      * @param {Canvas} canvas
      * @param {Player} player
      */
     drawCards(canvas:Canvas, player:Player) {
+        Arcomage.clearCardsFromCanvas(canvas, player);
         for (let i = 0; i < player.cards.length; i++) {
             let playerCardObject:IGroup = player.cards[i].object;
             let paddingLeft = (i === 0)
