@@ -1,5 +1,6 @@
 var ArcomageGame;
 (function (ArcomageGame) {
+    "use strict";
     class Cookie {
         constructor() {
             this.gameCookieName = "arcomage";

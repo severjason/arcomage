@@ -1,5 +1,8 @@
 namespace ArcomageGame {
+    "use strict";
+
     import IGroup = fabric.IGroup;
+
     export class CPUAI {
 
         private cpuPlayer: Player;

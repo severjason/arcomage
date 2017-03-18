@@ -1,5 +1,6 @@
 var ArcomageGame;
 (function (ArcomageGame) {
+    "use strict";
     class Player {
         constructor(name, playerValues, maxValues, canvasValues) {
             this.playerName = name;

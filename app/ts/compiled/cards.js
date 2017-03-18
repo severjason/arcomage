@@ -1,5 +1,6 @@
 var ArcomageGame;
 (function (ArcomageGame) {
+    "use strict";
     class ArcomageCards extends ArcomageGame.ArcomageCardsContainer {
         constructor() {
             super();

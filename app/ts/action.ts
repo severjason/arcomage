@@ -1,4 +1,7 @@
+"use strict";
+
 import LoaderClass = ArcomageGame.Loader;
+
 $(document).ready(() => {
     let loader = new LoaderClass();
     let body = $("body");

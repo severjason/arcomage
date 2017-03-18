@@ -1,4 +1,6 @@
 namespace ArcomageGame {
+    "use strict";
+
     import IImage = fabric.IImage;
     import ICircle = fabric.ICircle;
     import ITextbox = fabric.ITextbox;

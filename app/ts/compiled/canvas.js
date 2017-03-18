@@ -1,5 +1,6 @@
 var ArcomageGame;
 (function (ArcomageGame) {
+    "use strict";
     class Canvas {
         constructor(containerId, canvasId) {
             this.containerId = containerId;

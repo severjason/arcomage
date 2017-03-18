@@ -1,5 +1,6 @@
 var ArcomageGame;
 (function (ArcomageGame) {
+    "use strict";
     class DOM {
         constructor() {
             this.gameOverId = "game_over";

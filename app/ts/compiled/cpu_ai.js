@@ -1,5 +1,6 @@
 var ArcomageGame;
 (function (ArcomageGame) {
+    "use strict";
     class CPUAI {
         constructor(cpu, cards, params) {
             this.cpuPlayer = cpu;

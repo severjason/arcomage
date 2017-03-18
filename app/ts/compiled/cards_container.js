@@ -1,5 +1,6 @@
 var ArcomageGame;
 (function (ArcomageGame) {
+    "use strict";
     class ArcomageCardsContainer {
         constructor() {
             this.cardsArray = {

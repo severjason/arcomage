@@ -1,5 +1,6 @@
 var ArcomageGame;
 (function (ArcomageGame) {
+    "use strict";
     class Events {
         constructor(params, CARDS, canvas, game) {
             this.cardsObject = CARDS;

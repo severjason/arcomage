@@ -1,4 +1,6 @@
 namespace ArcomageGame {
+    "use strict";
+
     export class Loader {
 
         /**

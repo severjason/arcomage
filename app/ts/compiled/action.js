@@ -1,3 +1,4 @@
+"use strict";
 var LoaderClass = ArcomageGame.Loader;
 $(document).ready(() => {
     let loader = new LoaderClass();
