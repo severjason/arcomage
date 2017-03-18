@@ -1,132 +1,134 @@
-class Cookie {
+namespace ArcomageGame {
+    export class Cookie {
 
-    public gameCookieName: string;
-    public gameStatusCookie: string;
+        public gameCookieName: string;
+        public gameStatusCookie: string;
 
-    constructor() {
-        this.gameCookieName = "arcomage";
-        this.gameStatusCookie = "arcomage_status";
-    }
-
-    /**
-     * Set cookies using js-cookie
-     * @param {Player} playerOne
-     * @param {Player} playerTwo
-     */
-    public setCookie(playerOne: Player, playerTwo: Player): void {
-
-        let playerOneCards: string[] = [];
-        let playerTwoCards: string[] = [];
-
-        for (let i = 0; i < playerOne.cards.length; i++) {
-            playerOneCards.push(playerOne.cards[i].name);
-            playerTwoCards.push(playerTwo.cards[i].name);
+        constructor() {
+            this.gameCookieName = "arcomage";
+            this.gameStatusCookie = "arcomage_status";
         }
 
-        Cookies.set(this.gameCookieName, {
-            playerOne: {
-                cards: playerOneCards,
-                moves: playerOne.moves,
-                name: playerOne.name,
-                resources: playerOne.resources,
-                sources: playerOne.sources,
-                towerLife: playerOne.towerLife,
-                wallLife: playerOne.wallLife,
-            },
-            playerTwo: {
-                cards: playerTwoCards,
-                name: playerTwo.name,
-                resources: playerTwo.resources,
-                sources: playerTwo.sources,
-                towerLife: playerTwo.towerLife,
-                wallLife: playerTwo.wallLife,
-            },
-        });
-    }
+        /**
+         * Set cookies using js-cookie
+         * @param {Player} playerOne
+         * @param {Player} playerTwo
+         */
+        public setCookie(playerOne: Player, playerTwo: Player): void {
 
-    /**
-     * Set cookie for game status
-     * @param {boolean} status
-     */
-    public setStatusCookie(status: boolean) {
-        Cookies.set(this.gameStatusCookie, status);
-    }
+            let playerOneCards: string[] = [];
+            let playerTwoCards: string[] = [];
 
-    /**
-     * Check if game status is false
-     * @returns {boolean}
-     */
-    public gameIsOff(): any {
-        return Cookies.getJSON(this.gameStatusCookie) === false;
-    }
+            for (let i = 0; i < playerOne.cards.length; i++) {
+                playerOneCards.push(playerOne.cards[i].name);
+                playerTwoCards.push(playerTwo.cards[i].name);
+            }
 
-    /**
-     * Get player one values
-     * @returns {Object} playerOne
-     */
-    public getPlayerOneValues(): any {
-        return this.getCookie().playerOne;
-    }
+            Cookies.set(this.gameCookieName, {
+                playerOne: {
+                    cards: playerOneCards,
+                    moves: playerOne.moves,
+                    name: playerOne.name,
+                    resources: playerOne.resources,
+                    sources: playerOne.sources,
+                    towerLife: playerOne.towerLife,
+                    wallLife: playerOne.wallLife,
+                },
+                playerTwo: {
+                    cards: playerTwoCards,
+                    name: playerTwo.name,
+                    resources: playerTwo.resources,
+                    sources: playerTwo.sources,
+                    towerLife: playerTwo.towerLife,
+                    wallLife: playerTwo.wallLife,
+                },
+            });
+        }
 
-    /**
-     * Get player two values
-     * @returns {Object} playerTwo
-     */
-    public getPlayerTwoValues(): any {
-        return this.getCookie().playerTwo;
-    }
+        /**
+         * Set cookie for game status
+         * @param {boolean} status
+         */
+        public setStatusCookie(status: boolean) {
+            Cookies.set(this.gameStatusCookie, status);
+        }
 
-    /**
-     * Get player one name
-     * @returns {string}
-     */
-    public getPlayerOneName(): string {
-        return this.getPlayerOneValues().name;
-    }
+        /**
+         * Check if game status is false
+         * @returns {boolean}
+         */
+        public gameIsOff(): any {
+            return Cookies.getJSON(this.gameStatusCookie) === false;
+        }
 
-    /**
-     * Get player two name
-     * @returns {string}
-     */
-    public getPlayerTwoName(): string {
-        return this.getPlayerTwoValues().name;
-    }
+        /**
+         * Get player one values
+         * @returns {Object} playerOne
+         */
+        public getPlayerOneValues(): any {
+            return this.getCookie().playerOne;
+        }
 
-    /**
-     * Check if cookies are set
-     * @returns {boolean}
-     */
-    public cookiesAreSet(): boolean {
-        return !!(Cookies.get(this.gameCookieName));
-    }
+        /**
+         * Get player two values
+         * @returns {Object} playerTwo
+         */
+        public getPlayerTwoValues(): any {
+            return this.getCookie().playerTwo;
+        }
 
-    /**
-     * Get both players cookies
-     * @returns {Object}
-     */
-    public getCookie(): any {
-        return Cookies.getJSON(this.gameCookieName);
-    }
+        /**
+         * Get player one name
+         * @returns {string}
+         */
+        public getPlayerOneName(): string {
+            return this.getPlayerOneValues().name;
+        }
 
-    /**
-     * Delete status cookie
-     */
-    public removeStatusCookie(): void {
-        Cookies.remove(this.gameStatusCookie);
-    }
+        /**
+         * Get player two name
+         * @returns {string}
+         */
+        public getPlayerTwoName(): string {
+            return this.getPlayerTwoValues().name;
+        }
 
-    /**
-     * Delete both players cookie
-     */
-    public removeCookie(): void {
-        Cookies.remove(this.gameCookieName);
-    }
+        /**
+         * Check if cookies are set
+         * @returns {boolean}
+         */
+        public cookiesAreSet(): boolean {
+            return !!(Cookies.get(this.gameCookieName));
+        }
 
-    /**
-     * Remove all cookies
-     */
-    public removeAll() {
-        this.removeCookie();
-        this.removeStatusCookie();
+        /**
+         * Get both players cookies
+         * @returns {Object}
+         */
+        public getCookie(): any {
+            return Cookies.getJSON(this.gameCookieName);
+        }
+
+        /**
+         * Delete status cookie
+         */
+        public removeStatusCookie(): void {
+            Cookies.remove(this.gameStatusCookie);
+        }
+
+        /**
+         * Delete both players cookie
+         */
+        public removeCookie(): void {
+            Cookies.remove(this.gameCookieName);
+        }
+
+        /**
+         * Remove all cookies
+         */
+        public removeAll() {
+            this.removeCookie();
+            this.removeStatusCookie();
+        }
     }
 }
