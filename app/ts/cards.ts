@@ -6,42 +6,42 @@ class ArcomageCards extends ArcomageCardsContainer {
 
     /**
      * Get all cards
-     * @returns {any} cards
+     * @returns {Object} cards
      */
-    get cards():any {
-        return this._cards;
+    get cards(): any {
+        return this.cardsArray;
     }
 
     /**
      * Get back of card src
-     * @returns {any} _backOfCardSrc
+     * @returns {Object} backOfCardSrc
      */
-    get backOfCardSrc():string {
-        return this._backOfCardSrc;
+    get backOfCardSource(): string {
+        return this.backOfCardSrc;
     }
 
     /**
      * Get discard text
-     * @returns {string} _discardText
+     * @returns {string} discardTxt
      */
-    get discardText():string {
-        return this._discardText;
+    get discardText(): string {
+        return this.discardTxt;
     }
 
     /**
      *  Get cards names
      * @returns {string[]}
      */
-    get names():Array<string> {
-        return Object.keys(this._cards);
+    get names(): string[] {
+        return Object.keys(this.cardsArray);
     }
 
     /**
      * Get one card by name
      * @param {string} cardName
-     * @returns {any} 
+     * @returns {Object}
      */
-    getSingleCard(cardName:string):any {
+    public getSingleCard(cardName: string): any {
         return this.cards[cardName];
     }
 
@@ -50,7 +50,7 @@ class ArcomageCards extends ArcomageCardsContainer {
      * @param {string} description
      * @returns {string} cardName
      */
-    getCardNameByDesc(description:string):string {
+    public getCardNameByDesc(description: string): string {
         for (let i = 0, length = this.names.length; i < length; i++) {
             let cardDesc = this.getSingleCard(this.names[i]).description;
             if (description === cardDesc) {
@@ -62,18 +62,18 @@ class ArcomageCards extends ArcomageCardsContainer {
     /**
      * Get card fabric object
      * @param {string} cardName
-     * @returns {any}
+     * @returns {fabric.IGroup}
      */
-    getCardObject(cardName:string):any {
+    public getCardObject(cardName: string): fabric.IGroup {
         return this.getSingleCard(cardName).object;
     }
 
     /**
      * Set card fabric object
      * @param {string} cardName
-     * @param {any} newObject
+     * @param {fabric.IGroup} newObject
      */
-    setCardObject(cardName:string, newObject:any):void {
+    public setCardObject(cardName: string, newObject: fabric.IGroup): void {
         if (typeof newObject === "object") {
             this.getSingleCard(cardName).object = newObject;
         }
@@ -82,18 +82,18 @@ class ArcomageCards extends ArcomageCardsContainer {
     /**
      * Get back of card fabric object
      * @param {string} cardName
-     * @returns {any}
+     * @returns {fabric.IGroup}
      */
-    getBackOfCardObject(cardName:string):any {
+    public getBackOfCardObject(cardName: string): fabric.IGroup {
         return this.getSingleCard(cardName).backObject;
     }
 
     /**
      * Set back of card fabric object
      * @param {string} cardName
-     * @param {any} newObject
+     * @param {fabric.IGroup} newObject
      */
-    setBackOfCardObject(cardName:string, newObject:any) {
+    public setBackOfCardObject(cardName: string, newObject: fabric.IGroup) {
         if (typeof newObject === "object") {
             this.getSingleCard(cardName).backObject = newObject;
         }
@@ -105,10 +105,10 @@ class ArcomageCards extends ArcomageCardsContainer {
      * @param {Player} player
      * @returns {boolean}
      */
-    cardCanBeUsed(cardName:string, player:Player):boolean {
+    public cardCanBeUsed(cardName: string, player: Player): boolean {
         let card = this.getSingleCard(cardName);
-        let resourceName:string = Object.keys(card.resource)[0];
-        let resourceValue:number = card.resource[resourceName];
+        let resourceName: string = Object.keys(card.resource)[0];
+        let resourceValue: number = card.resource[resourceName];
         return (player.resources[resourceName] - resourceValue >= 0);
     }
 
@@ -117,7 +117,7 @@ class ArcomageCards extends ArcomageCardsContainer {
      * @param {string} cardName
      * @returns {boolean}
      */
-    isActive(cardName:string):boolean {
+    public isActive(cardName: string): boolean {
         return this.getSingleCard(cardName).isActive;
     }
 
@@ -125,7 +125,7 @@ class ArcomageCards extends ArcomageCardsContainer {
      * Change card status to false
      * @param {string} cardName
      */
-    deactivate(cardName:string):void {
+    public deactivate(cardName: string): void {
         this.getSingleCard(cardName).isActive = false;
     }
 
@@ -133,10 +133,8 @@ class ArcomageCards extends ArcomageCardsContainer {
      * Change card status to active
      * @param {string} cardName
      */
-    activate(cardName:string):void {
+    public activate(cardName: string): void {
         this.getSingleCard(cardName).isActive = true;
     }
 
 }
-
-

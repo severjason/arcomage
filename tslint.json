@@ -1,0 +1,9 @@
+{
+    "extends": "tslint:recommended",
+    "exclude": "app/ts/@types",
+    "rules": {
+        "no-namespace": [false, "allow-declarations"],
+        "object-literal-sort-keys": false,
+        "no-console": false
+    }
+}

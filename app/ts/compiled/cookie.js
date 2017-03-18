@@ -1,4 +1,3 @@
-/// <reference path="@types/js-cookie/js-cookie.d.ts" />
 class Cookie {
     constructor() {
         this.gameCookieName = "arcomage";
@@ -17,23 +16,23 @@ class Cookie {
             playerTwoCards.push(playerTwo.cards[i].name);
         }
         Cookies.set(this.gameCookieName, {
-            "playerOne": {
-                "name": playerOne.name,
-                "towerLife": playerOne.towerLife,
-                "wallLife": playerOne.wallLife,
-                "resources": playerOne.resources,
-                "sources": playerOne.sources,
-                "moves": playerOne.moves,
-                "cards": playerOneCards
+            playerOne: {
+                cards: playerOneCards,
+                moves: playerOne.moves,
+                name: playerOne.name,
+                resources: playerOne.resources,
+                sources: playerOne.sources,
+                towerLife: playerOne.towerLife,
+                wallLife: playerOne.wallLife,
             },
-            "playerTwo": {
-                "name": playerTwo.name,
-                "towerLife": playerTwo.towerLife,
-                "wallLife": playerTwo.wallLife,
-                "resources": playerTwo.resources,
-                "sources": playerTwo.sources,
-                "cards": playerTwoCards
-            }
+            playerTwo: {
+                cards: playerTwoCards,
+                name: playerTwo.name,
+                resources: playerTwo.resources,
+                sources: playerTwo.sources,
+                towerLife: playerTwo.towerLife,
+                wallLife: playerTwo.wallLife,
+            },
         });
     }
     /**
@@ -52,28 +51,28 @@ class Cookie {
     }
     /**
      * Get player one values
-     * @returns {any} playerOne
+     * @returns {Object} playerOne
      */
     getPlayerOneValues() {
         return this.getCookie().playerOne;
     }
     /**
      * Get player two values
-     * @returns {any} playerTwo
+     * @returns {Object} playerTwo
      */
     getPlayerTwoValues() {
         return this.getCookie().playerTwo;
     }
     /**
      * Get player one name
-     * @returns {any}
+     * @returns {string}
      */
     getPlayerOneName() {
         return this.getPlayerOneValues().name;
     }
     /**
      * Get player two name
-     * @returns {any}
+     * @returns {string}
      */
     getPlayerTwoName() {
         return this.getPlayerTwoValues().name;
@@ -83,11 +82,11 @@ class Cookie {
      * @returns {boolean}
      */
     cookiesAreSet() {
-        return (Cookies.get(this.gameCookieName)) ? true : false;
+        return !!(Cookies.get(this.gameCookieName));
     }
     /**
      * Get both players cookies
-     * @returns {any}
+     * @returns {Object}
      */
     getCookie() {
         return Cookies.getJSON(this.gameCookieName);

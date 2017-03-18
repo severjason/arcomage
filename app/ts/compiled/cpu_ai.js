@@ -1,36 +1,36 @@
-class CPU_AI {
+class CPUAI {
     constructor(cpu, cards, params) {
-        this._cpu = cpu;
-        this._cards = cards;
-        this._params = params;
+        this.cpuPlayer = cpu;
+        this.cardsObject = cards;
+        this.paramsObject = params;
     }
     /**
      * Get playerTwo (CPU)
-     * @returns {Player} _playerTwo
+     * @returns {Player} cpuPlayer
      */
     get cpu() {
-        return this._cpu;
+        return this.cpuPlayer;
     }
     /**
      * Get cards class
-     * @returns {ArcomageCards} _cards
+     * @returns {ArcomageCards} cardsObject
      */
     get cards() {
-        return this._cards;
+        return this.cardsObject;
     }
     /**
      * Get relations from parameters
-     * @returns {{mine, magic, dungeon}|any} relations
+     * @returns {{mine, magic, dungeon}|Object} relations
      */
     get relation() {
-        return this._params.canvasValues.relations;
+        return this.paramsObject.canvasValues.relations;
     }
     /**
      * Get Param class
-     * @returns {Param} _params
+     * @returns {Param} paramsObject
      */
     get params() {
-        return this._params;
+        return this.paramsObject;
     }
     /**
      * Apply card by its name
@@ -49,38 +49,38 @@ class CPU_AI {
                     game.playerMoved(that.cpu);
                 }
                 let basicValue = {
-                    "top": backOfCardObject.getTop(),
-                    "left": backOfCardObject.getLeft()
+                    top: backOfCardObject.getTop(),
+                    left: backOfCardObject.getLeft(),
                 };
                 cardObject.setTop(100);
                 cardObject.setLeft((canvas.width - that.params.cardsValues.width) / 2);
                 backOfCardObject.animate({
-                    "top": 100,
-                    "left": (canvas.width - that.params.cardsValues.width) / 2
+                    top: 100,
+                    left: (canvas.width - that.params.cardsValues.width) / 2,
                 }, {
                     onChange: canvas.fabricElement.renderAll.bind(canvas.fabricElement),
                     easing: fabric.util.ease.easeInCubic,
                     duration: 500,
-                    onComplete: function () {
+                    onComplete: () => {
                         canvas.fabricElement.remove(backOfCardObject);
                         cardObject.setOpacity(1);
                         canvas.fabricElement.add(cardObject);
                         backOfCardObject.setTop(basicValue.top);
                         game.applyCard(cardName, that.cpu, game.playerOne);
                         backOfCardObject.animate({
-                            "opacity": 0
+                            opacity: 0,
                         }, {
                             onChange: canvas.fabricElement.renderAll.bind(canvas.fabricElement),
                             duration: 100,
-                            onComplete: function () {
+                            onComplete: () => {
                                 setTimeout(() => {
                                     cardObject.animate({
-                                        "top": 0,
-                                        "opacity": 0
+                                        top: 0,
+                                        opacity: 0,
                                     }, {
                                         onChange: canvas.fabricElement.renderAll.bind(canvas.fabricElement),
                                         duration: 500,
-                                        onComplete: function () {
+                                        onComplete: () => {
                                             that.cpu.removeCard(card);
                                             cardObject.setTop(basicValue.top);
                                             cardObject.setOpacity(1);
@@ -94,12 +94,12 @@ class CPU_AI {
                                                     document.dispatchEvent(new CustomEvent("CPU moved"));
                                                 }
                                             }
-                                        }
+                                        },
                                     });
                                 }, 250);
-                            }
+                            },
                         });
-                    }
+                    },
                 });
             }
         }
@@ -120,26 +120,26 @@ class CPU_AI {
                 game.playerMoved(that.cpu);
                 that.cards.deactivate(cardName);
                 backOfCardObject.animate({
-                    "top": 0,
-                    "opacity": 0
+                    top: 0,
+                    opacity: 0,
                 }, {
                     onChange: canvas.fabricElement.renderAll.bind(canvas.fabricElement),
                     duration: 500,
-                    onComplete: function () {
+                    onComplete: () => {
                         that.cpu.removeCard(card);
                         backOfCardObject.setTop(backOfCardObjectTop);
                         canvas.fabricElement.remove(backOfCardObject);
                         if (game.allotCards(that.cpu)) {
                             document.dispatchEvent(new CustomEvent("CPU moved"));
                         }
-                    }
+                    },
                 });
             }
         }
     }
     /**
      * Get less resourceful card name
-     * @param {any[]} cards
+     * @param {Object[]} cards
      * @returns {string} cardName
      */
     getLessResourcefulCard(cards) {
@@ -154,7 +154,7 @@ class CPU_AI {
     }
     /**
      * Get most resourceful card name
-     * @param {any[]} cards
+     * @param {Object[]} cards
      * @returns {string} cardName
      */
     getMostResourcefulCard(cards) {
@@ -169,13 +169,13 @@ class CPU_AI {
     }
     /**
      * Get all cards that CPU can use from all available cards
-     * @returns {any[]}
+     * @returns {Object[]}
      */
     getAllCardsThatCanBeUsed() {
         let availableCards = [];
-        for (let i = 0; i < this.cpu.cards.length; i++) {
-            if (this.cards.cardCanBeUsed(this.cpu.cards[i].name, this.cpu)) {
-                availableCards.push(this.cpu.cards[i]);
+        for (let card of this.cpu.cards) {
+            if (this.cards.cardCanBeUsed(card.name, this.cpu)) {
+                availableCards.push(card);
             }
         }
         return availableCards;

@@ -4,36 +4,36 @@ class ArcomageCards extends ArcomageCardsContainer {
     }
     /**
      * Get all cards
-     * @returns {any} cards
+     * @returns {Object} cards
      */
     get cards() {
-        return this._cards;
+        return this.cardsArray;
     }
     /**
      * Get back of card src
-     * @returns {any} _backOfCardSrc
+     * @returns {Object} backOfCardSrc
      */
-    get backOfCardSrc() {
-        return this._backOfCardSrc;
+    get backOfCardSource() {
+        return this.backOfCardSrc;
     }
     /**
      * Get discard text
-     * @returns {string} _discardText
+     * @returns {string} discardTxt
      */
     get discardText() {
-        return this._discardText;
+        return this.discardTxt;
     }
     /**
      *  Get cards names
      * @returns {string[]}
      */
     get names() {
-        return Object.keys(this._cards);
+        return Object.keys(this.cardsArray);
     }
     /**
      * Get one card by name
      * @param {string} cardName
-     * @returns {any}
+     * @returns {Object}
      */
     getSingleCard(cardName) {
         return this.cards[cardName];
@@ -54,7 +54,7 @@ class ArcomageCards extends ArcomageCardsContainer {
     /**
      * Get card fabric object
      * @param {string} cardName
-     * @returns {any}
+     * @returns {fabric.IGroup}
      */
     getCardObject(cardName) {
         return this.getSingleCard(cardName).object;
@@ -62,7 +62,7 @@ class ArcomageCards extends ArcomageCardsContainer {
     /**
      * Set card fabric object
      * @param {string} cardName
-     * @param {any} newObject
+     * @param {fabric.IGroup} newObject
      */
     setCardObject(cardName, newObject) {
         if (typeof newObject === "object") {
@@ -72,7 +72,7 @@ class ArcomageCards extends ArcomageCardsContainer {
     /**
      * Get back of card fabric object
      * @param {string} cardName
-     * @returns {any}
+     * @returns {fabric.IGroup}
      */
     getBackOfCardObject(cardName) {
         return this.getSingleCard(cardName).backObject;
@@ -80,7 +80,7 @@ class ArcomageCards extends ArcomageCardsContainer {
     /**
      * Set back of card fabric object
      * @param {string} cardName
-     * @param {any} newObject
+     * @param {fabric.IGroup} newObject
      */
     setBackOfCardObject(cardName, newObject) {
         if (typeof newObject === "object") {

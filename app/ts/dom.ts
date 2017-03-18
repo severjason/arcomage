@@ -1,10 +1,10 @@
 class DOM {
 
-    gameOverId:string;
-    gameOverTitleId:string;
-    gameOverMovesId:string;
-    winText:string;
-    loseText:string;
+    public gameOverId: string;
+    public gameOverTitleId: string;
+    public gameOverMovesId: string;
+    public winText: string;
+    public loseText: string;
 
     constructor() {
         this.gameOverId = "game_over";
@@ -14,15 +14,13 @@ class DOM {
         this.loseText = "Sorry, pal!<br>You lose...";
     }
 
-    showGameOverMessage(playerOneWin:boolean, playerOneMoves:number):void {
-        let text:string = (playerOneWin) ? this.winText : this.loseText;
-        let movesText:string = `Your moves: ${playerOneMoves}`;
+    public showGameOverMessage(playerOneWin: boolean, playerOneMoves: number): void {
+        let text: string = (playerOneWin) ? this.winText : this.loseText;
+        let movesText: string = `Your moves: ${playerOneMoves}`;
         document.getElementById(this.gameOverTitleId).innerHTML = text;
         document.getElementById(this.gameOverMovesId).innerHTML = movesText;
-        setTimeout(()=> {
+        setTimeout(() => {
             document.getElementById(this.gameOverId).style.display = "block";
         }, 500);
     }
-
-
 }

@@ -1,57 +1,57 @@
 class Events {
 
-    private _cards:ArcomageCards;
-    private _canvas:Canvas;
-    private _game:Arcomage;
-    private _params:Param;
-    private _cardShakeEventStarted:boolean;
+    private cardsObject: ArcomageCards;
+    private canvasObject: Canvas;
+    private gameObject: Arcomage;
+    private paramsObject: Param;
+    private cardShakeEventStatus: boolean;
 
-    constructor(params:Param, CARDS:ArcomageCards, canvas:Canvas, game:Arcomage) {
-        this._cards = CARDS;
-        this._canvas = canvas;
-        this._game = game;
-        this._params = params;
-        this._cardShakeEventStarted = false;
+    constructor(params: Param, CARDS: ArcomageCards, canvas: Canvas, game: Arcomage) {
+        this.cardsObject = CARDS;
+        this.canvasObject = canvas;
+        this.gameObject = game;
+        this.paramsObject = params;
+        this.cardShakeEventStatus = false;
     }
 
     /**
      * Get switcher for card shake
-     * @returns {boolean} _cardShakeEventStarted
+     * @returns {boolean} cardShakeEventStatus
      */
-    get cardShakeEventStarted():boolean {
-        return this._cardShakeEventStarted;
+    get cardShakeEventStarted(): boolean {
+        return this.cardShakeEventStatus;
     }
 
     /**
      * Get Canvas class
-     * @returns {Canvas} _canvas
+     * @returns {Canvas} canvasObject
      */
-    get canvas():Canvas {
-        return this._canvas;
+    get canvas(): Canvas {
+        return this.canvasObject;
     }
 
     /**
      * Get Param class
-     * @returns {Param} _params
+     * @returns {Param} paramsObject
      */
-    get params():Param {
-        return this._params;
+    get params(): Param {
+        return this.paramsObject;
     }
 
     /**
      * Get ArcomageCards class
-     * @returns {ArcomageCards} _cards
+     * @returns {ArcomageCards} cardsObject
      */
-    get cards():ArcomageCards {
-        return this._cards;
+    get cards(): ArcomageCards {
+        return this.cardsObject;
     }
 
     /**
      * Get Arcomage class
-     * @returns {Arcomage} _game
+     * @returns {Arcomage} gameObject
      */
-    get game():Arcomage {
-        return this._game;
+    get game(): Arcomage {
+        return this.gameObject;
     }
 
     /**
@@ -73,21 +73,21 @@ class Events {
     /**
      * Start card shake event
      */
-    cardShakeOn() {
-        this._cardShakeEventStarted = true;
+    public cardShakeOn() {
+        this.cardShakeEventStatus = true;
     }
 
     /**
      * Stop card shake event
      */
-    cardShakeOff() {
-        this._cardShakeEventStarted = false;
+    public cardShakeOff() {
+        this.cardShakeEventStatus = false;
     }
 
     /**
      * Attach events
      */
-    init():void {
+    public init(): void {
         this.addEvents();
     }
 
@@ -95,36 +95,36 @@ class Events {
      * Shake card if it is not available
      * @param {string} cardName
      */
-    private shakeCard(cardName:string):void {
+    private shakeCard(cardName: string): void {
         let that = this;
-        let cardObject:IGroup = this.cards.getCardObject(cardName);
-        let cardLeftValue:number = cardObject.getLeft();
+        let cardObject: IGroup = this.cards.getCardObject(cardName);
+        let cardLeftValue: number = cardObject.getLeft();
         if (!this.cardShakeEventStarted) {
             that.cardShakeOn();
             cardObject.animate({
-                left: cardLeftValue - that.params.cardsValues.padding
+                left: cardLeftValue - that.params.cardsValues.padding,
             }, {
                 onChange: that.canvas.fabricElement.renderAll.bind(that.canvas.fabricElement),
                 duration: 100,
-                onComplete: function () {
+                onComplete: () => {
                     cardObject.animate({
-                        left: cardLeftValue + that.params.cardsValues.padding
+                        left: cardLeftValue + that.params.cardsValues.padding,
                     }, {
                         onChange: that.canvas.fabricElement.renderAll.bind(that.canvas.fabricElement),
                         duration: 100,
-                        onComplete: function () {
+                        onComplete: () => {
                             cardObject.animate({
-                                left: cardLeftValue
+                                left: cardLeftValue,
                             }, {
                                 onChange: that.canvas.fabricElement.renderAll.bind(that.canvas.fabricElement),
                                 duration: 100,
-                                onComplete: function () {
+                                onComplete: () => {
                                     that.cardShakeOff();
-                                }
+                                },
                             });
-                        }
+                        },
                     });
-                }
+                },
             });
         }
 
@@ -135,51 +135,50 @@ class Events {
      * @param {Player} player
      * @param {string} cardName
      */
-    private applyCard(player:Player, cardName:string):void {
+    private applyCard(player: Player, cardName: string): void {
         let that = this;
-        let card:any = this.cards.getSingleCard(cardName);
-        let cardObject:IGroup = this.cards.getCardObject(cardName);
+        let card: any = this.cards.getSingleCard(cardName);
+        let cardObject: IGroup = this.cards.getCardObject(cardName);
 
-        let playerOne:Player = (player === that.playerOne) ? that.playerOne : that.playerTwo;
-        let playerTwo:Player = (player === that.playerOne) ? that.playerTwo : that.playerOne;
+        let playerOne: Player = (player === that.playerOne) ? that.playerOne : that.playerTwo;
+        let playerTwo: Player = (player === that.playerOne) ? that.playerTwo : that.playerOne;
         if (that.game.isOn() && that.game.getPlayerTurn(playerOne)) {
             if (!that.cards.cardCanBeUsed(cardName, playerOne)) {
                 that.shakeCard(cardName);
-            }
-            else {
+            } else {
                 if (that.game.cardAvailable(cardName, playerOne)) {
 
                     if (!card.playAgain) {
                         that.game.playerMoved(playerOne);
                     }
 
-                    let basicValue:any = {
-                        "top": cardObject.getTop(),
-                        "left": cardObject.getLeft()
+                    let basicValue: any = {
+                        top: cardObject.getTop(),
+                        left: cardObject.getLeft(),
                     };
                     cardObject.animate({
-                        "top": 100,
-                        "left": (that.canvas.width - that.params.cardsValues.width) / 2,
-                        "opacity": 1
+                        top: 100,
+                        left: (that.canvas.width - that.params.cardsValues.width) / 2,
+                        opacity: 1,
                     }, {
                         onChange: that.canvas.fabricElement.renderAll.bind(that.canvas.fabricElement),
                         easing: fabric.util.ease.easeInCubic,
                         duration: 500,
-                        onComplete: function () {
+                        onComplete: () => {
                             that.game.applyCard(cardName, playerOne, playerTwo);
                             cardObject.animate({
-                                "top": 0,
-                                "opacity": 0
+                                top: 0,
+                                opacity: 0,
                             }, {
                                 onChange: that.canvas.fabricElement.renderAll.bind(that.canvas.fabricElement),
                                 duration: 500,
-                                onComplete: function () {
+                                onComplete: () => {
                                     playerOne.removeCard(card);
                                     cardObject.setTop(basicValue.top);
                                     that.canvas.fabricElement.remove(cardObject);
 
                                     if (that.game.isOn()) {
-                                        let eventPromise:Promise<any> = new Promise((resolve, reject) => {
+                                        let eventPromise: Promise<any> = new Promise((resolve, reject) => {
                                             (that.game.allotCards(playerOne))
                                                 ? resolve()
                                                 : reject("Can`t allot cards!");
@@ -187,18 +186,17 @@ class Events {
                                         eventPromise.then(() => {
                                             that.canvas.fabricElement.renderAll();
                                             Arcomage.clearCardsFromCanvas(that.canvas, playerOne);
-                                        }).then(()=> {
+                                        }).then(() => {
                                             if (card.playAgain) {
                                                 that.game.drawCards(that.canvas, playerOne);
-                                            }
-                                            else {
+                                            } else {
                                                 that.game.CPUMove(that.canvas);
                                             }
                                         });
                                     }
-                                }
+                                },
                             });
-                        }
+                        },
                     });
                 }
             }
@@ -210,38 +208,38 @@ class Events {
      * @param {Player} player
      * @param {string} cardName
      */
-    private discardCard(player:Player, cardName:string):void {
+    private discardCard(player: Player, cardName: string): void {
         let that = this;
-        let card:any = this.cards.getSingleCard(cardName);
-        let cardObject:IGroup = this.cards.getCardObject(cardName);
+        let card: any = this.cards.getSingleCard(cardName);
+        let cardObject: IGroup = this.cards.getCardObject(cardName);
 
-        let playerOne:Player = (player === that.playerOne) ? that.playerOne : that.playerTwo;
+        let playerOne: Player = (player === that.playerOne) ? that.playerOne : that.playerTwo;
         if (that.game.isOn() && that.game.getPlayerTurn(playerOne)) {
             if (that.game.cardAvailable(cardName, playerOne)) {
                 that.game.playerMoved(playerOne);
-                let cardObjectTop:number = cardObject.getTop();
+                let cardObjectTop: number = cardObject.getTop();
                 that.cards.deactivate(cardName);
                 cardObject.animate({
-                    "top": 0,
-                    "opacity": 0
+                    top: 0,
+                    opacity: 0,
                 }, {
                     onChange: that.canvas.fabricElement.renderAll.bind(that.canvas.fabricElement),
                     duration: 500,
-                    onComplete: function () {
+                    onComplete: () => {
                         playerOne.removeCard(card);
                         cardObject.setTop(cardObjectTop);
                         that.canvas.fabricElement.remove(cardObject);
-                        let eventPromise:Promise<any> = new Promise((resolve, reject) => {
+                        let eventPromise: Promise<any> = new Promise((resolve, reject) => {
                             (that.game.allotCards(playerOne))
                                 ? resolve()
                                 : reject("Can`t allot cards!");
                         });
                         eventPromise.then(() => {
                             Arcomage.clearCardsFromCanvas(that.canvas, playerOne);
-                        }).then(()=> {
+                        }).then(() => {
                             that.game.CPUMove(that.canvas);
                         });
-                    }
+                    },
                 });
             }
 
@@ -251,11 +249,11 @@ class Events {
     /**
      * Attach events to all available cards
      */
-    private addEvents():void {
+    private addEvents(): void {
         let that = this;
-        for (let i = 0; i < this.cards.names.length; i++) {
-            let cardName:string = this.cards.names[i];
-            let cardObject:IGroup = this.cards.getCardObject(cardName);
+        for (let i: number = 0; i < this.cards.names.length; i++) {
+            let cardName: string = this.cards.names[i];
+            let cardObject: IGroup = this.cards.getCardObject(cardName);
 
             cardObject.on("mouseover", () => {
                 cardObject.setOpacity(1);
@@ -265,15 +263,13 @@ class Events {
                 cardObject.setOpacity(0.9);
                 that.canvas.fabricElement.renderAll();
             });
-
-
-            for (let i = 0; i < 5; i++) {
-                cardObject.getObjects()[i].on("mousedown", ()=> {
+            for (let j: number = 0; j < 5; j++) {
+                cardObject.getObjects()[j].on("mousedown", () => {
                     that.applyCard(that.playerOne, cardName);
                 });
             }
-            for (let i = 5; i < 7; i++) {
-                cardObject.getObjects()[i].on("mousedown", ()=> {
+            for (let k: number = 5; k < 7; k++) {
+                cardObject.getObjects()[k].on("mousedown", () => {
                     that.discardCard(that.playerOne, cardName);
                 });
 

@@ -1,37 +1,39 @@
+/*export namespace ArcomageGame {
+}*/
 class Player {
     constructor(name, playerValues, maxValues, canvasValues) {
-        this._playerName = name;
-        this._playerTowerLife = playerValues.towerLife;
-        this._playerWallLife = playerValues.wallLife;
-        this._playerResources = playerValues.resources;
-        this._playerSources = playerValues.sources;
-        this._canvasTowerHeightStep = canvasValues.towers.heightStep;
-        this._canvasWallHeightStep = canvasValues.walls.heightStep;
-        this._maxWallLife = maxValues.wall;
-        this._maxTowerLife = maxValues.tower;
-        this._maxSources = maxValues.sources;
-        this._maxResources = maxValues.resources;
-        this._moves = playerValues.moves || 0;
-        this._playerNameObject = {};
-        this._playerSourcesObject = {};
-        this._playerResourcesObject = {};
-        this._playerCards = [];
-        this._playerTowerObject = {};
-        this._playerWallObject = {};
+        this.playerName = name;
+        this.playerTowerLife = playerValues.towerLife;
+        this.playerWallLife = playerValues.wallLife;
+        this.playerResources = playerValues.resources;
+        this.playerSources = playerValues.sources;
+        this.canvasTowerHeightStepValue = canvasValues.towers.heightStep;
+        this.canvasWallHeightStepValue = canvasValues.walls.heightStep;
+        this.maxWallLifeValue = maxValues.wall;
+        this.maxTowerLifeValue = maxValues.tower;
+        this.maxSourcesValue = maxValues.sources;
+        this.maxResourcesValue = maxValues.resources;
+        this.movesValue = playerValues.moves || 0;
+        this.playerNameObject = {};
+        this.playerSourcesObject = {};
+        this.playerResourcesObject = {};
+        this.playerCards = [];
+        this.playerTowerObject = {};
+        this.playerWallObject = {};
     }
     /**
      * Get player name
-     * @returns {string} _playerName
+     * @returns {string} playerName
      */
     get name() {
-        return this._playerName;
+        return this.playerName;
     }
     /**
      * Get playerTowerLife
-     * @returns {number} _playerTowerLife
+     * @returns {number} playerTowerLife
      */
     get towerLife() {
-        return this._playerTowerLife;
+        return this.playerTowerLife;
     }
     /**
      * Set new playerTowerLife
@@ -39,15 +41,17 @@ class Player {
      */
     set towerLife(newPlayerTowerLife) {
         if (newPlayerTowerLife >= 0) {
-            this._playerTowerLife = (newPlayerTowerLife < this._maxTowerLife) ? newPlayerTowerLife : this._maxTowerLife;
+            this.playerTowerLife = (newPlayerTowerLife < this.maxTowerLifeValue)
+                ? newPlayerTowerLife
+                : this.maxTowerLifeValue;
         }
     }
     /**
      * Get playerWallLife
-     * @returns {number} _playerWallLife
+     * @returns {number} playerWallLife
      */
     get wallLife() {
-        return this._playerWallLife;
+        return this.playerWallLife;
     }
     /**
      * Set playerWallLife
@@ -55,180 +59,180 @@ class Player {
      */
     set wallLife(newPlayerWall) {
         if (newPlayerWall >= 0) {
-            this._playerWallLife = (newPlayerWall < this._maxWallLife) ? newPlayerWall : this._maxWallLife;
+            this.playerWallLife = (newPlayerWall < this.maxWallLifeValue) ? newPlayerWall : this.maxWallLifeValue;
         }
     }
     /**
      * Get playerResources
-     * @returns {any} _playerResources
+     * @returns {Object} playerResources
      */
     get resources() {
-        return this._playerResources;
+        return this.playerResources;
     }
     /**
      * Get playerSources
-     * @returns {any} _playerSources
+     * @returns {Object} playerSources
      */
     get sources() {
-        return this._playerSources;
+        return this.playerSources;
     }
     /**
      * Get playerName fabric object
-     * @returns {any} _playerNameObject
+     * @returns {fabric.IGroup} playerNameObject
      */
     get nameObject() {
-        return this._playerNameObject;
+        return this.playerNameObject;
     }
     /**
      * Set new player name fabric object
-     * @param {any} newFabricObject
+     * @param {fabric.IGroup} newFabricObject
      */
     set nameObject(newFabricObject) {
         if (typeof newFabricObject === "object") {
-            this._playerNameObject = newFabricObject;
+            this.playerNameObject = newFabricObject;
         }
     }
     /**
      * Get playerTower fabric object
-     * @returns {any} _playerTowerObject
+     * @returns {fabric.IGroup} playerTowerObject
      */
     get towerObject() {
-        return this._playerTowerObject;
+        return this.playerTowerObject;
     }
     /**
      * Set new tower fabric object
-     * @param {any} newFabricObject
+     * @param {fabric.IGroup} newFabricObject
      */
     set towerObject(newFabricObject) {
         if (typeof newFabricObject === "object") {
-            this._playerTowerObject = newFabricObject;
+            this.playerTowerObject = newFabricObject;
         }
     }
     /**
      * Get playerWall fabric object
-     * @returns {any} _playerWallObject
+     * @returns {fabric.IGroup} playerWallObject
      */
     get wallObject() {
-        return this._playerWallObject;
+        return this.playerWallObject;
     }
     /**
      * Set new wall fabric object
-     * @param {any} newFabricObject
+     * @param {fabric.IGroup} newFabricObject
      */
     set wallObject(newFabricObject) {
         if (typeof newFabricObject === "object") {
-            this._playerWallObject = newFabricObject;
+            this.playerWallObject = newFabricObject;
         }
     }
     /**
      * Get playerSources fabric object
-     * @returns {any} _playerSourcesObject
+     * @returns {fabric.IGroup} playerSourcesObject
      */
     get sourcesObject() {
-        return this._playerSourcesObject;
+        return this.playerSourcesObject;
     }
     /**
      * Set new source fabric object
-     * @param {any} newFabricObject
+     * @param {fabric.IGroup} newFabricObject
      */
     set sourcesObject(newFabricObject) {
         if (typeof newFabricObject === "object") {
-            this._playerSourcesObject = newFabricObject;
+            this.playerSourcesObject = newFabricObject;
         }
     }
     /**
      * Get player resources fabric object
-     * @returns {any} _playerResourcesObject
+     * @returns {fabric.IGroup} playerResourcesObject
      */
     get resourcesObject() {
-        return this._playerResourcesObject;
+        return this.playerResourcesObject;
     }
     /**
      * Set new resource fabric object
-     * @param {any} newFabricObject
+     * @param {fabric.IGroup} newFabricObject
      */
     set resourcesObject(newFabricObject) {
         if (typeof newFabricObject === "object") {
-            this._playerResourcesObject = newFabricObject;
+            this.playerResourcesObject = newFabricObject;
         }
     }
     /**
      * Get playerCards
-     * @returns {Array<any>} _playerCards
+     * @returns {[]} playerCards
      */
     get cards() {
-        return this._playerCards;
+        return this.playerCards;
     }
     /**
      * Set new array of player cards
-     * @param {Array<any>} newCardsArray
+     * @param {[]} newCardsArray
      */
     set cards(newCardsArray) {
-        this._playerCards = newCardsArray;
+        this.playerCards = newCardsArray;
     }
     /**
      * Get max tower life
-     * @returns {number} _maxTowerLife
+     * @returns {number} maxTowerLifeValue
      */
     get maxTowerLife() {
-        return this._maxTowerLife;
+        return this.maxTowerLifeValue;
     }
     /**
      * Get max wall life
-     * @returns {number} _maxWallLife
+     * @returns {number} maxWallLifeValue
      */
     get maxWallLife() {
-        return this._maxWallLife;
+        return this.maxWallLifeValue;
     }
     /**
      * Get max sources value
-     * @returns {number} _maxSources
+     * @returns {number} maxSourcesValue
      */
     get maxSources() {
-        return this._maxSources;
+        return this.maxSourcesValue;
     }
     /**
      * Get max resources value
-     * @returns {number} _maxResources
+     * @returns {number} maxResourcesValue
      */
     get maxResources() {
-        return this._maxResources;
+        return this.maxResourcesValue;
     }
     /**
      * Get tower height step in canvas
-     * @returns {number} _canvasTowerHeightStep
+     * @returns {number} canvasTowerHeightStepValue
      */
     get canvasTowerHeightStep() {
-        return this._canvasTowerHeightStep;
+        return this.canvasTowerHeightStepValue;
     }
     /**
      * Get wall height step in canvas
-     * @returns {number} _canvasWallHeightStep
+     * @returns {number} canvasWallHeightStepValue
      */
     get canvasWallHeightStep() {
-        return this._canvasWallHeightStep;
+        return this.canvasWallHeightStepValue;
     }
     /**
      * Remove one card from cards array
-     * @param {any} card
+     * @param {Object} card
      */
     removeCard(card) {
-        this.cards = this.cards.filter(function (playerCard) {
+        this.cards = this.cards.filter((playerCard) => {
             return playerCard.name !== card.name;
         });
     }
     /**
      * Get player moves
-     * @returns {number} _moves
+     * @returns {number} movesValue
      */
     get moves() {
-        return this._moves;
+        return this.movesValue;
     }
     /**
      * Increases player moves on 1 move
      */
     updateMoves() {
-        this._moves++;
+        this.movesValue++;
     }
     /**
      * Updates player tower life and tower fabric object
@@ -287,7 +291,7 @@ class Player {
     }
     /**
      * Updates player sources
-     * @param {any} newSources
+     * @param {Object} newSources
      */
     updateSources(newSources) {
         for (let key in newSources) {
@@ -307,7 +311,7 @@ class Player {
     }
     /**
      * Updates player resources
-     * @param {any} newResources
+     * @param {Object} newResources
      */
     updateResources(newResources) {
         for (let key in newResources) {
@@ -331,11 +335,13 @@ class Player {
      */
     takeDamage(value) {
         let damage = value;
-        (damage <= this.wallLife) ? this.updateWallLife(-damage) : this.updateTowerLife(this.updateWallLife(-damage));
+        (damage <= this.wallLife)
+            ? this.updateWallLife(-damage)
+            : this.updateTowerLife(this.updateWallLife(-damage));
     }
     /**
      * Update array of player cards
-     * @param {any} card
+     * @param {Object} card
      */
     updateCards(card) {
         this.cards.push(card);

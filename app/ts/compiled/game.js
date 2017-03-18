@@ -1,58 +1,69 @@
 class Arcomage {
+    /**
+     * Clear canvas from cards objects
+     * @param {Canvas} canvas
+     * @param {Player} player
+     */
+    static clearCardsFromCanvas(canvas, player) {
+        for (let card of player.cards) {
+            let playerCardObject = card.object;
+            canvas.fabricElement.remove(playerCardObject);
+        }
+    }
     constructor(params, cards, dom, cookie, playerOneName, playerTwoName, playerOneValuesFromCookie, playerTwoValuesFromCookie) {
-        this._playerOne = new Player(playerOneName || params.playerOneName, playerOneValuesFromCookie || params.playerOneValues, params.maxValues, params.canvasValues);
-        this._playerTwo = new Player(playerTwoName || params.playerTwoName, playerTwoValuesFromCookie || params.playerTwoValues, params.maxValues, params.canvasValues);
-        this._cardsQuantity = params.cardsQuantity;
-        this._cards = cards;
-        this._params = params;
-        this._playerOneTurn = true;
-        this._playerTwoTurn = false;
-        this._status = true;
-        this._DOM = dom;
-        this._cookie = cookie;
-        this._CPU_AI = new CPU_AI(this._playerTwo, cards, params);
+        this.playerOneObject = new Player(playerOneName || params.playerOneName, playerOneValuesFromCookie || params.playerOneValues, params.maxValues, params.canvasValues);
+        this.playerTwoObject = new Player(playerTwoName || params.playerTwoName, playerTwoValuesFromCookie || params.playerTwoValues, params.maxValues, params.canvasValues);
+        this.cardsQty = params.cardsQuantity;
+        this.cardsObject = cards;
+        this.paramsObject = params;
+        this.playerOneTurnStatus = true;
+        this.playerTwoTurnStatus = false;
+        this.gameStatus = true;
+        this.DOMObject = dom;
+        this.cookieObject = cookie;
+        this.CPUAI = new CPUAI(this.playerTwoObject, cards, params);
     }
     /**
      * Get Param class
-     * @returns {Param} _params
+     * @returns {Param} paramsObject
      */
     get params() {
-        return this._params;
+        return this.paramsObject;
     }
     /**
      * Get player one
-     * @returns {Player} _playerOne
+     * @returns {Player} playerOneObject
      */
     get playerOne() {
-        return this._playerOne;
+        return this.playerOneObject;
     }
     /**
      * Get player one turn
-     * @returns {boolean} _playerOneTurn
+     * @returns {boolean} playerOneTurnStatus
      */
     get playerOneTurn() {
-        return this._playerOneTurn;
+        return this.playerOneTurnStatus;
     }
     /**
      * Get player two
-     * @returns {Player} _playerTwo
+     * @returns {Player} playerTwoObject
      */
     get playerTwo() {
-        return this._playerTwo;
+        return this.playerTwoObject;
     }
     /**
      * Get player two turn
-     * @returns {boolean} _playerTwoTurn
+     * @returns {boolean} playerTwoTurnStatus
      */
     get playerTwoTurn() {
-        return this._playerTwoTurn;
+        return this.playerTwoTurnStatus;
     }
     /**
      * Get CPU AI class
-     * @returns {CPU_AI} _CPU_AI
+     * @returns {CPU_AI} CPUAI
      */
     get CPU_AI() {
-        return this._CPU_AI;
+        return this.CPUAI;
     }
     /**
      * Get players turn
@@ -64,53 +75,53 @@ class Arcomage {
     }
     /**
      * Get cardValues from params
-     * @returns {any} _params.cardsValues
+     * @returns {Object} paramsObject.cardsValues
      */
     get cardsValues() {
-        return this._params.cardsValues;
+        return this.paramsObject.cardsValues;
     }
     /**
      * Get card class
-     * @returns {ArcomageCards} _cards
+     * @returns {ArcomageCards} cardsObject
      */
     get cards() {
-        return this._cards;
+        return this.cardsObject;
     }
     /**
      * Get cards quantity from params
-     * @returns {number} _cardsQuantity
+     * @returns {number} cardsQty
      */
     get cardsQuantity() {
-        return this._cardsQuantity;
+        return this.cardsQty;
     }
     /**
      * Get game status
-     * @returns {boolean} _status
+     * @returns {boolean} gameStatus
      */
     get status() {
-        return this._status;
+        return this.gameStatus;
     }
     /**
      * Get DOM class
-     * @returns {DOM} _DOM
+     * @returns {DOM} DOMObject
      */
     get DOM() {
-        return this._DOM;
+        return this.DOMObject;
     }
     /**
      * Get Cookie class
-     * @returns {Cookie} _cookie
+     * @returns {Cookie} cookieObject
      */
     get cookie() {
-        return this._cookie;
+        return this.cookieObject;
     }
     /**
      * Change game status to false, destroy cookie and show gameOver message
      * @param {Player} player
      */
     gameOver(player) {
-        this._status = false;
-        let playerOneWin = (player === this.playerOne) ? true : false;
+        this.gameStatus = false;
+        let playerOneWin = (player === this.playerOne);
         this.cookie.setStatusCookie(this.status);
         this.DOM.showGameOverMessage(playerOneWin, this.playerOne.moves);
     }
@@ -126,16 +137,16 @@ class Arcomage {
      */
     playerOneMoved() {
         this.playerOne.updateMoves();
-        this._playerOneTurn = false;
-        this._playerTwoTurn = true;
+        this.playerOneTurnStatus = false;
+        this.playerTwoTurnStatus = true;
     }
     /**
      * Update player two moves and change turn to player one
      */
     playerTwoMoved() {
         this.playerTwo.updateMoves();
-        this._playerTwoTurn = false;
-        this._playerOneTurn = true;
+        this.playerTwoTurnStatus = false;
+        this.playerOneTurnStatus = true;
     }
     /**
      * Update player moves and change turn to another player
@@ -163,8 +174,9 @@ class Arcomage {
     applyCard(cardName, player, enemy) {
         this.cards.getSingleCard(cardName).action(player, enemy);
         this.cards.deactivate(cardName);
-        if (player.towerLife === this.params.maxValues.tower || enemy.towerLife === 0)
+        if (player.towerLife === this.params.maxValues.tower || enemy.towerLife === 0) {
             this.gameOver(player);
+        }
     }
     /**
      * Check if player can use card
@@ -175,15 +187,16 @@ class Arcomage {
     cardAvailable(cardName, player) {
         if (this.cards.isActive(cardName)) {
             let switcher = false;
-            for (let i = 0; i < player.cards.length; i++) {
-                if (this.cards.getSingleCard(cardName) === player.cards[i]) {
+            for (let card of player.cards) {
+                if (this.cards.getSingleCard(cardName) === card) {
                     switcher = true;
                 }
             }
             return switcher;
         }
-        else
+        else {
             return false;
+        }
     }
     /**
      * Randomly allot card to player
@@ -199,8 +212,9 @@ class Arcomage {
                 this.cards.activate(cardsNames[random]);
                 player.updateCards(randomCard);
             }
-            else
+            else {
                 this.allotCards(player);
+            }
         }
         return true;
     }
@@ -210,24 +224,13 @@ class Arcomage {
     allotCardsFromCookies() {
         let playerOneCards = this.cookie.getPlayerOneValues().cards;
         let playerTwoCards = this.cookie.getPlayerTwoValues().cards;
-        for (let i = 0; i < playerOneCards.length; i++) {
-            this.cards.activate(playerOneCards[i]);
-            this.playerOne.updateCards(this.cards.getSingleCard(playerOneCards[i]));
+        for (let playerOneCard of playerOneCards) {
+            this.cards.activate(playerOneCard);
+            this.playerOne.updateCards(this.cards.getSingleCard(playerOneCard));
         }
-        for (let i = 0; i < playerTwoCards.length; i++) {
-            this.cards.activate(playerTwoCards[i]);
-            this.playerTwo.updateCards(this.cards.getSingleCard(playerTwoCards[i]));
-        }
-    }
-    /**
-     * Clear canvas from cards objects
-     * @param {Canvas} canvas
-     * @param {Player} player
-     */
-    static clearCardsFromCanvas(canvas, player) {
-        for (let i = 0; i < player.cards.length; i++) {
-            let playerCardObject = player.cards[i].object;
-            canvas.fabricElement.remove(playerCardObject);
+        for (let playerTwoCard of playerTwoCards) {
+            this.cards.activate(playerTwoCard);
+            this.playerTwo.updateCards(this.cards.getSingleCard(playerTwoCard));
         }
     }
     /**
@@ -235,8 +238,8 @@ class Arcomage {
      * @param {Canvas} canvas
      */
     clearCPUBackOfCards(canvas) {
-        for (let i = 0; i < this.playerTwo.cards.length; i++) {
-            let playerCardObject = this.playerTwo.cards[i].backObject;
+        for (let playerTwoCard of this.playerTwo.cards) {
+            let playerCardObject = playerTwoCard.backObject;
             canvas.fabricElement.remove(playerCardObject);
         }
     }
@@ -248,11 +251,14 @@ class Arcomage {
         let that = this;
         that.drawBackOfCards(canvas, that.playerTwo);
         that.CPU_AI.move(canvas, that);
-        document.addEventListener("CPU moved", function (e) {
+        document.addEventListener("CPU moved", (e) => {
             e.stopImmediatePropagation();
             let eventPromise = new Promise((resolve, reject) => {
                 that.clearCPUBackOfCards(canvas);
                 resolve();
+                reject(() => {
+                    throw new Error("Can`t clear back of cards!");
+                });
             });
             eventPromise.then(() => {
                 that.updateResources(that.playerOne.sources, that.playerTwo.sources);
@@ -301,16 +307,16 @@ class Arcomage {
     }
     /**
      * Update resources according to players sources and set cookies
-     * @param {any} playerOneSources
-     * @param {any} playerTwoSources
+     * @param {Object} playerOneSources
+     * @param {Object} playerTwoSources
      */
     updateResources(playerOneSources, playerTwoSources) {
         let sources = Object.keys(this.params.relations);
         let newResourcesPlayerOne = {};
         let newResourcesPlayerTwo = {};
-        for (let i = 0; i < sources.length; i++) {
-            newResourcesPlayerOne[this.params.relations[sources[i]]] = playerOneSources[sources[i]];
-            newResourcesPlayerTwo[this.params.relations[sources[i]]] = playerTwoSources[sources[i]];
+        for (let source of sources) {
+            newResourcesPlayerOne[this.params.relations[source]] = playerOneSources[source];
+            newResourcesPlayerTwo[this.params.relations[source]] = playerTwoSources[source];
         }
         this.playerOne.updateResources(newResourcesPlayerOne);
         this.playerTwo.updateResources(newResourcesPlayerTwo);

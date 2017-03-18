@@ -1553,7 +1553,7 @@ declare namespace fabric {
     /**
      * Removes all event listeners
      */
-    removeListeners(): void
+    removeListeners(): void;
   }
   interface ICanvasStatic {
     /**
@@ -1799,6 +1799,8 @@ declare namespace fabric {
      * @return {String} svg representation of an instance
      */
     toSVG(reviver?: Function): string;
+
+    getObjects(): any;
   }
   interface IGroupStatic {
     /**

@@ -1,104 +1,4 @@
 class Loader {
-    constructor() {
-    }
-    /**
-     * Get Param class
-     * @returns {Param} _params
-     */
-    get params() {
-        return this._params;
-    }
-    /**
-     * Set Param class
-     * @param {Param} newParams
-     */
-    set params(newParams) {
-        this._params = newParams;
-    }
-    /**
-     * Get ArcomageCards class
-     * @returns {ArcomageCards} _cards
-     */
-    get cards() {
-        return this._cards;
-    }
-    /**
-     * Set ArcomageCards
-     * @param {ArcomageCards} newCards
-     */
-    set cards(newCards) {
-        this._cards = newCards;
-    }
-    /**
-     * Get Arcomage class
-     * @returns {Arcomage} _game
-     */
-    get game() {
-        return this._game;
-    }
-    /**
-     * Set Arcomage class
-     * @param {Arcomage} newGame
-     */
-    set game(newGame) {
-        this._game = newGame;
-    }
-    /**
-     * Get canvas class
-     * @returns {Canvas} _canvas
-     */
-    get canvas() {
-        return this._canvas;
-    }
-    /**
-     * Set Canvas class
-     * @param {Canvas} newCanvas _canvas
-     */
-    set canvas(newCanvas) {
-        this._canvas = newCanvas;
-    }
-    /**
-     * Get Events class
-     * @returns {Events} _events
-     */
-    get events() {
-        return this._events;
-    }
-    /**
-     * Set Events class
-     * @param {Events} newEvents
-     */
-    set events(newEvents) {
-        this._events = newEvents;
-    }
-    /**
-     * Get DOM class
-     * @returns {DOM} _dom
-     */
-    get dom() {
-        return this._dom;
-    }
-    /**
-     * Set DOM class
-     * @param {DOM} newDOM
-     */
-    set dom(newDOM) {
-        this._dom = newDOM;
-    }
-    /**
-     * Get Cookie class
-     * @returns {Cookie} _cookie
-     */
-    get cookie() {
-        return this._cookie;
-    }
-    /**
-     * Set Cookie class
-     * @param {Cookie} newCookie
-     */
-    set cookie(newCookie) {
-        this._cookie = newCookie;
-    }
     /**
      * Hides loader
      */
@@ -108,21 +8,122 @@ class Loader {
     }
     /**
      * Analog of htmlspecialchars
-     * @param {string } string
+     * @param {string} text
      * @returns {string}
      */
-    static escapeHtml(string) {
-        var map = {
-            '&': '&amp;',
-            '<': '&lt;',
-            '>': '&gt;',
-            '"': '&quot;',
-            "'": '&#039;'
+    static escapeHtml(text) {
+        let map = {
+            "&": "&amp;",
+            "<": "&lt;",
+            ">": "&gt;",
+            '"': "&quot;",
+            "'": "&#039;",
         };
-        return string.replace(/[&<>"']/g, (m) => {
+        return text.replace(/[&<>"']/g, (m) => {
             return map[m];
         });
     }
+    /**
+     * Get Param class
+     * @returns {Param} paramsObject
+     */
+    get params() {
+        return this.paramsObject;
+    }
+    /**
+     * Set Param class
+     * @param {Param} newParams
+     */
+    set params(newParams) {
+        this.paramsObject = newParams;
+    }
+    /**
+     * Get ArcomageCards class
+     * @returns {ArcomageCards} cardsArray
+     */
+    get cards() {
+        return this.cardsObject;
+    }
+    /**
+     * Set ArcomageCards
+     * @param {ArcomageCards} newCards
+     */
+    set cards(newCards) {
+        this.cardsObject = newCards;
+    }
+    /**
+     * Get Arcomage class
+     * @returns {Arcomage} gameObject
+     */
+    get game() {
+        return this.gameObject;
+    }
+    /**
+     * Set Arcomage class
+     * @param {Arcomage} newGame
+     */
+    set game(newGame) {
+        this.gameObject = newGame;
+    }
+    /**
+     * Get canvas class
+     * @returns {Canvas} canvasObject
+     */
+    get canvas() {
+        return this.canvasObject;
+    }
+    /**
+     * Set Canvas class
+     * @param {Canvas} newCanvas canvasObject
+     */
+    set canvas(newCanvas) {
+        this.canvasObject = newCanvas;
+    }
+    /**
+     * Get Events class
+     * @returns {Events} eventsObject
+     */
+    get events() {
+        return this.eventsObject;
+    }
+    /**
+     * Set Events class
+     * @param {Events} newEvents
+     */
+    set events(newEvents) {
+        this.eventsObject = newEvents;
+    }
+    /**
+     * Get DOM class
+     * @returns {DOM} domObject
+     */
+    get dom() {
+        return this.domObject;
+    }
+    /**
+     * Set DOM class
+     * @param {DOM} newDOM
+     */
+    set dom(newDOM) {
+        this.domObject = newDOM;
+    }
+    /**
+     * Get Cookie class
+     * @returns {Cookie} cookieObject
+     */
+    get cookie() {
+        return this.cookieObject;
+    }
+    /**
+     * Set Cookie class
+     * @param {Cookie} newCookie
+     */
+    set cookie(newCookie) {
+        this.cookieObject = newCookie;
+    }
+    /**
+     * Creates new cookie and erase it when game is over
+     */
     initCookie() {
         this.cookie = new Cookie();
         if (this.cookie.gameIsOff()) {
@@ -132,7 +133,7 @@ class Loader {
     /**
      * Loads all classes step by step
      * @param {string} newPlayerOneName
-     * @returns {Promise<any>}
+     * @returns {Promise<Object>}
      */
     init(newPlayerOneName) {
         let that = this;

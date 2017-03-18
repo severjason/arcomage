@@ -1,45 +1,45 @@
 class Events {
     constructor(params, CARDS, canvas, game) {
-        this._cards = CARDS;
-        this._canvas = canvas;
-        this._game = game;
-        this._params = params;
-        this._cardShakeEventStarted = false;
+        this.cardsObject = CARDS;
+        this.canvasObject = canvas;
+        this.gameObject = game;
+        this.paramsObject = params;
+        this.cardShakeEventStatus = false;
     }
     /**
      * Get switcher for card shake
-     * @returns {boolean} _cardShakeEventStarted
+     * @returns {boolean} cardShakeEventStatus
      */
     get cardShakeEventStarted() {
-        return this._cardShakeEventStarted;
+        return this.cardShakeEventStatus;
     }
     /**
      * Get Canvas class
-     * @returns {Canvas} _canvas
+     * @returns {Canvas} canvasObject
      */
     get canvas() {
-        return this._canvas;
+        return this.canvasObject;
     }
     /**
      * Get Param class
-     * @returns {Param} _params
+     * @returns {Param} paramsObject
      */
     get params() {
-        return this._params;
+        return this.paramsObject;
     }
     /**
      * Get ArcomageCards class
-     * @returns {ArcomageCards} _cards
+     * @returns {ArcomageCards} cardsObject
      */
     get cards() {
-        return this._cards;
+        return this.cardsObject;
     }
     /**
      * Get Arcomage class
-     * @returns {Arcomage} _game
+     * @returns {Arcomage} gameObject
      */
     get game() {
-        return this._game;
+        return this.gameObject;
     }
     /**
      * Get player One
@@ -59,13 +59,13 @@ class Events {
      * Start card shake event
      */
     cardShakeOn() {
-        this._cardShakeEventStarted = true;
+        this.cardShakeEventStatus = true;
     }
     /**
      * Stop card shake event
      */
     cardShakeOff() {
-        this._cardShakeEventStarted = false;
+        this.cardShakeEventStatus = false;
     }
     /**
      * Attach events
@@ -84,29 +84,29 @@ class Events {
         if (!this.cardShakeEventStarted) {
             that.cardShakeOn();
             cardObject.animate({
-                left: cardLeftValue - that.params.cardsValues.padding
+                left: cardLeftValue - that.params.cardsValues.padding,
             }, {
                 onChange: that.canvas.fabricElement.renderAll.bind(that.canvas.fabricElement),
                 duration: 100,
-                onComplete: function () {
+                onComplete: () => {
                     cardObject.animate({
-                        left: cardLeftValue + that.params.cardsValues.padding
+                        left: cardLeftValue + that.params.cardsValues.padding,
                     }, {
                         onChange: that.canvas.fabricElement.renderAll.bind(that.canvas.fabricElement),
                         duration: 100,
-                        onComplete: function () {
+                        onComplete: () => {
                             cardObject.animate({
-                                left: cardLeftValue
+                                left: cardLeftValue,
                             }, {
                                 onChange: that.canvas.fabricElement.renderAll.bind(that.canvas.fabricElement),
                                 duration: 100,
-                                onComplete: function () {
+                                onComplete: () => {
                                     that.cardShakeOff();
-                                }
+                                },
                             });
-                        }
+                        },
                     });
-                }
+                },
             });
         }
     }
@@ -131,26 +131,26 @@ class Events {
                         that.game.playerMoved(playerOne);
                     }
                     let basicValue = {
-                        "top": cardObject.getTop(),
-                        "left": cardObject.getLeft()
+                        top: cardObject.getTop(),
+                        left: cardObject.getLeft(),
                     };
                     cardObject.animate({
-                        "top": 100,
-                        "left": (that.canvas.width - that.params.cardsValues.width) / 2,
-                        "opacity": 1
+                        top: 100,
+                        left: (that.canvas.width - that.params.cardsValues.width) / 2,
+                        opacity: 1,
                     }, {
                         onChange: that.canvas.fabricElement.renderAll.bind(that.canvas.fabricElement),
                         easing: fabric.util.ease.easeInCubic,
                         duration: 500,
-                        onComplete: function () {
+                        onComplete: () => {
                             that.game.applyCard(cardName, playerOne, playerTwo);
                             cardObject.animate({
-                                "top": 0,
-                                "opacity": 0
+                                top: 0,
+                                opacity: 0,
                             }, {
                                 onChange: that.canvas.fabricElement.renderAll.bind(that.canvas.fabricElement),
                                 duration: 500,
-                                onComplete: function () {
+                                onComplete: () => {
                                     playerOne.removeCard(card);
                                     cardObject.setTop(basicValue.top);
                                     that.canvas.fabricElement.remove(cardObject);
@@ -172,9 +172,9 @@ class Events {
                                             }
                                         });
                                     }
-                                }
+                                },
                             });
-                        }
+                        },
                     });
                 }
             }
@@ -196,12 +196,12 @@ class Events {
                 let cardObjectTop = cardObject.getTop();
                 that.cards.deactivate(cardName);
                 cardObject.animate({
-                    "top": 0,
-                    "opacity": 0
+                    top: 0,
+                    opacity: 0,
                 }, {
                     onChange: that.canvas.fabricElement.renderAll.bind(that.canvas.fabricElement),
                     duration: 500,
-                    onComplete: function () {
+                    onComplete: () => {
                         playerOne.removeCard(card);
                         cardObject.setTop(cardObjectTop);
                         that.canvas.fabricElement.remove(cardObject);
@@ -215,7 +215,7 @@ class Events {
                         }).then(() => {
                             that.game.CPUMove(that.canvas);
                         });
-                    }
+                    },
                 });
             }
         }
@@ -236,13 +236,13 @@ class Events {
                 cardObject.setOpacity(0.9);
                 that.canvas.fabricElement.renderAll();
             });
-            for (let i = 0; i < 5; i++) {
-                cardObject.getObjects()[i].on("mousedown", () => {
+            for (let j = 0; j < 5; j++) {
+                cardObject.getObjects()[j].on("mousedown", () => {
                     that.applyCard(that.playerOne, cardName);
                 });
             }
-            for (let i = 5; i < 7; i++) {
-                cardObject.getObjects()[i].on("mousedown", () => {
+            for (let k = 5; k < 7; k++) {
+                cardObject.getObjects()[k].on("mousedown", () => {
                     that.discardCard(that.playerOne, cardName);
                 });
             }

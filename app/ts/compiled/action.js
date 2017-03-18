@@ -1,23 +1,23 @@
-/// <reference path="../../node_modules/@types/jquery/index.d.ts" />
-(function () {
+(() => {
     $(document).ready(() => {
         let loader = new Loader();
+        let body = $("body");
         loader.initCookie();
         if (loader.cookie.cookiesAreSet()) {
             loader.start(loader.cookie.getPlayerOneName());
         }
         else {
-            //$("#start_field").show();
+            // $("#start_field").show();
             loader.start("Player1");
         }
-        $("body").on("click", "#start_game_button", function () {
+        body.on("click", "#start_game_button", () => {
             let newName = $("#player_name_input").val();
             $("#start_field").hide();
             loader.start(newName);
         });
-        $("body").on("click", "#clear_cookie_button", function () {
+        body.on("click", "#clear_cookie_button", () => {
             loader.cookie.removeAll();
             window.location.reload();
         });
     });
-}());
+})();

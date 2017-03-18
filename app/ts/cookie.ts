@@ -1,8 +1,7 @@
-/// <reference path="@types/js-cookie/js-cookie.d.ts" />
 class Cookie {
 
-    gameCookieName:string;
-    gameStatusCookie:string;
+    public gameCookieName: string;
+    public gameStatusCookie: string;
 
     constructor() {
         this.gameCookieName = "arcomage";
@@ -14,10 +13,10 @@ class Cookie {
      * @param {Player} playerOne
      * @param {Player} playerTwo
      */
-    setCookie(playerOne:Player, playerTwo:Player):void {
+    public setCookie(playerOne: Player, playerTwo: Player): void {
 
-        let playerOneCards:string[] = [];
-        let playerTwoCards:string[] = [];
+        let playerOneCards: string[] = [];
+        let playerTwoCards: string[] = [];
 
         for (let i = 0; i < playerOne.cards.length; i++) {
             playerOneCards.push(playerOne.cards[i].name);
@@ -25,23 +24,23 @@ class Cookie {
         }
 
         Cookies.set(this.gameCookieName, {
-            "playerOne": {
-                "name": playerOne.name,
-                "towerLife": playerOne.towerLife,
-                "wallLife": playerOne.wallLife,
-                "resources": playerOne.resources,
-                "sources": playerOne.sources,
-                "moves": playerOne.moves,
-                "cards": playerOneCards
+            playerOne: {
+                cards: playerOneCards,
+                moves: playerOne.moves,
+                name: playerOne.name,
+                resources: playerOne.resources,
+                sources: playerOne.sources,
+                towerLife: playerOne.towerLife,
+                wallLife: playerOne.wallLife,
             },
-            "playerTwo": {
-                "name": playerTwo.name,
-                "towerLife": playerTwo.towerLife,
-                "wallLife": playerTwo.wallLife,
-                "resources": playerTwo.resources,
-                "sources": playerTwo.sources,
-                "cards": playerTwoCards
-            }
+            playerTwo: {
+                cards: playerTwoCards,
+                name: playerTwo.name,
+                resources: playerTwo.resources,
+                sources: playerTwo.sources,
+                towerLife: playerTwo.towerLife,
+                wallLife: playerTwo.wallLife,
+            },
         });
     }
 
@@ -49,7 +48,7 @@ class Cookie {
      * Set cookie for game status
      * @param {boolean} status
      */
-    setStatusCookie(status:boolean) {
+    public setStatusCookie(status: boolean) {
         Cookies.set(this.gameStatusCookie, status);
     }
 
@@ -57,39 +56,39 @@ class Cookie {
      * Check if game status is false
      * @returns {boolean}
      */
-    gameIsOff():any {
+    public gameIsOff(): any {
         return Cookies.getJSON(this.gameStatusCookie) === false;
     }
 
     /**
      * Get player one values
-     * @returns {any} playerOne
+     * @returns {Object} playerOne
      */
-    getPlayerOneValues():any {
-        return this.getCookie().playerOne
+    public getPlayerOneValues(): any {
+        return this.getCookie().playerOne;
     }
 
     /**
      * Get player two values
-     * @returns {any} playerTwo
+     * @returns {Object} playerTwo
      */
-    getPlayerTwoValues():any {
+    public getPlayerTwoValues(): any {
         return this.getCookie().playerTwo;
     }
 
     /**
      * Get player one name
-     * @returns {any}
+     * @returns {string}
      */
-    getPlayerOneName():string {
+    public getPlayerOneName(): string {
         return this.getPlayerOneValues().name;
     }
 
     /**
      * Get player two name
-     * @returns {any}
+     * @returns {string}
      */
-    getPlayerTwoName():string {
+    public getPlayerTwoName(): string {
         return this.getPlayerTwoValues().name;
     }
 
@@ -97,36 +96,36 @@ class Cookie {
      * Check if cookies are set
      * @returns {boolean}
      */
-    cookiesAreSet():boolean {
-        return (Cookies.get(this.gameCookieName)) ? true : false;
+    public cookiesAreSet(): boolean {
+        return !!(Cookies.get(this.gameCookieName));
     }
 
     /**
      * Get both players cookies
-     * @returns {any}
+     * @returns {Object}
      */
-    getCookie():any {
+    public getCookie(): any {
         return Cookies.getJSON(this.gameCookieName);
     }
 
     /**
      * Delete status cookie
      */
-    removeStatusCookie():void {
+    public removeStatusCookie(): void {
         Cookies.remove(this.gameStatusCookie);
     }
 
     /**
      * Delete both players cookie
      */
-    removeCookie():void {
+    public removeCookie(): void {
         Cookies.remove(this.gameCookieName);
     }
 
     /**
      * Remove all cookies
      */
-    removeAll() {
+    public removeAll() {
         this.removeCookie();
         this.removeStatusCookie();
     }
