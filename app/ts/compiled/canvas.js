@@ -8,10 +8,7 @@ var ArcomageGame;
             this.canvas = new fabric.Canvas(canvasId, {
                 selection: false,
             });
-            this.promises = {
-                cardsImages: [],
-                sourcesImages: [],
-            };
+            this.promises = [];
         }
         get width() {
             return document.getElementById(this.containerId).getBoundingClientRect().width;
@@ -22,11 +19,8 @@ var ArcomageGame;
         get fabricElement() {
             return this.canvas;
         }
-        get cardsImagesLoaded() {
-            return this.promises.cardsImages;
-        }
-        get sourcesImagesLoaded() {
-            return this.promises.sourcesImages;
+        get imagesLoaded() {
+            return this.promises;
         }
         setCanvasDimensions(width = this.width, height = this.height) {
             this.fabricElement.setHeight(height);
@@ -154,7 +148,7 @@ var ArcomageGame;
                         reject(new Error("Can`t load cards images"));
                     };
                 });
-                that.cardsImagesLoaded.push(loadImage);
+                that.imagesLoaded.push(loadImage);
             }
         } // createCards
         createBackOfCard(CARDS, cardsValues) {
@@ -212,13 +206,14 @@ var ArcomageGame;
                         reject(new Error("Can`t load cards images"));
                     };
                 });
-                that.cardsImagesLoaded.push(loadImage);
+                that.imagesLoaded.push(loadImage);
             }
         } // createBackOfCard
         createNames(playerOne, playerTwo, canvasValues) {
             function createText(text) {
                 return new fabric.Textbox(text, {
                     fontSize: canvasValues.playersNamesText.fontSize,
+                    fill: canvasValues.playersNamesText.fillColor,
                     width: canvasValues.playersNamesText.width,
                     editable: false,
                     fontWeight: "bold",
@@ -228,7 +223,7 @@ var ArcomageGame;
                     originY: "top",
                 });
             }
-            function createMainBody() {
+            /*function createMainBody(): IRect {
                 return new fabric.Rect({
                     width: canvasValues.playersNamesText.width,
                     height: canvasValues.playersNamesText.height,
@@ -240,9 +235,8 @@ var ArcomageGame;
                     originX: "left",
                     originY: "top",
                 });
-            }
+             }*/
             let groupForPlayerOne = new fabric.Group([
-                createMainBody(),
                 createText(playerOne.name.substring(0, canvasValues.playersNamesText.maxLetters))
             ], {
                 left: canvasValues.playersNamesText.padding,
@@ -251,8 +245,9 @@ var ArcomageGame;
                 objectCaching: false,
                 hoverCursor: "default",
             });
-            let groupForPlayerTwo = new fabric.Group([createMainBody(),
-                createText(playerTwo.name.substring(0, canvasValues.playersNamesText.maxLetters))], {
+            let groupForPlayerTwo = new fabric.Group([
+                createText(playerTwo.name.substring(0, canvasValues.playersNamesText.maxLetters))
+            ], {
                 left: this.width - canvasValues.playersNamesText.width
                     - canvasValues.playersNamesText.padding - canvasValues.playersNamesText.strokeWidth,
                 top: 0,
@@ -265,7 +260,7 @@ var ArcomageGame;
             this.fabricElement.add(playerOne.nameObject);
             this.fabricElement.add(playerTwo.nameObject);
         } // createNames
-        createOneSource(source, playerOne, playerTwo, canvasValues) {
+        createOneSandR(source, playerOne, playerTwo, canvasValues) {
             let that = this;
             let sources = canvasValues.sources;
             let capitalizeFirstLetter = (text) => {
@@ -275,165 +270,208 @@ var ArcomageGame;
             let sourcesTopPadding1 = canvasValues.playersNamesText.height +
                 canvasValues.playersNamesText.padding +
                 sources[source].position * (sources.height + sources.paddingTop);
-            let loadImage = new Promise((resolve, reject) => {
-                let img = new Image();
-                img.src = sources[source].src;
-                img.onload = () => {
-                    img.width = sources.imgWidth;
-                    img.height = sources.imgHeight;
-                    let imageOne = new fabric.Image(img, {
+            let loadSourceImage = new Promise((resolve, reject) => {
+                let sourceImg = new Image();
+                sourceImg.src = sources[source].src;
+                sourceImg.onload = () => {
+                    sourceImg.width = sources.imgWidth;
+                    sourceImg.height = sources.imgHeight;
+                    let sourceImagePlayerOne = new fabric.Image(sourceImg, {
+                        left: 0,
+                        top: 0,
+                    });
+                    let sourceImagePlayerTwo = new fabric.Image(sourceImg, {
                         left: sources.width - sources.imgWidth,
                         top: 0,
                     });
-                    let imageTwo = new fabric.Image(img, {
-                        left: sources.width - sources.imgWidth,
-                        top: 0,
-                    });
-                    function createSourceBody() {
+                    /*function createSourceBody(): IRect {
                         return new fabric.Rect({
-                            width: sources.width,
-                            height: sources.height * 0.75,
-                            fill: sources[source].color,
+                     top: - sources.descFontSize - sources.padding,
+                     left: 0,
+                     width: sources.imgWidth + sources.resImgWidth,
+                     height: sources.descFontSize + sources.imgHeight + sources.fontSize + sources.padding,
+                     fill: "transparent",
+                     stroke: sources[source].color,
+                     strokeWidth: 2,
                             rx: sources.borderRadius,
                             ry: sources.borderRadius,
+                            originX: "left",
+                            originY: "top",
+                        });
+                     }*/
+                    function createSourcesText(player) {
+                        let leftPosition = (player === playerOne)
+                            ? 0
+                            : sources.descFontSize;
+                        return new fabric.Textbox(capitalizeFirstLetter(source), {
+                            width: sources.imgWidth,
+                            left: leftPosition,
+                            top: -sources.descFontSize,
+                            fontSize: sources.descFontSize,
+                            fontWeight: "bold",
+                            fill: sources[source].color,
+                            selectable: false,
+                            hasBorders: false,
+                            textAlign: "center",
                             originX: "left",
                             originY: "top",
                         });
                     }
                     function createSourceValue(player) {
                         let leftPosition = (player === playerOne)
-                            ? sources.padding - sources.borderRadius + sources.textPadding
-                            : that.width - sources.width - sources.padding - sources.borderRadius + sources.textPadding;
+                            ? sources.padding - sources.borderRadius
+                            : that.width - sources.imgWidth - sources.resImgWidth
+                                - sources.padding - sources.borderRadius;
                         return new fabric.Textbox(player.sources[source].toString(), {
-                            width: sources.width,
+                            width: sources.imgWidth,
                             left: leftPosition,
-                            top: sourcesTopPadding1 + sources.paddingTop + sources.imgHeight - sources.fontSize,
+                            top: sourcesTopPadding1 + sources.paddingTop + sources.imgHeight + sources.descFontSize / 2,
                             fontSize: sources.fontSize,
-                            fill: sources.textColor,
+                            fontWeight: "bold",
+                            fill: sources[source].color,
                             objectCaching: false,
                             selectable: false,
                             hasBorders: false,
                             hoverCursor: "default",
-                            textAlign: "left",
-                            originX: "left",
-                            originY: "top",
-                        });
-                    }
-                    function createResourcesText() {
-                        return new fabric.Textbox(capitalizeFirstLetter(canvasValues.relations[source]), {
-                            left: sources.padding / 4,
-                            top: sources.height * 0.75 + sources.textPadding,
-                            fontSize: sources.fontSize / 2,
-                            fill: sources.textColor,
                             textAlign: "center",
                             originX: "left",
                             originY: "top",
                         });
                     }
-                    function createResourcesBody() {
-                        return new fabric.Rect({
-                            width: sources.width,
-                            height: sources.height * 0.25,
-                            top: sources.height * 0.75 + sources.borderRadius * 2,
-                            fill: sources[source].color,
-                            rx: sources.borderRadius,
-                            ry: sources.borderRadius,
-                            originX: "left",
-                            originY: "top",
-                        });
-                    }
-                    function createResources(player) {
-                        let leftPosition = (player === playerOne)
-                            ? sources.padding
-                            : that.width - sources.width - sources.padding - sources.borderRadius;
-                        return new fabric.Textbox(player.resources[sources[source].resource].toString(), {
-                            width: sources.width - sources.padding / 2,
-                            left: leftPosition,
-                            top: sourcesTopPadding1 + sources.height + sources.textPadding / 2,
-                            fontSize: sources.fontSize / 2,
-                            fill: sources.textColor,
-                            objectCaching: false,
-                            selectable: false,
-                            hasBorders: false,
-                            hoverCursor: "default",
-                            textAlign: "right",
-                            originX: "left",
-                            originY: "top",
-                        });
-                    }
                     let sourceObjectPlayerOne = new fabric.Group([
-                        createSourceBody(),
-                        imageOne
+                        createSourcesText(playerOne),
+                        sourceImagePlayerOne
                     ], {
                         objectCaching: true,
                         left: sources.padding - sources.borderRadius,
-                        top: 3 * sources.paddingTop + sourcesTopPadding,
-                        selectable: false,
-                        hasBorders: false,
-                        hoverCursor: "default",
-                    });
-                    let resourceObjectPlayerOne = new fabric.Group([
-                        createResourcesBody(),
-                        createResourcesText()
-                    ], {
-                        objectCaching: true,
-                        left: sources.padding - sources.borderRadius,
-                        top: sources.height * 0.75 + 3 * sources.paddingTop +
-                            sources.borderRadius * 2 + sourcesTopPadding,
-                        selectable: false,
-                        hasBorders: false,
+                        top: 3 * sources.paddingTop + sourcesTopPadding - sources.descFontSize,
+                        selectable: true,
+                        hasBorders: true,
                         hoverCursor: "default",
                     });
                     let sourceObjectPlayerTwo = new fabric.Group([
-                        createSourceBody(),
-                        imageTwo
+                        /*createSourceBody(),*/
+                        createSourcesText(playerTwo),
+                        sourceImagePlayerTwo
                     ], {
                         objectCaching: true,
-                        left: that.width - sources.width - sources.padding - sources.borderRadius,
-                        top: 3 * sources.paddingTop + sourcesTopPadding,
-                        selectable: false,
-                        hasBorders: false,
-                        hoverCursor: "default",
-                    });
-                    let resourceObjectPlayerTwo = new fabric.Group([
-                        createResourcesBody(),
-                        createResourcesText()
-                    ], {
-                        objectCaching: true,
-                        left: that.width - sources.width - sources.padding - sources.borderRadius,
-                        top: sources.height * 0.75 + 3 * sources.paddingTop +
-                            sources.borderRadius * 2 + sourcesTopPadding,
+                        left: that.width - sources.imgWidth - sources.resImgWidth
+                            - sources.padding - sources.borderRadius,
+                        top: 3 * sources.paddingTop + sourcesTopPadding - sources.descFontSize,
                         selectable: false,
                         hasBorders: false,
                         hoverCursor: "default",
                     });
                     function addObjects() {
                         playerOne.sourcesObject[source] = createSourceValue(playerOne);
-                        playerOne.resourcesObject[sources[source].resource] = createResources(playerOne);
                         that.fabricElement.add(sourceObjectPlayerOne);
                         that.fabricElement.add(playerOne.sourcesObject[source]);
-                        that.fabricElement.add(resourceObjectPlayerOne);
-                        that.fabricElement.add(playerOne.resourcesObject[sources[source].resource]);
                         playerTwo.sourcesObject[source] = createSourceValue(playerTwo);
-                        playerTwo.resourcesObject[sources[source].resource] = createResources(playerTwo);
                         that.fabricElement.add(sourceObjectPlayerTwo);
                         that.fabricElement.add(playerTwo.sourcesObject[source]);
+                    }
+                    addObjects();
+                    resolve();
+                    reject(new Error("Can`t load source images"));
+                };
+            });
+            let loadResourceImage = new Promise((resolve, reject) => {
+                let resourceImg = new Image();
+                resourceImg.src = sources[source].resSrc;
+                resourceImg.onload = () => {
+                    resourceImg.width = sources.resImgWidth;
+                    resourceImg.height = sources.resImgHeight;
+                    let sourceImagePlayerOne = new fabric.Image(resourceImg, {
+                        left: 0,
+                        top: 0,
+                    });
+                    let sourceImagePlayerTwo = new fabric.Image(resourceImg, {
+                        left: sources.width - sources.imgWidth,
+                        top: 0,
+                    });
+                    function createResourcesText(player) {
+                        let leftPosition = (player === playerOne)
+                            ? 0
+                            : sources.descFontSize;
+                        return new fabric.Textbox(capitalizeFirstLetter(canvasValues.relations[source]), {
+                            width: sources.resImgWidth,
+                            left: leftPosition,
+                            top: -sources.descFontSize,
+                            fontSize: sources.descFontSize,
+                            fill: sources[source].color,
+                            selectable: false,
+                            hasBorders: false,
+                            textAlign: "center",
+                            originX: "left",
+                            originY: "top",
+                        });
+                    }
+                    function createResourcesValue(player) {
+                        let leftPosition = (player === playerOne)
+                            ? sources.padding + sources.imgWidth
+                            : that.width - sources.resImgWidth - sources.padding - sources.borderRadius;
+                        return new fabric.Textbox(player.resources[sources[source].resource].toString(), {
+                            width: sources.resImgWidth,
+                            left: leftPosition,
+                            top: sourcesTopPadding1 + sources.paddingTop + sources.imgHeight + sources.descFontSize / 2,
+                            fontSize: sources.fontSize,
+                            fill: sources[source].color,
+                            objectCaching: false,
+                            selectable: false,
+                            hasBorders: false,
+                            hoverCursor: "default",
+                            textAlign: "center",
+                            originX: "left",
+                            originY: "top",
+                        });
+                    }
+                    let resourceObjectPlayerOne = new fabric.Group([
+                        createResourcesText(playerOne),
+                        sourceImagePlayerOne
+                    ], {
+                        objectCaching: true,
+                        left: sources.padding - sources.borderRadius + sources.imgWidth,
+                        top: 3 * sources.paddingTop + sourcesTopPadding + sources.imgHeight
+                            - sources.resImgHeight - sources.descFontSize,
+                        selectable: false,
+                        hasBorders: false,
+                        hoverCursor: "default",
+                    });
+                    let resourceObjectPlayerTwo = new fabric.Group([
+                        createResourcesText(playerTwo),
+                        sourceImagePlayerTwo
+                    ], {
+                        objectCaching: true,
+                        left: that.width - sources.resImgWidth
+                            - sources.padding - sources.borderRadius,
+                        top: 3 * sources.paddingTop + sourcesTopPadding + sources.imgHeight
+                            - sources.resImgHeight - sources.descFontSize,
+                        selectable: false,
+                        hasBorders: false,
+                        hoverCursor: "default",
+                    });
+                    function addObjects() {
+                        playerOne.resourcesObject[sources[source].resource] = createResourcesValue(playerOne);
+                        that.fabricElement.add(resourceObjectPlayerOne);
+                        that.fabricElement.add(playerOne.resourcesObject[sources[source].resource]);
+                        playerTwo.resourcesObject[sources[source].resource] = createResourcesValue(playerTwo);
                         that.fabricElement.add(resourceObjectPlayerTwo);
                         that.fabricElement.add(playerTwo.resourcesObject[sources[source].resource]);
                     }
                     addObjects();
                     resolve();
-                    reject(new Error("Can`t load images"));
+                    reject(new Error("Can`t load resources images"));
                 };
             });
-            that.sourcesImagesLoaded.push(loadImage);
-        } // createOneSource
-        createSources(playerOne, playerTwo, canvasValues) {
+            that.imagesLoaded.push(loadSourceImage);
+            that.imagesLoaded.push(loadResourceImage);
+        } // create one Source and Resource
+        createAllSAndR(playerOne, playerTwo, canvasValues) {
             let sources = Object.keys(canvasValues.relations);
             for (let source of sources) {
-                this.createOneSource(source, playerOne, playerTwo, canvasValues);
+                this.createOneSandR(source, playerOne, playerTwo, canvasValues);
             }
-        } // createSources
+        } // create all sources and resources
         createTowers(playerOne, playerTwo, canvasValues) {
             let that = this;
             function createTowerRoof(player) {
@@ -589,7 +627,7 @@ var ArcomageGame;
             this.createCards(CARDS, cardsValues, relations);
             this.createBackOfCard(CARDS, cardsValues);
             this.createNames(playerOne, playerTwo, canvasValues);
-            this.createSources(playerOne, playerTwo, canvasValues);
+            this.createAllSAndR(playerOne, playerTwo, canvasValues);
             this.createTowers(playerOne, playerTwo, canvasValues);
             this.createWalls(playerOne, playerTwo, canvasValues);
         }

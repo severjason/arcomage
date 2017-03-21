@@ -301,7 +301,8 @@ var ArcomageGame;
                 let playerCardObject = player.cards[i].object;
                 let paddingLeft = (i === 0)
                     ? 2 * this.cardsValues.padding
-                    : (player.cards[i].object.getWidth() + 2 * this.cardsValues.padding) * i + this.cardsValues.padding;
+                    : (player.cards[i].object.getWidth() + 2 * this.cardsValues.padding) * i
+                    + 2 * this.cardsValues.padding;
                 playerCardObject.setLeft(paddingLeft);
                 playerCardObject.setOpacity(0.9);
                 canvas.fabricElement.add(playerCardObject);

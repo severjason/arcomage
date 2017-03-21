@@ -21,10 +21,7 @@ namespace ArcomageGame {
             this.canvas = new fabric.Canvas(canvasId, {
                 selection: false,
             });
-            this.promises = {
-                cardsImages: [],
-                sourcesImages: [],
-            };
+            this.promises = [];
         }
 
         get width(): number {
@@ -39,12 +36,8 @@ namespace ArcomageGame {
             return this.canvas;
         }
 
-        get cardsImagesLoaded(): any {
-            return this.promises.cardsImages;
-        }
-
-        get sourcesImagesLoaded(): any {
-            return this.promises.sourcesImages;
+        get imagesLoaded(): any {
+            return this.promises;
         }
 
         public setCanvasDimensions(width: number = this.width, height: number = this.height): void {
@@ -185,7 +178,7 @@ namespace ArcomageGame {
                     };
 
                 });
-                that.cardsImagesLoaded.push(loadImage);
+                that.imagesLoaded.push(loadImage);
             }
 
         } // createCards
@@ -257,7 +250,7 @@ namespace ArcomageGame {
                     };
 
                 });
-                that.cardsImagesLoaded.push(loadImage);
+                that.imagesLoaded.push(loadImage);
             }
 
         } // createBackOfCard
@@ -267,6 +260,7 @@ namespace ArcomageGame {
             function createText(text: string): ITextbox {
                 return new fabric.Textbox(text, {
                     fontSize: canvasValues.playersNamesText.fontSize,
+                    fill: canvasValues.playersNamesText.fillColor,
                     width: canvasValues.playersNamesText.width,
                     editable: false,
                     fontWeight: "bold",
@@ -277,7 +271,7 @@ namespace ArcomageGame {
                 });
             }
 
-            function createMainBody(): IRect {
+            /*function createMainBody(): IRect {
                 return new fabric.Rect({
                     width: canvasValues.playersNamesText.width,
                     height: canvasValues.playersNamesText.height,
@@ -289,10 +283,9 @@ namespace ArcomageGame {
                     originX: "left",
                     originY: "top",
                 });
-            }
+             }*/
 
             let groupForPlayerOne: IGroup = new fabric.Group([
-                createMainBody(),
                 createText(playerOne.name.substring(0, canvasValues.playersNamesText.maxLetters))], {
                 left: canvasValues.playersNamesText.padding,
                 top: 0,
@@ -301,7 +294,7 @@ namespace ArcomageGame {
                 hoverCursor: "default",
             });
 
-            let groupForPlayerTwo: IGroup = new fabric.Group([createMainBody(),
+            let groupForPlayerTwo: IGroup = new fabric.Group([
                 createText(playerTwo.name.substring(0, canvasValues.playersNamesText.maxLetters))], {
                 left: this.width - canvasValues.playersNamesText.width
                 - canvasValues.playersNamesText.padding - canvasValues.playersNamesText.strokeWidth,
@@ -317,7 +310,7 @@ namespace ArcomageGame {
             this.fabricElement.add(playerTwo.nameObject);
         } // createNames
 
-        public createOneSource(source: string, playerOne: Player, playerTwo: Player, canvasValues: any): void {
+        public createOneSandR(source: string, playerOne: Player, playerTwo: Player, canvasValues: any): void {
 
             let that: Canvas = this;
             let sources: any = canvasValues.sources;
@@ -331,31 +324,54 @@ namespace ArcomageGame {
                 canvasValues.playersNamesText.padding +
                 sources[source].position * (sources.height + sources.paddingTop);
 
-            let loadImage: Promise<any> = new Promise((resolve, reject) => {
+            let loadSourceImage: Promise<any> = new Promise((resolve, reject) => {
 
-                let img: HTMLImageElement = new Image();
-                img.src = sources[source].src;
-                img.onload = () => {
+                let sourceImg: HTMLImageElement = new Image();
+                sourceImg.src = sources[source].src;
+                sourceImg.onload = () => {
 
-                    img.width = sources.imgWidth;
-                    img.height = sources.imgHeight;
+                    sourceImg.width = sources.imgWidth;
+                    sourceImg.height = sources.imgHeight;
 
-                    let imageOne: IImage = new fabric.Image(img, {
+                    let sourceImagePlayerOne: IImage = new fabric.Image(sourceImg, {
+                        left: 0,
+                        top: 0,
+                    });
+                    let sourceImagePlayerTwo: IImage = new fabric.Image(sourceImg, {
                         left: sources.width - sources.imgWidth,
                         top: 0,
                     });
-                    let imageTwo: IImage = new fabric.Image(img, {
-                        left: sources.width - sources.imgWidth,
-                        top: 0,
-                    });
 
-                    function createSourceBody(): IRect {
+                    /*function createSourceBody(): IRect {
                         return new fabric.Rect({
-                            width: sources.width,
-                            height: sources.height * 0.75,
-                            fill: sources[source].color,
+                     top: - sources.descFontSize - sources.padding,
+                     left: 0,
+                     width: sources.imgWidth + sources.resImgWidth,
+                     height: sources.descFontSize + sources.imgHeight + sources.fontSize + sources.padding,
+                     fill: "transparent",
+                     stroke: sources[source].color,
+                     strokeWidth: 2,
                             rx: sources.borderRadius,
                             ry: sources.borderRadius,
+                            originX: "left",
+                            originY: "top",
+                        });
+                     }*/
+
+                    function createSourcesText(player: Player): ITextbox {
+                        let leftPosition = (player === playerOne)
+                            ? 0
+                            : sources.descFontSize;
+                        return new fabric.Textbox(capitalizeFirstLetter(source), {
+                            width: sources.imgWidth,
+                            left: leftPosition,
+                            top: -sources.descFontSize,
+                            fontSize: sources.descFontSize,
+                            fontWeight: "bold",
+                            fill: sources[source].color,
+                            selectable: false,
+                            hasBorders: false,
+                            textAlign: "center",
                             originX: "left",
                             originY: "top",
                         });
@@ -363,108 +379,45 @@ namespace ArcomageGame {
 
                     function createSourceValue(player: Player): ITextbox {
                         let leftPosition = (player === playerOne)
-                            ? sources.padding - sources.borderRadius + sources.textPadding
-                            : that.width - sources.width - sources.padding - sources.borderRadius + sources.textPadding;
+                            ? sources.padding - sources.borderRadius
+                            : that.width - sources.imgWidth - sources.resImgWidth
+                            - sources.padding - sources.borderRadius;
                         return new fabric.Textbox(player.sources[source].toString(), {
-                            width: sources.width,
+                            width: sources.imgWidth,
                             left: leftPosition,
-                            top: sourcesTopPadding1 + sources.paddingTop + sources.imgHeight - sources.fontSize,
+                            top: sourcesTopPadding1 + sources.paddingTop + sources.imgHeight + sources.descFontSize / 2,
                             fontSize: sources.fontSize,
-                            fill: sources.textColor,
+                            fontWeight: "bold",
+                            fill: sources[source].color,
                             objectCaching: false,
                             selectable: false,
                             hasBorders: false,
                             hoverCursor: "default",
-                            textAlign: "left",
-                            originX: "left",
-                            originY: "top",
-                        });
-                    }
-
-                    function createResourcesText(): ITextbox {
-                        return new fabric.Textbox(capitalizeFirstLetter(canvasValues.relations[source]), {
-                            left: sources.padding / 4,
-                            top: sources.height * 0.75 + sources.textPadding,
-                            fontSize: sources.fontSize / 2,
-                            fill: sources.textColor,
                             textAlign: "center",
                             originX: "left",
                             originY: "top",
                         });
                     }
 
-                    function createResourcesBody(): IRect {
-                        return new fabric.Rect({
-                            width: sources.width,
-                            height: sources.height * 0.25,
-                            top: sources.height * 0.75 + sources.borderRadius * 2,
-                            fill: sources[source].color,
-                            rx: sources.borderRadius,
-                            ry: sources.borderRadius,
-                            originX: "left",
-                            originY: "top",
-                        });
-                    }
-
-                    function createResources(player: Player): ITextbox {
-                        let leftPosition = (player === playerOne)
-                            ? sources.padding
-                            : that.width - sources.width - sources.padding - sources.borderRadius;
-
-                        return new fabric.Textbox(player.resources[sources[source].resource].toString(), {
-                            width: sources.width - sources.padding / 2,
-                            left: leftPosition,
-                            top: sourcesTopPadding1 + sources.height + sources.textPadding / 2,
-                            fontSize: sources.fontSize / 2,
-                            fill: sources.textColor,
-                            objectCaching: false,
-                            selectable: false,
-                            hasBorders: false,
-                            hoverCursor: "default",
-                            textAlign: "right",
-                            originX: "left",
-                            originY: "top",
-                        });
-                    }
-
                     let sourceObjectPlayerOne: IGroup = new fabric.Group([
-                        createSourceBody(),
-                        imageOne], {
+                        createSourcesText(playerOne),
+                        sourceImagePlayerOne], {
                         objectCaching: true,
                         left: sources.padding - sources.borderRadius,
-                        top: 3 * sources.paddingTop + sourcesTopPadding,
-                        selectable: false,
-                        hasBorders: false,
+                        top: 3 * sources.paddingTop + sourcesTopPadding - sources.descFontSize,
+                        selectable: true,
+                        hasBorders: true,
                         hoverCursor: "default",
                     });
-                    let resourceObjectPlayerOne = new fabric.Group([
-                        createResourcesBody(),
-                        createResourcesText()], {
-                        objectCaching: true,
-                        left: sources.padding - sources.borderRadius,
-                        top: sources.height * 0.75 + 3 * sources.paddingTop +
-                        sources.borderRadius * 2 + sourcesTopPadding,
-                        selectable: false,
-                        hasBorders: false,
-                        hoverCursor: "default",
-                    });
+
                     let sourceObjectPlayerTwo: IGroup = new fabric.Group([
-                        createSourceBody(),
-                        imageTwo], {
+                        /*createSourceBody(),*/
+                        createSourcesText(playerTwo),
+                        sourceImagePlayerTwo], {
                         objectCaching: true,
-                        left: that.width - sources.width - sources.padding - sources.borderRadius,
-                        top: 3 * sources.paddingTop + sourcesTopPadding,
-                        selectable: false,
-                        hasBorders: false,
-                        hoverCursor: "default",
-                    });
-                    let resourceObjectPlayerTwo: IGroup = new fabric.Group([
-                        createResourcesBody(),
-                        createResourcesText()], {
-                        objectCaching: true,
-                        left: that.width - sources.width - sources.padding - sources.borderRadius,
-                        top: sources.height * 0.75 + 3 * sources.paddingTop +
-                        sources.borderRadius * 2 + sourcesTopPadding,
+                        left: that.width - sources.imgWidth - sources.resImgWidth
+                        - sources.padding - sources.borderRadius,
+                        top: 3 * sources.paddingTop + sourcesTopPadding - sources.descFontSize,
                         selectable: false,
                         hasBorders: false,
                         hoverCursor: "default",
@@ -472,18 +425,116 @@ namespace ArcomageGame {
 
                     function addObjects(): void {
                         playerOne.sourcesObject[source] = createSourceValue(playerOne);
-                        playerOne.resourcesObject[sources[source].resource] = createResources(playerOne);
 
                         that.fabricElement.add(sourceObjectPlayerOne);
                         that.fabricElement.add(playerOne.sourcesObject[source]);
-                        that.fabricElement.add(resourceObjectPlayerOne);
-                        that.fabricElement.add(playerOne.resourcesObject[sources[source].resource]);
 
                         playerTwo.sourcesObject[source] = createSourceValue(playerTwo);
-                        playerTwo.resourcesObject[sources[source].resource] = createResources(playerTwo);
 
                         that.fabricElement.add(sourceObjectPlayerTwo);
                         that.fabricElement.add(playerTwo.sourcesObject[source]);
+                    }
+
+                    addObjects();
+
+                    resolve();
+
+                    reject(new Error("Can`t load source images"));
+
+                };
+
+            });
+            let loadResourceImage: Promise<any> = new Promise((resolve, reject) => {
+
+                let resourceImg: HTMLImageElement = new Image();
+                resourceImg.src = sources[source].resSrc;
+
+                resourceImg.onload = () => {
+
+                    resourceImg.width = sources.resImgWidth;
+                    resourceImg.height = sources.resImgHeight;
+
+                    let sourceImagePlayerOne: IImage = new fabric.Image(resourceImg, {
+                        left: 0,
+                        top: 0,
+                    });
+                    let sourceImagePlayerTwo: IImage = new fabric.Image(resourceImg, {
+                        left: sources.width - sources.imgWidth,
+                        top: 0,
+                    });
+
+                    function createResourcesText(player: Player): ITextbox {
+                        let leftPosition = (player === playerOne)
+                            ? 0
+                            : sources.descFontSize;
+                        return new fabric.Textbox(capitalizeFirstLetter(canvasValues.relations[source]), {
+                            width: sources.resImgWidth,
+                            left: leftPosition,
+                            top: -sources.descFontSize,
+                            fontSize: sources.descFontSize,
+                            fill: sources[source].color,
+                            selectable: false,
+                            hasBorders: false,
+                            textAlign: "center",
+                            originX: "left",
+                            originY: "top",
+                        });
+                    }
+
+                    function createResourcesValue(player: Player): ITextbox {
+                        let leftPosition = (player === playerOne)
+                            ? sources.padding + sources.imgWidth
+                            : that.width - sources.resImgWidth - sources.padding - sources.borderRadius;
+
+                        return new fabric.Textbox(player.resources[sources[source].resource].toString(), {
+                            width: sources.resImgWidth,
+                            left: leftPosition,
+                            top: sourcesTopPadding1 + sources.paddingTop + sources.imgHeight + sources.descFontSize / 2,
+                            fontSize: sources.fontSize,
+                            fill: sources[source].color,
+                            objectCaching: false,
+                            selectable: false,
+                            hasBorders: false,
+                            hoverCursor: "default",
+                            textAlign: "center",
+                            originX: "left",
+                            originY: "top",
+                        });
+                    }
+
+                    let resourceObjectPlayerOne = new fabric.Group([
+                        createResourcesText(playerOne),
+                        sourceImagePlayerOne], {
+                        objectCaching: true,
+                        left: sources.padding - sources.borderRadius + sources.imgWidth,
+                        top: 3 * sources.paddingTop + sourcesTopPadding + sources.imgHeight
+                        - sources.resImgHeight - sources.descFontSize,
+                        selectable: false,
+                        hasBorders: false,
+                        hoverCursor: "default",
+                    });
+
+                    let resourceObjectPlayerTwo: IGroup = new fabric.Group([
+                        createResourcesText(playerTwo),
+                        sourceImagePlayerTwo], {
+                        objectCaching: true,
+                        left: that.width - sources.resImgWidth
+                        - sources.padding - sources.borderRadius,
+                        top: 3 * sources.paddingTop + sourcesTopPadding + sources.imgHeight
+                        - sources.resImgHeight - sources.descFontSize,
+                        selectable: false,
+                        hasBorders: false,
+                        hoverCursor: "default",
+                    });
+
+                    function addObjects(): void {
+                        playerOne.resourcesObject[sources[source].resource] = createResourcesValue(playerOne);
+
+                        that.fabricElement.add(resourceObjectPlayerOne);
+                        that.fabricElement.add(playerOne.resourcesObject[sources[source].resource]);
+
+                        playerTwo.resourcesObject[sources[source].resource] = createResourcesValue(playerTwo);
+
                         that.fabricElement.add(resourceObjectPlayerTwo);
                         that.fabricElement.add(playerTwo.resourcesObject[sources[source].resource]);
                     }
@@ -492,20 +543,22 @@ namespace ArcomageGame {
 
                     resolve();
 
-                    reject(new Error("Can`t load images"));
+                    reject(new Error("Can`t load resources images"));
 
                 };
 
             });
-            that.sourcesImagesLoaded.push(loadImage);
-        } // createOneSource
+            that.imagesLoaded.push(loadSourceImage);
+            that.imagesLoaded.push(loadResourceImage);
 
-        public createSources(playerOne: Player, playerTwo: Player, canvasValues: any): void {
+        } // create one Source and Resource
+
+        public createAllSAndR(playerOne: Player, playerTwo: Player, canvasValues: any): void {
             let sources = Object.keys(canvasValues.relations);
             for (let source of sources) {
-                this.createOneSource(source, playerOne, playerTwo, canvasValues);
+                this.createOneSandR(source, playerOne, playerTwo, canvasValues);
             }
-        } // createSources
+        } // create all sources and resources
 
         public createTowers(playerOne: Player, playerTwo: Player, canvasValues: any): void {
 
@@ -682,7 +735,7 @@ namespace ArcomageGame {
             this.createCards(CARDS, cardsValues, relations);
             this.createBackOfCard(CARDS, cardsValues);
             this.createNames(playerOne, playerTwo, canvasValues);
-            this.createSources(playerOne, playerTwo, canvasValues);
+            this.createAllSAndR(playerOne, playerTwo, canvasValues);
             this.createTowers(playerOne, playerTwo, canvasValues);
             this.createWalls(playerOne, playerTwo, canvasValues);
         }

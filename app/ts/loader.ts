@@ -219,7 +219,7 @@ namespace ArcomageGame {
                 })
                 .then((events: Events) => {
                     that.events = events;
-                    return that.canvas.cardsImagesLoaded;
+                    return that.canvas.imagesLoaded;
                 })
                 .then((imagesPromises: Array<Promise<any>>) => {
                     return Promise.all(imagesPromises);
