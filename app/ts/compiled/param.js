@@ -108,6 +108,7 @@ var ArcomageGame;
                     fontSize: 24,
                     textColor: "#34495e",
                     roofColor: "#7c3607",
+                    roofStrokeColor: "#5d2906",
                     towerColor: "#a34508",
                 },
                 walls: {

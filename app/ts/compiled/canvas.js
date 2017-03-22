@@ -345,8 +345,8 @@ var ArcomageGame;
                         objectCaching: true,
                         left: sources.padding - sources.borderRadius,
                         top: 3 * sources.paddingTop + sourcesTopPadding - sources.descFontSize,
-                        selectable: true,
-                        hasBorders: true,
+                        selectable: false,
+                        hasBorders: false,
                         hoverCursor: "default",
                     });
                     let sourceObjectPlayerTwo = new fabric.Group([
@@ -482,6 +482,8 @@ var ArcomageGame;
                     top: -canvasValues.towers.heightStep * player.towerLife,
                     left: -(canvasValues.towers.roofWidth - canvasValues.towers.width) / 2,
                     fill: canvasValues.towers.roofColor,
+                    stroke: canvasValues.towers.roofStrokeColor,
+                    strokeWidth: 2,
                     originX: "left",
                     originY: "bottom",
                 });
