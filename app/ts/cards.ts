@@ -116,6 +116,17 @@ namespace ArcomageGame {
         }
 
         /**
+         * Get card score
+         * @param {string} cardName
+         * @returns {number}
+         */
+        public getScore(cardName: string): number {
+            let card = this.getSingleCard(cardName);
+            let resourceName: string = Object.keys(card.resource)[0];
+            return card.resource[resourceName] * 10;
+        }
+
+        /**
          * Get card active status
          * @param {string} cardName
          * @returns {boolean}

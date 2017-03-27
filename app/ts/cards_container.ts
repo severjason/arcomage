@@ -242,7 +242,7 @@ namespace ArcomageGame {
                     name: "crumblestone",
                     source: "magic",
                     description: {
-                        eng: "crumblestone",
+                        eng: "Crumblestone",
                     },
                     text: {
                         eng: "+5 tower,\nenemy loses 6 bricks",

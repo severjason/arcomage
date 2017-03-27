@@ -1,87 +1,200 @@
+@import "../variables";
+
+%full_screen {
+  z-index: 100;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  //background: #efefef;
+}
+
+%button {
+  display: block;
+  width: $button_controls_width;
+  height: $button_controls_height;
+  margin: 0 auto;
+  color: $controls_text_color;
+  background: $controls_background_color;
+  border: $button_border;
+  border-radius: 50px;
+  text-align: center;
+
+  &:focus {
+    outline: none;
+  }
+
+  &:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  }
+
+  &:active {
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+  }
+}
+
+#loader {
+  @extend %full_screen;
+  background: black;
+
+  img {
+    position: absolute;
+    width: $loader_width;
+    height: $loader_height;
+    left: 50%;
+    top: 50%;
+    margin-left: - $loader_width / 2;
+    margin-top: - $loader_height / 2;
+  }
+}
+
+//#loader
+
+#game_over {
+  @extend %full_screen;
+
+  display: none;
+  font-family: 'Lato', sans-serif;
+
+  .container {
+    position: absolute;
+    width: $game_over_width;
+    height: $game_over_height;
+    left: 50%;
+    top: 50%;
+    color: $game_over_text_color;
+    margin-left: - $game_over_width / 2;
+    margin-top: - $game_over_height / 2;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    border-radius: 2px;
+    background-size: cover;
+
+    h1 {
+      text-align: center;
+    }
+    h3 {
+      text-align: center;
+    }
+
+    .newgame_button {
+      @extend %button;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      margin-left: - $button_controls_width/2;
+      margin-top: - $button_controls_height/2;
+    }
+  }
+  // .container
+}
+
+// #game_over
+
+#start_field {
+  @extend %full_screen;
+  z-index: 200;
+  display: none;
+  background: $start_field_background_color;
+
+  .start_text {
+    color: $start_field_text_color;
+    margin-top: 270px;
+  }
+
+  .container {
+    position: absolute;
+    width: $start_field_width;
+    height: $start_field_height;
+    left: 50%;
+    top: 50%;
+    margin-top: - $start_field_height/2;
+    margin-left: - $start_field_width/2;
+    color: $start_field_text_color;
+    background: $start_field_background;
+
+    input {
+      height: 50px;
+      line-height: 50px;
+      border-radius: 2px;
+      color: $start_field_text_color;
+      background: $start_field_background_color;
+      border-color: $start_field_text_color;
+
+      &:focus {
+        outline-color: $start_field_text_color;
+      }
+    }
+
+    .start_input {
+      margin-top: 200px;
+    }
+  }
+
+  button {
+    @extend %button;
+    background: $start_field_background_color;
+  }
+}
+
+// #start_field
+
+#arcomage_header {
+  width: $controls_width;
+  height: $controls_height;
+  margin: 0 auto;
+  opacity: 0.4;
+  //border: 1px solid #efefef;
+
+  &:hover {
+    opacity: 1;
+  }
+
+  #title {
+    float: left;
+    width: 100%;
+    height: $title_height;
+    h1 {
+      color: #d35400;
+      margin: 0;
+      line-height: $title_height;
+    }
+  }
+
+  #arcomage_controls {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    height: $controls_height - $title_height;
+
+    .newgame_button {
+      @extend %button;
+    }
+    .small_button {
+      @extend %button;
+      width: $button_controls_width / 2;
+      height: $button_controls_height / 2;
+      span {
+        display: block;
+        top: 50%;
+      }
+    }
+  }
+}
+
 div#wrapper {
   z-index: 1;
   position: absolute;
   width: 100%;
   height: 100%;
   margin: 0;
-  //background: url("../../images/background/castle1.jpg") no-repeat top center;
+  background: #efefef url("../../images/background/castle.jpg") no-repeat top center;
 
-  //background: #34495e;
+  //background: rgba(44, 62, 80,1.0);
 
   h1 {
     text-align: center;
   }
-
-  %full_screen {
-    z-index: 100;
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    background: #efefef;
-  }
-
-  #loader {
-    @extend %full_screen;
-
-    img {
-      position: absolute;
-      width: $loader_width;
-      height: $loader_height;
-      left: 50%;
-      top: 50%;
-      margin-left: - $loader_width / 2;
-      margin-top: - $loader_height / 2;
-    }
-  }
-  //#loader
-
-  #game_over {
-    @extend %full_screen;
-
-    display: none;
-    font-family: 'Lato', sans-serif;
-
-    .container {
-      position: absolute;
-      width: $canvas_width;
-      height: $canvas_heigth;
-      left: 50%;
-      top: 50%;
-      margin-left: - $canvas_width / 2;
-      margin-top: - $canvas_heigth / 2;
-
-      h1 {
-        margin-top: $canvas_heigth / 4;
-      }
-      h3 {
-        text-align: center;
-      }
-    }
-    // .container
-  }
-  // #game_over
-
-  #start_field {
-    @extend %full_screen;
-    z-index: 200;
-    display: none;
-
-    .container {
-      position: absolute;
-      width: $start_filed_width;
-      height: $start_filed_height;
-      left: 50%;
-      top: 50%;
-      margin-top: - $start_filed_height/2;
-      margin-left: - $start_filed_width/2;
-    }
-
-    button {
-      margin-top: $start_field_button_margin;
-    }
-  }
-  // #start_field
 
 }

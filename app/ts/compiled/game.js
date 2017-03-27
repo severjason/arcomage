@@ -126,7 +126,7 @@ var ArcomageGame;
             this.gameStatus = false;
             let playerOneWin = (player === this.playerOne);
             this.cookie.setStatusCookie(this.status);
-            this.DOM.showGameOverMessage(playerOneWin, this.playerOne.moves);
+            this.DOM.showGameOverMessage(playerOneWin, this.playerOne.moves, this.playerOne.scores);
         }
         /**
          * Check if game is on
@@ -176,6 +176,7 @@ var ArcomageGame;
          */
         applyCard(cardName, player, enemy) {
             this.cards.getSingleCard(cardName).action(player, enemy);
+            player.updateScores(this.cards.getScore(cardName));
             this.cards.deactivate(cardName);
             if (player.towerLife === this.params.maxValues.tower || enemy.towerLife === 0) {
                 this.gameOver(player);
@@ -302,7 +303,7 @@ var ArcomageGame;
                 let paddingLeft = (i === 0)
                     ? 2 * this.cardsValues.padding
                     : (player.cards[i].object.getWidth() + 2 * this.cardsValues.padding) * i
-                    + 2 * this.cardsValues.padding;
+                        + 2 * this.cardsValues.padding;
                 playerCardObject.setLeft(paddingLeft);
                 playerCardObject.setOpacity(0.9);
                 canvas.fabricElement.add(playerCardObject);

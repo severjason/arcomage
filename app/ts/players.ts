@@ -21,6 +21,7 @@ namespace ArcomageGame {
         private playerTowerObject: any;
         private playerWallObject: any;
         private movesValue: number;
+        private scoresValue: number;
 
         constructor(name: string,
                     playerValues: any,
@@ -38,6 +39,7 @@ namespace ArcomageGame {
             this.maxSourcesValue = maxValues.sources;
             this.maxResourcesValue = maxValues.resources;
             this.movesValue = playerValues.moves || 0;
+            this.scoresValue = playerValues.scores || 0;
             this.playerNameObject = {};
             this.playerSourcesObject = {};
             this.playerResourcesObject = {};
@@ -285,6 +287,21 @@ namespace ArcomageGame {
          */
         public updateMoves(): void {
             this.movesValue++;
+        }
+
+        /**
+         * Get player scores
+         * @returns {number} scoresValue
+         */
+        get scores(): number {
+            return this.scoresValue;
+        }
+
+        /**
+         * Update player scores
+         */
+        public updateScores(newScores: number): void {
+            this.scoresValue += newScores;
         }
 
         /**

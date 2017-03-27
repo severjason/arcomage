@@ -1,17 +1,35 @@
-
 // canvas
 $canvas_width: 765px;
-$canvas_heigth: 765px;
+$canvas_height: 765px;
 $canvas_border: 1px solid #efefef;
+$wrapper_padding: 32px;
 
 // main content
-$main_width:960px;
+$main_width: 960px;
 
 // loader
-$loader_width:280px;
-$loader_height:138px;
+$loader_width: 120px;
+$loader_height: 120px;
 
 //start_field
-$start_filed_width: 300px;
-$start_filed_height: 300px;
+$start_field_width: 600px;
+$start_field_height: 600px;
 $start_field_button_margin: 50px;
+$start_field_text_color: #d35400;
+$start_field_background_color: #010101;
+$start_field_background: $start_field_background_color url("../images/background/start.jpg") center no-repeat;
+
+//game_over
+$game_over_width: 600px;
+$game_over_height: 600px;
+$game_over_text_color: #010101;
+
+// controls
+$title_height: 100px;
+$controls_width: 300px;
+$controls_height: 250px;
+$controls_text_color: #d35400;
+$controls_background_color: #010101;
+$button_controls_height: 100px;
+$button_controls_width: 100px;
+$button_border: 2px solid #d35400;

@@ -15,6 +15,7 @@ var ArcomageGame;
             this.maxSourcesValue = maxValues.sources;
             this.maxResourcesValue = maxValues.resources;
             this.movesValue = playerValues.moves || 0;
+            this.scoresValue = playerValues.scores || 0;
             this.playerNameObject = {};
             this.playerSourcesObject = {};
             this.playerResourcesObject = {};
@@ -234,6 +235,19 @@ var ArcomageGame;
          */
         updateMoves() {
             this.movesValue++;
+        }
+        /**
+         * Get player scores
+         * @returns {number} scoresValue
+         */
+        get scores() {
+            return this.scoresValue;
+        }
+        /**
+         * Update player scores
+         */
+        updateScores(newScores) {
+            this.scoresValue += newScores;
         }
         /**
          * Updates player tower life and tower fabric object

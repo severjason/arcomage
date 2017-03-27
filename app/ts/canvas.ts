@@ -593,9 +593,10 @@ namespace ArcomageGame {
 
             function createTextRect(): IRect {
                 return new fabric.Rect({
+                    top: -1,
                     width: canvasValues.towers.width,
                     height: canvasValues.towers.height,
-                    fill: "white",
+                    fill: canvasValues.towers.towerColor,
                     originX: "left",
                     originY: "top",
                 });
@@ -685,9 +686,10 @@ namespace ArcomageGame {
 
             function createTextRect(): IRect {
                 return new fabric.Rect({
+                    top: -1,
                     width: canvasValues.walls.width,
                     height: canvasValues.towers.height,
-                    fill: "white",
+                    fill: canvasValues.walls.wallColor,
                     originX: "left",
                     originY: "top",
                 });

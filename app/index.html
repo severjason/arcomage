@@ -25,43 +25,61 @@
     <link href="./css/print.css" rel="stylesheet" media="all">
     <!-- endbuild -->
 </head>
-<body>
-
-<div id="wrapper" class="noselect">
-    <div>
-        <button id="clear_cookie_button">Clear cookies</button>
+<body class="noselect">
+<div id="loader">
+    <img src="images/loading.gif" alt="game loading gif">
+</div>
+<div id="game_over">
+    <div class="container">
+        <h1 id="game_over_title"></h1>
+        <br>
+        <h3 id="game_over_moves"></h3>
+        <button class="newgame_button">New game</button>
     </div>
-    <div id="loader">
-        <img src="images/loading.gif" alt="game loading gif">
-    </div>
-    <div id="game_over">
-        <div class="container">
-            <h1 id="game_over_title"></h1>
-            <br>
-            <h3 id="game_over_moves"></h3>
-        </div>
-    </div>
-    <div id="start_field" class="text-center">
-        <div class="container">
-            <h3>
-                Please enter your name:
-            </h3>
+</div>
+<div id="start_field" class="text-center">
+    <h3 class="start_text">
+        To start ARCOMAGE
+        <br/>
+        please enter your name:
+    </h3>
+    <div class="container">
+        <div class="start_input">
             <label>
-                <input id="player_name_input" class="input-group text-center" type="text" maxlength="7">
+                <input id="player_name_input" class="input-group text-center" type="text" maxlength="10">
             </label>
-            <button id="start_game_button" class="btn-default btn">
+            <button id="start_game_button">
                 Start game
             </button>
         </div>
 
     </div>
 
+</div>
+<div id="wrapper" class="noselect">
+
+
+
+    <div id="arcomage_header">
+        <div id="title">
+            <h1 class="text-center">ARCOMAGE</h1>
+        </div>
+
+        <div id="arcomage_controls">
+            <button id="sound" class="small_button"><span class="glyphicon glyphicon-volume-off"></span></button>
+            <button class="newgame_button">New game</button>
+            <button class="small_button"><span class="glyphicon glyphicon-cog"></span></button>
+        </div>
+        <div class="clear"></div>
+
+    </div>
     <div id="arcomage">
 
         <canvas id="arcomage_canvas" width="800" height="800">
 
         </canvas>
     </div>
+
 
 </div>
 

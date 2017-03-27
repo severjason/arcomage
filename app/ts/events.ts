@@ -222,6 +222,7 @@ namespace ArcomageGame {
             if (that.game.isOn() && that.game.getPlayerTurn(playerOne)) {
                 if (that.game.cardAvailable(cardName, playerOne)) {
                     that.game.playerMoved(playerOne);
+                    player.updateScores(-that.cards.getScore(cardName));
                     let cardObjectTop: number = cardObject.getTop();
                     that.cards.deactivate(cardName);
                     cardObject.animate({

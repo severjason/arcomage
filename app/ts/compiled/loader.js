@@ -169,7 +169,7 @@ var ArcomageGame;
             })
                 .then((events) => {
                 that.events = events;
-                    return that.canvas.imagesLoaded;
+                return that.canvas.imagesLoaded;
             })
                 .then((imagesPromises) => {
                 return Promise.all(imagesPromises);

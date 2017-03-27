@@ -103,6 +103,16 @@ var ArcomageGame;
             return (player.resources[resourceName] - resourceValue >= 0);
         }
         /**
+         * Get card score
+         * @param {string} cardName
+         * @returns {number}
+         */
+        getScore(cardName) {
+            let card = this.getSingleCard(cardName);
+            let resourceName = Object.keys(card.resource)[0];
+            return card.resource[resourceName] * 10;
+        }
+        /**
          * Get card active status
          * @param {string} cardName
          * @returns {boolean}

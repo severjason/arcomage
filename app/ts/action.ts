@@ -20,7 +20,11 @@ $(document).ready(() => {
         loader.start(newName);
     });
 
-    body.on("click", "#clear_cookie_button", () => {
+    body.on("click", "#sound", () => {
+        console.log($("#sound").find("span").toggleClass("glyphicon-volume-up").toggleClass("glyphicon-volume-off"));
+    });
+
+    body.on("click", ".newgame_button", () => {
         loader.cookie.removeAll();
         window.location.reload();
     });

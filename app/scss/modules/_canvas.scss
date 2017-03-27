@@ -1,13 +1,28 @@
-#arcomage {
+@import "../variables";
+
+#arcomage_wrapper {
   position: absolute;
-  width: $canvas_width;
-  height: $canvas_heigth;
+  width: $canvas_width + $wrapper_padding;
+  height: $canvas_height + $wrapper_padding;
   left: 50%;
-  top: 50%;
+  top: $controls_height - $wrapper_padding / 2;
+  margin-left: - $canvas_width / 2 - $wrapper_padding / 2;
+  background: rgba(75, 75, 75, 0.5);
+  //background: rgba(189, 195, 199, 0.5);
+  border: 0;
+  border-radius: 5px;
+}
+
+#arcomage {
+  position: relative;
+  width: $canvas_width;
+  height: $canvas_height;
+  left: 50%;
+  //top: 50%;
   margin-left: - $canvas_width / 2;
-  margin-top: - $canvas_heigth / 2;
+  //margin-top: - $canvas_heigth / 2;
   //transform: translate(-50%,-50%);
-  border: $canvas_border;
+  //border: $canvas_border;
   #arcomage_canvas {
     //border: 1px solid red;
   }
