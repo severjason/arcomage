@@ -14,6 +14,8 @@ namespace ArcomageGame {
         private canvasId: string;
         private canvas: any;
         private promises: any;
+        private canvasWidth: number;
+        private canvasHeight: number;
 
         constructor(containerId: string, canvasId: string) {
             this.containerId = containerId;
@@ -22,14 +24,18 @@ namespace ArcomageGame {
                 selection: false,
             });
             this.promises = [];
+            this.canvasWidth = 765;
+            this.canvasHeight = 765;
         }
 
         get width(): number {
-            return document.getElementById(this.containerId).getBoundingClientRect().width;
+            return this.canvasWidth;
+            // return document.getElementById(this.containerId).getBoundingClientRect().width;
         }
 
         get height(): number {
-            return document.getElementById(this.containerId).getBoundingClientRect().height;
+            return this.canvasHeight;
+            // return document.getElementById(this.containerId).getBoundingClientRect().height;
         }
 
         get fabricElement(): any {
@@ -257,6 +263,8 @@ namespace ArcomageGame {
 
         public createNames(playerOne: Player, playerTwo: Player, canvasValues: any): void {
 
+            let that: Canvas = this;
+
             function createText(text: string): ITextbox {
                 return new fabric.Textbox(text, {
                     fontSize: canvasValues.playersNamesText.fontSize,
@@ -296,7 +304,7 @@ namespace ArcomageGame {
 
             let groupForPlayerTwo: IGroup = new fabric.Group([
                 createText(playerTwo.name.substring(0, canvasValues.playersNamesText.maxLetters))], {
-                left: this.width - canvasValues.playersNamesText.width
+                left: that.width - canvasValues.playersNamesText.width
                 - canvasValues.playersNamesText.padding - canvasValues.playersNamesText.strokeWidth,
                 top: 0,
                 selectable: false,

@@ -9,12 +9,16 @@ var ArcomageGame;
                 selection: false,
             });
             this.promises = [];
+            this.canvasWidth = 765;
+            this.canvasHeight = 765;
         }
         get width() {
-            return document.getElementById(this.containerId).getBoundingClientRect().width;
+            return this.canvasWidth;
+            // return document.getElementById(this.containerId).getBoundingClientRect().width;
         }
         get height() {
-            return document.getElementById(this.containerId).getBoundingClientRect().height;
+            return this.canvasHeight;
+            // return document.getElementById(this.containerId).getBoundingClientRect().height;
         }
         get fabricElement() {
             return this.canvas;
@@ -210,6 +214,7 @@ var ArcomageGame;
             }
         } // createBackOfCard
         createNames(playerOne, playerTwo, canvasValues) {
+            let that = this;
             function createText(text) {
                 return new fabric.Textbox(text, {
                     fontSize: canvasValues.playersNamesText.fontSize,
@@ -248,7 +253,7 @@ var ArcomageGame;
             let groupForPlayerTwo = new fabric.Group([
                 createText(playerTwo.name.substring(0, canvasValues.playersNamesText.maxLetters))
             ], {
-                left: this.width - canvasValues.playersNamesText.width
+                left: that.width - canvasValues.playersNamesText.width
                     - canvasValues.playersNamesText.padding - canvasValues.playersNamesText.strokeWidth,
                 top: 0,
                 selectable: false,

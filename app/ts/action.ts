@@ -26,6 +26,6 @@ $(document).ready(() => {
 
     body.on("click", ".newgame_button", () => {
         loader.cookie.removeAll();
-        window.location.reload();
+        window.location.reload(true);
     });
 });
