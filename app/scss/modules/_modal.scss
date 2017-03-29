@@ -1,0 +1,26 @@
+@import "../variables";
+@import "sections";
+
+#rulesModal {
+
+  .modal-header {
+    border-bottom: 1px solid $rules_text_color;
+
+    .close {
+      span {
+        color: $rules_text_color;
+      }
+    }
+  }
+
+  .modal-content {
+    color: $rules_text_color;
+    background-color: $rules_background_color;
+    border-radius: $rules_border_radius;
+
+    .rules_paragraph {
+      margin: 5px;
+    }
+  }
+
+}

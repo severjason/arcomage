@@ -18,7 +18,7 @@
   color: $controls_text_color;
   background: $controls_background_color;
   border: $button_border;
-  border-radius: 50px;
+  border-radius: $button_controls_width / 2;
   text-align: center;
 
   &:focus {

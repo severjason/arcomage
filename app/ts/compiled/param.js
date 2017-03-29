@@ -70,11 +70,11 @@ var ArcomageGame;
                     textPadding: 5,
                     fontSize: 24,
                     descFontSize: 18,
-                    textColor: "#2c3e50",
+                    textColor: "#010101",
                     borderRadius: 1,
                     mine: {
                         color: "#d35400",
-                        textColor: "white",
+                        textColor: "#010101",
                         src: "./images/sources/mine.png",
                         resSrc: "./images/sources/bricks.png",
                         resource: "bricks",
@@ -82,7 +82,7 @@ var ArcomageGame;
                     },
                     magic: {
                         color: "#2980b9",
-                        textColor: "#34495e",
+                        textColor: "#010101",
                         src: "./images/sources/magic.png",
                         resSrc: "./images/sources/gems.png",
                         resource: "gems",
@@ -90,7 +90,7 @@ var ArcomageGame;
                     },
                     dungeon: {
                         color: "#27ae60",
-                        textColor: "#34495e",
+                        textColor: "#010101",
                         src: "./images/sources/dungeon.png",
                         resSrc: "./images/sources/beasts.png",
                         resource: "beasts",
@@ -106,7 +106,7 @@ var ArcomageGame;
                     heightStep: 2.5,
                     padding: 155,
                     fontSize: 22,
-                    textColor: "#34495e",
+                    textColor: "#010101",
                     roofColor: "#7c3607",
                     roofStrokeColor: "#5d2906",
                     towerColor: "#a34508",
@@ -117,7 +117,7 @@ var ArcomageGame;
                     heightStep: 2.5,
                     padding: 250,
                     fontSize: 22,
-                    textColor: "#34495e",
+                    textColor: "#010101",
                     wallColor: "#7f8c8d",
                     src: "./images/temp/bricks.jpg",
                 },
@@ -143,15 +143,15 @@ var ArcomageGame;
                     backTextPadding: 50,
                     mine: {
                         color: "#d35400",
-                        textColor: "#2c3e50",
+                        textColor: "#010101",
                     },
                     magic: {
                         color: "#2980b9",
-                        textColor: "#2c3e50",
+                        textColor: "#010101",
                     },
                     dungeon: {
                         color: "#27ae60",
-                        textColor: "#2c3e50",
+                        textColor: "#010101",
                     },
                 },
             }, cardsQuantity = 5, divIdForCanvas = "arcomage", idForCanvas = "arcomage_canvas") {
