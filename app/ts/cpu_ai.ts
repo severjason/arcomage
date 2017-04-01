@@ -266,7 +266,7 @@ namespace ArcomageGame {
                     that.move(canvas, game, removeCard(availableCards, mostResCardName));
 
                 } else if (mostResCardName === allCards.tremor.name
-                    && (game.playerOne.wallLife <= 5 || that.cpu.wallLife < game.playerOne.wallLife) ) {
+                    && (game.playerOne.wallLife <= 5 || that.cpu.wallLife < game.playerOne.wallLife)) {
                     that.move(canvas, game, removeCard(availableCards, mostResCardName));
 
                 } else {
