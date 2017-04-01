@@ -170,6 +170,11 @@ var ArcomageGame;
             }
             return resultCard.name;
         }
+        /**
+         * Create new array with cards that CPU can use
+         * @param {Object[]} cards
+         * @returns {Object[]}
+         */
         getAllCardsThatCanBeUsed(cards) {
             let availableCards = [];
             for (let card of cards) {
@@ -179,6 +184,11 @@ var ArcomageGame;
             }
             return availableCards;
         }
+        /**
+         * Check if at least one card can be used
+         * @param {Object[]} cards
+         * @returns {boolean}
+         */
         cardsCanBeUsed(cards) {
             for (let i = 0, cardsLength = cards.length; i < cardsLength; i++) {
                 let cardName = cards[i].name;
@@ -188,6 +198,13 @@ var ArcomageGame;
             }
             return false;
         }
+        /**
+         * Apply most resourceful card or discard less resourceful card
+         * Some particular cards CPU use only under specific conditions
+         * @param {Canvas} canvas
+         * @param {Arcomage} game
+         * @param {Object[]} CPUcards
+         */
         move(canvas, game, CPUcards) {
             let allCards = this.cards.cards;
             let that = this;
