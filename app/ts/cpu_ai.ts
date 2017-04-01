@@ -88,7 +88,7 @@ namespace ArcomageGame {
                             }, {
                                 onChange: canvas.fabricElement.renderAll.bind(canvas.fabricElement),
                                 duration: 100,
-                                onComplete:  () => {
+                                onComplete: () => {
                                     setTimeout(() => {
                                         cardObject.animate({
                                             top: 0,
@@ -104,7 +104,7 @@ namespace ArcomageGame {
                                                 if (game.allotCards(that.cpu)) {
                                                     if (card.playAgain) {
                                                         game.drawBackOfCards(canvas, that.cpu);
-                                                        that.move(canvas, game);
+                                                        that.move(canvas, game, that.cpu.cards);
                                                     } else {
                                                         document.dispatchEvent(new CustomEvent("CPU moved"));
                                                     }
@@ -119,6 +119,7 @@ namespace ArcomageGame {
                 }
             }
         }
+
         /**
          * Discard card by its name
          * @param {string} cardName
@@ -186,13 +187,9 @@ namespace ArcomageGame {
             return resultCard.name;
         }
 
-        /**
-         * Get all cards that CPU can use from all available cards
-         * @returns {Object[]}
-         */
-        public getAllCardsThatCanBeUsed(): any[] {
+        public getAllCardsThatCanBeUsed(cards: any[]): any[] {
             let availableCards: any[] = [];
-            for (let card of this.cpu.cards) {
+            for (let card of cards) {
                 if (this.cards.cardCanBeUsed(card.name, this.cpu)) {
                     availableCards.push(card);
                 }
@@ -200,13 +197,9 @@ namespace ArcomageGame {
             return availableCards;
         }
 
-        /**
-         * Check if at least one card can be used
-         * @returns {boolean}
-         */
-        public cardsCanBeUsed(): boolean {
-            for (let i = 0, cardsLength = this.cpu.cards.length; i < cardsLength; i++) {
-                let cardName = this.cpu.cards[i].name;
+        public cardsCanBeUsed(cards: any[]): boolean {
+            for (let i = 0, cardsLength = cards.length; i < cardsLength; i++) {
+                let cardName = cards[i].name;
                 if (this.cards.cardCanBeUsed(cardName, this.cpu)) {
                     return true;
                 }
@@ -214,15 +207,72 @@ namespace ArcomageGame {
             return false;
         }
 
-        /**
-         * Apply most resourceful card if CPU can, else discard less resourceful card
-         * @param {Canvas} canvas
-         * @param {Arcomage} game
-         */
-        public move(canvas: Canvas, game: Arcomage): void {
-            return (!this.cardsCanBeUsed())
-                ? this.discardCard(this.getLessResourcefulCard(this.cpu.cards), canvas, game)
-                : this.applyCard(this.getMostResourcefulCard(this.getAllCardsThatCanBeUsed()), canvas, game);
+        public move(canvas: Canvas, game: Arcomage, CPUcards: any): void {
+            let allCards: any = this.cards.cards;
+            let that = this;
+
+            function removeCard(cardsArray: any[], cardToRemoveName: string): any[] {
+                let resultArray: any[] = [];
+                for (let card of cardsArray) {
+                    if (card.name !== cardToRemoveName) {
+                        resultArray.push(card);
+                    }
+                }
+                return resultArray;
+            }
+
+            if (!that.cardsCanBeUsed(CPUcards)) {
+                that.discardCard(that.getLessResourcefulCard(that.cpu.cards), canvas, game);
+            } else {
+                let availableCards: any = that.getAllCardsThatCanBeUsed(CPUcards);
+                let mostResCardName: string = that.getMostResourcefulCard(availableCards);
+                if (mostResCardName === allCards.berserker.name && that.cpu.towerLife >= 5) {
+                    that.move(canvas, game,
+                        removeCard(availableCards, allCards.berserker.name));
+
+                } else if (mostResCardName === allCards.cave_river.name &&
+                    (that.cpu.wallLife <= game.playerOne.wallLife)) {
+                    that.move(canvas, game, removeCard(availableCards, mostResCardName));
+
+                } else if (mostResCardName === allCards.defective_ore.name
+                    && (that.cpu.resources.bricks < game.playerOne.resources.bricks)) {
+                    that.move(canvas, game, removeCard(availableCards, mostResCardName));
+
+                } else if (mostResCardName === allCards.discord.name
+                    && that.cpu.towerLife < game.playerOne.towerLife
+                    && that.cpu.towerLife < 8) {
+                    that.move(canvas, game, removeCard(availableCards, mostResCardName));
+
+                } else if (mostResCardName === allCards.earthquake.name
+                    && that.cpu.sources.mine < game.playerOne.sources.mine) {
+                    that.move(canvas, game, removeCard(availableCards, mostResCardName));
+
+                } else if (mostResCardName === allCards.goblin_mob.name
+                    && that.cpu.wallLife < 3) {
+                    that.move(canvas, game, removeCard(availableCards, mostResCardName));
+
+                } else if (mostResCardName === allCards.parity.name &&
+                    that.cpu.sources.magic > game.playerOne.sources.magic) {
+                    that.move(canvas, game, removeCard(availableCards, mostResCardName));
+
+                } else if (mostResCardName === allCards.power_burn.name && that.cpu.towerLife < 10) {
+                    that.move(canvas, game, removeCard(availableCards, mostResCardName));
+
+                } else if (mostResCardName === allCards.shift.name && that.cpu.wallLife > game.playerOne.wallLife) {
+                    that.move(canvas, game, removeCard(availableCards, mostResCardName));
+
+                } else if (mostResCardName === allCards.technology_copping.name
+                    && that.cpu.sources.mine >= game.playerOne.sources.mine) {
+                    that.move(canvas, game, removeCard(availableCards, mostResCardName));
+
+                } else if (mostResCardName === allCards.tremor.name
+                    && (game.playerOne.wallLife <= 5 || that.cpu.wallLife < game.playerOne.wallLife) ) {
+                    that.move(canvas, game, removeCard(availableCards, mostResCardName));
+
+                } else {
+                    that.applyCard(mostResCardName, canvas, game);
+                }
+            }
         }
     }
 }

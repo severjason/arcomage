@@ -26,12 +26,12 @@ var ArcomageGame;
                 },
                 playerTwo: {
                     name: ["CPU", "Stan", "Cartman", "Batman", "Chuck", "Goblin", "Mr. Bot"],
-                    towerLife: 1,
-                    wallLife: 0,
+                    towerLife: 10,
+                    wallLife: 10,
                     resources: {
-                        bricks: 1,
-                        gems: 1,
-                        beasts: 1,
+                        bricks: 10,
+                        gems: 10,
+                        beasts: 10,
                     },
                     sources: {
                         mine: 1,

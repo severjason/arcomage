@@ -254,7 +254,7 @@ var ArcomageGame;
         CPUMove(canvas) {
             let that = this;
             that.drawBackOfCards(canvas, that.playerTwo);
-            that.CPU_AI.move(canvas, that);
+            that.CPU_AI.move(canvas, that, that.playerTwo.cards);
             document.addEventListener("CPU moved", (e) => {
                 e.stopImmediatePropagation();
                 let eventPromise = new Promise((resolve, reject) => {

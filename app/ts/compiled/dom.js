@@ -13,8 +13,8 @@ var ArcomageGame;
         showGameOverMessage(playerOneWin, playerOneMoves, playerOneScores) {
             let text = (playerOneWin) ? this.winText : this.loseText;
             let background = (playerOneWin)
-                ? "#2c3e50 url('../images/background/victory.jpg') center no-repeat"
-                : "#2c3e50 url('../images/background/defeat.jpg') center no-repeat";
+                ? "#010101 url('../images/background/victory.jpg') center no-repeat"
+                : "#010101 url('../images/background/defeat.jpg') center no-repeat";
             let finalScores = (playerOneScores > 0) ? playerOneScores + (1000 - playerOneMoves * 10) : 0;
             let movesText = `Scores: ${finalScores} <br><br> Moves: ${playerOneMoves}`;
             let container = document.querySelector("#game_over > .container");

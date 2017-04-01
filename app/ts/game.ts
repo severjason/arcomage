@@ -309,7 +309,7 @@ namespace ArcomageGame {
         public CPUMove(canvas: Canvas) {
             let that = this;
             that.drawBackOfCards(canvas, that.playerTwo);
-            that.CPU_AI.move(canvas, that);
+            that.CPU_AI.move(canvas, that, that.playerTwo.cards);
             document.addEventListener("CPU moved", (e) => {
                 e.stopImmediatePropagation();
                 let eventPromise: Promise<any> = new Promise((resolve, reject) => {

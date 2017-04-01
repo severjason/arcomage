@@ -1069,7 +1069,7 @@ var ArcomageGame;
                         eng: "Lodestone",
                     },
                     text: {
-                        eng: "+3 tower, this\n card can`t be discarded without playing it",
+                        eng: "+3 tower",
                     },
                     src: "./images/cards/lodestone.png",
                     resource: {
