@@ -106,9 +106,6 @@ a:hover, a:focus {
   z-index: 200;
   display: none;
   background: #010101; }
-  #start_field .start_text {
-    color: #d35400;
-    margin-top: 270px; }
   #start_field .container {
     position: absolute;
     width: 600px;
@@ -119,7 +116,11 @@ a:hover, a:focus {
     margin-left: -300px;
     color: #d35400;
     background: #010101 url("../images/background/start.jpg") center no-repeat; }
+    #start_field .container .start_text {
+      color: #d35400;
+      margin-top: -50px; }
     #start_field .container input {
+      width: 250px;
       height: 50px;
       line-height: 50px;
       border-radius: 2px;
@@ -130,6 +131,22 @@ a:hover, a:focus {
         outline-color: #d35400; }
     #start_field .container .start_input {
       margin-top: 200px; }
+      #start_field .container .start_input label {
+        margin-bottom: 0; }
+      #start_field .container .start_input #difficulty_container {
+        width: 250px;
+        height: 50px;
+        margin: 0 auto;
+        background: #010101;
+        border: 2px solid #d35400;
+        border-top: 0; }
+        #start_field .container .start_input #difficulty_container label {
+          line-height: 50px; }
+          #start_field .container .start_input #difficulty_container label select {
+            border: 0;
+            background: #010101; }
+            #start_field .container .start_input #difficulty_container label select:focus {
+              outline-color: #d35400; }
   #start_field button {
     background: #010101; }
 
@@ -255,9 +272,6 @@ div#wrapper {
   z-index: 200;
   display: none;
   background: #010101; }
-  #start_field .start_text {
-    color: #d35400;
-    margin-top: 270px; }
   #start_field .container {
     position: absolute;
     width: 600px;
@@ -268,7 +282,11 @@ div#wrapper {
     margin-left: -300px;
     color: #d35400;
     background: #010101 url("../images/background/start.jpg") center no-repeat; }
+    #start_field .container .start_text {
+      color: #d35400;
+      margin-top: -50px; }
     #start_field .container input {
+      width: 250px;
       height: 50px;
       line-height: 50px;
       border-radius: 2px;
@@ -279,6 +297,22 @@ div#wrapper {
         outline-color: #d35400; }
     #start_field .container .start_input {
       margin-top: 200px; }
+      #start_field .container .start_input label {
+        margin-bottom: 0; }
+      #start_field .container .start_input #difficulty_container {
+        width: 250px;
+        height: 50px;
+        margin: 0 auto;
+        background: #010101;
+        border: 2px solid #d35400;
+        border-top: 0; }
+        #start_field .container .start_input #difficulty_container label {
+          line-height: 50px; }
+          #start_field .container .start_input #difficulty_container label select {
+            border: 0;
+            background: #010101; }
+            #start_field .container .start_input #difficulty_container label select:focus {
+              outline-color: #d35400; }
   #start_field button {
     background: #010101; }
 

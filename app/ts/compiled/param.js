@@ -11,8 +11,8 @@ var ArcomageGame;
                 },
                 playerOne: {
                     name: "Player",
-                    towerLife: 15,
-                    wallLife: 10,
+                    towerLife: [10, 10, 5],
+                    wallLife: [10, 15, 10],
                     resources: {
                         bricks: 10,
                         gems: 10,
@@ -26,8 +26,8 @@ var ArcomageGame;
                 },
                 playerTwo: {
                     name: ["CPU", "Stan", "Cartman", "Batman", "Chuck", "Goblin", "Mr. Bot"],
-                    towerLife: 10,
-                    wallLife: 10,
+                    towerLife: [10, 15, 15],
+                    wallLife: [10, 15, 20],
                     resources: {
                         bricks: 10,
                         gems: 10,
@@ -127,7 +127,7 @@ var ArcomageGame;
                     padding: 4,
                     mainTextPadding: 120,
                     cardsStrokeWidth: 2,
-                    cardsBordersRadius: 1,
+                    cardsBordersRadius: 2,
                     cardsBodyColor: "#f8ecc2",
                     imageWidth: 140,
                     imageHeight: 90,

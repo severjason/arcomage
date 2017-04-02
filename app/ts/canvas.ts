@@ -350,22 +350,6 @@ namespace ArcomageGame {
                         top: 0,
                     });
 
-                    /*function createSourceBody(): IRect {
-                        return new fabric.Rect({
-                     top: - sources.descFontSize - sources.padding,
-                     left: 0,
-                     width: sources.imgWidth + sources.resImgWidth,
-                     height: sources.descFontSize + sources.imgHeight + sources.fontSize + sources.padding,
-                     fill: "transparent",
-                     stroke: sources[source].color,
-                     strokeWidth: 2,
-                            rx: sources.borderRadius,
-                            ry: sources.borderRadius,
-                            originX: "left",
-                            originY: "top",
-                        });
-                     }*/
-
                     function createSourcesText(player: Player): ITextbox {
                         let leftPosition = (player === playerOne)
                             ? 0
@@ -483,6 +467,7 @@ namespace ArcomageGame {
                             fill: sources[source].color,
                             selectable: false,
                             hasBorders: false,
+                            fontWeight: "bold",
                             textAlign: "center",
                             originX: "left",
                             originY: "top",
@@ -503,6 +488,7 @@ namespace ArcomageGame {
                             objectCaching: false,
                             selectable: false,
                             hasBorders: false,
+                            fontWeight: "bold",
                             hoverCursor: "default",
                             textAlign: "center",
                             originX: "left",

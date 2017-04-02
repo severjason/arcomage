@@ -28,11 +28,14 @@ namespace ArcomageGame {
         private gameStatus: boolean;
         private DOMObject: DOM;
         private cookieObject: Cookie;
+        private difficultyLevel: number;
+
         constructor(params: Param,
                     cards: ArcomageCards,
                     dom: DOM,
                     cookie: Cookie,
-                    playerOneName?: string,
+                    playerOneName: string,
+                    difficulty: number,
                     playerTwoName?: string,
                     playerOneValuesFromCookie?: any,
                     playerTwoValuesFromCookie?: any) {
@@ -40,12 +43,14 @@ namespace ArcomageGame {
                 playerOneName || params.playerOneName,
                 playerOneValuesFromCookie || params.playerOneValues,
                 params.maxValues,
-                params.canvasValues);
+                params.canvasValues,
+                difficulty);
             this.playerTwoObject = new Player(
                 playerTwoName || params.playerTwoName,
                 playerTwoValuesFromCookie || params.playerTwoValues,
                 params.maxValues,
-                params.canvasValues);
+                params.canvasValues,
+                difficulty);
             this.cardsQty = params.cardsQuantity;
             this.cardsObject = cards;
             this.paramsObject = params;
@@ -54,6 +59,7 @@ namespace ArcomageGame {
             this.gameStatus = true;
             this.DOMObject = dom;
             this.cookieObject = cookie;
+            this.difficultyLevel = difficulty;
             this.CPUAI = new CPUAI(this.playerTwoObject, cards, params);
         }
         /**

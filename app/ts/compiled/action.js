@@ -8,13 +8,13 @@ $(document).ready(() => {
         loader.start(loader.cookie.getPlayerOneName());
     }
     else {
-        // $("#start_field").show();
-        loader.start("Player1");
+        $("#start_field").show();
     }
     body.on("click", "#start_game_button", () => {
         let newName = $("#player_name_input").val();
+        let difficulty = $("#game_difficulty").val();
         $("#start_field").hide();
-        loader.start(newName);
+        loader.start(newName, difficulty);
     });
     body.on("click", "#sound", () => {
         console.log($("#sound").find("span").toggleClass("glyphicon-volume-up").toggleClass("glyphicon-volume-off"));

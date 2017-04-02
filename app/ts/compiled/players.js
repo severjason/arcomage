@@ -2,10 +2,14 @@ var ArcomageGame;
 (function (ArcomageGame) {
     "use strict";
     class Player {
-        constructor(name, playerValues, maxValues, canvasValues) {
+        constructor(name, playerValues, maxValues, canvasValues, difficulty) {
             this.playerName = name;
-            this.playerTowerLife = playerValues.towerLife;
-            this.playerWallLife = playerValues.wallLife;
+            this.playerTowerLife = (Array.isArray(playerValues.towerLife))
+                ? playerValues.towerLife[difficulty]
+                : playerValues.towerLife;
+            this.playerWallLife = (Array.isArray(playerValues.wallLife)
+                ? playerValues.wallLife[difficulty]
+                : playerValues.wallLife);
             this.playerResources = playerValues.resources;
             this.playerSources = playerValues.sources;
             this.canvasTowerHeightStepValue = canvasValues.towers.heightStep;

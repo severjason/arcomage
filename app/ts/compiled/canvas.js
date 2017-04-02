@@ -289,21 +289,6 @@ var ArcomageGame;
                         left: sources.width - sources.imgWidth,
                         top: 0,
                     });
-                    /*function createSourceBody(): IRect {
-                        return new fabric.Rect({
-                     top: - sources.descFontSize - sources.padding,
-                     left: 0,
-                     width: sources.imgWidth + sources.resImgWidth,
-                     height: sources.descFontSize + sources.imgHeight + sources.fontSize + sources.padding,
-                     fill: "transparent",
-                     stroke: sources[source].color,
-                     strokeWidth: 2,
-                            rx: sources.borderRadius,
-                            ry: sources.borderRadius,
-                            originX: "left",
-                            originY: "top",
-                        });
-                     }*/
                     function createSourcesText(player) {
                         let leftPosition = (player === playerOne)
                             ? 0
@@ -406,6 +391,7 @@ var ArcomageGame;
                             fill: sources[source].color,
                             selectable: false,
                             hasBorders: false,
+                            fontWeight: "bold",
                             textAlign: "center",
                             originX: "left",
                             originY: "top",
@@ -424,6 +410,7 @@ var ArcomageGame;
                             objectCaching: false,
                             selectable: false,
                             hasBorders: false,
+                            fontWeight: "bold",
                             hoverCursor: "default",
                             textAlign: "center",
                             originX: "left",

@@ -26,10 +26,15 @@ namespace ArcomageGame {
         constructor(name: string,
                     playerValues: any,
                     maxValues: any,
-                    canvasValues: any) {
+                    canvasValues: any,
+                    difficulty: number) {
             this.playerName = name;
-            this.playerTowerLife = playerValues.towerLife;
-            this.playerWallLife = playerValues.wallLife;
+            this.playerTowerLife = (Array.isArray(playerValues.towerLife))
+                ? playerValues.towerLife[difficulty]
+                : playerValues.towerLife;
+            this.playerWallLife = (Array.isArray(playerValues.wallLife)
+                ? playerValues.wallLife[difficulty]
+                : playerValues.wallLife);
             this.playerResources = playerValues.resources;
             this.playerSources = playerValues.sources;
             this.canvasTowerHeightStepValue = canvasValues.towers.heightStep;

@@ -136,9 +136,10 @@ var ArcomageGame;
         /**
          * Loads all classes step by step
          * @param {string} newPlayerOneName
+         * @param {number} difficulty
          * @returns {Promise<Object>}
          */
-        init(newPlayerOneName) {
+        init(newPlayerOneName, difficulty = 0) {
             let that = this;
             let promiseChain = new Promise((resolve, reject) => {
                 resolve(new ArcomageGame.Param());
@@ -153,8 +154,8 @@ var ArcomageGame;
                 .then((cards) => {
                 that.cards = cards;
                 return (that.cookie.cookiesAreSet())
-                    ? new ArcomageGame.Arcomage(that.params, that.cards, that.dom, that.cookie, newPlayerOneName, that.cookie.getPlayerTwoName(), that.cookie.getPlayerOneValues(), that.cookie.getPlayerTwoValues())
-                    : new ArcomageGame.Arcomage(that.params, that.cards, that.dom, that.cookie, newPlayerOneName);
+                    ? new ArcomageGame.Arcomage(that.params, that.cards, that.dom, that.cookie, newPlayerOneName, difficulty, that.cookie.getPlayerTwoName(), that.cookie.getPlayerOneValues(), that.cookie.getPlayerTwoValues())
+                    : new ArcomageGame.Arcomage(that.params, that.cards, that.dom, that.cookie, newPlayerOneName, difficulty);
             })
                 .then((game) => {
                 that.game = game;
@@ -178,10 +179,11 @@ var ArcomageGame;
         /**
          * Game launcher
          * @param {string} newPlayerOneName
+         * @param {number} difficulty
          */
-        start(newPlayerOneName) {
+        start(newPlayerOneName, difficulty = 0) {
             let that = this;
-            this.init(Loader.escapeHtml(newPlayerOneName)).then(() => {
+            this.init(Loader.escapeHtml(newPlayerOneName), difficulty).then(() => {
                 that.events.init();
                 Loader.hideLoader();
                 if (that.cookie.cookiesAreSet()) {

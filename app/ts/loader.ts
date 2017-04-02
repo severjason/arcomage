@@ -162,9 +162,10 @@ namespace ArcomageGame {
         /**
          * Loads all classes step by step
          * @param {string} newPlayerOneName
+         * @param {number} difficulty
          * @returns {Promise<Object>}
          */
-        public init(newPlayerOneName: string): Promise<any> {
+        public init(newPlayerOneName: string, difficulty: number = 0): Promise<any> {
             let that: Loader = this;
 
             let promiseChain: Promise<Object> = new Promise((resolve, reject) => {
@@ -190,6 +191,7 @@ namespace ArcomageGame {
                             that.dom,
                             that.cookie,
                             newPlayerOneName,
+                            difficulty,
                             that.cookie.getPlayerTwoName(),
                             that.cookie.getPlayerOneValues(),
                             that.cookie.getPlayerTwoValues())
@@ -198,7 +200,8 @@ namespace ArcomageGame {
                             that.cards,
                             that.dom,
                             that.cookie,
-                            newPlayerOneName);
+                            newPlayerOneName,
+                            difficulty);
                 })
                 .then((game: Arcomage) => {
                     that.game = game;
@@ -229,10 +232,11 @@ namespace ArcomageGame {
         /**
          * Game launcher
          * @param {string} newPlayerOneName
+         * @param {number} difficulty
          */
-        public start(newPlayerOneName: string): void {
+        public start(newPlayerOneName: string, difficulty: number = 0): void {
             let that = this;
-            this.init(Loader.escapeHtml(newPlayerOneName)).then(() => {
+            this.init(Loader.escapeHtml(newPlayerOneName), difficulty).then(() => {
                 that.events.init();
                 Loader.hideLoader();
                 if (that.cookie.cookiesAreSet()) {

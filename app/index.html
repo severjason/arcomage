@@ -38,16 +38,26 @@
     </div>
 </div>
 <div id="start_field" class="text-center">
-    <h3 class="start_text">
-        To start ARCOMAGE
-        <br/>
-        please enter your name:
-    </h3>
     <div class="container">
+        <h3 class="start_text">
+            To start ARCOMAGE
+            <br/>
+            please enter your name:
+        </h3>
         <div class="start_input">
             <label>
                 <input id="player_name_input" class="input-group text-center" type="text" maxlength="10">
             </label>
+            <div id="difficulty_container">
+                <label>
+                    <span>Difficulty: </span>
+                    <select id="game_difficulty" >
+                        <option value="0">Easy</option>
+                        <option value="1">Medium</option>
+                        <option value="2">Hard</option>
+                    </select>
+                </label>
+            </div>
             <button id="start_game_button">
                 Start game
             </button>

@@ -2,9 +2,9 @@ var ArcomageGame;
 (function (ArcomageGame) {
     "use strict";
     class Arcomage {
-        constructor(params, cards, dom, cookie, playerOneName, playerTwoName, playerOneValuesFromCookie, playerTwoValuesFromCookie) {
-            this.playerOneObject = new ArcomageGame.Player(playerOneName || params.playerOneName, playerOneValuesFromCookie || params.playerOneValues, params.maxValues, params.canvasValues);
-            this.playerTwoObject = new ArcomageGame.Player(playerTwoName || params.playerTwoName, playerTwoValuesFromCookie || params.playerTwoValues, params.maxValues, params.canvasValues);
+        constructor(params, cards, dom, cookie, playerOneName, difficulty, playerTwoName, playerOneValuesFromCookie, playerTwoValuesFromCookie) {
+            this.playerOneObject = new ArcomageGame.Player(playerOneName || params.playerOneName, playerOneValuesFromCookie || params.playerOneValues, params.maxValues, params.canvasValues, difficulty);
+            this.playerTwoObject = new ArcomageGame.Player(playerTwoName || params.playerTwoName, playerTwoValuesFromCookie || params.playerTwoValues, params.maxValues, params.canvasValues, difficulty);
             this.cardsQty = params.cardsQuantity;
             this.cardsObject = cards;
             this.paramsObject = params;
@@ -13,6 +13,7 @@ var ArcomageGame;
             this.gameStatus = true;
             this.DOMObject = dom;
             this.cookieObject = cookie;
+            this.difficultyLevel = difficulty;
             this.CPUAI = new ArcomageGame.CPUAI(this.playerTwoObject, cards, params);
         }
         /**
