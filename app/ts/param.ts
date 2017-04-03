@@ -20,11 +20,11 @@ namespace ArcomageGame {
                 name: "Player",
                 towerLife: [10, 10, 5],
                 wallLife: [10, 15, 10],
-                resources: {
-                    bricks: 10,
-                    gems: 10,
-                    beasts: 10,
-                },
+                resources: [
+                    {bricks: 10, gems: 10, beasts: 10},
+                    {bricks: 10, gems: 5, beasts: 10},
+                    {bricks: 5, gems: 5, beasts: 5},
+                    ],
                 sources: {
                     mine: 1,
                     magic: 1,
@@ -35,11 +35,11 @@ namespace ArcomageGame {
                 name: ["CPU", "Stan", "Cartman", "Batman", "Chuck", "Goblin", "Mr. Bot"],
                 towerLife: [10, 15, 15],
                 wallLife: [10, 15, 20],
-                resources: {
-                    bricks: 10,
-                    gems: 10,
-                    beasts: 10,
-                },
+                resources: [
+                    {bricks: 10, gems: 10, beasts: 10},
+                    {bricks: 15, gems: 15, beasts: 15},
+                    {bricks: 20, gems: 20, beasts: 20},
+                ],
                 sources: {
                     mine: 1,
                     magic: 1,

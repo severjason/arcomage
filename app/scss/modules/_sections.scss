@@ -135,12 +135,31 @@
       }
 
       #difficulty_container {
+        display: flex;
+        justify-content: space-around;
         width: $start_field_input_width;
         height: $start_field_input_height;
         margin: 0 auto;
         background: $start_field_background_color;
         border: $button_border;
         border-top: 0;
+
+        .difficulty_level {
+          width: $start_field_input_width / 3;
+          height: $start_field_input_height;
+          line-height: $start_field_input_height;
+
+          &:hover {
+            cursor: pointer;
+            color: $start_field_background_color;
+            background: $start_field_text_color;
+          }
+
+          &.active {
+            color: $start_field_background_color;
+            background: $start_field_text_color;
+          }
+        }
 
         label {
           line-height: $start_field_input_height;
@@ -167,7 +186,6 @@
 
 #arcomage_header {
   width: $controls_width;
-  height: $controls_height;
   margin: 0 auto;
   opacity: 0.4;
   //border: 1px solid #efefef;
@@ -177,7 +195,6 @@
   }
 
   #title {
-    float: left;
     width: 100%;
     height: $title_height;
     h1 {
@@ -189,10 +206,10 @@
 
   #arcomage_controls {
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
     width: 100%;
-    height: $controls_height - $title_height;
+    height: $controls_height;
 
     .newgame_button {
       @extend %button;
@@ -201,9 +218,12 @@
       @extend %button;
       width: $button_controls_width / 2;
       height: $button_controls_height / 2;
+      padding: 0;
       span {
         display: block;
-        top: 50%;
+        top: 0;
+        width: $button_controls_width / 2 - 2 * $main_border_width;
+        line-height: $button_controls_height / 2 - 2 * $main_border_width;
       }
     }
   }

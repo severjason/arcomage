@@ -12,9 +12,13 @@ $(document).ready(() => {
     }
     body.on("click", "#start_game_button", () => {
         let newName = $("#player_name_input").val();
-        let difficulty = $("#game_difficulty").val();
+        let difficulty = $("div.difficulty_level.active").data("value");
         $("#start_field").hide();
         loader.start(newName, difficulty);
+    });
+    body.on("click", "div.difficulty_level", (e) => {
+        $("div.difficulty_level").removeClass("active");
+        $(e.target).addClass("active");
     });
     body.on("click", "#sound", () => {
         console.log($("#sound").find("span").toggleClass("glyphicon-volume-up").toggleClass("glyphicon-volume-off"));

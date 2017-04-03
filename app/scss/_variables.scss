@@ -6,6 +6,7 @@ $wrapper_padding: 32px;
 
 // main content
 $main_width: 960px;
+$main_border_width: 2px;
 $main_border_radius: 2px;
 
 // loader
@@ -21,7 +22,7 @@ $start_field_text_color: #d35400;
 $start_field_background_color: #010101;
 $start_field_background: $start_field_background_color url("../images/background/start.jpg") center no-repeat;
 $start_field_input_height: 50px;
-$start_field_input_width: 250px;
+$start_field_input_width: 240px;
 
 
 //game_over
@@ -32,12 +33,12 @@ $game_over_text_color: #010101;
 // controls
 $title_height: 100px;
 $controls_width: 300px;
-$controls_height: 250px;
+$controls_height: 100px;
 $controls_text_color: #d35400;
 $controls_background_color: #010101;
 $button_controls_height: 100px;
 $button_controls_width: 100px;
-$button_border: 2px solid #d35400;
+$button_border: $main_border_width solid #d35400;
 
 // rules modal
 $rules_border_radius: $main_border_radius;

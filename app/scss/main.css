@@ -120,7 +120,7 @@ a:hover, a:focus {
       color: #d35400;
       margin-top: -50px; }
     #start_field .container input {
-      width: 250px;
+      width: 240px;
       height: 50px;
       line-height: 50px;
       border-radius: 2px;
@@ -134,12 +134,25 @@ a:hover, a:focus {
       #start_field .container .start_input label {
         margin-bottom: 0; }
       #start_field .container .start_input #difficulty_container {
-        width: 250px;
+        display: flex;
+        justify-content: space-around;
+        width: 240px;
         height: 50px;
         margin: 0 auto;
         background: #010101;
         border: 2px solid #d35400;
         border-top: 0; }
+        #start_field .container .start_input #difficulty_container .difficulty_level {
+          width: 80px;
+          height: 50px;
+          line-height: 50px; }
+          #start_field .container .start_input #difficulty_container .difficulty_level:hover {
+            cursor: pointer;
+            color: #010101;
+            background: #d35400; }
+          #start_field .container .start_input #difficulty_container .difficulty_level.active {
+            color: #010101;
+            background: #d35400; }
         #start_field .container .start_input #difficulty_container label {
           line-height: 50px; }
           #start_field .container .start_input #difficulty_container label select {
@@ -152,13 +165,11 @@ a:hover, a:focus {
 
 #arcomage_header {
   width: 300px;
-  height: 250px;
   margin: 0 auto;
   opacity: 0.4; }
   #arcomage_header:hover {
     opacity: 1; }
   #arcomage_header #title {
-    float: left;
     width: 100%;
     height: 100px; }
     #arcomage_header #title h1 {
@@ -167,16 +178,19 @@ a:hover, a:focus {
       line-height: 100px; }
   #arcomage_header #arcomage_controls {
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
     width: 100%;
-    height: 150px; }
+    height: 100px; }
     #arcomage_header #arcomage_controls .small_button {
       width: 50px;
-      height: 50px; }
+      height: 50px;
+      padding: 0; }
       #arcomage_header #arcomage_controls .small_button span {
         display: block;
-        top: 50%; }
+        top: 0;
+        width: 46px;
+        line-height: 46px; }
 
 div#wrapper {
   z-index: 1;
@@ -193,7 +207,7 @@ div#wrapper {
   width: 797px;
   height: 797px;
   left: 50%;
-  top: 234px;
+  top: 84px;
   margin-left: -398.5px;
   background: rgba(75, 75, 75, 0.5);
   border: 0;
@@ -286,7 +300,7 @@ div#wrapper {
       color: #d35400;
       margin-top: -50px; }
     #start_field .container input {
-      width: 250px;
+      width: 240px;
       height: 50px;
       line-height: 50px;
       border-radius: 2px;
@@ -300,12 +314,25 @@ div#wrapper {
       #start_field .container .start_input label {
         margin-bottom: 0; }
       #start_field .container .start_input #difficulty_container {
-        width: 250px;
+        display: flex;
+        justify-content: space-around;
+        width: 240px;
         height: 50px;
         margin: 0 auto;
         background: #010101;
         border: 2px solid #d35400;
         border-top: 0; }
+        #start_field .container .start_input #difficulty_container .difficulty_level {
+          width: 80px;
+          height: 50px;
+          line-height: 50px; }
+          #start_field .container .start_input #difficulty_container .difficulty_level:hover {
+            cursor: pointer;
+            color: #010101;
+            background: #d35400; }
+          #start_field .container .start_input #difficulty_container .difficulty_level.active {
+            color: #010101;
+            background: #d35400; }
         #start_field .container .start_input #difficulty_container label {
           line-height: 50px; }
           #start_field .container .start_input #difficulty_container label select {
@@ -318,13 +345,11 @@ div#wrapper {
 
 #arcomage_header {
   width: 300px;
-  height: 250px;
   margin: 0 auto;
   opacity: 0.4; }
   #arcomage_header:hover {
     opacity: 1; }
   #arcomage_header #title {
-    float: left;
     width: 100%;
     height: 100px; }
     #arcomage_header #title h1 {
@@ -333,16 +358,19 @@ div#wrapper {
       line-height: 100px; }
   #arcomage_header #arcomage_controls {
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
     width: 100%;
-    height: 150px; }
+    height: 100px; }
     #arcomage_header #arcomage_controls .small_button {
       width: 50px;
-      height: 50px; }
+      height: 50px;
+      padding: 0; }
       #arcomage_header #arcomage_controls .small_button span {
         display: block;
-        top: 50%; }
+        top: 0;
+        width: 46px;
+        line-height: 46px; }
 
 div#wrapper {
   z-index: 1;

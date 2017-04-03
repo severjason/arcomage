@@ -62,6 +62,7 @@ namespace ArcomageGame {
             this.difficultyLevel = difficulty;
             this.CPUAI = new CPUAI(this.playerTwoObject, cards, params);
         }
+
         /**
          * Get Param class
          * @returns {Param} paramsObject
@@ -166,6 +167,15 @@ namespace ArcomageGame {
         get cookie(): Cookie {
             return this.cookieObject;
         }
+
+        /**
+         * Get difficulty level
+         * @returns {number} difficultyLevel
+         */
+        get difficulty(): number {
+            return this.difficultyLevel;
+        }
+
         /**
          * Change game status to false, destroy cookie and show gameOver message
          * @param {Player} player
@@ -174,7 +184,7 @@ namespace ArcomageGame {
             this.gameStatus = false;
             let playerOneWin = (player === this.playerOne);
             this.cookie.setStatusCookie(this.status);
-            this.DOM.showGameOverMessage(playerOneWin, this.playerOne.moves, this.playerOne.scores);
+            this.DOM.showGameOverMessage(playerOneWin, this.playerOne.moves, this.playerOne.scores, this.difficulty);
         }
 
         /**
@@ -297,6 +307,7 @@ namespace ArcomageGame {
                 this.playerTwo.updateCards(this.cards.getSingleCard(playerTwoCard));
             }
         }
+
         /**
          * Clear back of cards for CPU only
          * @param {Canvas} canvas

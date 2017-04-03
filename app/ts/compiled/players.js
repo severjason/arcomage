@@ -10,7 +10,9 @@ var ArcomageGame;
             this.playerWallLife = (Array.isArray(playerValues.wallLife)
                 ? playerValues.wallLife[difficulty]
                 : playerValues.wallLife);
-            this.playerResources = playerValues.resources;
+            this.playerResources = (Array.isArray(playerValues.resources)
+                ? playerValues.resources[difficulty]
+                : playerValues.resources);
             this.playerSources = playerValues.sources;
             this.canvasTowerHeightStepValue = canvasValues.towers.heightStep;
             this.canvasWallHeightStepValue = canvasValues.walls.heightStep;

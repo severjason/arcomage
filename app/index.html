@@ -6,6 +6,8 @@
 
     <title>Arcomage</title>
 
+    <link rel="icon" href="../favicon.ico" type="image/x-icon">
+
     <meta name="description" content="">
     <meta name="language" content="en-us"/>
     <!-- Mobile-friendly viewport -->
@@ -49,14 +51,20 @@
                 <input id="player_name_input" class="input-group text-center" type="text" maxlength="10">
             </label>
             <div id="difficulty_container">
-                <label>
-                    <span>Difficulty: </span>
-                    <select id="game_difficulty" >
+                <div class="difficulty_level active" data-value="0">
+                    Easy
+                </div>
+                <div class="difficulty_level" data-value="1">
+                    Medium
+                </div>
+                <div class="difficulty_level" data-value="2">
+                    Hard
+                </div>
+<!--                    <select id="game_difficulty">
                         <option value="0">Easy</option>
                         <option value="1">Medium</option>
                         <option value="2">Hard</option>
-                    </select>
-                </label>
+                    </select>-->
             </div>
             <button id="start_game_button">
                 Start game
@@ -72,13 +80,16 @@
     <div id="arcomage_header">
         <div id="title">
             <h1 class="text-center">ARCOMAGE</h1>
-        </div>
 
+        </div>
         <div id="arcomage_controls">
-            <button id="sound" class="small_button"><span class="glyphicon glyphicon-volume-off"></span></button>
+            <button class="small_button" id="sound">
+                <span class="glyphicon glyphicon-volume-off"></span>
+            </button>
             <button class="newgame_button">New game</button>
-            <button class="small_button" data-toggle="modal" data-target="#rulesModal"><span
-                    class="glyphicon glyphicon-cog"></span></button>
+            <button class="small_button" data-toggle="modal" data-target="#rulesModal">
+                <span class="glyphicon glyphicon-cog"></span>
+            </button>
         </div>
         <div class="clear"></div>
 

@@ -120,6 +120,13 @@ var ArcomageGame;
             return this.cookieObject;
         }
         /**
+         * Get difficulty level
+         * @returns {number} difficultyLevel
+         */
+        get difficulty() {
+            return this.difficultyLevel;
+        }
+        /**
          * Change game status to false, destroy cookie and show gameOver message
          * @param {Player} player
          */
@@ -127,7 +134,7 @@ var ArcomageGame;
             this.gameStatus = false;
             let playerOneWin = (player === this.playerOne);
             this.cookie.setStatusCookie(this.status);
-            this.DOM.showGameOverMessage(playerOneWin, this.playerOne.moves, this.playerOne.scores);
+            this.DOM.showGameOverMessage(playerOneWin, this.playerOne.moves, this.playerOne.scores, this.difficulty);
         }
         /**
          * Check if game is on
