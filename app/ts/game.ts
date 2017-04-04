@@ -184,7 +184,7 @@ namespace ArcomageGame {
             this.gameStatus = false;
             let playerOneWin = (player === this.playerOne);
             this.cookie.setStatusCookie(this.status);
-            this.DOM.showGameOverMessage(playerOneWin, this.playerOne.moves, this.playerOne.scores, this.difficulty);
+            this.DOM.showGameOverMessage(playerOneWin, this.playerOne.moves, this.playerOne.scores);
         }
 
         /**
@@ -241,7 +241,7 @@ namespace ArcomageGame {
          */
         public applyCard(cardName: string, player: Player, enemy: Player) {
             this.cards.getSingleCard(cardName).action(player, enemy);
-            player.updateScores(this.cards.getScore(cardName));
+            player.updateScores(this.cards.getScore(cardName) * (1 + this.difficulty / 2));
             this.cards.deactivate(cardName);
             if (player.towerLife === this.params.maxValues.tower || enemy.towerLife === 0) {
                 this.gameOver(player);

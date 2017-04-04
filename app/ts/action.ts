@@ -21,9 +21,9 @@ $(document).ready(() => {
         loader.start(newName, difficulty);
     });
 
-    body.on("click", "div.difficulty_level", (e) => {
+    body.on("click", "div.difficulty_level", (e: Event) => {
         $("div.difficulty_level").removeClass("active");
-        $(e.target).addClass("active");
+        $(e.currentTarget).addClass("active");
     });
 
     body.on("click", "#sound", () => {

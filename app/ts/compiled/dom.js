@@ -10,15 +10,14 @@ var ArcomageGame;
             this.winText = "Congratulations!<br>You win!";
             this.loseText = "Sorry, pal!<br>You lose...";
         }
-        showGameOverMessage(playerOneWin, playerOneMoves, playerOneScores, difficulty) {
+        showGameOverMessage(playerOneWin, playerOneMoves, playerOneScores) {
             let text = (playerOneWin) ? this.winText : this.loseText;
             let background = (playerOneWin)
                 ? "#010101 url('../images/background/victory.jpg') center no-repeat"
                 : "#010101 url('../images/background/defeat.jpg') center no-repeat";
             let winScores = (playerOneWin) ? 1000 : -1000;
-            let difficultyScores = difficulty * 1000;
-            let finalScores = (playerOneScores + winScores + difficultyScores > 0)
-                ? playerOneScores + winScores + difficultyScores
+            let finalScores = (playerOneScores + winScores > 0)
+                ? playerOneScores + winScores
                 : 0;
             let movesText = `Scores: ${finalScores} <br><br> Moves: ${playerOneMoves}`;
             let container = document.querySelector("#game_over > .container");

@@ -18,7 +18,7 @@ $(document).ready(() => {
     });
     body.on("click", "div.difficulty_level", (e) => {
         $("div.difficulty_level").removeClass("active");
-        $(e.target).addClass("active");
+        $(e.currentTarget).addClass("active");
     });
     body.on("click", "#sound", () => {
         console.log($("#sound").find("span").toggleClass("glyphicon-volume-up").toggleClass("glyphicon-volume-off"));

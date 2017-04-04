@@ -22,16 +22,14 @@ namespace ArcomageGame {
         public showGameOverMessage(
             playerOneWin: boolean,
             playerOneMoves: number,
-            playerOneScores: number,
-            difficulty: number): void {
+            playerOneScores: number): void {
             let text: string = (playerOneWin) ? this.winText : this.loseText;
             let background: string = (playerOneWin)
                 ? "#010101 url('../images/background/victory.jpg') center no-repeat"
                 : "#010101 url('../images/background/defeat.jpg') center no-repeat";
             let winScores = (playerOneWin) ? 1000 : -1000;
-            let difficultyScores = difficulty * 1000;
-            let finalScores: number = (playerOneScores + winScores + difficultyScores > 0)
-                ? playerOneScores + winScores + difficultyScores
+            let finalScores: number = (playerOneScores + winScores > 0)
+                ? playerOneScores + winScores
                 : 0;
             let movesText: string = `Scores: ${finalScores} <br><br> Moves: ${playerOneMoves}`;
             let container = <HTMLElement> document.querySelector("#game_over > .container");
