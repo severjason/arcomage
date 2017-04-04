@@ -134,6 +134,10 @@
         margin-bottom: 0;
       }
 
+      #start_game_button {
+        margin-top: 10px;
+      }
+
       #difficulty_container {
         display: flex;
         justify-content: space-around;
@@ -195,12 +199,27 @@
   }
 
   #title {
+    display: flex;
+    justify-content: space-around;
     width: 100%;
     height: $title_height;
     h1 {
       color: #d35400;
       margin: 0;
       line-height: $title_height;
+    }
+    .small_button {
+      @extend %button;
+      width: $button_controls_width / 2;
+      height: $button_controls_height / 2;
+      padding: 0;
+      margin: ($title_height - $button_controls_height / 2) / 2 0;
+      span {
+        display: block;
+        top: 0;
+        width: $button_controls_width / 2 - 2 * $main_border_width;
+        line-height: $button_controls_height / 2 - 2 * $main_border_width;
+      }
     }
   }
 
@@ -214,18 +233,7 @@
     .newgame_button {
       @extend %button;
     }
-    .small_button {
-      @extend %button;
-      width: $button_controls_width / 2;
-      height: $button_controls_height / 2;
-      padding: 0;
-      span {
-        display: block;
-        top: 0;
-        width: $button_controls_width / 2 - 2 * $main_border_width;
-        line-height: $button_controls_height / 2 - 2 * $main_border_width;
-      }
-    }
+
   }
 }
 

@@ -4,11 +4,24 @@
 #rulesModal {
 
   .modal-header {
+    height: $rules_header_height;
+    padding: 0;
     border-bottom: 1px solid $rules_text_color;
 
+    h4 {
+
+      line-height: $rules_header_height;
+    }
+
     .close {
+      height: $rules_header_height;
+      width: $rules_header_width;
+      opacity: .8;
+
       span {
         color: $rules_text_color;
+        text-shadow: none;
+
       }
     }
   }

@@ -48,7 +48,7 @@ a:hover, a:focus {
   margin: 0;
   padding: 0; }
 
-#game_over .container .newgame_button, #start_field button, #arcomage_header #arcomage_controls .newgame_button, #arcomage_header #arcomage_controls .small_button {
+#game_over .container .newgame_button, #start_field button, #arcomage_header #title .small_button, #arcomage_header #arcomage_controls .newgame_button {
   display: block;
   width: 100px;
   height: 100px;
@@ -58,11 +58,11 @@ a:hover, a:focus {
   border: 2px solid #d35400;
   border-radius: 50px;
   text-align: center; }
-  #game_over .container .newgame_button:focus, #start_field button:focus, #arcomage_header #arcomage_controls .newgame_button:focus, #arcomage_header #arcomage_controls .small_button:focus {
+  #game_over .container .newgame_button:focus, #start_field button:focus, #arcomage_header #title .small_button:focus, #arcomage_header #arcomage_controls .newgame_button:focus {
     outline: none; }
-  #game_over .container .newgame_button:hover, #start_field button:hover, #arcomage_header #arcomage_controls .newgame_button:hover, #arcomage_header #arcomage_controls .small_button:hover {
+  #game_over .container .newgame_button:hover, #start_field button:hover, #arcomage_header #title .small_button:hover, #arcomage_header #arcomage_controls .newgame_button:hover {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); }
-  #game_over .container .newgame_button:active, #start_field button:active, #arcomage_header #arcomage_controls .newgame_button:active, #arcomage_header #arcomage_controls .small_button:active {
+  #game_over .container .newgame_button:active, #start_field button:active, #arcomage_header #title .small_button:active, #arcomage_header #arcomage_controls .newgame_button:active {
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.5); }
 
 #loader {
@@ -133,6 +133,8 @@ a:hover, a:focus {
       margin-top: 200px; }
       #start_field .container .start_input label {
         margin-bottom: 0; }
+      #start_field .container .start_input #start_game_button {
+        margin-top: 10px; }
       #start_field .container .start_input #difficulty_container {
         display: flex;
         justify-content: space-around;
@@ -170,27 +172,30 @@ a:hover, a:focus {
   #arcomage_header:hover {
     opacity: 1; }
   #arcomage_header #title {
+    display: flex;
+    justify-content: space-around;
     width: 100%;
     height: 100px; }
     #arcomage_header #title h1 {
       color: #d35400;
       margin: 0;
       line-height: 100px; }
+    #arcomage_header #title .small_button {
+      width: 50px;
+      height: 50px;
+      padding: 0;
+      margin: 25px 0; }
+      #arcomage_header #title .small_button span {
+        display: block;
+        top: 0;
+        width: 46px;
+        line-height: 46px; }
   #arcomage_header #arcomage_controls {
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
     height: 100px; }
-    #arcomage_header #arcomage_controls .small_button {
-      width: 50px;
-      height: 50px;
-      padding: 0; }
-      #arcomage_header #arcomage_controls .small_button span {
-        display: block;
-        top: 0;
-        width: 46px;
-        line-height: 46px; }
 
 div#wrapper {
   z-index: 1;
@@ -228,7 +233,7 @@ div#wrapper {
   margin: 0;
   padding: 0; }
 
-#game_over .container .newgame_button, #start_field button, #arcomage_header #arcomage_controls .newgame_button, #arcomage_header #arcomage_controls .small_button {
+#game_over .container .newgame_button, #start_field button, #arcomage_header #title .small_button, #arcomage_header #arcomage_controls .newgame_button {
   display: block;
   width: 100px;
   height: 100px;
@@ -238,11 +243,11 @@ div#wrapper {
   border: 2px solid #d35400;
   border-radius: 50px;
   text-align: center; }
-  #game_over .container .newgame_button:focus, #start_field button:focus, #arcomage_header #arcomage_controls .newgame_button:focus, #arcomage_header #arcomage_controls .small_button:focus {
+  #game_over .container .newgame_button:focus, #start_field button:focus, #arcomage_header #title .small_button:focus, #arcomage_header #arcomage_controls .newgame_button:focus {
     outline: none; }
-  #game_over .container .newgame_button:hover, #start_field button:hover, #arcomage_header #arcomage_controls .newgame_button:hover, #arcomage_header #arcomage_controls .small_button:hover {
+  #game_over .container .newgame_button:hover, #start_field button:hover, #arcomage_header #title .small_button:hover, #arcomage_header #arcomage_controls .newgame_button:hover {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); }
-  #game_over .container .newgame_button:active, #start_field button:active, #arcomage_header #arcomage_controls .newgame_button:active, #arcomage_header #arcomage_controls .small_button:active {
+  #game_over .container .newgame_button:active, #start_field button:active, #arcomage_header #title .small_button:active, #arcomage_header #arcomage_controls .newgame_button:active {
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.5); }
 
 #loader {
@@ -313,6 +318,8 @@ div#wrapper {
       margin-top: 200px; }
       #start_field .container .start_input label {
         margin-bottom: 0; }
+      #start_field .container .start_input #start_game_button {
+        margin-top: 10px; }
       #start_field .container .start_input #difficulty_container {
         display: flex;
         justify-content: space-around;
@@ -350,27 +357,30 @@ div#wrapper {
   #arcomage_header:hover {
     opacity: 1; }
   #arcomage_header #title {
+    display: flex;
+    justify-content: space-around;
     width: 100%;
     height: 100px; }
     #arcomage_header #title h1 {
       color: #d35400;
       margin: 0;
       line-height: 100px; }
+    #arcomage_header #title .small_button {
+      width: 50px;
+      height: 50px;
+      padding: 0;
+      margin: 25px 0; }
+      #arcomage_header #title .small_button span {
+        display: block;
+        top: 0;
+        width: 46px;
+        line-height: 46px; }
   #arcomage_header #arcomage_controls {
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
     height: 100px; }
-    #arcomage_header #arcomage_controls .small_button {
-      width: 50px;
-      height: 50px;
-      padding: 0; }
-      #arcomage_header #arcomage_controls .small_button span {
-        display: block;
-        top: 0;
-        width: 46px;
-        line-height: 46px; }
 
 div#wrapper {
   z-index: 1;
@@ -383,9 +393,18 @@ div#wrapper {
     text-align: center; }
 
 #rulesModal .modal-header {
+  height: 60px;
+  padding: 0;
   border-bottom: 1px solid #d35400; }
-  #rulesModal .modal-header .close span {
-    color: #d35400; }
+  #rulesModal .modal-header h4 {
+    line-height: 60px; }
+  #rulesModal .modal-header .close {
+    height: 60px;
+    width: 60px;
+    opacity: .8; }
+    #rulesModal .modal-header .close span {
+      color: #d35400;
+      text-shadow: none; }
 #rulesModal .modal-content {
   color: #d35400;
   background-color: #010101;
