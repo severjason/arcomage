@@ -13,9 +13,11 @@ namespace ArcomageGame {
                     name: "amethyst",
                     source: "magic",
                     description: {
+                        rus: "Аметист",
                         eng: "Amethyst",
                     },
                     text: {
+                        rus: "+3 башня",
                         eng: "+3 tower",
                     },
                     src: "./images/cards/amethyst.png",
@@ -34,9 +36,11 @@ namespace ArcomageGame {
                     name: "apprentice",
                     source: "magic",
                     description: {
+                        rus: "Ученик",
                         eng: "Apprentice",
                     },
                     text: {
+                        rus: "+4 башня,\nвы теряете 3 зверя,\n2 урона башне врага",
                         eng: "+4 tower,\nyou lose 3 beasts,\n2 damage to enemy tower",
                     },
                     src: "./images/cards/apprentice.png",
@@ -56,9 +60,11 @@ namespace ArcomageGame {
                     name: "barracks",
                     source: "mine",
                     description: {
+                        rus: "Барраки",
                         eng: "Barracks",
                     },
                     text: {
+                        rus: "+6 зверей, +6 стена,\nесли темница <\nтемницы врага,\n+1 темница",
                         eng: "+6 beasts, +6 wall,\nif dungeon <\nenemy dungeon,\n+1 dungeon",
                     },
                     src: "./images/cards/barracks.png",
@@ -81,9 +87,11 @@ namespace ArcomageGame {
                     name: "basic_wall",
                     source: "mine",
                     description: {
+                        rus: "Базовая стена",
                         eng: "Basic wall",
                     },
                     text: {
+                        rus: "+3 стена",
                         eng: "+3 wall",
                     },
                     src: "./images/cards/basic_wall.png",
@@ -102,9 +110,11 @@ namespace ArcomageGame {
                     name: "battlements",
                     source: "mine",
                     description: {
+                        rus: "Амбразура",
                         eng: "Battlements",
                     },
                     text: {
+                        rus: "+7 стена,\n6 урона врагу",
                         eng: "+7 wall,\n6 damage to enemy",
                     },
                     src: "./images/cards/battlements.png",
@@ -124,9 +134,11 @@ namespace ArcomageGame {
                     name: "berserker",
                     source: "dungeon",
                     description: {
+                        rus: "Берсерк",
                         eng: "Berserker",
                     },
                     text: {
+                        rus: "8 урона,\n3 урона вашей башне",
                         eng: "8 damage,\n3 damage to your tower",
                     },
                     src: "./images/cards/berserker.png",
@@ -146,9 +158,11 @@ namespace ArcomageGame {
                     name: "big_wall",
                     source: "mine",
                     description: {
+                        rus: "Большая стена",
                         eng: "Big wall",
                     },
                     text: {
+                        rus: "+6 стена",
                         eng: "+6 wall",
                     },
                     src: "./images/cards/big_wall.png",
@@ -167,9 +181,11 @@ namespace ArcomageGame {
                     name: "cave_river",
                     source: "mine",
                     description: {
+                        rus: "Пещерная река",
                         eng: "Cave river",
                     },
                     text: {
+                        rus: "Игрок с меньшей\nстеной -1 темница\nи -2 башня",
                         eng: "Player with\n lowest wall\n-1 dungeon and \n -2 tower",
                     },
                     src: "./images/cards/cave_river.png",
@@ -200,9 +216,11 @@ namespace ArcomageGame {
                     name: "collapse",
                     source: "mine",
                     description: {
+                        rus: "Коллапс!",
                         eng: "Collapse!",
                     },
                     text: {
+                        rus: "-1 шахта врага",
                         eng: "-1 enemy mine",
                     },
                     src: "./images/cards/collapse.png",
@@ -221,9 +239,11 @@ namespace ArcomageGame {
                     name: "corrosion_cloud",
                     source: "dungeon",
                     description: {
+                        rus: "Коррозионное облако",
                         eng: "Corrosion cloud",
                     },
                     text: {
+                        rus: "Если стена врага > 0\n10 урона, иначе 7 урона",
                         eng: "If enemy wall > 0\n10 damage, else\n7 damage",
                     },
                     src: "./images/cards/corrosion_cloud.png",
@@ -242,9 +262,11 @@ namespace ArcomageGame {
                     name: "crumblestone",
                     source: "magic",
                     description: {
+                        rus: "Раскрошенный камень",
                         eng: "Crumblestone",
                     },
                     text: {
+                        rus: "+5 башня,\nвраг теряет 6 зверей",
                         eng: "+5 tower,\nenemy loses 6 bricks",
                     },
                     src: "./images/cards/crumblestone.png",
@@ -264,9 +286,11 @@ namespace ArcomageGame {
                     name: "crystallize",
                     source: "magic",
                     description: {
+                        rus: "Кристализация",
                         eng: "Crystallize",
                     },
                     text: {
+                        rus: "+11 башня,\n-6 стена",
                         eng: "+11 tower,\n-6 wall",
                     },
                     src: "./images/cards/crystallize.png",
@@ -286,9 +310,11 @@ namespace ArcomageGame {
                     name: "crystal_rock",
                     source: "mine",
                     description: {
+                        rus: "Кристаллический камень",
                         eng: "Crystal rock",
                     },
                     text: {
+                        rus: "+7 стена,\nполучаете 7 самоцветов",
                         eng: "+7 wall,\ngain 7 gems",
                     },
                     src: "./images/cards/crystal_rock.png",
@@ -307,9 +333,11 @@ namespace ArcomageGame {
                     name: "crystal_shield",
                     source: "magic",
                     description: {
+                        rus: "Кристаллический щит",
                         eng: "Crystal shield",
                     },
                     text: {
+                        rus: "+8 башня,\n+ стена",
                         eng: "+8 tower,\n+3 wall",
                     },
                     src: "./images/cards/crystal_shield.png",
@@ -329,10 +357,12 @@ namespace ArcomageGame {
                     name: "defective_ore",
                     source: "mine",
                     description: {
+                        rus: "Дефектная руда",
                         eng: "Defective ore",
                     },
                     text: {
-                        eng: "All players\n lose 8 bricks",
+                        rus: "Все игроки\nтеряют 8 камней",
+                        eng: "All players\nlose 8 bricks",
                     },
                     src: "./images/cards/defective_ore.png",
                     resource: {
@@ -350,9 +380,11 @@ namespace ArcomageGame {
                     name: "defence_magic",
                     source: "magic",
                     description: {
+                        rus: "Защитная магия",
                         eng: "Defence magic",
                     },
                     text: {
+                        rus: "+20 башня",
                         eng: "+20 tower",
                     },
                     src: "./images/cards/defence_magic.png",
@@ -371,9 +403,11 @@ namespace ArcomageGame {
                     name: "demon_slasher",
                     source: "dungeon",
                     description: {
+                        rus: "Демон-воин",
                         eng: "Demon slasher",
                     },
                     text: {
+                        rus: "6 урона",
                         eng: "6 damage",
                     },
                     src: "./images/cards/demon_slasher.png",
@@ -392,9 +426,11 @@ namespace ArcomageGame {
                     name: "diamond",
                     source: "magic",
                     description: {
+                        rus: "Бриллиант",
                         eng: "Diamond",
                     },
                     text: {
+                        rus: "+15 башня",
                         eng: "+15 tower",
                     },
                     src: "./images/cards/diamond.png",
@@ -413,9 +449,11 @@ namespace ArcomageGame {
                     name: "discord",
                     source: "magic",
                     description: {
+                        rus: "Спор",
                         eng: "Discord",
                     },
                     text: {
+                        rus: "7 урона всем башням,\nвся магия -1",
                         eng: "7 damage to\n all towers,\n all magic -1",
                     },
                     src: "./images/cards/discord.png",
@@ -437,9 +475,11 @@ namespace ArcomageGame {
                     name: "dragon",
                     source: "dungeon",
                     description: {
+                        rus: "Дракон",
                         eng: "Dragon",
                     },
                     text: {
+                        rus: "20 урона,\nвраг теряет 10 самоцветов,\n-1 темница врага",
                         eng: "20 damage,\nenemy loses 10 gems,\n-1 enemy dungeon",
                     },
                     src: "./images/cards/dragon.png",
@@ -460,9 +500,11 @@ namespace ArcomageGame {
                     name: "dragon_heart",
                     source: "mine",
                     description: {
+                        rus: "Сердце дракона",
                         eng: "Dragon heart",
                     },
                     text: {
+                        rus: "+20 стена,\n+8 башня",
                         eng: "+20 wall,\n+8 tower",
                     },
                     src: "./images/cards/dragon_heart.png",
@@ -482,9 +524,11 @@ namespace ArcomageGame {
                     name: "dwarf_merchant",
                     source: "mine",
                     description: {
+                        rus: "Гном-торговец",
                         eng: "Dwarf merchant",
                     },
                     text: {
+                        rus: "+5 стена,\nвы теряете 6 самоцветов",
                         eng: "+5 wall,\nyou lose 6 gems",
                     },
                     src: "./images/cards/dwarf_merchant.png",
@@ -503,9 +547,11 @@ namespace ArcomageGame {
                     name: "dwarf_miner",
                     source: "mine",
                     description: {
+                        rus: "Гном-шахтер",
                         eng: "Dwarf miner",
                     },
                     text: {
+                        rus: "+4 стена,\n+1 шахта",
                         eng: "+4 wall,\n+1 mine",
                     },
                     src: "./images/cards/dwarf_miner.png",
@@ -527,9 +573,11 @@ namespace ArcomageGame {
                     name: "dwarfs",
                     source: "dungeon",
                     description: {
+                        rus: "Гномы",
                         eng: "Dwarfs",
                     },
                     text: {
+                        rus: "4 урона,\n+3 стена",
                         eng: "4 damage,\n+3 wall",
                     },
                     src: "./images/cards/dwarfs.png",
@@ -549,9 +597,11 @@ namespace ArcomageGame {
                     name: "earthquake",
                     source: "mine",
                     description: {
+                        rus: "Землетрясение",
                         eng: "Earthquake",
                     },
                     text: {
+                        rus: "+1 всем шахтам",
                         eng: "-1 to all mines",
                     },
                     src: "./images/cards/earthquake.png",
@@ -571,9 +621,11 @@ namespace ArcomageGame {
                     name: "elven_archer",
                     source: "dungeon",
                     description: {
+                        rus: "Эльф-лучник",
                         eng: "Elven archer",
                     },
                     text: {
+                        rus: "Если стена > стены\nврага, 6 урона\nбашне врага,\nиначе 6 урона",
                         eng: "If wall > enemy\nwall, 6 damage\nto enemy tower\nelse 6 damage",
                     },
                     src: "./images/cards/elven_archer.png",
@@ -592,9 +644,11 @@ namespace ArcomageGame {
                     name: "emerald",
                     source: "magic",
                     description: {
+                        rus: "Изумруд",
                         eng: "Emerald",
                     },
                     text: {
+                        rus: "+8 башня",
                         eng: "+8 tower",
                     },
                     src: "./images/cards/emerald.png",
@@ -613,9 +667,11 @@ namespace ArcomageGame {
                     name: "faerie",
                     source: "dungeon",
                     description: {
+                        rus: "Фея",
                         eng: "Faerie",
                     },
                     text: {
+                        rus: "2 урона,\nходить еще раз",
                         eng: "2 damage,\nplay again",
                     },
                     src: "./images/cards/faerie.png",
@@ -635,9 +691,11 @@ namespace ArcomageGame {
                     name: "fire_ruby",
                     source: "magic",
                     description: {
+                        rus: "Огненный рубин",
                         eng: "Fire ruby",
                     },
                     text: {
+                        rus: "+6 башня,\n4 урона башне\nи стене врага",
                         eng: "+6 tower,\n4 damage to\n enemy wall\nand tower",
                     },
                     src: "./images/cards/fire_ruby.png",
@@ -658,9 +716,11 @@ namespace ArcomageGame {
                     name: "focused_designs",
                     source: "mine",
                     description: {
+                        rus: "Новые чертежи",
                         eng: "Focused designs",
                     },
                     text: {
+                        rus: "+8 стена,\n+5 башня",
                         eng: "+8 wall,\n+5 tower",
                     },
                     src: "./images/cards/focused_designs.png",
@@ -680,9 +740,11 @@ namespace ArcomageGame {
                     name: "forced_labor",
                     source: "mine",
                     description: {
+                        rus: "Рабский труд",
                         eng: "Forced labor",
                     },
                     text: {
+                        rus: "+9 стена,\nтеряете 5 зверей",
                         eng: "+9 wall,\nlose 5 beasts",
                     },
                     src: "./images/cards/forced_labor.png",
@@ -701,9 +763,11 @@ namespace ArcomageGame {
                     name: "foundations",
                     source: "mine",
                     description: {
+                        rus: "Фундамент",
                         eng: "Foundations",
                     },
                     text: {
+                        rus: "Если стена = 0,\n+6 стена,\nиначе +3 стена",
                         eng: "If wall = 0,\n+6 wall,\nelse +3 wall",
                     },
                     src: "./images/cards/foundations.png",
@@ -722,9 +786,11 @@ namespace ArcomageGame {
                     name: "friendly_terrain",
                     source: "mine",
                     description: {
+                        rus: "Благодатная почва",
                         eng: "Friendly terrain",
                     },
                     text: {
+                        rus: "+1 стена,\nходить еще раз",
                         eng: "+1 wall,\nplay again",
                     },
                     src: "./images/cards/friendly_terrain.png",
@@ -744,9 +810,11 @@ namespace ArcomageGame {
                     name: "full_moon",
                     source: "dungeon",
                     description: {
+                        rus: "Полнолуние",
                         eng: "Full moon",
                     },
                     text: {
+                        rus: "+1 ко всем темницам,\nвы получаете 3 зверей",
                         eng: "+1 to all dungeons,\nyou gain 3 beasts",
                     },
                     src: "./images/cards/full_moon.png",
@@ -766,9 +834,11 @@ namespace ArcomageGame {
                     name: "gargoyle",
                     source: "dungeon",
                     description: {
+                        rus: "Гаргулия",
                         eng: "Gargoyle",
                     },
                     text: {
+                        rus: "2 урона,\n+4 стена,\n+2 башня",
                         eng: "2 damage,\n+4 wall,\n+2 tower",
                     },
                     src: "./images/cards/gargoyle.png",
@@ -789,9 +859,11 @@ namespace ArcomageGame {
                     name: "gem_spear",
                     source: "magic",
                     description: {
+                        rus: "Рунное копье",
                         eng: "Gem spear",
                     },
                     text: {
+                        rus: "5 урона\nбашне врага",
                         eng: "5 damage to\nenemy tower",
                     },
                     src: "./images/cards/gem_spear.png",
@@ -810,9 +882,11 @@ namespace ArcomageGame {
                     name: "gemstone_flaw",
                     source: "magic",
                     description: {
+                        rus: "Дефектный самоцвет",
                         eng: "Gemstone flaw",
                     },
                     text: {
+                        rus: "3 урона\nбашне врага",
                         eng: "3 damage to\nenemy tower",
                     },
                     src: "./images/cards/gemstone_flaw.png",
@@ -831,9 +905,11 @@ namespace ArcomageGame {
                     name: "gnoll",
                     source: "dungeon",
                     description: {
+                        rus: "Гнолл",
                         eng: "Gnoll",
                     },
                     text: {
+                        rus: "3 урона,\n+1 самоцвет",
                         eng: "3 damage,\n+1 gem",
                     },
                     src: "./images/cards/gnoll.png",
@@ -852,9 +928,11 @@ namespace ArcomageGame {
                     name: "goblin_archer",
                     source: "dungeon",
                     description: {
+                        rus: "Гоблин-лучник",
                         eng: "Goblin archer",
                     },
                     text: {
+                        rus: "3 урона башне\nврага, вы получаете\n1 урона",
                         eng: "3 damage to\nenemy tower,\nyou take\n1 damage",
                     },
                     src: "./images/cards/goblin_archer.png",
@@ -874,9 +952,11 @@ namespace ArcomageGame {
                     name: "goblin_mob",
                     source: "dungeon",
                     description: {
+                        rus: "Гоблин",
                         eng: "Goblin mob",
                     },
                     text: {
+                        rus: "6 урона,\nвы получаете\n3 урона",
                         eng: "6 damage,\n you take\n3 damage",
                     },
                     src: "./images/cards/goblin_mob.png",
@@ -896,9 +976,11 @@ namespace ArcomageGame {
                     name: "gold_mine",
                     source: "mine",
                     description: {
+                        rus: "Золотая шахта",
                         eng: "Gold mine",
                     },
                     text: {
+                        rus: "Если шахта < шахты\nврага, +2 шахта,\nиначе +1 шахта",
                         eng: "If mine < enemy\nmine, +2 mine,\nelse +1 mine",
                     },
                     src: "./images/cards/gold_mine.png",
@@ -919,9 +1001,11 @@ namespace ArcomageGame {
                     name: "great_wall",
                     source: "mine",
                     description: {
+                        rus: "Великая стена",
                         eng: "Great wall",
                     },
                     text: {
+                        rus: "+15 стена",
                         eng: "+15 wall",
                     },
                     src: "./images/cards/great_wall.png",
@@ -940,9 +1024,11 @@ namespace ArcomageGame {
                     name: "harmonic_ore",
                     source: "mine",
                     description: {
+                        rus: "Гармоническая руда",
                         eng: "Harmonic ore",
                     },
                     text: {
+                        rus: "+6 стена,\n+3 башня",
                         eng: "+6 wall,\n+3 tower",
                     },
                     src: "./images/cards/harmonic_ore.png",
@@ -962,9 +1048,11 @@ namespace ArcomageGame {
                     name: "harmony",
                     source: "magic",
                     description: {
+                        rus: "Гармония",
                         eng: "Harmony",
                     },
                     text: {
+                        rus: "+1 магия,\n+3 башня,\n+3 стена",
                         eng: "+1 magic,\n+3 tower,\n+3 wall",
                     },
                     src: "./images/cards/harmony.png",
@@ -985,10 +1073,12 @@ namespace ArcomageGame {
                     name: "hydralisk",
                     source: "dungeon",
                     description: {
+                        rus: "Гидралиск",
                         eng: "Hydralisk",
                     },
                     text: {
-                        eng: "If enemy wall\n=0, 10 damage,\nelse 6 damage",
+                        rus: "Если стена врага = 0,\n10 урона,\nиначе 6 урона",
+                        eng: "If enemy wall=0,\n10 damage,\nelse 6 damage",
                     },
                     src: "./images/cards/hydralisk.png",
                     resource: {
@@ -1006,9 +1096,11 @@ namespace ArcomageGame {
                     name: "imp",
                     source: "dungeon",
                     description: {
+                        rus: "Имп",
                         eng: "Imp",
                     },
                     text: {
+                        rus: "6 урона, все\nигроки теряют 5 камней, самоцветов и зверей",
                         eng: "6 damage, all\nplayers lose 5 bricks, gems and beasts",
                     },
                     src: "./images/cards/imp.png",
@@ -1028,9 +1120,11 @@ namespace ArcomageGame {
                     name: "innovations",
                     source: "mine",
                     description: {
+                        rus: "Инновации",
                         eng: "Innovations",
                     },
                     text: {
+                        rus: "+1 ко всем шахтам,\nвы получаете 4 самоцвета",
                         eng: "+1 to all player`s mines, you gain 4 gems",
                     },
                     src: "./images/cards/innovations.png",
@@ -1050,9 +1144,11 @@ namespace ArcomageGame {
                     name: "lightning_shard",
                     source: "magic",
                     description: {
+                        rus: "Удар молнии",
                         eng: "Lightning shard",
                     },
                     text: {
+                        rus: "Если башня > башни\nврага, 8 урона, башне врага,\nиначе 8 урона",
                         eng: "If tower > enemy\nwall, 8 damage\nto enemy tower,\nelse 8 damage",
                     },
                     src: "./images/cards/lightning_shard.png",
@@ -1071,9 +1167,11 @@ namespace ArcomageGame {
                     name: "lodestone",
                     source: "magic",
                     description: {
+                        rus: "Магнитная руда",
                         eng: "Lodestone",
                     },
                     text: {
+                        rus: "+3 башня",
                         eng: "+3 tower",
                     },
                     src: "./images/cards/lodestone.png",
@@ -1092,9 +1190,11 @@ namespace ArcomageGame {
                     name: "lucky_coin",
                     source: "mine",
                     description: {
+                        rus: "Счастливая монета",
                         eng: "Lucky coin",
                     },
                     text: {
+                        rus: "+2 камня,\n+2 самоцвета,\nходить еще раз",
                         eng: "+2 bricks,\n+2 gems,\nplay again",
                     },
                     src: "./images/cards/lucky_coin.png",
@@ -1113,9 +1213,11 @@ namespace ArcomageGame {
                     name: "mad_cow_disease",
                     source: "dungeon",
                     description: {
+                        rus: "Коровье бешенство",
                         eng: "Mad cow disease",
                     },
                     text: {
+                        rus: "Все игроки теряют 6 зверей",
                         eng: "All players lose 6 beasts",
                     },
                     src: "./images/cards/mad_cow_disease.png",
@@ -1134,9 +1236,11 @@ namespace ArcomageGame {
                     name: "magic_book",
                     source: "magic",
                     description: {
+                        rus: "Магическая книга",
                         eng: "Magic book",
                     },
                     text: {
+                        rus: "+8 башня,\n+1 темница",
                         eng: "+8 tower,\n+1 dungeon",
                     },
                     src: "./images/cards/magic_book.png",
@@ -1156,9 +1260,11 @@ namespace ArcomageGame {
                     name: "meditation",
                     source: "magic",
                     description: {
+                        rus: "Медитация",
                         eng: "Meditation",
                     },
                     text: {
+                        rus: "+13 башня,\n+6 зверей,\n+6 камней",
                         eng: "+13 tower,\n+6 beasts,\n+6 bricks",
                     },
                     src: "./images/cards/meditation.png",
@@ -1177,9 +1283,11 @@ namespace ArcomageGame {
                     name: "medusa",
                     source: "dungeon",
                     description: {
+                        rus: "Медуза",
                         eng: "Medusa",
                     },
                     text: {
+                        rus: "6 урона,\nвраг теряет\n3 зверя",
                         eng: "6 damage,\n enemy loses\n 3 beasts",
                     },
                     src: "./images/cards/medusa.png",
@@ -1199,9 +1307,11 @@ namespace ArcomageGame {
                     name: "miners",
                     source: "mine",
                     description: {
+                        rus: "Шахтеры",
                         eng: "Miners",
                     },
                     text: {
+                        rus: "+1 шахта",
                         eng: "+1 mine",
                     },
                     src: "./images/cards/miners.png",
@@ -1220,9 +1330,11 @@ namespace ArcomageGame {
                     name: "minotaur",
                     source: "dungeon",
                     description: {
+                        rus: "Минотавр",
                         eng: "Minotaur",
                     },
                     text: {
+                        rus: "+1 темница",
                         eng: "+1 dungeon",
                     },
                     src: "./images/cards/minotaur.png",
@@ -1241,9 +1353,11 @@ namespace ArcomageGame {
                     name: "mondo_wall",
                     source: "mine",
                     description: {
+                        rus: "Отличная стена",
                         eng: "Mondo wall",
                     },
                     text: {
+                        rus: "+12 стена",
                         eng: "+12 wall",
                     },
                     src: "./images/cards/mondo_wall.png",
@@ -1262,9 +1376,11 @@ namespace ArcomageGame {
                     name: "moody_goblins",
                     source: "dungeon",
                     description: {
+                        rus: "Угрюмые гоблины",
                         eng: "Moody goblins",
                     },
                     text: {
+                        rus: "4 урона,\nвы теряете 3 самоцвета",
                         eng: "4 damage,\nyou lose 3 gems",
                     },
                     src: "./images/cards/moody_goblins.png",
@@ -1283,9 +1399,11 @@ namespace ArcomageGame {
                     name: "new_equipment",
                     source: "mine",
                     description: {
+                        rus: "Новое оборудование",
                         eng: "New equipment",
                     },
                     text: {
+                        rus: "+2 шахта",
                         eng: "+2 mine",
                     },
                     src: "./images/cards/new_equipment.png",
@@ -1304,9 +1422,11 @@ namespace ArcomageGame {
                     name: "ogre",
                     source: "dungeon",
                     description: {
+                        rus: "Огр",
                         eng: "Ogre",
                     },
                     text: {
+                        rus: "7 урона",
                         eng: "7 damage",
                     },
                     src: "./images/cards/ogre.png",
@@ -1325,9 +1445,11 @@ namespace ArcomageGame {
                     name: "orc",
                     source: "dungeon",
                     description: {
+                        rus: "Орк",
                         eng: "Orc",
                     },
                     text: {
+                        rus: "5 урона",
                         eng: "5 damage",
                     },
                     src: "./images/cards/orc.png",
@@ -1346,9 +1468,11 @@ namespace ArcomageGame {
                     name: "parity",
                     source: "magic",
                     description: {
+                        rus: "Паритет",
                         eng: "Parity",
                     },
                     text: {
+                        rus: "Магия всех игроков равняется магии игрока с большей магией",
                         eng: "All player`s magic equals the highest player`s magic",
                     },
                     src: "./images/cards/parity.png",
@@ -1370,9 +1494,11 @@ namespace ArcomageGame {
                     name: "pearl_of_wisdom",
                     source: "magic",
                     description: {
+                        rus: "Жемчужина мудрости",
                         eng: "Pearl of wisdom",
                     },
                     text: {
+                        rus: "+5 башня,\n+1 магия",
                         eng: "+5 tower\n+1 magic",
                     },
                     src: "./images/cards/pearl_of_wisdom.png",
@@ -1392,9 +1518,11 @@ namespace ArcomageGame {
                     name: "pegasus",
                     source: "dungeon",
                     description: {
+                        rus: "Пегас",
                         eng: "Pegasus",
                     },
                     text: {
+                        rus: "12 урона башне врага",
                         eng: "12 damage to\n enemy tower",
                     },
                     src: "./images/cards/pegasus.png",
@@ -1413,9 +1541,11 @@ namespace ArcomageGame {
                     name: "portcullis",
                     source: "mine",
                     description: {
+                        rus: "Решетка",
                         eng: "Portcullis",
                     },
                     text: {
+                        rus: "+5 стена,\n+1 темница",
                         eng: "+5 wall\n+1 dungeon",
                     },
                     src: "./images/cards/portcullis.png",
@@ -1435,9 +1565,11 @@ namespace ArcomageGame {
                     name: "power_burn",
                     source: "magic",
                     description: {
+                        rus: "Силовой взрыв",
                         eng: "Power burn",
                     },
                     text: {
+                        rus: "5 урона вашей\nбашни, +2 магия",
                         eng: "5 damage to\nyour tower,\n+2 magic",
                     },
                     src: "./images/cards/power_burn.png",
@@ -1457,9 +1589,11 @@ namespace ArcomageGame {
                     name: "prism",
                     source: "magic",
                     description: {
+                        rus: "Призма",
                         eng: "Prism",
                     },
                     text: {
+                        rus: "Если башня <\nбашни врага\n+2 башния,\nиначе +1 башня",
                         eng: "If tower <\nenemy tower\n+2 tower,\nelse +1 tower",
                     },
                     src: "./images/cards/prism.png",
@@ -1477,9 +1611,11 @@ namespace ArcomageGame {
                     name: "quarrys_help",
                     source: "magic",
                     description: {
+                        rus: "Помощь из карьера",
                         eng: "Quarry`s help",
                     },
                     text: {
+                        rus: "+7 башня,\nвы теряете 10 камней",
                         eng: "+7 tower,\nlose 10 bricks",
                     },
                     src: "./images/cards/quarrys_help.png",
@@ -1498,9 +1634,11 @@ namespace ArcomageGame {
                     name: "quartz",
                     source: "magic",
                     description: {
+                        rus: "Кварц",
                         eng: "Quartz",
                     },
                     text: {
+                        rus: "+1 башня,\nходить еще раз",
                         eng: "+1 tower,\nplay again",
                     },
                     src: "./images/cards/quartz.png",
@@ -1520,9 +1658,11 @@ namespace ArcomageGame {
                     name: "rainbow",
                     source: "magic",
                     description: {
+                        rus: "Радуга",
                         eng: "Rainbow",
                     },
                     text: {
+                        rus: "+1 башня всех\nигроков, вы получаете\n3 самоцвета",
                         eng: "+1 tower to\nall players,\nyou gain 3 gems",
                     },
                     src: "./images/cards/rainbow.png",
@@ -1542,9 +1682,11 @@ namespace ArcomageGame {
                     name: "rare_ring",
                     source: "magic",
                     description: {
+                        rus: "Редкое кольцо",
                         eng: "Rare ring",
                     },
                     text: {
+                        rus: "+1 магия,\n+3 башня,\n+1 башня врага",
                         eng: "+1 magic,\n+3 tower,\n+1 enemy tower",
                     },
                     src: "./images/cards/rare_ring.png",
@@ -1565,9 +1707,11 @@ namespace ArcomageGame {
                     name: "reinforced_wall",
                     source: "mine",
                     description: {
+                        rus: "Усиленная стена",
                         eng: "Reinforced wall",
                     },
                     text: {
+                        rus: "+8 стена",
                         eng: "+8 wall",
                     },
                     src: "./images/cards/reinforced_wall.png",
@@ -1586,9 +1730,11 @@ namespace ArcomageGame {
                     name: "rock_garden",
                     source: "mine",
                     description: {
+                        rus: "Сад камней",
                         eng: "Rock garden",
                     },
                     text: {
+                        rus: "+1 стена,\n+1 башня,\n+2 зверя",
                         eng: "+1 wall,\n+1 tower,\n+2 beasts",
                     },
                     src: "./images/cards/rock_garden.png",
@@ -1608,9 +1754,11 @@ namespace ArcomageGame {
                     name: "rock_launcher",
                     source: "mine",
                     description: {
+                        rus: "Камнемет",
                         eng: "Rock launcher",
                     },
                     text: {
+                        rus: "+6 стена,\n10 урона",
                         eng: "+6 wall,\n10 damage",
                     },
                     src: "./images/cards/rock_launcher.png",
@@ -1630,9 +1778,11 @@ namespace ArcomageGame {
                     name: "ruby",
                     source: "magic",
                     description: {
+                        rus: "Рубин",
                         eng: "Ruby",
                     },
                     text: {
+                        rus: "+5 башня",
                         eng: "+5 tower",
                     },
                     src: "./images/cards/ruby.png",
@@ -1651,9 +1801,11 @@ namespace ArcomageGame {
                     name: "sapphire",
                     source: "magic",
                     description: {
+                        rus: "Сапфир",
                         eng: "Sapphire",
                     },
                     text: {
+                        rus: "+11 башня",
                         eng: "+11 tower",
                     },
                     src: "./images/cards/sapphire.png",
@@ -1672,9 +1824,11 @@ namespace ArcomageGame {
                     name: "secret_cave",
                     source: "mine",
                     description: {
+                        rus: "Секретная пещера",
                         eng: "Secret cave",
                     },
                     text: {
+                        rus: "+1 магия,\nходить еще раз",
                         eng: "+1 magic,\nplay again",
                     },
                     src: "./images/cards/secret_cave.png",
@@ -1694,9 +1848,11 @@ namespace ArcomageGame {
                     name: "shadow_fairy",
                     source: "magic",
                     description: {
+                        rus: "Темная фея",
                         eng: "Shadow fairy",
                     },
                     text: {
+                        rus: "2 урона\nбашне врага,\nходить еще раз",
                         eng: "2 damage to\nenemy tower,\nplay again",
                     },
                     src: "./images/cards/shadow_fairy.png",
@@ -1716,9 +1872,11 @@ namespace ArcomageGame {
                     name: "shatterer",
                     source: "magic",
                     description: {
+                        rus: "Обломки",
                         eng: "Shatterer",
                     },
                     text: {
+                        rus: "-1 магия,\n9 урона\nбашне врага",
                         eng: "-1 magic,\n9 damage to\nenemy tower",
                     },
                     src: "./images/cards/shatterer.png",
@@ -1738,9 +1896,11 @@ namespace ArcomageGame {
                     name: "shift",
                     source: "mine",
                     description: {
+                        rus: "Сдвиг",
                         eng: "Shift",
                     },
                     text: {
+                        rus: "Поменяй свою стену со стеной врага",
                         eng: "Switch your wall with enemy wall",
                     },
                     src: "./images/cards/shift.png",
@@ -1762,9 +1922,11 @@ namespace ArcomageGame {
                     name: "smoky_quartz",
                     source: "magic",
                     description: {
+                        rus: "Дымчатый кварц",
                         eng: "Smoky quartz",
                     },
                     text: {
+                        rus: "1 урона\nбашне врага,\nходить еще раз",
                         eng: "1 damage to\nenemy tower,\nplay again",
                     },
                     src: "./images/cards/smoky_quartz.png",
@@ -1784,9 +1946,11 @@ namespace ArcomageGame {
                     name: "snake",
                     source: "dungeon",
                     description: {
+                        rus: "Змея",
                         eng: "Snake",
                     },
                     text: {
+                        rus: "4 урона\nбашне врага",
                         eng: "4 damage to\n enemy tower",
                     },
                     src: "./images/cards/snake.png",
@@ -1805,9 +1969,11 @@ namespace ArcomageGame {
                     name: "solar_flare",
                     source: "magic",
                     description: {
+                        rus: "Солнечное затмение",
                         eng: "Solar flare",
                     },
                     text: {
+                        rus: "+2 башня,\n2 урона\nбашне врага",
                         eng: "+2 tower,\n2 damage to\nenemy tower",
                     },
                     src: "./images/cards/solar_flare.png",
@@ -1827,9 +1993,11 @@ namespace ArcomageGame {
                     name: "spearman",
                     source: "dungeon",
                     description: {
+                        rus: "Копьеносец",
                         eng: "Spearman",
                     },
                     text: {
+                        rus: "Если стена > стены\nврага 3 урона,\nиначе 2 урона",
                         eng: "If wall > enemy\nwall do 3 damage,\nelse do 2 damage",
                     },
                     src: "./images/cards/spearman.png",
@@ -1848,9 +2016,11 @@ namespace ArcomageGame {
                     name: "spell_weavers",
                     source: "magic",
                     description: {
+                        rus: "Заклинатели",
                         eng: "Spell weavers",
                     },
                     text: {
+                        rus: "+1 магия",
                         eng: "+1 magic",
                     },
                     src: "./images/cards/spell_weavers.png",
@@ -1869,9 +2039,11 @@ namespace ArcomageGame {
                     name: "stone_giant",
                     source: "dungeon",
                     description: {
+                        rus: "Каменный гигант",
                         eng: "Stone giant",
                     },
                     text: {
+                        rus: "10 урона,\n+4 стена",
                         eng: "10 damage,\n+4 wall",
                     },
                     src: "./images/cards/stone_giant.png",
@@ -1888,15 +2060,17 @@ namespace ArcomageGame {
                     backObject: {},
                 },
                 strudy_wall: {
-                    name: "strudy_wall",
+                    name: "sturdy_wall",
                     source: "mine",
                     description: {
-                        eng: "Strudy wall",
+                        rus: "Крепкая стена",
+                        eng: "Sturdy wall",
                     },
                     text: {
+                        rus: "+4 стена",
                         eng: "+4 wall",
                     },
-                    src: "./images/cards/strudy_wall.png",
+                    src: "./images/cards/sturdy_wall.png",
                     resource: {
                         bricks: 3,
                     },
@@ -1912,9 +2086,11 @@ namespace ArcomageGame {
                     name: "succubus",
                     source: "dungeon",
                     description: {
+                        rus: "Суккуб",
                         eng: "Succubus",
                     },
                     text: {
+                        rus: "5 урона\nбашне врага,\nвраг теряет\n8 зверей",
                         eng: "5 damage to\nenemy tower,\nenemy loses\n8 beasts",
                     },
                     src: "./images/cards/succubus.png",
@@ -1934,9 +2110,11 @@ namespace ArcomageGame {
                     name: "technology_copping",
                     source: "mine",
                     description: {
+                        rus: "Кража технологий",
                         eng: "Technology copping",
                     },
                     text: {
+                        rus: "Если шахта < шахты\nврага, шахта =\nшахте врага",
                         eng: "If mine < enemy\nmine, mine =\nenemy mine",
                     },
                     src: "./images/cards/technology_copping.png",
@@ -1957,9 +2135,11 @@ namespace ArcomageGame {
                     name: "thief",
                     source: "dungeon",
                     description: {
+                        rus: "Вор",
                         eng: "Thief",
                     },
                     text: {
+                        rus: "Враг теряет 10 самоцветов, 6 камней, вы получаете половину",
                         eng: "Enemy loses 10 gems,\n 6 bricks, you gain half of that",
                     },
                     src: "./images/cards/thief.png",
@@ -1988,9 +2168,11 @@ namespace ArcomageGame {
                     name: "topaz",
                     source: "magic",
                     description: {
+                        rus: "Топаз",
                         eng: "Topaz",
                     },
                     text: {
+                        rus: "+12 башня,\n6 урона башне\nи стене врага",
                         eng: "+12 tower,\n6 damage to\nenemy wall and tower",
                     },
                     src: "./images/cards/topaz.png",
@@ -2011,9 +2193,11 @@ namespace ArcomageGame {
                     name: "tremor",
                     source: "mine",
                     description: {
+                        rus: "Дрожь",
                         eng: "Tremor",
                     },
                     text: {
+                        rus: "Все стены\nполучают 5 урона,\nходить еще раз",
                         eng: "All walls take\n 5 damage,\nplay again",
                     },
                     src: "./images/cards/tremor.png",
@@ -2034,9 +2218,11 @@ namespace ArcomageGame {
                     name: "troll",
                     source: "dungeon",
                     description: {
+                        rus: "Тролль",
                         eng: "Troll",
                     },
                     text: {
+                        rus: "+2 темницы",
                         eng: "+2 dungeon",
                     },
                     src: "./images/cards/troll.png",
@@ -2055,9 +2241,11 @@ namespace ArcomageGame {
                     name: "unicorn",
                     source: "dungeon",
                     description: {
+                        rus: "Единорог",
                         eng: "Unicorn",
                     },
                     text: {
+                        rus: "Если магия > магии\nврага, 12 урона,\nиначе 8 урона",
                         eng: "If magic > enemy\nmagic, 12 damage,\nelse 8 damage",
                     },
                     src: "./images/cards/unicorn.png",
@@ -2076,9 +2264,11 @@ namespace ArcomageGame {
                     name: "vampire",
                     source: "dungeon",
                     description: {
+                        rus: "Вампир",
                         eng: "Vampire",
                     },
                     text: {
+                        rus: "10 урона,\nвраг теряет 5 камней,\n-1 темница врага",
                         eng: "10 damage,\nenemy loses 5 beasts,\n-1 enemy dungeon",
                     },
                     src: "./images/cards/vampire.png",
@@ -2099,9 +2289,11 @@ namespace ArcomageGame {
                     name: "warlord",
                     source: "dungeon",
                     description: {
+                        rus: "Полководец",
                         eng: "Warlord",
                     },
                     text: {
+                        rus: "13 урона,\nвы теряете 3 самоцвета",
                         eng: "13 damage,\nyou lose 3 gems",
                     },
                     src: "./images/cards/warlord.png",
@@ -2120,9 +2312,11 @@ namespace ArcomageGame {
                     name: "werewolf",
                     source: "dungeon",
                     description: {
+                        rus: "Обротень",
                         eng: "Werewolf",
                     },
                     text: {
+                        rus: "9 урона",
                         eng: "9 damage",
                     },
                     src: "./images/cards/werewolf.png",
@@ -2141,9 +2335,11 @@ namespace ArcomageGame {
                     name: "wolf_sign",
                     source: "dungeon",
                     description: {
+                        rus: "Знак волка",
                         eng: "Wolf sign",
                     },
                     text: {
+                        rus: "8 урона,\n-1 шахта врага",
                         eng: "8 damage,\n-1 enemy mine",
                     },
                     src: "./images/cards/wolf_sign.png",
