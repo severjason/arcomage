@@ -6,9 +6,17 @@ namespace ArcomageGame {
         /**
          * Hides loader
          */
-        public static hideLoader() {
+        public static hideLoader(): void {
             let elem = <HTMLElement> document.querySelector("#loader");
             elem.style.display = "none";
+        }
+
+        /**
+         * Shows canvas div
+         */
+        public  static showCanvas(): void {
+            let canvas = <HTMLElement> document.getElementById("arcomage");
+            canvas.style.display = "block";
         }
 
         /**
@@ -239,6 +247,7 @@ namespace ArcomageGame {
             this.init(Loader.escapeHtml(newPlayerOneName), difficulty).then(() => {
                 that.events.init();
                 Loader.hideLoader();
+                Loader.showCanvas();
                 if (that.cookie.cookiesAreSet()) {
                     that.game.allotCardsFromCookies();
                 } else {

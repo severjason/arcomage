@@ -11,7 +11,6 @@ $(document).ready(() => {
         loader.start(loader.cookie.getPlayerOneName());
     } else {
         $("#start_field").show();
-        // loader.start("Player1", 1);
     }
 
     body.on("click", "#start_game_button", () => {
@@ -24,10 +23,6 @@ $(document).ready(() => {
     body.on("click", "div.difficulty_level", (e: Event) => {
         $("div.difficulty_level").removeClass("active");
         $(e.currentTarget).addClass("active");
-    });
-
-    body.on("click", "#sound", () => {
-        console.log($("#sound").find("span").toggleClass("glyphicon-volume-up").toggleClass("glyphicon-volume-off"));
     });
 
     body.on("click", ".newgame_button", () => {

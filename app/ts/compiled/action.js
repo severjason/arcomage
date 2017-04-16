@@ -20,9 +20,6 @@ $(document).ready(() => {
         $("div.difficulty_level").removeClass("active");
         $(e.currentTarget).addClass("active");
     });
-    body.on("click", "#sound", () => {
-        console.log($("#sound").find("span").toggleClass("glyphicon-volume-up").toggleClass("glyphicon-volume-off"));
-    });
     body.on("click", ".newgame_button", () => {
         loader.cookie.removeAll();
         window.location.reload(true);

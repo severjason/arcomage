@@ -10,6 +10,13 @@ var ArcomageGame;
             elem.style.display = "none";
         }
         /**
+         * Shows canvas div
+         */
+        static showCanvas() {
+            let canvas = document.getElementById("arcomage");
+            canvas.style.display = "block";
+        }
+        /**
          * Analog of htmlspecialchars
          * @param {string} text
          * @returns {string}
@@ -186,6 +193,7 @@ var ArcomageGame;
             this.init(Loader.escapeHtml(newPlayerOneName), difficulty).then(() => {
                 that.events.init();
                 Loader.hideLoader();
+                Loader.showCanvas();
                 if (that.cookie.cookiesAreSet()) {
                     that.game.allotCardsFromCookies();
                 }

@@ -30,12 +30,12 @@ namespace ArcomageGame {
 
         get width(): number {
             return this.canvasWidth;
-            // return document.getElementById(this.containerId).getBoundingClientRect().width;
+            // return document.getElementById(this.containerId).style.width;
         }
 
         get height(): number {
             return this.canvasHeight;
-            // return document.getElementById(this.containerId).getBoundingClientRect().height;
+            // return document.getElementById(this.containerId).style.height;
         }
 
         get fabricElement(): any {

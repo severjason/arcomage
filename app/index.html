@@ -23,54 +23,54 @@
     <!-- endbuild -->
 </head>
 <body class="noselect">
-<div id="loader">
-    <img src="images/loading.gif" alt="game loading gif">
-</div>
-<div id="game_over">
-    <div class="container">
-        <h1 id="game_over_title"></h1>
-        <br>
-        <h3 id="game_over_moves"></h3>
-        <button class="newgame_button">New game</button>
+
+<div id="wrapper" class="noselect">
+    <div id="loader">
+        <img src="images/loading.gif" alt="game loading gif">
     </div>
-</div>
-<div id="start_field" class="text-center">
-    <div class="container">
-        <h3 class="start_text">
-            To start ARCOMAGE
-            <br/>
-            please enter your name:
-        </h3>
-        <div class="start_input">
-            <label>
-                <input id="player_name_input" class="input-group text-center" type="text" maxlength="10">
-            </label>
-            <div id="difficulty_container">
-                <div class="difficulty_level active" data-value="0">
-                    Easy
+    <div id="start_field" class="text-center">
+        <div class="container">
+            <h3 class="start_text">
+                To start ARCOMAGE
+                <br/>
+                please enter your name:
+            </h3>
+            <div class="start_input">
+                <label>
+                    <input id="player_name_input" class="input-group text-center" type="text" maxlength="10">
+                </label>
+                <div id="difficulty_container">
+                    <div class="difficulty_level active" data-value="0">
+                        Easy
+                    </div>
+                    <div class="difficulty_level" data-value="1">
+                        Medium
+                    </div>
+                    <div class="difficulty_level" data-value="2">
+                        Hard
+                    </div>
+                    <!--                    <select id="game_difficulty">
+                                            <option value="0">Easy</option>
+                                            <option value="1">Medium</option>
+                                            <option value="2">Hard</option>
+                                        </select>-->
                 </div>
-                <div class="difficulty_level" data-value="1">
-                    Medium
-                </div>
-                <div class="difficulty_level" data-value="2">
-                    Hard
-                </div>
-                <!--                    <select id="game_difficulty">
-                                        <option value="0">Easy</option>
-                                        <option value="1">Medium</option>
-                                        <option value="2">Hard</option>
-                                    </select>-->
+                <button id="start_game_button">
+                    Start game
+                </button>
             </div>
-            <button id="start_game_button">
-                Start game
-            </button>
+
         </div>
 
     </div>
-
-</div>
-<div id="wrapper" class="noselect">
-
+    <div id="game_over">
+        <div class="container">
+            <h1 id="game_over_title"></h1>
+            <br>
+            <h3 id="game_over_moves"></h3>
+            <button class="newgame_button">New game</button>
+        </div>
+    </div>
 
     <div id="arcomage_header">
         <div id="title">
@@ -88,7 +88,7 @@
     </div>
     <div id="arcomage">
 
-        <canvas id="arcomage_canvas" width="765" height="765">
+        <canvas id="arcomage_canvas" >
 
         </canvas>
     </div>
