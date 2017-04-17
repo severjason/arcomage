@@ -1,0 +1,31 @@
+@import '../variables';
+
+@media all and (max-height: 800px) {
+
+  .arcomage-header {
+    opacity: 1;
+
+    .arcomage-header-title {
+      display: flex;
+      height: $title-height / 2;
+
+      h1 {
+        line-height: $title-height / 2;
+      }
+    }
+    .small-button {
+      margin: 5px auto;
+    }
+
+    #arcomage-controls {
+      height: $controls-height / 2;
+
+      .newgame-button {
+        height: $button-controls-height;
+        margin: ($title-height - $button-controls-height / 2) / 2 0;
+        padding: 0;
+      }
+
+    }
+  }
+}

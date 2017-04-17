@@ -279,20 +279,6 @@ namespace ArcomageGame {
                 });
             }
 
-            /*function createMainBody(): IRect {
-                return new fabric.Rect({
-                    width: canvasValues.playersNamesText.width,
-                    height: canvasValues.playersNamesText.height,
-                    fill: canvasValues.playersNamesText.fillColor,
-                    stroke: canvasValues.playersNamesText.strokeColor,
-                    strokeWidth: canvasValues.playersNamesText.strokeWidth,
-                    rx: canvasValues.playersNamesText.borderRadius,
-                    ry: canvasValues.playersNamesText.borderRadius,
-                    originX: "left",
-                    originY: "top",
-                });
-             }*/
-
             let groupForPlayerOne: IGroup = new fabric.Group([
                 createText(playerOne.name.substring(0, canvasValues.playersNamesText.maxLetters))], {
                 left: canvasValues.playersNamesText.padding,
@@ -357,7 +343,7 @@ namespace ArcomageGame {
                         return new fabric.Textbox(capitalizeFirstLetter(source), {
                             width: sources.imgWidth,
                             left: leftPosition,
-                            top: -sources.descFontSize,
+                            top: - sources.descFontSize,
                             fontSize: sources.descFontSize,
                             fontWeight: "bold",
                             fill: sources[source].color,
@@ -557,6 +543,7 @@ namespace ArcomageGame {
         public createTowers(playerOne: Player, playerTwo: Player, canvasValues: any): void {
 
             let that: Canvas = this;
+
             function createTowerRoof(player: Player): IPath {
 
                 let pos1: string = `0 ${canvasValues.towers.roofHeight}`;
@@ -573,9 +560,11 @@ namespace ArcomageGame {
                     originY: "bottom",
                 });
             }
+
             function createTowerText(player: Player): ITextbox {
                 return new fabric.Textbox(player.towerLife.toString(), {
-                    top: (canvasValues.towers.height - canvasValues.towers.fontSize) / 2,
+                    top: (canvasValues.towers.height - canvasValues.towers.fontSize) / 2
+                    - canvasValues.towers.topTextPadding,
                     width: canvasValues.towers.width,
                     fontSize: canvasValues.towers.fontSize,
                     fill: canvasValues.towers.textColor,
@@ -587,7 +576,7 @@ namespace ArcomageGame {
 
             function createTextRect(): IRect {
                 return new fabric.Rect({
-                    top: -1,
+                    top: -canvasValues.towers.topTextPadding,
                     width: canvasValues.towers.width,
                     height: canvasValues.towers.height,
                     fill: canvasValues.towers.towerColor,
@@ -597,7 +586,6 @@ namespace ArcomageGame {
             }
 
             function createTower(player: Player): IRect {
-
                 return new fabric.Rect({
                     width: canvasValues.towers.width,
                     height: canvasValues.towers.heightStep * player.towerLife,
@@ -649,11 +637,9 @@ namespace ArcomageGame {
 
         } // createTowers
 
-        public createWalls(playerOne: Player, playerTwo: Player, canvasValues: any) {
+        public createWalls(playerOne: Player, playerTwo: Player, canvasValues: any): void {
 
             let that: Canvas = this;
-            /*        let img = new Image();
-             img.src = canvasValues.walls.src;*/
 
             function createWall(player: Player): IRect {
                 return new fabric.Rect({
@@ -667,7 +653,8 @@ namespace ArcomageGame {
 
             function createWallText(player: Player): ITextbox {
                 return new fabric.Textbox(player.wallLife.toString(), {
-                    top: (canvasValues.towers.height - canvasValues.walls.fontSize) / 2,
+                    top: (canvasValues.towers.height - canvasValues.walls.fontSize) / 2
+                    - canvasValues.walls.topTextPadding,
                     width: canvasValues.walls.width,
                     fontSize: canvasValues.walls.fontSize,
                     fill: canvasValues.walls.textColor,
@@ -680,7 +667,7 @@ namespace ArcomageGame {
 
             function createTextRect(): IRect {
                 return new fabric.Rect({
-                    top: -1,
+                    top: -canvasValues.walls.topTextPadding,
                     width: canvasValues.walls.width,
                     height: canvasValues.towers.height,
                     fill: canvasValues.walls.wallColor,
@@ -728,8 +715,42 @@ namespace ArcomageGame {
 
         }
 
+        public createSAndRBackground(canvasValues: any): void {
+            let that: Canvas = this;
+            let backgroundWidth: number = canvasValues.sources.width + canvasValues.sources.resImgWidth
+                - 2 * canvasValues.sources.padding;
+
+            function createBackground(leftPadding: number): IRect {
+
+                return new fabric.Rect({
+                    width: backgroundWidth,
+                    height: (canvasValues.sources.height + canvasValues.sources.descFontSize) * 3
+                    + canvasValues.sources.padding,
+                    top: canvasValues.playersNamesText.height + canvasValues.playersNamesText.padding,
+                    left: leftPadding,
+                    fill: canvasValues.sources.backgroundColor,
+                    rx: canvasValues.sources.borderRadius,
+                    ry: canvasValues.sources.borderRadius,
+                    stroke: canvasValues.sources.textColor,
+                    strokeWidth: canvasValues.sources.backgroundStrokeWidth,
+                    opacity: .8,
+                    objectCaching: true,
+                    selectable: false,
+                    hasBorders: false,
+                    originX: "left",
+                    originY: "top",
+                    hoverCursor: "default",
+                });
+            }
+
+            that.fabricElement.add(createBackground(0));
+            that.fabricElement.add(createBackground(that.width - backgroundWidth
+                - canvasValues.sources.backgroundStrokeWidth));
+        }
+
         public drawAll(CARDS: ArcomageCards, cardsValues: any, relations: any,
                        playerOne: Player, playerTwo: Player, canvasValues: any): void {
+            this.createSAndRBackground(canvasValues);
             this.createCards(CARDS, cardsValues, relations);
             this.createBackOfCard(CARDS, cardsValues);
             this.createNames(playerOne, playerTwo, canvasValues);

@@ -16,6 +16,7 @@ $loader-height: 120px;
 // start-field
 $start-field-width: 600px;
 $start-field-height: 600px;
+$start-field-padding: 180px;
 $start-field-button-margin: 50px;
 $start-field-title-margin: -50px;
 $start-field-text-color: #d35400;
@@ -28,15 +29,16 @@ $start-field-input-width: 240px;
 // game-over
 $game-over-width: 600px;
 $game-over-height: 600px;
+$game-over-text-width: 240px;
 $game-over-text-color: #010101;
 
 // controls
 $title-height: 100px;
 $controls-width: 300px;
-$controls-height: 80px;
+$controls-height: 40px;
 $controls-text-color: #d35400;
 $controls-background-color: #010101;
-$button-controls-height: 80px;
+$button-controls-height: 40px;
 $button-controls-width: 80px;
 $button-border: $main-border-width solid $controls-text-color;
 $button-shadow-color: rgba(0, 0, 0, .5);

@@ -25,7 +25,10 @@
   }
 
   &:hover {
-    box-shadow: 0 0 10px $button-shadow-color;
+    background: $start-field-text-color;
+    box-shadow: none;
+    color: $start-field-background-color;
+    cursor: pointer;
   }
 
   &:active {
@@ -75,16 +78,19 @@
     }
 
     h3 {
+      margin: 0 auto;
       text-align: center;
+      width: $game-over-text-width;
     }
 
     .newgame-button {
       @extend %button;
       left: 50%;
-      margin-left: - $button-controls-width / 2;
+      margin-left: - $button-controls-width;
       margin-top: - $button-controls-height / 2;
       position: absolute;
       top: 50%;
+      width: 2 * $button-controls-width;
     }
   }
   // .container
@@ -117,16 +123,29 @@
   }
 
   .start-input {
-    margin-top: 200px;
+    margin-top: $start-field-padding;
 
     label {
       margin-bottom: 0;
     }
+  }
 
-    #start-game-button {
-      margin-top: 10px;
+  #start-game-button {
+    border-radius: 0;
+    border-top: 0;
+    height: $start-field-input-height;
+    width: $start-field-input-width;
+
+    &:hover {
+      background: $start-field-text-color;
+      box-shadow: none;
+      color: $start-field-background-color;
+      cursor: pointer;
     }
 
+    &:active {
+      box-shadow: 0 0 15px $button-shadow-color;
+    }
   }
 
   .difficulty-container {
@@ -198,8 +217,8 @@
 
   .small-button {
     @extend %button;
-    height: $button-controls-height / 2;
-    margin: ($title-height - $button-controls-height / 2) / 2 0;
+    height: $button-controls-height;
+    margin: ($title-height - $button-controls-height) / 2 0;
     padding: 0;
     width: $button-controls-width / 2;
 
@@ -233,6 +252,7 @@
 
     .newgame-button {
       @extend %button;
+      width: 2 * $button-controls-width;
     }
 
   }

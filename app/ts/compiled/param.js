@@ -11,12 +11,12 @@ var ArcomageGame;
                 },
                 playerOne: {
                     name: "Player",
-                    towerLife: [10, 10, 50],
-                    wallLife: [10, 15, 100],
+                    towerLife: [10, 10, 10],
+                    wallLife: [10, 15, 5],
                     resources: [
                         { bricks: 10, gems: 10, beasts: 10 },
                         { bricks: 10, gems: 5, beasts: 10 },
-                        { bricks: 5, gems: 5, beasts: 5 },
+                        { bricks: 10, gems: 5, beasts: 5 },
                     ],
                     sources: {
                         mine: 1,
@@ -27,11 +27,11 @@ var ArcomageGame;
                 playerTwo: {
                     name: ["CPU", "Stan", "Cartman", "Batman", "Chuck", "Goblin", "Mr. Bot"],
                     towerLife: [10, 15, 15],
-                    wallLife: [10, 15, 20],
+                    wallLife: [10, 15, 15],
                     resources: [
                         { bricks: 10, gems: 10, beasts: 10 },
                         { bricks: 15, gems: 15, beasts: 15 },
-                        { bricks: 20, gems: 20, beasts: 20 },
+                        { bricks: 15, gems: 20, beasts: 15 },
                     ],
                     sources: {
                         mine: 1,
@@ -72,6 +72,8 @@ var ArcomageGame;
                     descFontSize: 18,
                     textColor: "#010101",
                     borderRadius: 1,
+                    backgroundColor: "#f8ecc2",
+                    backgroundStrokeWidth: 2,
                     mine: {
                         color: "#d35400",
                         textColor: "#010101",
@@ -105,6 +107,7 @@ var ArcomageGame;
                     roofHeight: 50,
                     heightStep: 2.5,
                     padding: 155,
+                    topTextPadding: 2,
                     fontSize: 22,
                     textColor: "#010101",
                     roofColor: "#7c3607",
@@ -116,6 +119,7 @@ var ArcomageGame;
                     width: 36,
                     heightStep: 2.5,
                     padding: 250,
+                    topTextPadding: 2,
                     fontSize: 22,
                     textColor: "#010101",
                     wallColor: "#7f8c8d",

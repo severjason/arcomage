@@ -54,14 +54,17 @@ a:hover, a:focus {
   border-radius: 40px;
   color: #d35400;
   display: block;
-  height: 80px;
+  height: 40px;
   margin: 0 auto;
   text-align: center;
   width: 80px; }
   #game-over .container .newgame-button:focus, #start-field button:focus, .arcomage-header .small-button:focus, .arcomage-header #arcomage-controls .newgame-button:focus {
     outline: none; }
   #game-over .container .newgame-button:hover, #start-field button:hover, .arcomage-header .small-button:hover, .arcomage-header #arcomage-controls .newgame-button:hover {
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); }
+    background: #d35400;
+    box-shadow: none;
+    color: #010101;
+    cursor: pointer; }
   #game-over .container .newgame-button:active, #start-field button:active, .arcomage-header .small-button:active, .arcomage-header #arcomage-controls .newgame-button:active {
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.5); }
 
@@ -95,13 +98,16 @@ a:hover, a:focus {
     #game-over .container h1 {
       text-align: center; }
     #game-over .container h3 {
-      text-align: center; }
+      margin: 0 auto;
+      text-align: center;
+      width: 240px; }
     #game-over .container .newgame-button {
       left: 50%;
-      margin-left: -40px;
-      margin-top: -40px;
+      margin-left: -80px;
+      margin-top: -20px;
       position: absolute;
-      top: 50%; }
+      top: 50%;
+      width: 160px; }
 
 #start-field {
   background: #010101;
@@ -121,11 +127,21 @@ a:hover, a:focus {
       color: #d35400;
       margin-top: -50px; }
   #start-field .start-input {
-    margin-top: 200px; }
+    margin-top: 180px; }
     #start-field .start-input label {
       margin-bottom: 0; }
-    #start-field .start-input #start-game-button {
-      margin-top: 10px; }
+  #start-field #start-game-button {
+    border-radius: 0;
+    border-top: 0;
+    height: 50px;
+    width: 240px; }
+    #start-field #start-game-button:hover {
+      background: #d35400;
+      box-shadow: none;
+      color: #010101;
+      cursor: pointer; }
+    #start-field #start-game-button:active {
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.5); }
   #start-field .difficulty-container {
     background: #010101;
     border: 2px solid #d35400;
@@ -177,7 +193,7 @@ a:hover, a:focus {
     width: 40px; }
     .arcomage-header .small-button span {
       display: block;
-      line-height: 36px;
+      line-height: 16px;
       top: 0;
       width: 36px; }
   .arcomage-header .arcomage-header-title {
@@ -192,9 +208,11 @@ a:hover, a:focus {
   .arcomage-header #arcomage-controls {
     align-items: center;
     display: flex;
-    height: 80px;
+    height: 40px;
     justify-content: center;
     width: 100%; }
+    .arcomage-header #arcomage-controls .newgame-button {
+      width: 160px; }
 
 #wrapper {
   height: 100%;
@@ -241,14 +259,17 @@ body {
   border-radius: 40px;
   color: #d35400;
   display: block;
-  height: 80px;
+  height: 40px;
   margin: 0 auto;
   text-align: center;
   width: 80px; }
   #game-over .container .newgame-button:focus, #start-field button:focus, .arcomage-header .small-button:focus, .arcomage-header #arcomage-controls .newgame-button:focus {
     outline: none; }
   #game-over .container .newgame-button:hover, #start-field button:hover, .arcomage-header .small-button:hover, .arcomage-header #arcomage-controls .newgame-button:hover {
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); }
+    background: #d35400;
+    box-shadow: none;
+    color: #010101;
+    cursor: pointer; }
   #game-over .container .newgame-button:active, #start-field button:active, .arcomage-header .small-button:active, .arcomage-header #arcomage-controls .newgame-button:active {
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.5); }
 
@@ -282,13 +303,16 @@ body {
     #game-over .container h1 {
       text-align: center; }
     #game-over .container h3 {
-      text-align: center; }
+      margin: 0 auto;
+      text-align: center;
+      width: 240px; }
     #game-over .container .newgame-button {
       left: 50%;
-      margin-left: -40px;
-      margin-top: -40px;
+      margin-left: -80px;
+      margin-top: -20px;
       position: absolute;
-      top: 50%; }
+      top: 50%;
+      width: 160px; }
 
 #start-field {
   background: #010101;
@@ -308,11 +332,21 @@ body {
       color: #d35400;
       margin-top: -50px; }
   #start-field .start-input {
-    margin-top: 200px; }
+    margin-top: 180px; }
     #start-field .start-input label {
       margin-bottom: 0; }
-    #start-field .start-input #start-game-button {
-      margin-top: 10px; }
+  #start-field #start-game-button {
+    border-radius: 0;
+    border-top: 0;
+    height: 50px;
+    width: 240px; }
+    #start-field #start-game-button:hover {
+      background: #d35400;
+      box-shadow: none;
+      color: #010101;
+      cursor: pointer; }
+    #start-field #start-game-button:active {
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.5); }
   #start-field .difficulty-container {
     background: #010101;
     border: 2px solid #d35400;
@@ -364,7 +398,7 @@ body {
     width: 40px; }
     .arcomage-header .small-button span {
       display: block;
-      line-height: 36px;
+      line-height: 16px;
       top: 0;
       width: 36px; }
   .arcomage-header .arcomage-header-title {
@@ -379,9 +413,11 @@ body {
   .arcomage-header #arcomage-controls {
     align-items: center;
     display: flex;
-    height: 80px;
+    height: 40px;
     justify-content: center;
     width: 100%; }
+    .arcomage-header #arcomage-controls .newgame-button {
+      width: 160px; }
 
 #wrapper {
   height: 100%;
@@ -414,5 +450,22 @@ body {
   color: #d35400; }
   #rulesModal .modal-content .rules-paragraph {
     margin: 5px; }
+
+@media all and (max-height: 800px) {
+  .arcomage-header {
+    opacity: 1; }
+    .arcomage-header .arcomage-header-title {
+      display: flex;
+      height: 50px; }
+      .arcomage-header .arcomage-header-title h1 {
+        line-height: 50px; }
+    .arcomage-header .small-button {
+      margin: 5px auto; }
+    .arcomage-header #arcomage-controls {
+      height: 20px; }
+      .arcomage-header #arcomage-controls .newgame-button {
+        height: 40px;
+        margin: 40px 0;
+        padding: 0; } }
 
 /*# sourceMappingURL=main.css.map */
