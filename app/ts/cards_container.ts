@@ -2059,7 +2059,7 @@ namespace ArcomageGame {
                     object: {},
                     backObject: {},
                 },
-                strudy_wall: {
+                sturdy_wall: {
                     name: "sturdy_wall",
                     source: "mine",
                     description: {

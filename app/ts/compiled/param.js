@@ -11,8 +11,8 @@ var ArcomageGame;
                 },
                 playerOne: {
                     name: "Player",
-                    towerLife: [10, 10, 5],
-                    wallLife: [10, 15, 10],
+                    towerLife: [10, 10, 50],
+                    wallLife: [10, 15, 100],
                     resources: [
                         { bricks: 10, gems: 10, beasts: 10 },
                         { bricks: 10, gems: 5, beasts: 10 },
@@ -113,7 +113,7 @@ var ArcomageGame;
                 },
                 walls: {
                     positionY: 300,
-                    width: 30,
+                    width: 36,
                     heightStep: 2.5,
                     padding: 250,
                     fontSize: 22,

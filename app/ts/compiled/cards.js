@@ -98,7 +98,6 @@ var ArcomageGame;
          */
         cardCanBeUsed(cardName, player) {
             let card = this.getSingleCard(cardName);
-            console.log(card);
             let resourceName = Object.keys(card.resource)[0];
             let resourceValue = card.resource[resourceName];
             return (player.resources[resourceName] - resourceValue >= 0);
