@@ -3,9 +3,9 @@ var ArcomageGame;
     "use strict";
     class DOM {
         constructor() {
-            this.gameOverId = "game_over";
-            this.gameOverTitleId = "game_over_title";
-            this.gameOverMovesId = "game_over_moves";
+            this.gameOverId = "game-over";
+            this.gameOverTitleId = "game-over-title";
+            this.gameOverMovesId = "game-over-moves";
             this.wrapperId = "wrapper";
             this.winText = "Congratulations!<br>You win!";
             this.loseText = "Sorry, pal!<br>You lose...";

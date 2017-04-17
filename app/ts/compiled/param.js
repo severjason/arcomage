@@ -154,7 +154,7 @@ var ArcomageGame;
                         textColor: "#010101",
                     },
                 },
-            }, cardsQuantity = 5, divIdForCanvas = "arcomage", idForCanvas = "arcomage_canvas") {
+            }, cardsQuantity = 5, divIdForCanvas = "arcomage", idForCanvas = "arcomage-canvas") {
             this.playersVls = playersValues;
             this.canvasVls = canvasValues;
             this.cardsPerPlayer = cardsQuantity;

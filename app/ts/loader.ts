@@ -7,7 +7,7 @@ namespace ArcomageGame {
          * Hides loader
          */
         public static hideLoader(): void {
-            let elem = <HTMLElement> document.querySelector("#loader");
+            let elem = <HTMLElement> document.getElementById("loader");
             elem.style.display = "none";
         }
 

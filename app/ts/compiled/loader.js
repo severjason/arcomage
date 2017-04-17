@@ -6,7 +6,7 @@ var ArcomageGame;
          * Hides loader
          */
         static hideLoader() {
-            let elem = document.querySelector("#loader");
+            let elem = document.getElementById("loader");
             elem.style.display = "none";
         }
         /**

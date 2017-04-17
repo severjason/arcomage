@@ -1,17 +1,17 @@
 @import url("https://fonts.googleapis.com/css?family=Lato:400,700");
 html {
-  font-size: 62.5%;
-  box-sizing: border-box; }
+  box-sizing: border-box;
+  font-size: 62.5%; }
 
 *, *:before, *:after {
   box-sizing: inherit; }
 
 body {
   font-size: 1.8rem;
-  width: 100%;
   height: 100%;
   margin: 0;
-  padding: 0; }
+  padding: 0;
+  width: 100%; }
 
 img {
   display: block;
@@ -40,399 +40,379 @@ a:hover, a:focus {
   -ms-filter: blur(5px);
   filter: blur(5px); }
 
-#loader, #game_over, #start_field {
-  z-index: 100;
-  position: absolute;
-  width: 100%;
+#loader, #game-over, #start-field {
   height: 100%;
   margin: 0;
-  padding: 0; }
+  padding: 0;
+  position: absolute;
+  width: 100%;
+  z-index: 100; }
 
-#game_over .container .newgame_button, #start_field button, #arcomage_header #title .small_button, #arcomage_header #arcomage_controls .newgame_button {
-  display: block;
-  width: 100px;
-  height: 100px;
-  margin: 0 auto;
-  color: #d35400;
+#game-over .container .newgame-button, #start-field button, .arcomage-header .small-button, .arcomage-header #arcomage-controls .newgame-button {
   background: #010101;
   border: 2px solid #d35400;
-  border-radius: 50px;
-  text-align: center; }
-  #game_over .container .newgame_button:focus, #start_field button:focus, #arcomage_header #title .small_button:focus, #arcomage_header #arcomage_controls .newgame_button:focus {
+  border-radius: 40px;
+  color: #d35400;
+  display: block;
+  height: 80px;
+  margin: 0 auto;
+  text-align: center;
+  width: 80px; }
+  #game-over .container .newgame-button:focus, #start-field button:focus, .arcomage-header .small-button:focus, .arcomage-header #arcomage-controls .newgame-button:focus {
     outline: none; }
-  #game_over .container .newgame_button:hover, #start_field button:hover, #arcomage_header #title .small_button:hover, #arcomage_header #arcomage_controls .newgame_button:hover {
+  #game-over .container .newgame-button:hover, #start-field button:hover, .arcomage-header .small-button:hover, .arcomage-header #arcomage-controls .newgame-button:hover {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); }
-  #game_over .container .newgame_button:active, #start_field button:active, #arcomage_header #title .small_button:active, #arcomage_header #arcomage_controls .newgame_button:active {
+  #game-over .container .newgame-button:active, #start-field button:active, .arcomage-header .small-button:active, .arcomage-header #arcomage-controls .newgame-button:active {
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.5); }
 
 #loader {
-  background: black;
+  background: #010101;
   z-index: 100; }
   #loader img {
-    position: absolute;
-    width: 120px;
     height: 120px;
     left: 50%;
-    top: 50%;
     margin-left: -60px;
-    margin-top: -60px; }
+    margin-top: -60px;
+    position: absolute;
+    top: 50%;
+    width: 120px; }
 
-#game_over {
+#game-over {
   display: none;
   font-family: 'Lato', sans-serif; }
-  #game_over .container {
-    position: absolute;
-    width: 600px;
-    height: 600px;
-    left: 50%;
-    top: 50%;
-    color: #010101;
-    margin-left: -300px;
-    margin-top: -300px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  #game-over .container {
+    background-size: cover;
     border-radius: 2px;
-    background-size: cover; }
-    #game_over .container h1 {
-      text-align: center; }
-    #game_over .container h3 {
-      text-align: center; }
-    #game_over .container .newgame_button {
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      margin-left: -50px;
-      margin-top: -50px; }
-
-#start_field {
-  z-index: 200;
-  display: none;
-  background: #010101; }
-  #start_field .container {
-    position: absolute;
-    width: 600px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    color: #010101;
     height: 600px;
     left: 50%;
-    top: 50%;
-    margin-top: -300px;
     margin-left: -300px;
+    margin-top: -300px;
+    position: absolute;
+    top: 50%;
+    width: 600px; }
+    #game-over .container h1 {
+      text-align: center; }
+    #game-over .container h3 {
+      text-align: center; }
+    #game-over .container .newgame-button {
+      left: 50%;
+      margin-left: -40px;
+      margin-top: -40px;
+      position: absolute;
+      top: 50%; }
+
+#start-field {
+  background: #010101;
+  display: none;
+  z-index: 200; }
+  #start-field .container {
+    background: #010101 url("../images/background/start.jpg") center no-repeat;
     color: #d35400;
-    background: #010101 url("../images/background/start.jpg") center no-repeat; }
-    #start_field .container .start_text {
+    height: 600px;
+    left: 50%;
+    margin-left: -300px;
+    margin-top: -300px;
+    position: absolute;
+    top: 50%;
+    width: 600px; }
+    #start-field .container .start-text {
       color: #d35400;
       margin-top: -50px; }
-    #start_field .container input {
-      width: 240px;
-      height: 50px;
-      line-height: 50px;
-      border-radius: 2px;
-      color: #d35400;
-      background: #010101;
-      border-color: #d35400; }
-      #start_field .container input:focus {
-        outline-color: #d35400; }
-    #start_field .container .start_input {
-      margin-top: 200px; }
-      #start_field .container .start_input label {
-        margin-bottom: 0; }
-      #start_field .container .start_input #start_game_button {
-        margin-top: 10px; }
-      #start_field .container .start_input #difficulty_container {
-        display: flex;
-        justify-content: space-around;
-        width: 240px;
-        height: 50px;
-        margin: 0 auto;
-        background: #010101;
-        border: 2px solid #d35400;
-        border-top: 0; }
-        #start_field .container .start_input #difficulty_container .difficulty_level {
-          width: 80px;
-          height: 50px;
-          line-height: 50px; }
-          #start_field .container .start_input #difficulty_container .difficulty_level:hover {
-            cursor: pointer;
-            color: #010101;
-            background: #d35400; }
-          #start_field .container .start_input #difficulty_container .difficulty_level.active {
-            color: #010101;
-            background: #d35400; }
-        #start_field .container .start_input #difficulty_container label {
-          line-height: 50px; }
-          #start_field .container .start_input #difficulty_container label select {
-            border: 0;
-            background: #010101; }
-            #start_field .container .start_input #difficulty_container label select:focus {
-              outline-color: #d35400; }
-  #start_field button {
+  #start-field .start-input {
+    margin-top: 200px; }
+    #start-field .start-input label {
+      margin-bottom: 0; }
+    #start-field .start-input #start-game-button {
+      margin-top: 10px; }
+  #start-field .difficulty-container {
+    background: #010101;
+    border: 2px solid #d35400;
+    border-top: 0;
+    display: flex;
+    height: 50px;
+    justify-content: space-around;
+    margin: 0 auto;
+    width: 240px; }
+    #start-field .difficulty-container label {
+      line-height: 50px; }
+  #start-field .difficulty-level {
+    border: 0;
+    border-radius: 0;
+    height: 48px;
+    line-height: 48px;
+    width: 80px; }
+    #start-field .difficulty-level:hover {
+      background: #d35400;
+      box-shadow: none;
+      color: #010101;
+      cursor: pointer; }
+    #start-field .difficulty-level.active {
+      background: #d35400;
+      color: #010101; }
+  #start-field input {
+    background: #010101;
+    border-color: #d35400;
+    border-radius: 2px;
+    color: #d35400;
+    height: 50px;
+    line-height: 50px;
+    width: 240px; }
+    #start-field input:focus {
+      outline-color: #d35400; }
+  #start-field button {
     background: #010101; }
 
-#arcomage_header {
-  width: 300px;
+.arcomage-header {
   margin: 0 auto;
-  opacity: 0.4; }
-  #arcomage_header:hover {
+  opacity: .4;
+  width: 300px; }
+  .arcomage-header:hover {
     opacity: 1; }
-  #arcomage_header #title {
+  .arcomage-header .small-button {
+    height: 40px;
+    margin: 30px 0;
+    padding: 0;
+    width: 40px; }
+    .arcomage-header .small-button span {
+      display: block;
+      line-height: 36px;
+      top: 0;
+      width: 36px; }
+  .arcomage-header .arcomage-header-title {
     display: flex;
+    height: 100px;
     justify-content: space-around;
-    width: 100%;
-    height: 100px; }
-    #arcomage_header #title h1 {
+    width: 100%; }
+    .arcomage-header .arcomage-header-title h1 {
       color: #d35400;
-      margin: 0;
-      line-height: 100px; }
-    #arcomage_header #title .small_button {
-      width: 50px;
-      height: 50px;
-      padding: 0;
-      margin: 25px 0; }
-      #arcomage_header #title .small_button span {
-        display: block;
-        top: 0;
-        width: 46px;
-        line-height: 46px; }
-  #arcomage_header #arcomage_controls {
-    display: flex;
-    justify-content: center;
+      line-height: 100px;
+      margin: 0; }
+  .arcomage-header #arcomage-controls {
     align-items: center;
-    width: 100%;
-    height: 100px; }
+    display: flex;
+    height: 80px;
+    justify-content: center;
+    width: 100%; }
 
-div#wrapper {
-  z-index: 1;
+.wrapper {
+  height: 100%;
+  margin: 0;
   position: absolute;
   width: 100%;
-  height: 100%;
-  margin: 0; }
-  div#wrapper h1 {
+  z-index: 1; }
+  .wrapper h1 {
     text-align: center; }
 
 body {
   background: #010101 url("../../images/background/castle.jpg") no-repeat top center; }
 
-#arcomage_wrapper {
-  position: absolute;
-  width: 797px;
-  height: 797px;
-  left: 50%;
-  top: 84px;
-  margin-left: -398.5px;
+#arcomage-wrapper {
   background: rgba(75, 75, 75, 0.5);
   border: 0;
-  border-radius: 5px; }
+  border-radius: 5px;
+  height: 797px;
+  left: 50%;
+  margin-left: -398.5px;
+  position: absolute;
+  top: 0;
+  width: 797px; }
 
 #arcomage {
   display: none;
-  position: relative;
-  width: 765px;
   height: 765px;
   left: 50%;
-  margin-left: -382.5px; }
+  margin-left: -382.5px;
+  position: relative;
+  width: 765px; }
 
-#loader, #game_over, #start_field {
-  z-index: 100;
-  position: absolute;
-  width: 100%;
+#loader, #game-over, #start-field {
   height: 100%;
   margin: 0;
-  padding: 0; }
+  padding: 0;
+  position: absolute;
+  width: 100%;
+  z-index: 100; }
 
-#game_over .container .newgame_button, #start_field button, #arcomage_header #title .small_button, #arcomage_header #arcomage_controls .newgame_button {
-  display: block;
-  width: 100px;
-  height: 100px;
-  margin: 0 auto;
-  color: #d35400;
+#game-over .container .newgame-button, #start-field button, .arcomage-header .small-button, .arcomage-header #arcomage-controls .newgame-button {
   background: #010101;
   border: 2px solid #d35400;
-  border-radius: 50px;
-  text-align: center; }
-  #game_over .container .newgame_button:focus, #start_field button:focus, #arcomage_header #title .small_button:focus, #arcomage_header #arcomage_controls .newgame_button:focus {
+  border-radius: 40px;
+  color: #d35400;
+  display: block;
+  height: 80px;
+  margin: 0 auto;
+  text-align: center;
+  width: 80px; }
+  #game-over .container .newgame-button:focus, #start-field button:focus, .arcomage-header .small-button:focus, .arcomage-header #arcomage-controls .newgame-button:focus {
     outline: none; }
-  #game_over .container .newgame_button:hover, #start_field button:hover, #arcomage_header #title .small_button:hover, #arcomage_header #arcomage_controls .newgame_button:hover {
+  #game-over .container .newgame-button:hover, #start-field button:hover, .arcomage-header .small-button:hover, .arcomage-header #arcomage-controls .newgame-button:hover {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); }
-  #game_over .container .newgame_button:active, #start_field button:active, #arcomage_header #title .small_button:active, #arcomage_header #arcomage_controls .newgame_button:active {
+  #game-over .container .newgame-button:active, #start-field button:active, .arcomage-header .small-button:active, .arcomage-header #arcomage-controls .newgame-button:active {
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.5); }
 
 #loader {
-  background: black;
+  background: #010101;
   z-index: 100; }
   #loader img {
-    position: absolute;
-    width: 120px;
     height: 120px;
     left: 50%;
-    top: 50%;
     margin-left: -60px;
-    margin-top: -60px; }
+    margin-top: -60px;
+    position: absolute;
+    top: 50%;
+    width: 120px; }
 
-#game_over {
+#game-over {
   display: none;
   font-family: 'Lato', sans-serif; }
-  #game_over .container {
-    position: absolute;
-    width: 600px;
-    height: 600px;
-    left: 50%;
-    top: 50%;
-    color: #010101;
-    margin-left: -300px;
-    margin-top: -300px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  #game-over .container {
+    background-size: cover;
     border-radius: 2px;
-    background-size: cover; }
-    #game_over .container h1 {
-      text-align: center; }
-    #game_over .container h3 {
-      text-align: center; }
-    #game_over .container .newgame_button {
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      margin-left: -50px;
-      margin-top: -50px; }
-
-#start_field {
-  z-index: 200;
-  display: none;
-  background: #010101; }
-  #start_field .container {
-    position: absolute;
-    width: 600px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    color: #010101;
     height: 600px;
     left: 50%;
-    top: 50%;
-    margin-top: -300px;
     margin-left: -300px;
+    margin-top: -300px;
+    position: absolute;
+    top: 50%;
+    width: 600px; }
+    #game-over .container h1 {
+      text-align: center; }
+    #game-over .container h3 {
+      text-align: center; }
+    #game-over .container .newgame-button {
+      left: 50%;
+      margin-left: -40px;
+      margin-top: -40px;
+      position: absolute;
+      top: 50%; }
+
+#start-field {
+  background: #010101;
+  display: none;
+  z-index: 200; }
+  #start-field .container {
+    background: #010101 url("../images/background/start.jpg") center no-repeat;
     color: #d35400;
-    background: #010101 url("../images/background/start.jpg") center no-repeat; }
-    #start_field .container .start_text {
+    height: 600px;
+    left: 50%;
+    margin-left: -300px;
+    margin-top: -300px;
+    position: absolute;
+    top: 50%;
+    width: 600px; }
+    #start-field .container .start-text {
       color: #d35400;
       margin-top: -50px; }
-    #start_field .container input {
-      width: 240px;
-      height: 50px;
-      line-height: 50px;
-      border-radius: 2px;
-      color: #d35400;
-      background: #010101;
-      border-color: #d35400; }
-      #start_field .container input:focus {
-        outline-color: #d35400; }
-    #start_field .container .start_input {
-      margin-top: 200px; }
-      #start_field .container .start_input label {
-        margin-bottom: 0; }
-      #start_field .container .start_input #start_game_button {
-        margin-top: 10px; }
-      #start_field .container .start_input #difficulty_container {
-        display: flex;
-        justify-content: space-around;
-        width: 240px;
-        height: 50px;
-        margin: 0 auto;
-        background: #010101;
-        border: 2px solid #d35400;
-        border-top: 0; }
-        #start_field .container .start_input #difficulty_container .difficulty_level {
-          width: 80px;
-          height: 50px;
-          line-height: 50px; }
-          #start_field .container .start_input #difficulty_container .difficulty_level:hover {
-            cursor: pointer;
-            color: #010101;
-            background: #d35400; }
-          #start_field .container .start_input #difficulty_container .difficulty_level.active {
-            color: #010101;
-            background: #d35400; }
-        #start_field .container .start_input #difficulty_container label {
-          line-height: 50px; }
-          #start_field .container .start_input #difficulty_container label select {
-            border: 0;
-            background: #010101; }
-            #start_field .container .start_input #difficulty_container label select:focus {
-              outline-color: #d35400; }
-  #start_field button {
+  #start-field .start-input {
+    margin-top: 200px; }
+    #start-field .start-input label {
+      margin-bottom: 0; }
+    #start-field .start-input #start-game-button {
+      margin-top: 10px; }
+  #start-field .difficulty-container {
+    background: #010101;
+    border: 2px solid #d35400;
+    border-top: 0;
+    display: flex;
+    height: 50px;
+    justify-content: space-around;
+    margin: 0 auto;
+    width: 240px; }
+    #start-field .difficulty-container label {
+      line-height: 50px; }
+  #start-field .difficulty-level {
+    border: 0;
+    border-radius: 0;
+    height: 48px;
+    line-height: 48px;
+    width: 80px; }
+    #start-field .difficulty-level:hover {
+      background: #d35400;
+      box-shadow: none;
+      color: #010101;
+      cursor: pointer; }
+    #start-field .difficulty-level.active {
+      background: #d35400;
+      color: #010101; }
+  #start-field input {
+    background: #010101;
+    border-color: #d35400;
+    border-radius: 2px;
+    color: #d35400;
+    height: 50px;
+    line-height: 50px;
+    width: 240px; }
+    #start-field input:focus {
+      outline-color: #d35400; }
+  #start-field button {
     background: #010101; }
 
-#arcomage_header {
-  width: 300px;
+.arcomage-header {
   margin: 0 auto;
-  opacity: 0.4; }
-  #arcomage_header:hover {
+  opacity: .4;
+  width: 300px; }
+  .arcomage-header:hover {
     opacity: 1; }
-  #arcomage_header #title {
+  .arcomage-header .small-button {
+    height: 40px;
+    margin: 30px 0;
+    padding: 0;
+    width: 40px; }
+    .arcomage-header .small-button span {
+      display: block;
+      line-height: 36px;
+      top: 0;
+      width: 36px; }
+  .arcomage-header .arcomage-header-title {
     display: flex;
+    height: 100px;
     justify-content: space-around;
-    width: 100%;
-    height: 100px; }
-    #arcomage_header #title h1 {
+    width: 100%; }
+    .arcomage-header .arcomage-header-title h1 {
       color: #d35400;
-      margin: 0;
-      line-height: 100px; }
-    #arcomage_header #title .small_button {
-      width: 50px;
-      height: 50px;
-      padding: 0;
-      margin: 25px 0; }
-      #arcomage_header #title .small_button span {
-        display: block;
-        top: 0;
-        width: 46px;
-        line-height: 46px; }
-  #arcomage_header #arcomage_controls {
-    display: flex;
-    justify-content: center;
+      line-height: 100px;
+      margin: 0; }
+  .arcomage-header #arcomage-controls {
     align-items: center;
-    width: 100%;
-    height: 100px; }
+    display: flex;
+    height: 80px;
+    justify-content: center;
+    width: 100%; }
 
-div#wrapper {
-  z-index: 1;
+.wrapper {
+  height: 100%;
+  margin: 0;
   position: absolute;
   width: 100%;
-  height: 100%;
-  margin: 0; }
-  div#wrapper h1 {
+  z-index: 1; }
+  .wrapper h1 {
     text-align: center; }
 
 body {
   background: #010101 url("../../images/background/castle.jpg") no-repeat top center; }
 
 #rulesModal .modal-header {
+  border-bottom: 1px solid #d35400;
   height: 60px;
-  padding: 0;
-  border-bottom: 1px solid #d35400; }
+  padding: 0; }
   #rulesModal .modal-header h4 {
     line-height: 60px; }
-  #rulesModal .modal-header .close {
-    height: 60px;
-    width: 60px;
-    opacity: .8; }
-    #rulesModal .modal-header .close span {
-      color: #d35400;
-      text-shadow: none; }
+#rulesModal .close {
+  height: 60px;
+  opacity: .8;
+  width: 60px; }
+  #rulesModal .close span {
+    color: #d35400;
+    text-shadow: none; }
 #rulesModal .modal-content {
-  color: #d35400;
   background-color: #010101;
-  border-radius: 2px; }
-  #rulesModal .modal-content .rules_paragraph {
+  border-radius: 2px;
+  color: #d35400; }
+  #rulesModal .modal-content .rules-paragraph {
     margin: 5px; }
-
-/*@media all and (min-width: 400px) {
-
-  #arcomage {
-    position: absolute;
-    width: 400px;
-    height: 400px;
-    left: 0;
-    top: 0;
-    margin: 0;
-    padding: 0;
-    border: 0;
-  }
-
-}
-*/
 
 /*# sourceMappingURL=main.css.map */

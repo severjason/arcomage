@@ -1,37 +1,35 @@
-@import "../variables";
-@import "sections";
+@import '../variables';
+@import 'sections';
 
 #rulesModal {
 
   .modal-header {
-    height: $rules_header_height;
+    border-bottom: 1px solid $rules-text-color;
+    height: $rules-header-height;
     padding: 0;
-    border-bottom: 1px solid $rules_text_color;
 
     h4 {
-
-      line-height: $rules_header_height;
+      line-height: $rules-header-height;
     }
+  }
 
-    .close {
-      height: $rules_header_height;
-      width: $rules_header_width;
-      opacity: .8;
+  .close {
+    height: $rules-header-height;
+    opacity: .8;
+    width: $rules-header-width;
 
-      span {
-        color: $rules_text_color;
-        text-shadow: none;
-
-      }
+    span {
+      color: $rules-text-color;
+      text-shadow: none;
     }
   }
 
   .modal-content {
-    color: $rules_text_color;
-    background-color: $rules_background_color;
-    border-radius: $rules_border_radius;
+    background-color: $rules-background-color;
+    border-radius: $rules-border-radius;
+    color: $rules-text-color;
 
-    .rules_paragraph {
+    .rules-paragraph {
       margin: 5px;
     }
   }

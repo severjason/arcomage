@@ -1,12 +1,12 @@
-@mixin backImage($image,
+@mixin back-image($image,
   $height:100vh,
-  $gradientStart:rgba(0,0,0,.2),
-  $gradientEnd:rgba(0,0,0,.5),
-  $backgroundPosition: 'center center') {
+  $gradient-start:rgba(0,0,0,.2),
+  $gradient-end:rgba(0,0,0,.5),
+  $background-position: 'center center') {
 
-  background:linear-gradient( to bottom, $gradientStart, $gradientEnd), url($image);
+  background: linear-gradient(to bottom, $gradient-start, $gradient-end), url($image);
   background-repeat: no-repeat;
-  background-position: $backgroundPosition;
+  background-position: $background-position;
   background-size: cover;
   height: 100vh;
   max-height: $height;

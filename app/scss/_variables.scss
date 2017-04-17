@@ -1,49 +1,50 @@
 // canvas
-$canvas_width: 765px;
-$canvas_height: 765px;
-$canvas_border: 1px solid #efefef;
-$wrapper_padding: 32px;
+$canvas-width: 765px;
+$canvas-height: 765px;
+$wrapper-padding: 32px;
+$wrapper-background: rgba(75, 75, 75, .5);
 
 // main content
-$main_width: 960px;
-$main_border_width: 2px;
-$main_border_radius: 2px;
+$main-width: 960px;
+$main-border-width: 2px;
+$main-border-radius: 2px;
 
 // loader
-$loader_width: 120px;
-$loader_height: 120px;
+$loader-width: 120px;
+$loader-height: 120px;
 
-//start_field
-$start_field_width: 600px;
-$start_field_height: 600px;
-$start_field_button_margin: 50px;
-$start_field_title_margin: -50px;
-$start_field_text_color: #d35400;
-$start_field_background_color: #010101;
-$start_field_background: $start_field_background_color url("../images/background/start.jpg") center no-repeat;
-$start_field_input_height: 50px;
-$start_field_input_width: 240px;
+// start-field
+$start-field-width: 600px;
+$start-field-height: 600px;
+$start-field-button-margin: 50px;
+$start-field-title-margin: -50px;
+$start-field-text-color: #d35400;
+$start-field-background-color: #010101;
+$start-field-background: $start-field-background-color url('../images/background/start.jpg') center no-repeat;
+$start-field-input-height: 50px;
+$start-field-input-width: 240px;
 
 
-//game_over
-$game_over_width: 600px;
-$game_over_height: 600px;
-$game_over_text_color: #010101;
+// game-over
+$game-over-width: 600px;
+$game-over-height: 600px;
+$game-over-text-color: #010101;
 
 // controls
-$title_height: 100px;
-$controls_width: 300px;
-$controls_height: 100px;
-$controls_text_color: #d35400;
-$controls_background_color: #010101;
-$button_controls_height: 100px;
-$button_controls_width: 100px;
-$button_border: $main_border_width solid #d35400;
+$title-height: 100px;
+$controls-width: 300px;
+$controls-height: 80px;
+$controls-text-color: #d35400;
+$controls-background-color: #010101;
+$button-controls-height: 80px;
+$button-controls-width: 80px;
+$button-border: $main-border-width solid $controls-text-color;
+$button-shadow-color: rgba(0, 0, 0, .5);
 
 // rules modal
-$rules_header_height: 60px;
-$rules_header_width: $rules_header_height;
-$rules_border_radius: $main_border_radius;
-$rules_margin: 5px;
-$rules_background_color: #010101;
-$rules_text_color:#d35400;
+$rules-header-height: 60px;
+$rules-header-width: $rules-header-height;
+$rules-border-radius: $main-border-radius;
+$rules-margin: 5px;
+$rules-background-color: #010101;
+$rules-text-color:#d35400;

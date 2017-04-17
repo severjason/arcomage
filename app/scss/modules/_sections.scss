@@ -1,251 +1,249 @@
-@import "../variables";
+@import '../variables';
 
-%full_screen {
-  z-index: 100;
-  position: absolute;
-  width: 100%;
+%full-screen {
   height: 100%;
   margin: 0;
   padding: 0;
-  //background: #efefef;
+  position: absolute;
+  width: 100%;
+  z-index: 100;
 }
 
 %button {
+  background: $controls-background-color;
+  border: $button-border;
+  border-radius: $button-controls-width / 2;
+  color: $controls-text-color;
   display: block;
-  width: $button_controls_width;
-  height: $button_controls_height;
+  height: $button-controls-height;
   margin: 0 auto;
-  color: $controls_text_color;
-  background: $controls_background_color;
-  border: $button_border;
-  border-radius: $button_controls_width / 2;
   text-align: center;
+  width: $button-controls-width;
 
   &:focus {
     outline: none;
   }
 
   &:hover {
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 10px $button-shadow-color;
   }
 
   &:active {
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 15px $button-shadow-color;
   }
 }
 
 #loader {
-  @extend %full_screen;
-  background: black;
+  @extend %full-screen;
+  background: $controls-background-color;
   z-index: 100;
 
   img {
-    position: absolute;
-    width: $loader_width;
-    height: $loader_height;
+    height: $loader-height;
     left: 50%;
+    margin-left: - $loader-width / 2;
+    margin-top: - $loader-height / 2;
+    position: absolute;
     top: 50%;
-    margin-left: - $loader_width / 2;
-    margin-top: - $loader_height / 2;
+    width: $loader-width;
   }
 }
 
 //#loader
 
-#game_over {
-  @extend %full_screen;
+#game-over {
+  @extend %full-screen;
 
   display: none;
   font-family: 'Lato', sans-serif;
 
   .container {
-    position: absolute;
-    width: $game_over_width;
-    height: $game_over_height;
-    left: 50%;
-    top: 50%;
-    color: $game_over_text_color;
-    margin-left: - $game_over_width / 2;
-    margin-top: - $game_over_height / 2;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    border-radius: 2px;
     background-size: cover;
+    border-radius: 2px;
+    box-shadow: 0 0 10px $button-shadow-color;
+    color: $game-over-text-color;
+    height: $game-over-height;
+    left: 50%;
+    margin-left: - $game-over-width / 2;
+    margin-top: - $game-over-height / 2;
+    position: absolute;
+    top: 50%;
+    width: $game-over-width;
 
     h1 {
       text-align: center;
     }
+
     h3 {
       text-align: center;
     }
 
-    .newgame_button {
+    .newgame-button {
       @extend %button;
-      position: absolute;
       left: 50%;
+      margin-left: - $button-controls-width / 2;
+      margin-top: - $button-controls-height / 2;
+      position: absolute;
       top: 50%;
-      margin-left: - $button_controls_width/2;
-      margin-top: - $button_controls_height/2;
     }
   }
   // .container
 }
 
-// #game_over
+// #game-over
 
-#start_field {
-  @extend %full_screen;
-  z-index: 200;
+#start-field {
+  @extend %full-screen;
+  background: $start-field-background-color;
   display: none;
-  background: $start_field_background_color;
+  z-index: 200;
 
   .container {
-    position: absolute;
-    width: $start_field_width;
-    height: $start_field_height;
+    background: $start-field-background;
+    color: $start-field-text-color;
+    height: $start-field-height;
     left: 50%;
+    margin-left: - $start-field-width / 2;
+    margin-top: - $start-field-height / 2;
+    position: absolute;
     top: 50%;
-    margin-top: - $start_field_height/2;
-    margin-left: - $start_field_width/2;
-    color: $start_field_text_color;
-    background: $start_field_background;
+    width: $start-field-width;
 
-    .start_text {
-      color: $start_field_text_color;
-      margin-top: $start_field_title_margin;
+    .start-text {
+      color: $start-field-text-color;
+      margin-top: $start-field-title-margin;
     }
 
-    input {
-      width: $start_field_input_width;
-      height: $start_field_input_height;
-      line-height: $start_field_input_height;
-      border-radius: $main_border_radius;
-      color: $start_field_text_color;
-      background: $start_field_background_color;
-      border-color: $start_field_text_color;
+  }
 
-      &:focus {
-        outline-color: $start_field_text_color;
-      }
+  .start-input {
+    margin-top: 200px;
+
+    label {
+      margin-bottom: 0;
     }
 
-    .start_input {
-      margin-top: 200px;
+    #start-game-button {
+      margin-top: 10px;
+    }
 
-      label {
-        margin-bottom: 0;
-      }
+  }
 
-      #start_game_button {
-        margin-top: 10px;
-      }
+  .difficulty-container {
+    background: $start-field-background-color;
+    border: $button-border;
+    border-top: 0;
+    display: flex;
+    height: $start-field-input-height;
+    justify-content: space-around;
+    margin: 0 auto;
+    width: $start-field-input-width;
 
-      #difficulty_container {
-        display: flex;
-        justify-content: space-around;
-        width: $start_field_input_width;
-        height: $start_field_input_height;
-        margin: 0 auto;
-        background: $start_field_background_color;
-        border: $button_border;
-        border-top: 0;
+    label {
+      line-height: $start-field-input-height;
+    }
+  }
 
-        .difficulty_level {
-          width: $start_field_input_width / 3;
-          height: $start_field_input_height;
-          line-height: $start_field_input_height;
+  .difficulty-level {
+    border: 0;
+    border-radius: 0;
+    height: $start-field-input-height - $main-border-width;
+    line-height: $start-field-input-height - $main-border-width;
+    width: $start-field-input-width / 3;
 
-          &:hover {
-            cursor: pointer;
-            color: $start_field_background_color;
-            background: $start_field_text_color;
-          }
+    &:hover {
+      background: $start-field-text-color;
+      box-shadow: none;
+      color: $start-field-background-color;
+      cursor: pointer;
+    }
 
-          &.active {
-            color: $start_field_background_color;
-            background: $start_field_text_color;
-          }
-        }
+    &.active {
+      background: $start-field-text-color;
+      color: $start-field-background-color;
+    }
+  }
 
-        label {
-          line-height: $start_field_input_height;
-          select {
-            border: 0;
-            background: $start_field_background_color;
+  input {
+    background: $start-field-background-color;
+    border-color: $start-field-text-color;
+    border-radius: $main-border-radius;
+    color: $start-field-text-color;
+    height: $start-field-input-height;
+    line-height: $start-field-input-height;
+    width: $start-field-input-width;
 
-            &:focus {
-              outline-color: $start_field_text_color;
-            }
-          }
-        }
-      }
+    &:focus {
+      outline-color: $start-field-text-color;
     }
   }
 
   button {
     @extend %button;
-    background: $start_field_background_color;
+    background: $start-field-background-color;
   }
 }
 
-// #start_field
+// #start-field
 
-#arcomage_header {
-  width: $controls_width;
+.arcomage-header {
   margin: 0 auto;
-  opacity: 0.4;
+  opacity: .4;
+  width: $controls-width;
   //border: 1px solid #efefef;
 
   &:hover {
     opacity: 1;
   }
 
-  #title {
-    display: flex;
-    justify-content: space-around;
-    width: 100%;
-    height: $title_height;
-    h1 {
-      color: #d35400;
-      margin: 0;
-      line-height: $title_height;
-    }
-    .small_button {
-      @extend %button;
-      width: $button_controls_width / 2;
-      height: $button_controls_height / 2;
-      padding: 0;
-      margin: ($title_height - $button_controls_height / 2) / 2 0;
-      span {
-        display: block;
-        top: 0;
-        width: $button_controls_width / 2 - 2 * $main_border_width;
-        line-height: $button_controls_height / 2 - 2 * $main_border_width;
-      }
+  .small-button {
+    @extend %button;
+    height: $button-controls-height / 2;
+    margin: ($title-height - $button-controls-height / 2) / 2 0;
+    padding: 0;
+    width: $button-controls-width / 2;
+
+    span {
+      display: block;
+      line-height: $button-controls-height / 2 - 2 * $main-border-width;
+      top: 0;
+      width: $button-controls-width / 2 - 2 * $main-border-width;
     }
   }
 
-  #arcomage_controls {
+  .arcomage-header-title {
     display: flex;
-    justify-content: center;
-    align-items: center;
+    height: $title-height;
+    justify-content: space-around;
     width: 100%;
-    height: $controls_height;
 
-    .newgame_button {
+    h1 {
+      color: $start-field-text-color;
+      line-height: $title-height;
+      margin: 0;
+    }
+  }
+
+  #arcomage-controls {
+    align-items: center;
+    display: flex;
+    height: $controls-height;
+    justify-content: center;
+    width: 100%;
+
+    .newgame-button {
       @extend %button;
     }
 
   }
 }
 
-div#wrapper {
-  z-index: 1;
-  position: absolute;
-  width: 100%;
+.wrapper {
   height: 100%;
   margin: 0;
-  // background: $start_field_background_color url("../../images/background/castle.jpg") no-repeat top center;
-  // background: rgba(44, 62, 80,1.0);
+  position: absolute;
+  width: 100%;
+  z-index: 1;
 
   h1 {
     text-align: center;
@@ -254,5 +252,5 @@ div#wrapper {
 }
 
 body {
-  background: $start_field_background_color url("../../images/background/castle.jpg") no-repeat top center;
+  background: $start-field-background-color url('../../images/background/castle.jpg') no-repeat top center;
 }

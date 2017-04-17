@@ -24,38 +24,33 @@
 </head>
 <body class="noselect">
 
-<div id="wrapper" class="noselect">
+<div class="wrapper noselect">
     <div id="loader">
         <img src="images/loading.gif" alt="game loading gif">
     </div>
-    <div id="start_field" class="text-center">
+    <div id="start-field" class="text-center">
         <div class="container">
-            <h3 class="start_text">
+            <h3 class="start-text">
                 To start ARCOMAGE
                 <br/>
                 please enter your name:
             </h3>
-            <div class="start_input">
+            <div class="start-input">
                 <label>
-                    <input id="player_name_input" class="input-group text-center" type="text" maxlength="10">
+                    <input id="player-name-input" class="input-group text-center" type="text" maxlength="10">
                 </label>
-                <div id="difficulty_container">
-                    <div class="difficulty_level active" data-value="0">
+                <div class="difficulty-container">
+                    <button class="difficulty-level active" data-value="0">
                         Easy
-                    </div>
-                    <div class="difficulty_level" data-value="1">
+                    </button>
+                    <button class="difficulty-level" data-value="1">
                         Medium
-                    </div>
-                    <div class="difficulty_level" data-value="2">
+                    </button>
+                    <button class="difficulty-level" data-value="2">
                         Hard
-                    </div>
-                    <!--                    <select id="game_difficulty">
-                                            <option value="0">Easy</option>
-                                            <option value="1">Medium</option>
-                                            <option value="2">Hard</option>
-                                        </select>-->
+                    </button>
                 </div>
-                <button id="start_game_button">
+                <button id="start-game-button">
                     Start game
                 </button>
             </div>
@@ -63,32 +58,31 @@
         </div>
 
     </div>
-    <div id="game_over">
+    <div id="game-over">
         <div class="container">
-            <h1 id="game_over_title"></h1>
+            <h1 id="game-over-title"></h1>
             <br>
-            <h3 id="game_over_moves"></h3>
+            <h3 id="game-over-moves"></h3>
             <button class="newgame_button">New game</button>
         </div>
     </div>
 
-    <div id="arcomage_header">
-        <div id="title">
+    <div class="arcomage-header">
+        <div class="arcomage-header-title">
             <h1 class="text-center">ARCO</h1>
-            <button class="small_button" data-toggle="modal" data-target="#rulesModal">
+            <button class="small-button" data-toggle="modal" data-target="#rulesModal">
                 <span class="glyphicon glyphicon-cog"></span>
             </button>
             <h1 class="text-center">MAGE</h1>
         </div>
-        <div id="arcomage_controls">
-            <button class="newgame_button">New game</button>
+        <div id="arcomage-controls">
+            <button class="newgame-button">New game</button>
         </div>
         <div class="clear"></div>
 
     </div>
     <div id="arcomage">
-
-        <canvas id="arcomage_canvas" >
+        <canvas id="arcomage-canvas">
 
         </canvas>
     </div>

@@ -166,7 +166,7 @@ namespace ArcomageGame {
                     },
                     cardsQuantity: number = 5,
                     divIdForCanvas: string = "arcomage",
-                    idForCanvas: string = "arcomage_canvas") {
+                    idForCanvas: string = "arcomage-canvas") {
 
             this.playersVls = playersValues;
             this.canvasVls = canvasValues;
