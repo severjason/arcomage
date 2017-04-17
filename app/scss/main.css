@@ -196,13 +196,13 @@ a:hover, a:focus {
     justify-content: center;
     width: 100%; }
 
-.wrapper {
+#wrapper {
   height: 100%;
   margin: 0;
   position: absolute;
   width: 100%;
   z-index: 1; }
-  .wrapper h1 {
+  #wrapper h1 {
     text-align: center; }
 
 body {
@@ -383,13 +383,13 @@ body {
     justify-content: center;
     width: 100%; }
 
-.wrapper {
+#wrapper {
   height: 100%;
   margin: 0;
   position: absolute;
   width: 100%;
   z-index: 1; }
-  .wrapper h1 {
+  #wrapper h1 {
     text-align: center; }
 
 body {

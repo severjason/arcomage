@@ -24,7 +24,7 @@
 </head>
 <body class="noselect">
 
-<div class="wrapper noselect">
+<div id="wrapper" class="noselect">
     <div id="loader">
         <img src="images/loading.gif" alt="game loading gif">
     </div>
@@ -58,15 +58,6 @@
         </div>
 
     </div>
-    <div id="game-over">
-        <div class="container">
-            <h1 id="game-over-title"></h1>
-            <br>
-            <h3 id="game-over-moves"></h3>
-            <button class="newgame_button">New game</button>
-        </div>
-    </div>
-
     <div class="arcomage-header">
         <div class="arcomage-header-title">
             <h1 class="text-center">ARCO</h1>
@@ -88,6 +79,14 @@
     </div>
 
 
+</div>
+<div id="game-over">
+    <div class="container">
+        <h1 id="game-over-title"></h1>
+        <br>
+        <h3 id="game-over-moves"></h3>
+        <button class="newgame-button">New game</button>
+    </div>
 </div>
 <!-- Modal -->
 <div class="modal fade" id="rulesModal" tabindex="-1" role="dialog" aria-labelledby="rulesModalLabel">

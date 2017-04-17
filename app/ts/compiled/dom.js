@@ -20,7 +20,7 @@ var ArcomageGame;
                 ? playerOneScores + winScores
                 : 0;
             let movesText = `Scores: ${finalScores} <br><br> Moves: ${playerOneMoves}`;
-            let container = document.querySelector("#game_over > .container");
+            let container = document.querySelector("#game-over > .container");
             container.style.background = background;
             document.getElementById(this.gameOverTitleId).innerHTML = text;
             document.getElementById(this.gameOverMovesId).innerHTML = movesText;

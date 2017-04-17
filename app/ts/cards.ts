@@ -110,6 +110,7 @@ namespace ArcomageGame {
          */
         public cardCanBeUsed(cardName: string, player: Player): boolean {
             let card = this.getSingleCard(cardName);
+            console.log(card);
             let resourceName: string = Object.keys(card.resource)[0];
             let resourceValue: number = card.resource[resourceName];
             return (player.resources[resourceName] - resourceValue >= 0);

@@ -32,7 +32,7 @@ namespace ArcomageGame {
                 ? playerOneScores + winScores
                 : 0;
             let movesText: string = `Scores: ${finalScores} <br><br> Moves: ${playerOneMoves}`;
-            let container = <HTMLElement> document.querySelector("#game_over > .container");
+            let container = <HTMLElement> document.querySelector("#game-over > .container");
             container.style.background = background;
             document.getElementById(this.gameOverTitleId).innerHTML = text;
             document.getElementById(this.gameOverMovesId).innerHTML = movesText;
