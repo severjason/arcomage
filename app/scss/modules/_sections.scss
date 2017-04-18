@@ -130,8 +130,17 @@
     }
   }
 
+  #player-name-input {
+    border-top-left-radius: $start-field-input-border-radius;
+    border-top-right-radius: $start-field-input-border-radius;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
   #start-game-button {
-    border-radius: 0;
+    border-radius: 0 0 $start-field-input-border-radius $start-field-input-border-radius;
     border-top: 0;
     height: $start-field-input-height;
     width: $start-field-input-width;

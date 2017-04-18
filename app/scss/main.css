@@ -130,8 +130,13 @@ a:hover, a:focus {
     margin-top: 180px; }
     #start-field .start-input label {
       margin-bottom: 0; }
+  #start-field #player-name-input {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px; }
+    #start-field #player-name-input:focus {
+      outline: none; }
   #start-field #start-game-button {
-    border-radius: 0;
+    border-radius: 0 0 10px 10px;
     border-top: 0;
     height: 50px;
     width: 240px; }
@@ -335,8 +340,13 @@ body {
     margin-top: 180px; }
     #start-field .start-input label {
       margin-bottom: 0; }
+  #start-field #player-name-input {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px; }
+    #start-field #player-name-input:focus {
+      outline: none; }
   #start-field #start-game-button {
-    border-radius: 0;
+    border-radius: 0 0 10px 10px;
     border-top: 0;
     height: 50px;
     width: 240px; }

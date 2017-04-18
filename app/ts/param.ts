@@ -80,7 +80,7 @@ namespace ArcomageGame {
                             fontSize: 24,
                             descFontSize: 18,
                             textColor: "#010101",
-                            borderRadius: 1,
+                            borderRadius: 2,
                             backgroundColor: "#f8ecc2",
                             backgroundStrokeWidth: 2,
                             mine: {
