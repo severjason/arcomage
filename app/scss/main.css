@@ -91,9 +91,8 @@ a:hover, a:focus {
     height: 600px;
     left: 50%;
     margin-left: -300px;
-    margin-top: -300px;
+    margin-top: 140px;
     position: absolute;
-    top: 50%;
     width: 600px; }
     #game-over .container h1 {
       text-align: center; }
@@ -301,9 +300,8 @@ body {
     height: 600px;
     left: 50%;
     margin-left: -300px;
-    margin-top: -300px;
+    margin-top: 140px;
     position: absolute;
-    top: 50%;
     width: 600px; }
     #game-over .container h1 {
       text-align: center; }

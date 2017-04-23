@@ -275,7 +275,9 @@ namespace ArcomageGame {
                 } else if (mostResCardName === allCards.power_burn.name && that.cpu.towerLife < 10) {
                     that.move(canvas, game, removeCard(availableCards, mostResCardName));
 
-                } else if (mostResCardName === allCards.shift.name && that.cpu.wallLife > game.playerOne.wallLife) {
+                } else if (mostResCardName === allCards.shift.name
+                    && that.cpu.wallLife > game.playerOne.wallLife
+                    && that.cpu.wallLife !== 0) {
                     that.move(canvas, game, removeCard(availableCards, mostResCardName));
 
                 } else if (mostResCardName === allCards.technology_copping.name

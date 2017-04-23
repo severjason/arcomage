@@ -68,9 +68,8 @@
     height: $game-over-height;
     left: 50%;
     margin-left: - $game-over-width / 2;
-    margin-top: - $game-over-height / 2;
+    margin-top: $title-height + $controls-height;
     position: absolute;
-    top: 50%;
     width: $game-over-width;
 
     h1 {
