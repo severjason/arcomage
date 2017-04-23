@@ -469,11 +469,9 @@ body {
         line-height: 50px; }
     .arcomage-header .small-button {
       margin: 5px auto; }
-    .arcomage-header #arcomage-controls {
-      height: 20px; }
-      .arcomage-header #arcomage-controls .newgame-button {
-        height: 40px;
-        margin: 40px 0;
-        padding: 0; } }
+    .arcomage-header #arcomage-controls .newgame-button {
+      height: 40px;
+      margin: 40px 0;
+      padding: 0; } }
 
 /*# sourceMappingURL=main.css.map */
