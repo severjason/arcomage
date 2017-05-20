@@ -1,10 +1,8 @@
-"use strict";
-
-import LoaderClass = ArcomageGame.Loader;
+import {Loader} from "./loader";
 
 $(document).ready(() => {
-    let loader = new LoaderClass();
-    let body = $("body");
+    const loader = new Loader();
+    const body = $("body");
     loader.initCookie();
 
     if (loader.cookie.cookiesAreSet()) {
@@ -14,8 +12,8 @@ $(document).ready(() => {
     }
 
     body.on("click", "#start-game-button", () => {
-        let newName: string = $("#player-name-input").val();
-        let difficulty: number = $("button.difficulty-level.active").data("value");
+        const newName: string = $("#player-name-input").val();
+        const difficulty: number = $("button.difficulty-level.active").data("value");
         $("#start-field").hide();
         loader.start(newName, difficulty);
     });
