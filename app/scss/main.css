@@ -113,7 +113,7 @@ a:hover, a:focus {
   display: none;
   z-index: 200; }
   #start-field .container {
-    background: #010101 url("../images/background/start.jpg") center no-repeat;
+    background: #010101 url("../../dist/images/background/start.jpg") center no-repeat;
     color: #d35400;
     height: 600px;
     left: 50%;
@@ -228,7 +228,7 @@ a:hover, a:focus {
     text-align: center; }
 
 body {
-  background: #010101 url("../../images/background/castle.jpg") no-repeat top center; }
+  background: #010101 url("../../dist/images/background/castle.jpg") no-repeat top center; }
 
 #arcomage-wrapper {
   background: rgba(75, 75, 75, 0.5);
@@ -322,7 +322,7 @@ body {
   display: none;
   z-index: 200; }
   #start-field .container {
-    background: #010101 url("../images/background/start.jpg") center no-repeat;
+    background: #010101 url("../../dist/images/background/start.jpg") center no-repeat;
     color: #d35400;
     height: 600px;
     left: 50%;
@@ -437,7 +437,7 @@ body {
     text-align: center; }
 
 body {
-  background: #010101 url("../../images/background/castle.jpg") no-repeat top center; }
+  background: #010101 url("../../dist/images/background/castle.jpg") no-repeat top center; }
 
 #rulesModal .modal-header {
   border-bottom: 1px solid #d35400;
