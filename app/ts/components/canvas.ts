@@ -307,7 +307,7 @@ export class Canvas {
         const that: Canvas = this;
         const sources: any = canvasValues.sources;
 
-        const capitalizeFirstconstter = (text: string) => {
+        const capitalizeFirstLetter = (text: string) => {
             return text[0].toUpperCase() + text.slice(1);
         };
 
@@ -338,7 +338,7 @@ export class Canvas {
                     const leftPosition = (player === playerOne)
                         ? 0
                         : sources.descFontSize;
-                    return new fabric.Textbox(capitalizeFirstconstter(source), {
+                    return new fabric.Textbox(capitalizeFirstLetter(source), {
                         width: sources.imgWidth,
                         left: leftPosition,
                         top: -sources.descFontSize,
@@ -443,7 +443,7 @@ export class Canvas {
                     const leftPosition = (player === playerOne)
                         ? 0
                         : sources.descFontSize;
-                    return new fabric.Textbox(capitalizeFirstconstter(canvasValues.relations[source]), {
+                    return new fabric.Textbox(capitalizeFirstLetter(canvasValues.relations[source]), {
                         width: sources.resImgWidth,
                         left: leftPosition,
                         top: -sources.descFontSize,

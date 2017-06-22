@@ -4,6 +4,7 @@
     "rules": {
         "no-namespace": [false, "allow-declarations"],
         "object-literal-sort-keys": false,
-        "no-console": false
+        "no-console": false,
+        "allowJs": true
     }
 }
