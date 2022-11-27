@@ -333,7 +333,7 @@ export class Arcomage {
         that.CPU_AI.move(canvas, that, that.playerTwo.cards);
         document.addEventListener("CPU moved", (e) => {
             e.stopImmediatePropagation();
-            const eventPromise: Promise<any> = new Promise((resolve, reject) => {
+            const eventPromise: Promise<void> = new Promise((resolve, reject) => {
                 that.clearCPUBackOfCards(canvas);
                 resolve();
                 reject(() => {

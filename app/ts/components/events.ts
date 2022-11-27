@@ -185,7 +185,7 @@ export class Events {
                                     that.canvas.fabricElement.remove(cardObject);
 
                                     if (that.game.isOn()) {
-                                        const eventPromise: Promise<any> = new Promise((resolve, reject) => {
+                                        const eventPromise: Promise<void> = new Promise((resolve, reject) => {
                                             (that.game.allotCards(playerOne))
                                                 ? resolve()
                                                 : reject("Can`t allot cards!");
@@ -237,7 +237,7 @@ export class Events {
                         playerOne.removeCard(card);
                         cardObject.setTop(cardObjectTop);
                         that.canvas.fabricElement.remove(cardObject);
-                        const eventPromise: Promise<any> = new Promise((resolve, reject) => {
+                        const eventPromise: Promise<void> = new Promise((resolve, reject) => {
                             (that.game.allotCards(playerOne))
                                 ? resolve()
                                 : reject("Can`t allot cards!");

@@ -116,17 +116,17 @@ export class Player {
 
     /**
      * Get playerName fabric object
-     * @returns {fabric.IGroup} playerNameObject
+     * @returns {fabric.Group} playerNameObject
      */
-    get nameObject(): fabric.IGroup {
+    get nameObject(): fabric.Group {
         return this.playerNameObject;
     }
 
     /**
      * Set new player name fabric object
-     * @param {fabric.IGroup} newFabricObject
+     * @param {fabric.Group} newFabricObject
      */
-    set nameObject(newFabricObject: fabric.IGroup) {
+    set nameObject(newFabricObject: fabric.Group) {
         if (typeof newFabricObject === "object") {
             this.playerNameObject = newFabricObject;
         }
@@ -134,17 +134,17 @@ export class Player {
 
     /**
      * Get playerTower fabric object
-     * @returns {fabric.IGroup} playerTowerObject
+     * @returns {fabric.Group} playerTowerObject
      */
-    get towerObject(): fabric.IGroup {
+    get towerObject(): fabric.Group {
         return this.playerTowerObject;
     }
 
     /**
      * Set new tower fabric object
-     * @param {fabric.IGroup} newFabricObject
+     * @param {fabric.Group} newFabricObject
      */
-    set towerObject(newFabricObject: fabric.IGroup) {
+    set towerObject(newFabricObject: fabric.Group) {
         if (typeof newFabricObject === "object") {
             this.playerTowerObject = newFabricObject;
         }
@@ -152,17 +152,17 @@ export class Player {
 
     /**
      * Get playerWall fabric object
-     * @returns {fabric.IGroup} playerWallObject
+     * @returns {fabric.Group} playerWallObject
      */
-    get wallObject(): fabric.IGroup {
+    get wallObject(): fabric.Group {
         return this.playerWallObject;
     }
 
     /**
      * Set new wall fabric object
-     * @param {fabric.IGroup} newFabricObject
+     * @param {fabric.Group} newFabricObject
      */
-    set wallObject(newFabricObject: fabric.IGroup) {
+    set wallObject(newFabricObject: fabric.Group) {
         if (typeof newFabricObject === "object") {
             this.playerWallObject = newFabricObject;
         }
@@ -335,7 +335,7 @@ export class Player {
             }
         }
         this.towerObject.getObjects()[1].setHeight(this.towerLife * this.canvasTowerHeightStep);
-        this.towerObject.getObjects()[3].setText(this.towerLife.toString());
+        this.towerObject.getObjects()[3].set('text', this.towerLife.toString());
     }
 
     /**
@@ -351,13 +351,13 @@ export class Player {
             const remainder = newValue + this.wallLife;
             this.wallLife = 0;
             this.wallObject.getObjects()[0].setHeight(this.wallLife * this.canvasWallHeightStep);
-            this.wallObject.getObjects()[2].setText(this.wallLife.toString());
+            this.wallObject.getObjects()[2].set('text', this.wallLife.toString());
             return remainder;
         } else {
             this.wallLife += newValue;
         }
         this.wallObject.getObjects()[0].setHeight(this.wallLife * this.canvasWallHeightStep);
-        this.wallObject.getObjects()[2].setText(this.wallLife.toString());
+        this.wallObject.getObjects()[2].set('text', this.wallLife.toString());
 
     }
 

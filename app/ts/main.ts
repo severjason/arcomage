@@ -4,7 +4,6 @@ $(document).ready(() => {
     const loader = new Loader();
     const body = $("body");
     loader.initCookie();
-
     if (loader.cookie.cookiesAreSet()) {
         loader.start(loader.cookie.getPlayerOneName());
     } else {
@@ -25,6 +24,6 @@ $(document).ready(() => {
 
     body.on("click", ".newgame-button", () => {
         loader.cookie.removeAll();
-        window.location.reload(true);
+        window.location.reload();
     });
 });

@@ -1,10 +1,13 @@
 const path = require("path");
 const webpack = require("webpack");
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
 
 module.exports = {
+    mode: 'development',
     entry: {
-        app: path.join(__dirname, "app/ts/main.ts"),
-        vendor: path.join(__dirname, "app/ts/vendor.ts"),
+        app: "./app/ts/main.ts",
+        vendor: "./app/ts/vendor.ts",
     },
     output: {
         path: path.join(__dirname, "dist/js"),
@@ -12,52 +15,41 @@ module.exports = {
     },
     resolve: {
         extensions: [".ts", ".js"],
+        fallback: {
+            "url": false,
+            "http": false,
+            "https": false
+        }
     },
     devServer: {
-        inline: true,
-        contentBase: './dist',
+        static: './dist',
         historyApiFallback: true,
         port: 3000,
     },
     module: {
-        loaders: [
+        rules:  [
             {
                 test: /\.tsx?$/,
-                loader: ["babel-loader", "ts-loader"],
+                use: ["babel-loader", "ts-loader"],
                 exclude: /node_modules/,
             },
             {
                 test: /\.scss$/,
-                loader: "style-loader!css-loader!sass-loader"
+                use: ["style-loader", "css-loader", "sass-loader"]
             },
             {
                 test: /\.(png|jpe?g|gif)$/,
-                loader: 'url-loader?limit=100000&name=../images/[name].[ext]'
+                use: 'url-loader?limit=100000&name=../images/[name].[ext]'
             },
             {
                 test: /\.(svg|woff|woff2|ttf|eot|ico)$/,
-                loader: 'file-loader?limit=100000&name=../fonts/[name].[ext]'
+                use: 'file-loader?limit=100000&name=../fonts/[name].[ext]'
             }
         ]
     },
     plugins: [
-        new webpack.optimize.CommonsChunkPlugin({
-            name: "vendor",
-            minChunks: Infinity,
-        }),
-        new webpack.optimize.UglifyJsPlugin({
-            sourceMap: true,
-            debug: true,
-            minimize: true,
-            output: {
-                comments: false
-            },
-            compressor: {
-                warnings: false
-            },
-            mangle: {
-                keep_fnames: true
-            }
+        new HtmlWebpackPlugin({
+            title: 'Development',
         }),
         new webpack.ProvidePlugin({
             $: "jquery",
